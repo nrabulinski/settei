@@ -11,7 +11,7 @@
   }: {
     imports = [
       "${modulesPath}/profiles/qemu-guest.nix"
-      (import ./disks.nix {})
+      ./disks.nix
 
       ./conduit.nix
       ./mail.nix

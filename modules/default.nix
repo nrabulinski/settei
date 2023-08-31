@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./nixos
     ./flake

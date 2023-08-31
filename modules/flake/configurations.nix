@@ -10,11 +10,6 @@
 }: let
   inherit (lib) mkOption mapAttrs;
   inherit (flake-parts-lib) mkSubmoduleOptions;
-  possibleConfigurations = {
-    nixos = {};
-    darwin = {};
-    home = {};
-  };
 in {
   _file = ./configurations.nix;
 
@@ -24,28 +19,17 @@ in {
     builders = {
       nixos = mkOption {
         type = lib.types.functionTo lib.types.unspecified;
-        default = nixpkgs.lib.nixosSystem;
+        default = _name: nixpkgs.lib.nixosSystem;
       };
       darwin = mkOption {
         type = lib.types.functionTo lib.types.unspecified;
-        default = darwin.lib.darwinSystem;
+        default = _name: darwin.lib.darwinSystem;
       };
       home = mkOption {
         type = lib.types.functionTo lib.types.unspecified;
-        default = home-manager.lib.homeManagerConfiguration;
+        default = _name: home-manager.lib.homeManagerConfiguration;
       };
     };
-
-    # Those functions map the value of the configuration attribute
-    # and emit a list of arguments to be passed to respected evalModules
-    mappers =
-      mapAttrs
-      (_: _:
-        mkOption {
-          type = lib.types.functionTo lib.types.attrs;
-          default = lib.id;
-        })
-      possibleConfigurations;
 
     configurations = {
       nixos = mkOption {
@@ -61,42 +45,21 @@ in {
         default = {};
       };
     };
-
-    # This is exposed so that it's possible to modify the arguments that get passed to a builder
-    # after they have been mapped. Probably shouldn't do it. Probably should remove it or make it read-only
-    configurationOptions =
-      mapAttrs
-      (_: _:
-        mkOption {
-          type = lib.types.attrsOf lib.types.attrs;
-        })
-      possibleConfigurations;
   };
 
-  config = {
-    configurationOptions =
-      mapAttrs
-      (
-        name: _:
-          mapAttrs
-          (configurationName: val: let
-            mapped = config.mappers.${name} val;
-            # TODO: specialArgs is actually extraSpecialArgs in home-manager.
-            #       At which level should that be handled?
-            defaultArgs = {
-              specialArgs = {inherit configurationName;};
-            };
-          in
-            lib.recursiveUpdate defaultArgs mapped)
-          config.configurations.${name}
-      )
-      possibleConfigurations;
-
+  config.
     flake = {
-      nixosConfigurations =
-        mapAttrs
-        (_: args: config.builders.nixos args)
-        config.configurationOptions.nixos;
-    };
+    nixosConfigurations =
+      mapAttrs
+      config.builders.nixos
+      config.configurations.nixos;
+    darwinConfigurations =
+      mapAttrs
+      config.builders.darwin
+      config.configurations.darwin;
+    homeConfigurations =
+      mapAttrs
+      config.builders.home
+      config.configurations.home;
   };
 }

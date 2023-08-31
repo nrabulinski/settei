@@ -11,6 +11,7 @@
         ./assets
         ./hosts
         ./modules
+        ./wrappers
         ./deploy.nix
       ];
 
@@ -67,6 +68,28 @@
     };
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wrapper-manager-hm-compat = {
+      url = "github:nrabulinski/wrapper-manager-hm-compat";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    racket = {
+      url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

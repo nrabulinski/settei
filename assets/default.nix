@@ -4,6 +4,6 @@
   };
 
   config.assets = {
-    sshKeys = import ./ssh.nix {};
+    sshKeys = import ./ssh.nix;
   };
 }

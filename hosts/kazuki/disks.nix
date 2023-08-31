@@ -1,4 +1,6 @@
-{bootDevice ? "/dev/sda", ...}: {
+args: let
+  bootDevice = args.bootDevice or "/dev/sda";
+in {
   disko.devices.disk.bootDisk = {
     type = "disk";
     device = bootDevice;
@@ -32,7 +34,10 @@
                 inherit mountOptions;
                 mountpoint = "/";
               };
-              "/nix" = {inherit mountOptions;};
+              "/nix" = {
+                inherit mountOptions;
+                mountpoint = "/nix";
+              };
             };
           };
         }

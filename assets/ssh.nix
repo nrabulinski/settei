@@ -1,4 +1,4 @@
-{...}: {
+{
   other = {
     bootstrap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEvSD7mNn5x+Ras/shxzyRMEhPqKeide3IH39UG6kLMV nikodem@rabulinski.com";
   };

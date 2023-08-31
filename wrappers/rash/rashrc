@@ -1,0 +1,17 @@
+(require readline/pread
+         data/maybe
+         (prefix-in f: data/functor)
+         data/applicative
+         data/monad
+         threading
+
+         racket/string
+         racket/cmdline
+         racket/system
+         racket/pretty
+         racket/format
+         racket/list
+         racket/function
+         racket/port)
+
+(current-prompt-function prompt-f)
