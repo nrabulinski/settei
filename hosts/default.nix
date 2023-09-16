@@ -7,50 +7,53 @@
 }: {
   builders = {
     nixos = name: module: let
-      combinedInputs = inputs // {settei = self;};
-      baseOptions = {
-        settei.flake-qol = {
-          enable = true;
-          inputs = combinedInputs;
-        };
-      };
-      base = inputs.nixpkgs.lib.nixosSystem {
-        modules = [
-          inputs.agenix.nixosModules.age
-          inputs.disko.nixosModules.disko
-          inputs.mailserver.nixosModules.default
-          self.nixosModules.settei
-          baseOptions
-        ];
-      };
       defaultOptions = {
         username,
         inputs',
         lib,
         ...
       }: {
+        _file = ./default.nix;
+
         settei = {
           username = lib.mkDefault "niko";
-          sane-defaults.enable = lib.mkDefault true;
+          sane-defaults = {
+            enable = lib.mkDefault true;
+            allSshKeys = config.assets.sshKeys.user;
+          };
+          flake-qol = {
+            enable = true;
+            inputs = inputs // {settei = self;};
+          };
+          user = {
+            enable = true;
+            config = {
+              home.packages = lib.attrValues inputs'.settei.packages;
+            };
+          };
         };
 
-        users.users.${username}.packages = lib.attrValues inputs'.settei.packages;
+        time.timeZone = lib.mkDefault "Europe/Warsaw";
+        i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
       };
     in
-      base.extendModules {
+      inputs.nixpkgs.lib.nixosSystem {
         modules = [
+          inputs.agenix.nixosModules.age
+          inputs.disko.nixosModules.disko
+          inputs.mailserver.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          self.nixosModules.settei
           defaultOptions
           module
         ];
-        specialArgs = {
-          prev = base;
-          configurationName = name;
-        };
+        specialArgs.configurationName = name;
       };
   };
 
   imports = [
     ./kazuki
     ./hijiri-vm
+    # ./legion
   ];
 }

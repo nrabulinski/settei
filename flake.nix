@@ -8,11 +8,14 @@
       ];
 
       imports = [
+        inputs.hercules-ci-effects.flakeModule
+
         ./assets
         ./hosts
         ./modules
         ./wrappers
         ./deploy.nix
+        ./effects.nix
       ];
 
       perSystem = {
@@ -21,7 +24,10 @@
         ...
       }: {
         devShells.default = pkgs.mkShellNoCC {
-          packages = [inputs'.deploy-rs.packages.deploy-rs inputs'.agenix.packages.agenix];
+          packages = [
+            inputs'.deploy-rs.packages.deploy-rs
+            inputs'.agenix.packages.agenix
+          ];
         };
 
         formatter = pkgs.alejandra;
@@ -58,11 +64,13 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # agenix checks fail because of https://github.com/LnL7/nix-darwin/pull/687
+    darwin-old-for-agenix.url = "github:lnl7/nix-darwin/22620845fee1cc16f4ea639509c50fd989ccc1ce";
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "darwin";
+        darwin.follows = "darwin-old-for-agenix";
         home-manager.follows = "home-manager";
       };
     };
@@ -81,16 +89,21 @@
         home-manager.follows = "home-manager";
       };
     };
-    stylix = {
-      url = "github:danth/stylix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    # stylix = {
+    #   url = "github:danth/stylix";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
     racket = {
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hercules-ci-effects = {
+      url = "github:hercules-ci/hercules-ci-effects";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
   };
 

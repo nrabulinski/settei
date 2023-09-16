@@ -1,3 +1,6 @@
+# This module is supposed to be a reusable set of options you probably would want to set anyway
+#
+# Other default options which don't necessairly make sense for other people go into hosts/default.nix
 {
   lib,
   config,
@@ -5,17 +8,27 @@
 } @ args: {
   _file = ./sane-defaults.nix;
 
-  options.settei.sane-defaults = {
-    enable = lib.mkEnableOption "Personal sane defaults";
+  options.settei.sane-defaults = with lib; {
+    enable = mkEnableOption "Personal sane defaults (but they should make sense for anyone)";
+    allSshKeys = mkOption {
+      type = types.attrsOf types.singleLineStr;
+      default = {};
+    };
   };
 
   config = lib.mkIf config.settei.sane-defaults.enable (let
     cfg = config.settei;
     inherit (cfg) username;
+    configName = optionName:
+      args.configurationName
+      or (throw "pass configurationName to module arguments or set ${optionName} yourself");
   in {
     _module.args = {
       username = lib.mkDefault username;
     };
+
+    # https://github.com/NixOS/nixpkgs/issues/254807
+    boot.swraid.enable = false;
 
     hardware.enableRedistributableFirmware = true;
 
@@ -30,20 +43,23 @@
         home = "/home/${username}";
         group = username;
         extraGroups = ["wheel"];
+        openssh.authorizedKeys.keys = let
+          filteredKeys = let
+            configName' = configName "users.users.${username}.openssh.authorizedKeys";
+          in
+            lib.filterAttrs (name: _: name != configName') cfg.sane-defaults.allSshKeys;
+        in
+          lib.mkDefault (lib.attrValues filteredKeys);
       };
       groups.${username} = {};
     };
 
-    networking.hostName = lib.mkDefault (
-      args.configurationName
-      or (throw "pass configurationName to module arguments or set networking.hostName yourself")
-    );
-    time.timeZone = lib.mkDefault "Europe/Warsaw";
+    networking.hostName = lib.mkDefault (configName "networking.hostName");
 
     nix = {
       settings = {
         experimental-features = ["nix-command" "flakes" "repl-flake" "auto-allocate-uids"];
-        trusted-users = [username];
+        trusted-users = lib.optionals (!config.security.sudo.wheelNeedsPassword) [username];
         auto-allocate-uids = true;
         extra-substituters = [
           "https://hyprland.cachix.org"
