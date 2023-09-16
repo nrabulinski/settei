@@ -9,6 +9,7 @@ in {
     imports = [
       ./hardware.nix
       # ./disks.nix
+      ./initrd.nix
     ];
 
     nixpkgs.system = "x86_64-linux";

@@ -1,5 +1,8 @@
 {config, ...}: {
-  age.secrets.vault-cert-env.file = ../../secrets/vault-cert-env.age;
+  age.secrets.vault-cert-env = {
+    file = ../../secrets/vault-cert-env.age;
+    owner = config.services.nginx.user;
+  };
 
   services.vaultwarden = {
     enable = true;

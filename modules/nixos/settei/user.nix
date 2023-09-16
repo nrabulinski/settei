@@ -29,6 +29,8 @@ in {
       home-manager.extraSpecialArgs = cfg.extraArgs;
 
       home-manager.users.${username} = {
+        _file = ./user.nix;
+
         imports = [cfg.config];
 
         home = {

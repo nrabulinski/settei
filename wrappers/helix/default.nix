@@ -15,6 +15,7 @@
         cursorline = true;
         auto-save = true;
         indent-guides.render = true;
+        theme = "base16_default_dark";
       };
     };
     languages = {

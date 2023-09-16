@@ -100,10 +100,16 @@
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hercules-ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent";
+      inputs.flake-parts.follows = "flake-parts";
+    };
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        hercules-ci-agent.follows = "hercules-ci-agent";
+      };
     };
   };
 
@@ -113,12 +119,14 @@
       "https://cache.garnix.io"
       "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
+      "https://hercules-ci.cachix.org"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
     ];
   };
 }

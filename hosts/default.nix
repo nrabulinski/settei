@@ -43,7 +43,9 @@
           inputs.disko.nixosModules.disko
           inputs.mailserver.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
+          inputs.hercules-ci-agent.nixosModules.agent-service
           self.nixosModules.settei
+          ./common
           defaultOptions
           module
         ];
@@ -55,5 +57,6 @@
     ./kazuki
     ./hijiri-vm
     # ./legion
+    ./installer
   ];
 }

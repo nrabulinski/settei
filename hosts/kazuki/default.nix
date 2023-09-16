@@ -24,5 +24,7 @@
       loader.systemd-boot.configurationLimit = 1;
       loader.efi.canTouchEfiVariables = true;
     };
+
+    common.hercules.enable = true;
   };
 }
