@@ -4,6 +4,8 @@
   lib,
   ...
 }: {
+  _file = ./hercules.nix;
+
   options.common.hercules.enable = lib.mkEnableOption "Enables hercules-ci-agent with my configuration";
 
   config = lib.mkIf config.common.hercules.enable {

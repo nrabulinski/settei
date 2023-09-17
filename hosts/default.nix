@@ -45,7 +45,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.hercules-ci-agent.nixosModules.agent-service
           self.nixosModules.settei
-          ./common
+          self.nixosModules.common
           defaultOptions
           module
         ];

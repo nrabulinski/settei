@@ -3,16 +3,17 @@
   雪定<rp>(</rp><rt>せってい</rt><rp>)</rp>
 </ruby>
 </h1>
+Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, home-manager, and flake-parts modules.
 
 ## Project structure
 - hosts - per-machine configurations
-  - common - common options between my machines which aren't reusable by others
   - kazuki - my linux arm server
   - legion - my linux x86 server[^1]
   - hijiri - my macbook[^1]
   - hijiri-vm - linux vm running on my macbook
   - miyagi - my work machine[^1]
 - modules - options which in principle should be reusable by others
+  - */common - common options between my machines which aren't meant to be reusable by others
   - nixos
     - settei - my opinionated nixos options
   - flake - flake-parts modules

@@ -1,3 +1,6 @@
 {config, ...}: {
-  flake.nixosModules.settei = import ./settei {inherit (config) perInput;};
+  flake.nixosModules = {
+    settei = import ./settei {inherit (config) perInput;};
+    common = ./common;
+  };
 }
