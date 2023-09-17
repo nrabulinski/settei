@@ -26,5 +26,10 @@
     };
 
     common.hercules.enable = true;
+    age.secrets.kazuki-cachix = {
+      file = ../../secrets/kazuki-cachix.age;
+      owner = config.systemd.services.hercules-ci-agent.serviceConfig.User;
+    };
+    services.hercules-ci-agent.settings.binaryCachesPath = config.age.secrets.kazuki-cachix.path;
   };
 }

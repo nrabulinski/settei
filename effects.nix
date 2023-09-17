@@ -1,4 +1,4 @@
-{
+{self, ...}: {
   defaultEffectSystem = "aarch64-linux";
 
   hercules-ci = {
@@ -11,6 +11,8 @@
   herculesCI = {
     onPush = {
       default.enable = true;
+
+      wrappers.outputs = self.packages.aarch64-linux;
     };
   };
 }

@@ -6,4 +6,5 @@ in {
   "vault-cert-env.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   # "bitwarden-env-file.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   "hercules-token.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
+  "kazuki-cachix.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
 }
