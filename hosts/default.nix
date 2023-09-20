@@ -5,35 +5,54 @@
   lib,
   ...
 }: {
-  builders = {
-    nixos = name: module: let
-      defaultOptions = {
-        username,
-        inputs',
-        lib,
-        ...
-      }: {
-        _file = ./default.nix;
+  imports = [
+    ./kazuki
+    ./hijiri-vm
+    ./hijiri
+    ./legion
+    ./installer
+  ];
 
-        settei = {
-          username = lib.mkDefault "niko";
-          sane-defaults = {
-            enable = lib.mkDefault true;
-            allSshKeys = config.assets.sshKeys.user;
-          };
-          flake-qol = {
-            enable = true;
-            inputs = inputs // {settei = self;};
-          };
-          user = {
-            enable = true;
-            config = {
-              home.packages = lib.attrValues inputs'.settei.packages;
-            };
+  builders = let
+    sharedOptions = {
+      inputs',
+      lib,
+      ...
+    }: {
+      _file = ./default.nix;
+
+      settei = {
+        username = lib.mkDefault "niko";
+        sane-defaults = {
+          enable = lib.mkDefault true;
+          allSshKeys = config.assets.sshKeys.user;
+        };
+        flake-qol = {
+          enable = true;
+          inputs = inputs // {settei = self;};
+        };
+        user = {
+          enable = true;
+          config = {
+            home.packages = let
+              wrappers = lib.attrValues inputs'.settei.packages;
+              extraPkgs = [inputs'.nh.packages.default];
+            in
+              wrappers ++ extraPkgs;
+
+            programs.git.enable = true;
+            home.sessionVariables.EDITOR = "hx";
           };
         };
+      };
 
-        time.timeZone = lib.mkDefault "Europe/Warsaw";
+      time.timeZone = lib.mkDefault "Europe/Warsaw";
+    };
+  in {
+    nixos = name: module: let
+      defaultOptions = {
+        _file = ./default.nix;
+
         i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
       };
     in
@@ -46,17 +65,29 @@
           inputs.hercules-ci-agent.nixosModules.agent-service
           self.nixosModules.settei
           self.nixosModules.common
+          sharedOptions
+          defaultOptions
+          module
+        ];
+        specialArgs.configurationName = name;
+      };
+
+    darwin = name: module: let
+      defaultOptions = {
+        _file = ./default.nix;
+      };
+    in
+      inputs.darwin.lib.darwinSystem {
+        modules = [
+          inputs.agenix.darwinModules.age
+          inputs.home-manager.darwinModules.home-manager
+          inputs.hercules-ci-agent.darwinModules.agent-service
+          self.darwinModules.settei
+          sharedOptions
           defaultOptions
           module
         ];
         specialArgs.configurationName = name;
       };
   };
-
-  imports = [
-    ./kazuki
-    ./hijiri-vm
-    # ./legion
-    ./installer
-  ];
 }

@@ -1,6 +1,10 @@
-args: let
+args:
+/*
+let
   bootDevice = args.bootDevice or "/dev/nvme0n1";
-in {
+in
+*/
+{
   assertions = [
     {
       assertion = false;

@@ -1,4 +1,4 @@
-{
+{username, ...}: {
   services.jellyfin.enable = true;
   services.radarr.enable = true;
   services.sonarr.enable = true;
@@ -13,6 +13,6 @@
     jellyfin.extraGroups = ["radarr" "sonarr"];
     radarr.extraGroups = ["deluge"];
     sonarr.extraGroups = ["deluge"];
-    niko.extraGroups = ["deluge"];
+    ${username}.extraGroups = ["deluge"];
   };
 }

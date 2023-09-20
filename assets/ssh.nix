@@ -13,5 +13,6 @@
 
   system = {
     kazuki = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyYhYWDNmKSrpcslD3NzWW+lQmDcLJdjLh7CSkL4hW5 root@kazuki";
+    legion = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH0Ktyj0FSn8KLRwRGd0Tp/qNUPXV7+XyxAsWGWdMYp8 root@legion";
   };
 }

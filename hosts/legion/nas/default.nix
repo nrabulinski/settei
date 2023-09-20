@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   username,
   ...
 }: {
@@ -7,7 +8,7 @@
     ./media.nix
   ];
 
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = ["ext4" "zfs"];
 
   boot.zfs.extraPools = ["yottapool"];
   services.zfs = {
@@ -15,7 +16,7 @@
     zed.settings = {
       ZED_DEBUG_LOG = "/tmp/zed.debug.log";
       ZED_EMAIL_ADDR = [username];
-      ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
+      ZED_EMAIL_PROG = lib.getExe pkgs.msmtp;
       ZED_EMAIL_OPTS = "@ADDRESS@";
 
       ZED_NOTIFY_INTERVAL_SECS = 3600;
@@ -26,8 +27,8 @@
     };
   };
 
-  fileSystems."/nix-cache" = {
-    device = "/dev/disk/by-label/CACHE";
+  fileSystems."/bulk" = {
+    device = "/dev/disk/by-label/BULK";
     fsType = "ext4";
   };
 }

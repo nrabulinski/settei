@@ -1,9 +1,11 @@
-{...}: {
+{config, ...}: {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "uas"];
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
   boot.kernelModules = ["kvm-intel" "i2c-dev" "acpi_call"];
   boot.blacklistedKernelModules = ["nouveau"];
 
+  # Needed for enableAllFirmware
+  nixpkgs.config.allowUnfree = true;
   hardware = {
     enableAllFirmware = true;
     cpu.intel.updateMicrocode = true;

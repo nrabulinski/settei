@@ -1,9 +1,4 @@
 {
-  self,
-  inputs,
-  config,
-  ...
-}: {
   configurations.nixos.hijiri-vm = {
     modulesPath,
     lib,
@@ -15,7 +10,7 @@
       ./disks.nix
     ];
 
-    nixpkgs.system = "aarch64-linux";
+    nixpkgs.hostPlatform = "aarch64-linux";
 
     boot = {
       loader.systemd-boot.enable = true;

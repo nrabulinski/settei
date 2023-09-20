@@ -43,7 +43,7 @@ in {
 
       nix = {
         registry = lib.mapAttrs (_: flake: {inherit flake;}) cfg.inputs-flakes;
-        nixPath = map (name: "${name}=flake:${name}") (lib.attrNames cfg.inputs-flakes);
+        nixPath = lib.mapAttrsToList (name: _: "${name}=flake:${name}") cfg.inputs-flakes;
       };
     };
 }

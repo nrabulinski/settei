@@ -1,11 +1,8 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
     settings = {
+      theme = "base16_default_dark";
       editor = {
         true-color = true;
         line-number = "relative";
@@ -15,7 +12,6 @@
         cursorline = true;
         auto-save = true;
         indent-guides.render = true;
-        theme = "base16_default_dark";
       };
     };
     languages = {

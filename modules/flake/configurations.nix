@@ -7,10 +7,8 @@
   lib,
   flake-parts-lib,
   ...
-}: let
-  inherit (lib) mkOption mapAttrs;
-  inherit (flake-parts-lib) mkSubmoduleOptions;
-in {
+}:
+with lib; {
   _file = ./configurations.nix;
 
   options = {
@@ -18,37 +16,36 @@ in {
     # Probably should hardly ever be overriden
     builders = {
       nixos = mkOption {
-        type = lib.types.functionTo lib.types.unspecified;
+        type = types.functionTo types.unspecified;
         default = _name: nixpkgs.lib.nixosSystem;
       };
       darwin = mkOption {
-        type = lib.types.functionTo lib.types.unspecified;
+        type = types.functionTo types.unspecified;
         default = _name: darwin.lib.darwinSystem;
       };
       home = mkOption {
-        type = lib.types.functionTo lib.types.unspecified;
+        type = types.functionTo types.unspecified;
         default = _name: home-manager.lib.homeManagerConfiguration;
       };
     };
 
     configurations = {
       nixos = mkOption {
-        type = lib.types.unspecified;
+        type = types.attrsOf types.deferredModule;
         default = {};
       };
       darwin = mkOption {
-        type = lib.types.unspecified;
+        type = types.attrsOf types.deferredModule;
         default = {};
       };
       home = mkOption {
-        type = lib.types.unspecified;
+        type = types.attrsOf types.deferredModule;
         default = {};
       };
     };
   };
 
-  config.
-    flake = {
+  config.flake = {
     nixosConfigurations =
       mapAttrs
       config.builders.nixos

@@ -8,7 +8,7 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 ## Project structure
 - hosts - per-machine configurations
   - kazuki - my linux arm server
-  - legion - my linux x86 server[^1]
+  - legion - my linux x86 server
   - hijiri - my macbook[^1]
   - hijiri-vm - linux vm running on my macbook
   - miyagi - my work machine[^1]

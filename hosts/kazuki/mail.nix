@@ -1,4 +1,5 @@
 {config, ...}: {
+  # nix shell nixpkgs#apacheHttpd -c htpasswd -nbB "" "super secret password" | cut -d: -f2
   age.secrets = {
     leet-nrab-lol.file = ../../secrets/leet-nrab-lol-pass.age;
     alert-nrab-lol.file = ../../secrets/alert-nrab-lol-pass.age;

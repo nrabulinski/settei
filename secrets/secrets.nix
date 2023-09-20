@@ -5,6 +5,8 @@ in {
   "alert-nrab-lol-pass.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   "vault-cert-env.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   # "bitwarden-env-file.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
-  "hercules-token.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
-  "kazuki-cachix.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
+  "hercules-token.age".publicKeys = [keys.system.kazuki keys.system.legion keys.other.bootstrap];
+  "hercules-cache.age".publicKeys = [keys.system.kazuki keys.system.legion keys.other.bootstrap];
+  "alert-plain-pass.age".publicKeys = [keys.system.legion keys.other.bootstrap];
+  "legion-niko-pass.age".publicKeys = [keys.system.legion keys.other.bootstrap];
 }

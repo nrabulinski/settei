@@ -36,7 +36,7 @@ in {
         home = {
           inherit username;
           homeDirectory = config.users.users.${username}.home;
-          stateVersion = config.system.stateVersion;
+          stateVersion = "22.05";
         };
 
         programs.home-manager.enable = true;

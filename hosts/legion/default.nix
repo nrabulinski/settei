@@ -1,18 +1,17 @@
-{config, ...}: let
-  inherit (config.assets) sshKeys;
-in {
+{
   configurations.nixos.legion = {
     config,
     lib,
+    username,
     ...
   }: {
     imports = [
       ./hardware.nix
       # ./disks.nix
-      ./initrd.nix
+      ./msmtp.nix
     ];
 
-    nixpkgs.system = "x86_64-linux";
+    nixpkgs.hostPlatform = "x86_64-linux";
 
     specialisation = {
       nas.configuration = ./nas;
@@ -28,10 +27,15 @@ in {
       hostName = "legion";
       hostId = builtins.substring 0 8 (builtins.readFile ./machine-id);
       networkmanager.enable = true;
-      useDHCP = true;
       firewall.trustedInterfaces = ["tailscale0"];
     };
+    systemd.services.NetworkManager-wait-online.enable = false;
 
     powerManagement.cpuFreqGovernor = "performance";
+
+    age.secrets.niko-pass.file = ../../secrets/legion-niko-pass.age;
+    users.users.${username}.hashedPasswordFile = config.age.secrets.niko-pass.path;
+
+    common.hercules.enable = true;
   };
 }

@@ -1,9 +1,6 @@
 {
-  config,
-  self,
-  ...
-}: {
   configurations.nixos.kazuki = {
+    config,
     modulesPath,
     lib,
     ...
@@ -17,7 +14,7 @@
       ./vault.nix
     ];
 
-    nixpkgs.system = "aarch64-linux";
+    nixpkgs.hostPlatform = "aarch64-linux";
 
     boot = {
       loader.systemd-boot.enable = true;
@@ -26,10 +23,5 @@
     };
 
     common.hercules.enable = true;
-    age.secrets.kazuki-cachix = {
-      file = ../../secrets/kazuki-cachix.age;
-      owner = config.systemd.services.hercules-ci-agent.serviceConfig.User;
-    };
-    services.hercules-ci-agent.settings.binaryCachesPath = config.age.secrets.kazuki-cachix.path;
   };
 }
