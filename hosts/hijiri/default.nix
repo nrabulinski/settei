@@ -1,5 +1,5 @@
 {
   configurations.darwin.hijiri = {
-    nixpkgs.hostPlatform = "aarch64-darwin";
+    nixpkgs.system = "aarch64-darwin";
   };
 }
