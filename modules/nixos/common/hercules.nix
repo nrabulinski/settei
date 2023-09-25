@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }: {
@@ -26,6 +27,7 @@
           clusterJoinTokenPath = config.age.secrets.hercules-token.path;
           concurrentTasks = lib.mkDefault 4;
           binaryCachesPath = config.age.secrets.hercules-cache.path;
+          secretsJsonPath = pkgs.writeText "secrets.json" "{}";
         };
       };
     };
