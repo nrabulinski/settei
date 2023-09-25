@@ -10,7 +10,8 @@
     ./hijiri-vm
     ./hijiri
     ./legion
-    ./installer
+    # TODO: Custom installer ISO
+    # ./installer
   ];
 
   builders = let
