@@ -9,6 +9,7 @@
       ./hardware.nix
       # ./disks.nix
       ./msmtp.nix
+      ./desktop.nix
     ];
 
     nixpkgs.hostPlatform = "x86_64-linux";
