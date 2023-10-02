@@ -31,15 +31,15 @@ with lib; {
 
     configurations = {
       nixos = mkOption {
-        type = types.attrsOf types.deferredModule;
+        type = types.lazyAttrsOf types.deferredModule;
         default = {};
       };
       darwin = mkOption {
-        type = types.attrsOf types.deferredModule;
+        type = types.lazyAttrsOf types.deferredModule;
         default = {};
       };
       home = mkOption {
-        type = types.attrsOf types.deferredModule;
+        type = types.lazyAttrsOf types.deferredModule;
         default = {};
       };
     };

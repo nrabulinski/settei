@@ -6,11 +6,9 @@
   ...
 } @ args: let
   cfg = config.settei.sane-defaults;
+  nmEnabled = config.networking.networkmanager.enable;
 in {
   config = lib.mkIf cfg.enable {
-    # https://github.com/NixOS/nixpkgs/issues/254807
-    boot.swraid.enable = false;
-
     hardware.enableRedistributableFirmware = true;
 
     services.openssh.enable = true;
@@ -24,12 +22,10 @@ in {
         group = username;
         extraGroups = ["wheel"];
         openssh.authorizedKeys.keys = let
-          filteredKeys = let
-            configName' =
-              args.configurationName
-              or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself");
-          in
-            lib.filterAttrs (name: _: name != configName') cfg.allSshKeys;
+          configName' =
+            args.configurationName
+            or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself");
+          filteredKeys = lib.filterAttrs (name: _: name != configName') cfg.allSshKeys;
         in
           lib.mkDefault (lib.attrValues filteredKeys);
       };
@@ -40,6 +36,15 @@ in {
     #       be able to use sudo with no password
     security.sudo.wheelNeedsPassword = false;
 
-    system.stateVersion = "22.05";
+    # When NetworkManager isn't in use, add tailscale DNS address manually
+    networking.nameservers = lib.mkIf (!nmEnabled && config.services.tailscale.enable) [
+      "100.100.100.100"
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    # NetworkManager probably means desktop system so we don't want to slow down boot times
+    systemd.services = lib.mkIf nmEnabled {
+      NetworkManager-wait-online.enable = false;
+    };
   };
 }

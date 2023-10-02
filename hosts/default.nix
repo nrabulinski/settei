@@ -84,6 +84,7 @@
           inputs.home-manager.darwinModules.home-manager
           inputs.hercules-ci-agent.darwinModules.agent-service
           self.darwinModules.settei
+          self.darwinModules.common
           sharedOptions
           defaultOptions
           module

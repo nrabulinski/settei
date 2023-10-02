@@ -1,6 +1,5 @@
-# This module is supposed to be a reusable set of options you probably would want to set anyway
-#
-# Other default options which don't necessairly make sense for other people go into hosts/default.nix
+# This module is supposed to be a reusable set of options you probably would want to set anyway.
+# For options specific to nixos or darwin go to modules/{nixos,darwin}/settei/sane-defaults.nix
 {
   config,
   pkgs,

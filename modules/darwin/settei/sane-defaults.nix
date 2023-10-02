@@ -11,7 +11,5 @@
     security.pam.enableSudoTouchIdAuth = true;
 
     users.users.${username}.home = "/Users/${username}";
-
-    system.stateVersion = 4;
   };
 }
