@@ -21,7 +21,6 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 - wrappers - nix packages wrapped with my configs (see: [wrapper-manager](https://github.com/viperML/wrapper-manager))
 - assets - miscellaneous values reused throughout my config
 - effects.nix - hercules-ci configuration
-- deploy.nix - deploy-rs configuration
 
 [^1]: Machine not migrated yet or in the process of migrating. See: https://nest.pijul.com/nrabulinski/nix-config
 

@@ -14,7 +14,6 @@
         ./hosts
         ./modules
         ./wrappers
-        ./deploy.nix
         ./effects.nix
       ];
 
@@ -27,7 +26,6 @@
         devShells.default = pkgs.mkShellNoCC {
           packages =
             [
-              inputs'.deploy-rs.packages.deploy-rs
               inputs'.agenix.packages.agenix
             ]
             # TODO: Contribute darwin support to nh
@@ -50,10 +48,6 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niko-nur = {
