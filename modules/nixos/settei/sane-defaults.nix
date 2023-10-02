@@ -37,11 +37,15 @@ in {
     security.sudo.wheelNeedsPassword = false;
 
     # When NetworkManager isn't in use, add tailscale DNS address manually
-    networking.nameservers = lib.mkIf (!nmEnabled && config.services.tailscale.enable) [
-      "100.100.100.100"
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
+    networking = lib.mkIf (!nmEnabled && config.services.tailscale.enable && cfg.tailnet != null) {
+      nameservers = [
+        "100.100.100.100"
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
+      search = [cfg.tailnet];
+    };
+
     # NetworkManager probably means desktop system so we don't want to slow down boot times
     systemd.services = lib.mkIf nmEnabled {
       NetworkManager-wait-online.enable = false;

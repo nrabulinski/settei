@@ -27,6 +27,7 @@
         sane-defaults = {
           enable = lib.mkDefault true;
           allSshKeys = config.assets.sshKeys.user;
+          tailnet = "discus-macaroni.ts.net";
         };
         flake-qol = {
           enable = true;

@@ -14,6 +14,10 @@
       type = types.attrsOf types.singleLineStr;
       default = {};
     };
+    tailnet = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
   };
 
   config = lib.mkIf config.settei.sane-defaults.enable (let
