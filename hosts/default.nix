@@ -59,6 +59,7 @@
           inputs.mailserver.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           inputs.hercules-ci-agent.nixosModules.agent-service
+          # inputs.nvidia-patch.nixosModules.nvidia-patch
           self.nixosModules.settei
           self.nixosModules.common
           sharedOptions

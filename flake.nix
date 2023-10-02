@@ -108,6 +108,10 @@
     conduit = {
       url = "gitlab:famedly/conduit?ref=next";
     };
+    nvidia-patch = {
+      url = "github:arcnmx/nvidia-patch.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
