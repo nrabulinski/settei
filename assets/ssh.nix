@@ -9,6 +9,7 @@
 
     hijiri-vm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6tfXLB6xhcl3rtI5x9NXSs12U4LVy06RRlyZxiORa0 nikodem@rabulinski.com";
     kazuki = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIImsFb9qRxX0n2Bmy00T8iPam+Fc3mgKkm7dfM7AQRHN nikodem@rabulinski.com";
+    legion = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILHX2MNGZGSTedYAepZHgcx+KK0A6ASulwSrpf9ytb5h nikodem@rabulinski.com";
   };
 
   system = {

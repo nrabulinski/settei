@@ -36,6 +36,9 @@
       or (throw "pass configurationName to module arguments or set networking.hostName yourself")
     );
 
+    # Flakes are unusable without git present so pull it into the environment by default
+    settei.user.config.programs.git.enable = lib.mkDefault true;
+
     nix = {
       settings = {
         experimental-features = ["nix-command" "flakes" "repl-flake" "auto-allocate-uids"];

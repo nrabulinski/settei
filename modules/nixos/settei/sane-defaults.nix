@@ -21,6 +21,7 @@ in {
         home = "/home/${username}";
         group = username;
         extraGroups = ["wheel"];
+        # TODO: Probably move this out into common
         openssh.authorizedKeys.keys = let
           configName' =
             args.configurationName

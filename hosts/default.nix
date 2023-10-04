@@ -51,13 +51,7 @@
       time.timeZone = lib.mkDefault "Europe/Warsaw";
     };
   in {
-    nixos = name: module: let
-      defaultOptions = {
-        _file = ./default.nix;
-
-        i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-      };
-    in
+    nixos = name: module:
       inputs.nixpkgs.lib.nixosSystem {
         modules = [
           inputs.agenix.nixosModules.age
@@ -68,17 +62,12 @@
           self.nixosModules.settei
           self.nixosModules.common
           sharedOptions
-          defaultOptions
           module
         ];
         specialArgs.configurationName = name;
       };
 
-    darwin = name: module: let
-      defaultOptions = {
-        _file = ./default.nix;
-      };
-    in
+    darwin = name: module:
       inputs.darwin.lib.darwinSystem {
         modules = [
           inputs.agenix.darwinModules.age
@@ -87,7 +76,6 @@
           self.darwinModules.settei
           self.darwinModules.common
           sharedOptions
-          defaultOptions
           module
         ];
         specialArgs.configurationName = name;
