@@ -106,6 +106,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+    conduit = {
+      url = "gitlab:famedly/conduit?ref=next";
+    };
   };
 
   nixConfig = {
