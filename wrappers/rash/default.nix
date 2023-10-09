@@ -43,10 +43,12 @@
     basePackage = pkgs.writeShellScriptBin "rash" ''
       exec "${racket-with-libs}/bin/rash-repl" "$@"
     '';
-    env.
-    XDG_CONFIG_HOME = pkgs.linkFarm "rash-config" {
-      "rash/rashrc" = ./rashrc;
-      "rash/rashrc.rkt" = ./rashrc.rkt;
+    env.XDG_CONFIG_HOME = {
+      value = pkgs.linkFarm "rash-config" {
+        "rash/rashrc" = ./rashrc;
+        "rash/rashrc.rkt" = ./rashrc.rkt;
+      };
+      force = true;
     };
     pathAdd = [
       racket-with-libs

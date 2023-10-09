@@ -494,11 +494,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1693462186,
-        "narHash": "sha256-q7TpkEPnzzp/6t/Gh/xxgrYmpctAb7ebGuHUpNfn+Gk=",
+        "lastModified": 1696852272,
+        "narHash": "sha256-JZlIWxCurPjOudY7Jl5523Kf32ZzXXr9OzusM4MDInQ=",
         "owner": "nrabulinski",
         "repo": "wrapper-manager-hm-compat",
-        "rev": "199b04b07665b85649506c807e6a39d2adcfb133",
+        "rev": "287bdf3c13e4d865ea131cc9433dc991a98ee41a",
         "type": "github"
       },
       "original": {
