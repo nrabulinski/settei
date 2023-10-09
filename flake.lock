@@ -125,8 +125,8 @@
       },
       "original": {
         "owner": "lnl7",
+        "ref": "22620845fee1cc16f4ea639509c50fd989ccc1ce",
         "repo": "nix-darwin",
-        "rev": "22620845fee1cc16f4ea639509c50fd989ccc1ce",
         "type": "github"
       }
     },
