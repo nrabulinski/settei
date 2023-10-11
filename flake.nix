@@ -37,7 +37,7 @@
     };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -61,7 +61,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # agenix checks fail because of https://github.com/LnL7/nix-darwin/pull/687
-    darwin-old-for-agenix.url = "github:lnl7/nix-darwin/22620845fee1cc16f4ea639509c50fd989ccc1ce";
+    darwin-old-for-agenix.url = "github:lnl7/nix-darwin?ref=22620845fee1cc16f4ea639509c50fd989ccc1ce";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -105,6 +105,9 @@
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
+    };
+    conduit = {
+      url = "gitlab:famedly/conduit?ref=next";
     };
   };
 

@@ -8,7 +8,7 @@
 in {
   services.matrix-conduit = {
     enable = true;
-    package = inputs'.niko-nur.packages.conduit-latest;
+    package = inputs'.conduit.packages.default;
     settings.global = {
       server_name = "nrab.lol";
       database_backend = "rocksdb";
