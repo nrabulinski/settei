@@ -12,6 +12,8 @@
     enable = true;
     fqdn = "mail.nrab.lol";
     domains = ["nrab.lol"];
+    lmtpSaveToDetailMailbox = "no";
+    recipientDelimiter = "+-";
 
     loginAccounts = {
       "1337@nrab.lol" = {
