@@ -40,9 +40,10 @@
       buildInputs = with pkgs; [readline];
     };
   in {
-    basePackage = pkgs.writeShellScriptBin "rash" ''
+    basePackage = pkgs.writeShellScriptBin "rash-repl" ''
       exec "${racket-with-libs}/bin/rash-repl" "$@"
     '';
+    # TODO: Shell shouldn't overwrite this variable. Probably
     env.XDG_CONFIG_HOME = {
       value = pkgs.linkFarm "rash-config" {
         "rash/rashrc" = ./rashrc;

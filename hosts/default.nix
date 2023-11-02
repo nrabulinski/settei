@@ -15,6 +15,7 @@
   ];
 
   builders = let
+    # FIXME: Move to common
     sharedOptions = {
       inputs',
       lib,
@@ -37,10 +38,9 @@
           enable = true;
           config = {
             home.packages = let
-              wrappers = lib.attrValues inputs'.settei.packages;
               extraPkgs = [inputs'.nh.packages.default];
             in
-              wrappers ++ extraPkgs;
+              [inputs'.settei.packages.base-packages] ++ extraPkgs;
 
             programs.git.enable = true;
             home.sessionVariables.EDITOR = "hx";

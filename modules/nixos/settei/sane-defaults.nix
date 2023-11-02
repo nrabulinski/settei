@@ -21,7 +21,7 @@ in {
         home = "/home/${username}";
         group = username;
         extraGroups = ["wheel"];
-        # TODO: Probably move this out into common
+        # FIXME: Move to common
         openssh.authorizedKeys.keys = let
           configName' =
             args.configurationName
@@ -38,6 +38,7 @@ in {
     security.sudo.wheelNeedsPassword = false;
 
     # When NetworkManager isn't in use, add tailscale DNS address manually
+    # FIXME: Move to common
     networking = lib.mkIf (!nmEnabled && config.services.tailscale.enable && cfg.tailnet != null) {
       nameservers = [
         "100.100.100.100"

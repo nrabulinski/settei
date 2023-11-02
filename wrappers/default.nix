@@ -20,7 +20,17 @@
         ./rash
       ];
     };
+    all-packages = wrapped.config.build.packages;
+    base-packages = pkgs.symlinkJoin {
+      name = "settei-base";
+      paths = with all-packages; [
+        rash
+        helix
+      ];
+    };
   in {
-    inherit (wrapped.config.build) packages;
+    packages = all-packages // {
+      inherit base-packages;
+    };
   };
 }

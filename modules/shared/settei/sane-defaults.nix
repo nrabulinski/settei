@@ -29,6 +29,7 @@
       username = lib.mkDefault username;
     };
 
+    # FIXME: Move to common
     services.tailscale.enable = true;
 
     networking.hostName = lib.mkDefault (

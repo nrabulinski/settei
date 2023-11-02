@@ -99,7 +99,6 @@
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
     nh = {
       url = "github:viperML/nh";
