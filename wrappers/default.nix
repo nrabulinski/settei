@@ -29,8 +29,10 @@
       ];
     };
   in {
-    packages = all-packages // {
-      inherit base-packages;
-    };
+    packages =
+      all-packages
+      // {
+        inherit base-packages;
+      };
   };
 }

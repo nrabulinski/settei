@@ -12,6 +12,7 @@
     ./legion
     # TODO: Custom installer ISO
     # ./installer
+    ./ude
   ];
 
   builders = let
