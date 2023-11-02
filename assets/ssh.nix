@@ -11,11 +11,13 @@
     kazuki = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIImsFb9qRxX0n2Bmy00T8iPam+Fc3mgKkm7dfM7AQRHN nikodem@rabulinski.com";
     legion = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILHX2MNGZGSTedYAepZHgcx+KK0A6ASulwSrpf9ytb5h nikodem@rabulinski.com";
     miyagi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIf4Ypws+1v9WL9MibW1dELpa/7YixElaBE7S71jsTy nrabulinski@antmicro.com";
+    ude = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDm3M/i/4wP2BM4+9hHAOMospwvlBZ+FT+pJtVgaaMq nikodem@rabulinski.com";
   };
 
   system = {
     kazuki = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyYhYWDNmKSrpcslD3NzWW+lQmDcLJdjLh7CSkL4hW5 root@kazuki";
     legion = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH0Ktyj0FSn8KLRwRGd0Tp/qNUPXV7+XyxAsWGWdMYp8 root@legion";
     miyagi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbUcsZrZgGHojG+1yVyNEW5Fgr7/7qNaWxOt+lFrJaD root@miyagi";
+    ude = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDZW15ObZ6XG776pdEvs9yqSuIiWlbGveEVA774Ri9/o root@ude";
   };
 }
