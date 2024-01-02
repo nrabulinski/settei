@@ -14,8 +14,8 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - miyagi - my work machine[^1]
 - modules - options which in principle should be reusable by others
   - */common - common options between my machines which aren't meant to be reusable by others
-  - nixos
-    - settei - my opinionated nixos options
+  - system
+    - settei - my opinionated nixos/nix-darwin options
   - flake - flake-parts modules
 - secrets - agenix secrets
 - wrappers - nix packages wrapped with my configs (see: [wrapper-manager](https://github.com/viperML/wrapper-manager))
