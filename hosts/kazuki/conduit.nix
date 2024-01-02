@@ -8,7 +8,7 @@
 in {
   services.matrix-conduit = {
     enable = true;
-    package = inputs'.conduit.packages.default;
+    package = inputs'.settei.packages.conduit-next;
     settings.global = {
       server_name = "nrab.lol";
       database_backend = "rocksdb";
