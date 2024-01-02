@@ -90,8 +90,7 @@
   };
 
   hardware.nvidia = {
-    # TODO: Makes the build spiral out of control?
-    # patch.enable = true;
+    patch.enable = true;
     modesetting.enable = true;
   };
 
