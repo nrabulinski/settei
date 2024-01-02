@@ -1,7 +1,6 @@
 {
   imports = [
-    ./nixos
-    ./darwin
+    ./system
     ./flake
   ];
 }

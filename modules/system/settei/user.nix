@@ -43,7 +43,8 @@ in {
       };
     };
   in
-    lib.mkIf cfg.enable ({
+    lib.mkIf cfg.enable (lib.mkMerge [
+      {
         assertions = [
           {
             assertion = hasHomeManager;
@@ -51,5 +52,6 @@ in {
           }
         ];
       }
-      // hmConfig);
+      hmConfig
+    ]);
 }
