@@ -24,7 +24,6 @@
     base-packages = pkgs.symlinkJoin {
       name = "settei-base";
       paths = with all-packages; [
-        rash
         helix
       ];
     };
