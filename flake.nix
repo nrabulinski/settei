@@ -15,6 +15,7 @@
         ./modules
         ./wrappers
         ./effects.nix
+        ./pkgs
       ];
 
       perSystem = {
@@ -86,11 +87,20 @@
     nh = {
       url = "github:viperML/nh";
     };
-    conduit = {
+    conduit-src = {
       url = "gitlab:famedly/conduit?ref=next";
+      flake = false;
     };
     nvidia-patch = {
       url = "github:arcnmx/nvidia-patch.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    crane = {
+      url = "github:ipetkov/crane";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
