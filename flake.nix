@@ -50,22 +50,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niko-nur = {
-      url = "github:nrabulinski/nur-packages";
-      # Not overriding nixpkgs to get cache hits
-      # inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # agenix checks fail because of https://github.com/LnL7/nix-darwin/pull/687
-    darwin-old-for-agenix.url = "github:lnl7/nix-darwin?ref=22620845fee1cc16f4ea639509c50fd989ccc1ce";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = "darwin-old-for-agenix";
+      inputs.darwin.follows = "darwin";
       inputs.home-manager.follows = "home-manager";
     };
     mailserver = {
@@ -81,29 +73,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # stylix = {
-    #   url = "github:danth/stylix";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     home-manager.follows = "home-manager";
-    #   };
-    # };
     racket = {
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hercules-ci-agent = {
       url = "github:hercules-ci/hercules-ci-agent";
-      inputs.flake-parts.follows = "flake-parts";
     };
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
-      inputs.flake-parts.follows = "flake-parts";
     };
     nh = {
       url = "github:viperML/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
     };
     conduit = {
       url = "gitlab:famedly/conduit?ref=next";
