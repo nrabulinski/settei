@@ -12,6 +12,7 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - hijiri - my macbook[^1]
   - hijiri-vm - linux vm running on my macbook
   - miyagi - my work machine[^1]
+  - ude - another linux arm server
 - modules - options which in principle should be reusable by others
   - */common - common options between my machines which aren't meant to be reusable by others
   - system
@@ -33,7 +34,7 @@ Not set rules but general guidelines for myself to hopefully keep this config cl
 this means i'll try to only do `imports = [ ./foo ];` or `imports = [ ./bar.nix ]` but not `imports = [ ./x/y/z.nix ];`
 - the file should be roughly in order of most interesting to least interesting options.
 - `imports` should be the first attribute (except for `_file`)
-- anything that goes into `modules` should be usable by others. any options specific to me go into `hosts/default.nix` or `hosts/common`.
+- anything that goes into `modules` should be usable by others, except for `modules/common`.
 - there should be no implicit state anywhere in the config.
 (sounds obvious but this is already broken with legion and the zfs pool but i'll let that one slide)
 to achieve this i still need to create a proper live iso with my config and my bootstrapping ssh key
@@ -41,8 +42,6 @@ to achieve this i still need to create a proper live iso with my config and my b
 ## TODOs
 Sorted rougly by priority
 
-- finish migrating legion
-- private nix cache
-- set up hercules agent on legion
-- hercules-ci checking if configuration is valid
+- migrate the rest of my machines
+- private nix cache (unneeded with cachix?)
 - hercules-ci effects for deploying machines on update (if configuration is valid)
