@@ -13,6 +13,7 @@
     # TODO: Custom installer ISO
     # ./installer
     ./ude
+    ./kogata
   ];
 
   builders = let

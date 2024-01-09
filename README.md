@@ -13,6 +13,7 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - hijiri-vm - linux vm running on my macbook
   - miyagi - my work machine[^1]
   - ude - another linux arm server
+  - kogata - my m1 mac mini doubling as a server
 - modules - options which in principle should be reusable by others
   - */common - common options between my machines which aren't meant to be reusable by others
   - system
