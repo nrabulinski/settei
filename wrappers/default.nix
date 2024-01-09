@@ -18,20 +18,30 @@
         ./starship
         ./helix
         ./rash
+        ./fish
       ];
     };
     all-packages = wrapped.config.build.packages;
+
+    fish-base = pkgs.fish;
+    fish-wrapped = all-packages.fish;
+    fish = pkgs.symlinkJoin {
+      inherit (fish-base) name meta passthru;
+      paths = [ fish-wrapped fish-base ];
+    };
+
     base-packages = pkgs.symlinkJoin {
       name = "settei-base";
-      paths = with all-packages; [
-        helix
+      paths = [
+        all-packages.helix
+        fish
       ];
     };
   in {
     packages =
       all-packages
       // {
-        inherit base-packages;
+        inherit base-packages fish;
       };
   };
 }
