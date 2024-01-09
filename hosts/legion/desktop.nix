@@ -9,7 +9,7 @@
   # Needed for nvidia and steam
   nixpkgs.config.allowUnfree = true;
 
-  settei.user.config = {pkgs, ...}: {
+  settei.user.config = {
     home.packages = with pkgs; [alacritty brightnessctl dmenu];
 
     xsession.windowManager.i3 = {
