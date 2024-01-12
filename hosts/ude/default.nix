@@ -26,5 +26,12 @@
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
+
+    services.nginx = {
+      enable = true;
+      appendConfig = ''
+        include /impure/nginx/*.conf;
+      '';
+    };
   };
 }
