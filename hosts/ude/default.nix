@@ -29,7 +29,7 @@
 
     services.nginx = {
       enable = true;
-      appendConfig = ''
+      appendHttpConfig = ''
         include /impure/nginx/*.conf;
       '';
     };
