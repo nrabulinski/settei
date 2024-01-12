@@ -15,9 +15,10 @@
       modules = [
         inputs.wrapper-manager-hm-compat.wrapperManagerModules.homeManagerCompat
         argsModule
-        ./starship
+        # ./starship
         ./helix
-        ./rash
+        # TODO: Enable again
+        # ./rash
         ./fish
       ];
     };
