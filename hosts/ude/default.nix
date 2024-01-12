@@ -33,5 +33,6 @@
         include /impure/nginx/*.conf;
       '';
     };
+    networking.firewall.allowedTCPPorts = [80];
   };
 }

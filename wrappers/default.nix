@@ -28,7 +28,7 @@
     fish-wrapped = all-packages.fish;
     fish = pkgs.symlinkJoin {
       inherit (fish-base) name meta passthru;
-      paths = [ fish-wrapped fish-base ];
+      paths = [fish-wrapped fish-base];
     };
 
     base-packages = pkgs.symlinkJoin {

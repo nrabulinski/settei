@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   # TODO: Fix once https://github.com/viperML/wrapper-manager/issues/14 is resolved
   wrappers.fish = {
     basePackage = pkgs.runCommandNoCC "fish-binary" {} ''
