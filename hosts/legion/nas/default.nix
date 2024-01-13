@@ -31,4 +31,24 @@
     device = "/dev/disk/by-label/BULK";
     fsType = "ext4";
   };
+
+  systemd.mounts = [
+    {
+      type = "none";
+      options = "bind,nofail";
+      what = "/media/data";
+      where = "/export/yotta-data";
+      requires = ["zfs-mount.service"];
+      wantedBy = ["multi-user.target"];
+    }
+  ];
+
+  services.nfs.server = {
+    enable = true;
+    hostName = "100.84.112.35";
+    exports = ''
+      /export            *(insecure,rw,crossmnt,fsid=0)
+      /export/yotta-data *(insecure,rw,nohide)
+    '';
+  };
 }
