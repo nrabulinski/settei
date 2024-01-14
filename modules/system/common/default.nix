@@ -7,7 +7,6 @@
   username,
   ...
 }: let
-  inherit (inputs'.settei.packages) fish;
   sharedConfig = {
     settei.user.config = {
       programs.git = {
@@ -30,12 +29,11 @@
     };
 
     programs.fish.enable = true;
-    environment.shells = [fish];
-    users.users.${username}.shell = fish;
+    users.users.${username}.shell = pkgs.fish;
 
     # NixOS' fish module doesn't allow setting what package to use for fish,
     # so I need to override the fish package.
-    nixpkgs.overlays = [(_: _: {inherit fish;})];
+    nixpkgs.overlays = [(_: _: {inherit (inputs'.settei.packages) fish;})];
   };
 
   linuxConfig = lib.optionalAttrs isLinux {

@@ -1,3 +1,7 @@
+# Set up path
+fish_add_path --path --prepend '@bat@/bin'
+fish_add_path --path --prepend '@eza@/bin'
+
 # Abbreviations
 abbr --add --global -- flake-update 'nix flake lock --update-input'
 abbr --add --global -- ns 'nix shell'
