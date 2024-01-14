@@ -3,10 +3,18 @@ fish_add_path --path --prepend '@bat@/bin'
 fish_add_path --path --prepend '@eza@/bin'
 
 # Abbreviations
-abbr --add --global -- flake-update 'nix flake lock --update-input'
+## misc
+abbr --add --global -- vim hx
+## nix
 abbr --add --global -- ns 'nix shell'
 abbr --add --global -- nss 'nix search'
-abbr --add --global -- vim hx
+abbr --add --global -- flake-update 'nix flake lock --update-input'
+## git
+abbr --add --global -- gs 'git status'
+abbr --add --global -- gp 'git pull'
+abbr --add --global -- gc 'git checkout'
+abbr --add --global -- ga 'git add'
+abbr --add --global -- gr 'git rebase'
 
 # Aliases
 alias cat bat
