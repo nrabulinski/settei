@@ -1,10 +1,4 @@
-# Set up path
-fish_add_path --path --prepend '@bat@/bin'
-fish_add_path --path --prepend '@eza@/bin'
-
 # Abbreviations
-## misc
-abbr --add --global -- vim hx
 ## nix
 abbr --add --global -- ns 'nix shell'
 abbr --add --global -- nss 'nix search'
