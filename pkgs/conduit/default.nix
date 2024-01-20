@@ -9,7 +9,12 @@
   darwin,
   rustPlatform,
 }: let
-  crane' = crane.overrideToolchain fenix.stable.toolchain;
+  rust = with fenix;
+    combine [
+      stable.cargo
+      stable.rustc
+    ];
+  crane' = crane.overrideToolchain rust;
 in
   crane'.buildPackage {
     inherit src;
