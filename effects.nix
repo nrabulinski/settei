@@ -46,7 +46,7 @@
             }: "cachix pin nrabulinski ${lib.escapeShellArg name} ${lib.escapeShellArg drv}")
             collected;
         in
-          hci-effects.runIf (herculesCI.config.branch == "main") (hci-effects.mkEffect {
+          hci-effects.runIf (herculesCI.config.repo.branch == "main") (hci-effects.mkEffect {
             secretsMap."cachix-token" = "cachix-token";
             inputs = [pkgs.cachix];
             userSetupScript = ''
