@@ -26,6 +26,10 @@ in {
       file = ../../../secrets/hercules-cache.age;
       owner = herculesUser;
     };
+    age.secrets.hercules-secrets = {
+      file = ../../../secrets/hercules-secrets.age;
+      owner = herculesUser;
+    };
 
     services.hercules-ci-agent = {
       enable = true;
@@ -33,7 +37,7 @@ in {
         clusterJoinTokenPath = config.age.secrets.hercules-token.path;
         concurrentTasks = lib.mkDefault 4;
         binaryCachesPath = config.age.secrets.hercules-cache.path;
-        secretsJsonPath = pkgs.writeText "secrets.json" "{}";
+        secretsJsonPath = config.age.secrets.hercules-secrets.path;
       };
     };
   };
