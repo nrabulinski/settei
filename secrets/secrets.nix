@@ -28,6 +28,13 @@ in {
     keys.system.kogata
     keys.other.bootstrap
   ];
+  "hercules-secrets.age".publicKeys = [
+    keys.system.kazuki
+    keys.system.legion
+    keys.system.ude
+    keys.system.kogata
+    keys.other.bootstrap
+  ];
   "alert-plain-pass.age".publicKeys = [
     keys.system.legion
     keys.other.bootstrap
