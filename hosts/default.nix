@@ -17,40 +17,11 @@
   ];
 
   builders = let
-    # FIXME: Move to common
     sharedOptions = {
-      inputs',
-      lib,
-      ...
-    }: {
       _file = ./default.nix;
 
-      settei = {
-        username = lib.mkDefault "niko";
-        sane-defaults = {
-          enable = lib.mkDefault true;
-          allSshKeys = config.assets.sshKeys.user;
-          tailnet = "discus-macaroni.ts.net";
-        };
-        flake-qol = {
-          enable = true;
-          inputs = inputs // {settei = self;};
-        };
-        user = {
-          enable = true;
-          config = {
-            home.packages = let
-              extraPkgs = [inputs'.nh.packages.default];
-            in
-              [inputs'.settei.packages.base-packages] ++ extraPkgs;
-
-            programs.git.enable = true;
-            home.sessionVariables.EDITOR = "hx";
-          };
-        };
-      };
-
-      time.timeZone = lib.mkDefault "Europe/Warsaw";
+      settei.sane-defaults.allSshKeys = config.assets.sshKeys.user;
+      settei.flake-qol.inputs = inputs // {settei = self;};
     };
   in {
     nixos = name: module:

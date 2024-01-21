@@ -25,12 +25,11 @@
         ...
       }: {
         devShells.default = pkgs.mkShellNoCC {
-          packages =
-            [
-              inputs'.agenix.packages.agenix
-            ]
+          packages = [
+            inputs'.agenix.packages.agenix
             # TODO: Contribute darwin support to nh
-            ++ lib.optionals (!pkgs.stdenv.isDarwin) [inputs'.nh.packages.default];
+            pkgs.nh
+          ];
         };
 
         formatter = pkgs.alejandra;
@@ -83,9 +82,6 @@
     };
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
-    };
-    nh = {
-      url = "github:viperML/nh";
     };
     conduit-src = {
       url = "gitlab:famedly/conduit?ref=next";
