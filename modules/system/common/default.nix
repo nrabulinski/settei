@@ -8,28 +8,47 @@
   ...
 }: let
   sharedConfig = {
-    settei.user.config = {
-      programs.git = {
+    settei = {
+      username = lib.mkDefault "niko";
+      sane-defaults = {
+        enable = lib.mkDefault true;
+        tailnet = "discus-macaroni.ts.net";
+      };
+      flake-qol.enable = true;
+      user = {
         enable = true;
-        difftastic.enable = true;
-        lfs.enable = true;
-        userName = "Nikodem Rabuliński";
-        userEmail = lib.mkDefault "nikodem@rabulinski.com";
-        signing = {
-          key = config.settei.sane-defaults.allSshKeys.${configurationName};
-          signByDefault = true;
-        };
-        extraConfig = {
-          gpg.format = "ssh";
-          push.followTags = true;
+        config = {
+          home.packages = let
+            extraPkgs = [pkgs.nh];
+          in
+            [inputs'.settei.packages.base-packages] ++ extraPkgs;
+
+          home.sessionVariables.EDITOR = "hx";
+          programs.git = {
+            enable = true;
+            difftastic.enable = true;
+            lfs.enable = true;
+            userName = "Nikodem Rabuliński";
+            userEmail = lib.mkDefault "nikodem@rabulinski.com";
+            signing = {
+              key = config.settei.sane-defaults.allSshKeys.${configurationName};
+              signByDefault = true;
+            };
+            extraConfig = {
+              gpg.format = "ssh";
+              push.followTags = true;
+            };
+          };
+
+          programs.fish.enable = true;
         };
       };
-
-      programs.fish.enable = true;
     };
 
     programs.fish.enable = true;
     users.users.${username}.shell = pkgs.fish;
+
+    time.timeZone = lib.mkDefault "Europe/Warsaw";
 
     # NixOS' fish module doesn't allow setting what package to use for fish,
     # so I need to override the fish package.
