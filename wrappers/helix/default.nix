@@ -13,6 +13,9 @@
         auto-save = true;
         indent-guides.render = true;
       };
+      keys.normal = {
+        "?" = "make_search_word_bounded";
+      };
     };
     languages = {
       language = [
