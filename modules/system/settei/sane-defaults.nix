@@ -1,9 +1,11 @@
 {isLinux}: {
   config,
   lib,
-  username,
   ...
 } @ args: let
+  cfg = config.settei.sane-defaults;
+  inherit (config.settei) username;
+
   options = {
     settei.sane-defaults = with lib; {
       enable = mkEnableOption "Personal sane defaults (but they should make sense for anyone)";
@@ -19,8 +21,6 @@
   };
 
   sharedConfig = let
-    cfg = config.settei;
-    inherit (cfg) username;
     adminNeedsPassword = isLinux -> config.security.sudo.wheelNeedsPassword;
   in {
     _module.args = {
@@ -37,6 +37,15 @@
 
     # Flakes are unusable without git present so pull it into the environment by default
     settei.user.config.programs.git.enable = lib.mkDefault true;
+
+    # FIXME: Move to common
+    users.users.${username}.openssh.authorizedKeys.keys = let
+      configName' =
+        args.configurationName
+        or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself");
+      filteredKeys = lib.filterAttrs (name: _: name != configName') cfg.allSshKeys;
+    in
+      lib.mkDefault (lib.attrValues filteredKeys);
 
     nix = {
       settings = {
@@ -62,13 +71,13 @@
   };
 
   linuxConfig = lib.optionalAttrs isLinux (let
-    cfg = config.settei.sane-defaults;
     nmEnabled = config.networking.networkmanager.enable;
   in {
     hardware.enableRedistributableFirmware = true;
 
     services.openssh.enable = true;
     programs.mosh.enable = lib.mkDefault true;
+    programs.git.enable = lib.mkDefault true;
 
     users = {
       mutableUsers = false;
@@ -77,14 +86,6 @@
         home = "/home/${username}";
         group = username;
         extraGroups = ["wheel"];
-        # FIXME: Move to common
-        openssh.authorizedKeys.keys = let
-          configName' =
-            args.configurationName
-            or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself");
-          filteredKeys = lib.filterAttrs (name: _: name != configName') cfg.allSshKeys;
-        in
-          lib.mkDefault (lib.attrValues filteredKeys);
       };
       groups.${username} = {};
     };
