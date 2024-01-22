@@ -2,5 +2,6 @@
   imports = [
     ./system
     ./flake
+    ./home
   ];
 }
