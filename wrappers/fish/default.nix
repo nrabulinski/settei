@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -11,12 +12,11 @@
     extraWrapperFlags = "--inherit-argv0";
 
     prependFlags = let
-      extraPkgs = with pkgs; [eza bat];
-      # Can't use pathAdd because fish used as login shell will ignore the variables the wrapper sets up
+      # Can't rely on pathAdd because fish used as login shell will ignore the variables the wrapper sets up
       path-add-lines =
         lib.concatMapStringsSep "\n"
         (pkg: "fish_add_path --path --prepend '${lib.getExe' pkg ""}'")
-        extraPkgs;
+        config.wrappers.fish.pathAdd;
       config-fish = pkgs.writeText "config.fish" ''
         ${path-add-lines}
         source ${./config.fish}
@@ -25,5 +25,7 @@
       "-C"
       "source ${config-fish}"
     ];
+
+    pathAdd = with pkgs; [eza bat fzf];
   };
 }
