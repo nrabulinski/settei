@@ -6,9 +6,7 @@
   }: {
     nixpkgs.system = "aarch64-darwin";
 
-    settei.user.config = {
-      home.packages = with pkgs; [alacritty];
-    };
+    settei.user.config.common.desktop.enable = true;
 
     # TODO: Make it a settei module so it's easy to concatenate which pkgs are allowed
     nixpkgs.config.allowUnfreePredicate = pkg:
