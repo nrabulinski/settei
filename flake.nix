@@ -103,6 +103,9 @@
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niko-nur = {
+      url = "github:nrabulinski/nur-packages";
+    };
   };
 
   nixConfig = {
