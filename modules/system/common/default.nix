@@ -3,6 +3,7 @@
   configurationName,
   lib,
   pkgs,
+  inputs,
   inputs',
   username,
   ...
@@ -16,32 +17,10 @@
       };
       flake-qol.enable = true;
       user = {
-        enable = true;
-        config = {
-          home.packages = let
-            extraPkgs = [pkgs.nh];
-          in
-            [inputs'.settei.packages.base-packages] ++ extraPkgs;
-
-          home.sessionVariables.EDITOR = "hx";
-          programs.git = {
-            enable = true;
-            difftastic.enable = true;
-            lfs.enable = true;
-            userName = "Nikodem Rabuliński";
-            userEmail = lib.mkDefault "nikodem@rabulinski.com";
-            signing = {
-              key = config.settei.sane-defaults.allSshKeys.${configurationName};
-              signByDefault = true;
-            };
-            extraConfig = {
-              gpg.format = "ssh";
-              push.followTags = true;
-            };
-          };
-
-          programs.fish.enable = true;
-        };
+        enable = lib.mkDefault true;
+        # TODO: Move to settei or leave here?
+        extraArgs.machineName = configurationName;
+        config.imports = [inputs.settei.homeModules.common];
       };
     };
 

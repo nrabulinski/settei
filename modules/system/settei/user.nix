@@ -3,7 +3,7 @@
   options,
   lib,
   ...
-}: let
+} @ args: let
   hasHomeManager = options ? home-manager;
   cfg = config.settei.user;
   inherit (config.settei) username;
@@ -26,7 +26,11 @@ in {
     hmConfig = lib.optionalAttrs hasHomeManager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = cfg.extraArgs;
+      home-manager.extraSpecialArgs =
+        {
+          inherit (args) inputs inputs';
+        }
+        // cfg.extraArgs;
 
       home-manager.users.${username} = {
         _file = ./user.nix;

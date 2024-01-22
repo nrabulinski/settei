@@ -141,6 +141,26 @@
         "type": "github"
       }
     },
+    "firefox-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705884384,
+        "narHash": "sha256-bi1bK24N9LbYnkJfv7K/YTy+RCsxNsdlTvBqqWj46lg=",
+        "owner": "bandithedoge",
+        "repo": "nixpkgs-firefox-darwin",
+        "rev": "5cc14069cb1da102f13483666aed9e91fbaac255",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bandithedoge",
+        "repo": "nixpkgs-firefox-darwin",
+        "type": "github"
+      }
+    },
     "fl-config": {
       "locked": {
         "lastModified": 1653159448,
@@ -512,6 +532,7 @@
         "darwin": "darwin",
         "disko": "disko",
         "fenix": "fenix",
+        "firefox-darwin": "firefox-darwin",
         "flake-parts": "flake-parts",
         "hercules-ci-agent": "hercules-ci-agent",
         "hercules-ci-effects": "hercules-ci-effects",
