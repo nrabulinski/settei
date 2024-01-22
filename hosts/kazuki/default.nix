@@ -15,6 +15,8 @@
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
+    # Not intended for interactive use
+    settei.user.enable = false;
 
     boot = {
       loader.systemd-boot.enable = true;
