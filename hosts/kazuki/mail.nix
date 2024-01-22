@@ -11,13 +11,17 @@
   mailserver = {
     enable = true;
     fqdn = "mail.nrab.lol";
-    domains = ["nrab.lol"];
+    domains = [
+      "nrab.lol"
+      "rab.lol"
+    ];
     lmtpSaveToDetailMailbox = "no";
     recipientDelimiter = "+-";
 
     loginAccounts = {
       "1337@nrab.lol" = {
         hashedPasswordFile = config.age.secrets.leet-nrab-lol.path;
+        aliases = ["n@rab.lol"];
       };
       "alert@nrab.lol" = {
         hashedPasswordFile = config.age.secrets.alert-nrab-lol.path;
