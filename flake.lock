@@ -254,6 +254,24 @@
         "type": "indirect"
       }
     },
+    "flake-parts_4": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1688466019,
+        "narHash": "sha256-VeM2akYrBYMsb4W/MmBo1zmaMfgbL4cH3Pu8PGyIwJ0=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "8e8d955c22df93dbe24f19ea04f47a74adbdc5ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flakelib": {
       "inputs": {
         "fl-config": "fl-config",
@@ -373,6 +391,25 @@
         "type": "gitlab"
       }
     },
+    "niko-nur": {
+      "inputs": {
+        "flake-parts": "flake-parts_4",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1690830552,
+        "narHash": "sha256-8n8PipmWZnnE56QlhcGQCKG5cMU8v+NTaFkJzBM6k4w=",
+        "owner": "nrabulinski",
+        "repo": "nur-packages",
+        "rev": "b19fe09dd3f325ff2731b83f230e2573b67db4aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nrabulinski",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
     "nix-std": {
       "locked": {
         "lastModified": 1701658249,
@@ -434,6 +471,24 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1688049487,
+        "narHash": "sha256-100g4iaKC9MalDjUW9iN6Jl/OocTDtXdeAj7pEGIRh4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4bc72cae107788bf3f24f30db2e2f685c9298dc9",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1703637592,
@@ -451,6 +506,22 @@
       }
     },
     "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1690753480,
+        "narHash": "sha256-GQgPs8fCh/LsyQoYMUZgT2p7jFVWyHu9p+1Nl/dp8GY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9e06dd56947c1dc3dc837c3149bfe02c71a6edd7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1705697961,
         "narHash": "sha256-XepT3WS516evSFYkme3GrcI3+7uwXHqtHbip+t24J7E=",
@@ -538,7 +609,8 @@
         "hercules-ci-effects": "hercules-ci-effects",
         "home-manager": "home-manager",
         "mailserver": "mailserver",
-        "nixpkgs": "nixpkgs_3",
+        "niko-nur": "niko-nur",
+        "nixpkgs": "nixpkgs_4",
         "nvidia-patch": "nvidia-patch",
         "racket": "racket",
         "wrapper-manager": "wrapper-manager",
