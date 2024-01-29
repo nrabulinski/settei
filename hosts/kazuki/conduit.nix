@@ -5,6 +5,7 @@
   ...
 }: let
   formatJson = pkgs.formats.json {};
+  serverDomain = "matrix.nrab.lol";
 in {
   services.matrix-conduit = {
     enable = true;
@@ -35,7 +36,7 @@ in {
 
         locations."=/.well-known/matrix/server" = {
           alias = formatJson.generate "well-known-matrix-server" {
-            "m.server" = "matrix.nrab.lol";
+            "m.server" = serverDomain;
           };
           extraConfig = ''
             default_type application/json;
@@ -46,7 +47,10 @@ in {
         locations."=/.well-known/matrix/client" = {
           alias = formatJson.generate "well-known-matrix-client" {
             "m.homeserver" = {
-              "base_url" = "https://matrix.nrab.lol";
+              "base_url" = "https://${serverDomain}";
+            };
+            "org.matrix.msc3575.proxy" = {
+              "url" = "https://${serverDomain}";
             };
           };
           extraConfig = ''
