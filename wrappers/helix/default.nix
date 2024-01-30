@@ -18,6 +18,9 @@
       };
     };
     languages = {
+      language-server.nil.config = {
+        nix.flake.autoEvalInputs = true;
+      };
       language = [
         {
           name = "koka";
