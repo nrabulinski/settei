@@ -58,6 +58,7 @@ in {
 
   imports = [
     (import ./hercules.nix {inherit isLinux;})
+    (import ./user.nix {inherit isLinux;})
   ];
 
   config = lib.mkMerge [
