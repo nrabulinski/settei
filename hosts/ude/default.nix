@@ -21,12 +21,6 @@
     common.hercules.enable = true;
     services.hercules-ci-agent.settings.concurrentTasks = 6;
 
-    virtualisation.podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-
     services.nginx = {
       enable = true;
       appendHttpConfig = ''

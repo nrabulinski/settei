@@ -11,8 +11,6 @@
       common.desktop.enable = true;
       home.packages = with pkgs; [
         utm
-        podman
-        podman-compose
         qemu
         anki-bin
       ];
