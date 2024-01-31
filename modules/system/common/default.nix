@@ -32,6 +32,8 @@
     # NixOS' fish module doesn't allow setting what package to use for fish,
     # so I need to override the fish package.
     nixpkgs.overlays = [(_: _: {inherit (inputs'.settei.packages) fish;})];
+
+    nix.settings.allow-import-from-derivation = false;
   };
 
   linuxConfig = lib.optionalAttrs isLinux {

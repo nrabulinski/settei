@@ -31,7 +31,6 @@
           inputs.disko.nixosModules.disko
           inputs.mailserver.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
-          inputs.hercules-ci-agent.nixosModules.agent-service
           inputs.nvidia-patch.nixosModules.nvidia-patch
           self.nixosModules.settei
           self.nixosModules.common
@@ -46,7 +45,6 @@
         modules = [
           inputs.agenix.darwinModules.age
           inputs.home-manager.darwinModules.home-manager
-          inputs.hercules-ci-agent.darwinModules.agent-service
           self.darwinModules.settei
           self.darwinModules.common
           sharedOptions

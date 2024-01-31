@@ -77,9 +77,6 @@
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hercules-ci-agent = {
-      url = "github:hercules-ci/hercules-ci-agent";
-    };
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
     };
