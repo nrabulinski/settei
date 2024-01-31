@@ -15,6 +15,7 @@
     (import ./sane-defaults.nix {inherit isLinux;})
     (import ./flake-qol.nix {inherit perInput;})
     ./user.nix
+    (import ./programs {inherit isLinux;})
   ];
 
   options.settei = with lib; {
