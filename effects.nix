@@ -36,7 +36,8 @@
             ];
           in
             drvs ++ (lib.flatten recursed);
-          collected = collectDrvs "packages" herculesCI.config.onPush.default.outputs.packages;
+          rootOutputs = builtins.removeAttrs herculesCI.config.onPush.default.outputs ["effects"];
+          collected = collectDrvs "outputs" rootOutputs;
           cachixCommands =
             lib.concatMapStringsSep
             "\n"
