@@ -3,7 +3,9 @@
   lib,
   ...
 }: let
-  sharedConfig = {};
+  sharedConfig = {
+    settei.programs.podman.enable = true;
+  };
 
   linuxConfig = lib.optionalAttrs isLinux {
     boot.kernel.sysctl."kernel.yama.ptrace_scope" = 0;
