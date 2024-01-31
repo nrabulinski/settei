@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -27,4 +28,12 @@
         || yabai -m window $YABAI_WINDOW_ID --toggle float'
     '';
   };
+
+  environment.etc."sudoers.d/yabai".source = pkgs.runCommand "sudoers-yabai" {} ''
+    YABAI_BIN="${config.services.yabai.package}/bin/yabai"
+    SHASUM=$(sha256sum "$YABAI_BIN" | cut -d' ' -f1)
+    cat <<EOF >"$out"
+    %admin ALL=(root) NOPASSWD: sha256:$SHASUM $YABAI_BIN --load-sa
+    EOF
+  '';
 }
