@@ -22,14 +22,12 @@
 
         source ${./config.fish}
         source ${./prompt.fish}
-
-        ${lib.getExe pkgs.zoxide} init fish | source
       '';
     in [
       "-C"
       "source ${config-fish}"
     ];
 
-    pathAdd = with pkgs; [eza bat fzf ripgrep];
+    pathAdd = with pkgs; [eza bat fzf ripgrep zoxide direnv];
   };
 }
