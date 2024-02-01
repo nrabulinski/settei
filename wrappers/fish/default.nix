@@ -19,13 +19,17 @@
         config.wrappers.fish.pathAdd;
       config-fish = pkgs.writeText "config.fish" ''
         ${path-add-lines}
+
         source ${./config.fish}
+        source ${./prompt.fish}
+
+        ${lib.getExe pkgs.zoxide} init fish | source
       '';
     in [
       "-C"
       "source ${config-fish}"
     ];
 
-    pathAdd = with pkgs; [eza bat fzf];
+    pathAdd = with pkgs; [eza bat fzf ripgrep];
   };
 }

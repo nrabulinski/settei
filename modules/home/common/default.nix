@@ -24,8 +24,6 @@ in {
   programs.direnv.enable = true;
   programs.nix-index.enable = true;
   programs.ssh.enable = true;
-  programs.zoxide.enable = true;
-  programs.ripgrep.enable = true;
   programs.git = {
     enable = true;
     difftastic.enable = true;
