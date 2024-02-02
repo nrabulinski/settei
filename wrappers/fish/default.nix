@@ -20,8 +20,8 @@
       config-fish = pkgs.writeText "config.fish" ''
         ${path-add-lines}
 
-        source ${./config.fish}
         source ${./prompt.fish}
+        source ${./config.fish}
       '';
     in [
       "-C"

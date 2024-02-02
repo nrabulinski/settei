@@ -1,5 +1,6 @@
 status --is-interactive
 and begin
+    fish_vi_key_bindings insert
 
     # Abbreviations
     ## nix
@@ -19,7 +20,7 @@ and begin
     alias cat bat
     alias l 'eza -lah --group-directories-first --icons'
 
+    # Integrations
     zoxide init fish | source
     direnv hook fish | source
-
 end
