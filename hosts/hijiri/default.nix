@@ -14,6 +14,7 @@
         qemu
         anki-bin
       ];
+      programs.alacritty.settings.font.size = 14;
     };
 
     system.defaults = {
