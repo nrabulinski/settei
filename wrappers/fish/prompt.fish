@@ -1,6 +1,10 @@
 # name: Nim
 # author: Guilhem "Nim" Saurel − https://github.com/nim65s/dotfiles/
 
+# Vi-mode
+# The default mode prompt would be prefixed, which ruins our alignment.
+function fish_mode_prompt; end
+
 function fish_prompt
     set -l retc red
     test $status = 0; and set retc green
@@ -59,11 +63,6 @@ function fish_prompt
 
     # Date
     _nim_prompt_wrapper $retc '' (date +%X)
-
-    # Vi-mode
-    # The default mode prompt would be prefixed, which ruins our alignment.
-    function fish_mode_prompt
-    end
 
     if test "$fish_key_bindings" = fish_vi_key_bindings
         or test "$fish_key_bindings" = fish_hybrid_key_bindings
