@@ -30,19 +30,11 @@
       inherit (fish-base) name meta passthru;
       paths = [fish-wrapped fish-base];
     };
-
-    base-packages = pkgs.symlinkJoin {
-      name = "settei-base";
-      paths = [
-        all-packages.helix
-        fish
-      ];
-    };
   in {
     packages =
       all-packages
       // {
-        inherit base-packages fish;
+        inherit fish;
       };
   };
 }
