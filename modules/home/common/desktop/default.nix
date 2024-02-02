@@ -14,7 +14,10 @@
   config = lib.mkIf config.common.desktop.enable {
     home.packages = with pkgs; [
       nerdfonts
+      fontconfig
     ];
+
+    fonts.fontconfig.enable = true;
 
     programs.firefox = {
       enable = true;
@@ -35,6 +38,7 @@
             then "Buttonless"
             else "None";
         };
+        font.normal.family = "Iosevka Nerd Font";
       };
     };
 
