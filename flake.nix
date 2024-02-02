@@ -20,6 +20,7 @@
 
       perSystem = {
         inputs',
+        self',
         pkgs,
         lib,
         ...
@@ -29,6 +30,15 @@
             inputs'.agenix.packages.agenix
             # TODO: Contribute darwin support to nh
             pkgs.nh
+          ];
+        };
+
+        packages.base-packages = pkgs.symlinkJoin {
+          name = "settei-base";
+          paths = with self'.packages; [
+            helix
+            fish
+            git-commit-last
           ];
         };
 
