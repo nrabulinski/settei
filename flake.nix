@@ -113,6 +113,11 @@
     niko-nur = {
       url = "github:nrabulinski/nur-packages";
     };
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+    };
   };
 
   nixConfig = {

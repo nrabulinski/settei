@@ -2,7 +2,6 @@
   config,
   self,
   inputs,
-  lib,
   ...
 }: {
   imports = [
@@ -32,6 +31,7 @@
           inputs.mailserver.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           inputs.nvidia-patch.nixosModules.nvidia-patch
+          inputs.attic.nixosModules.atticd
           self.nixosModules.settei
           self.nixosModules.common
           sharedOptions
