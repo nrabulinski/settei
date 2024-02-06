@@ -47,4 +47,12 @@ in {
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "nrab-lol-cf.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
+  "attic-creds.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }

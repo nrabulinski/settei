@@ -13,6 +13,7 @@
       ./mail.nix
       ./vault.nix
       ./storage.nix
+      ./attic.nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
