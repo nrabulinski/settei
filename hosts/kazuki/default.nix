@@ -12,6 +12,7 @@
       ./conduit.nix
       ./mail.nix
       ./vault.nix
+      ./storage.nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";

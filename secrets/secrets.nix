@@ -43,4 +43,8 @@ in {
     keys.system.legion
     keys.other.bootstrap
   ];
+  "storage-box-creds.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }
