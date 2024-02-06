@@ -1,0 +1,12 @@
+name: Build flake
+
+on:
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/install-nix
+      - run: nix flake check

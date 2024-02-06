@@ -17,7 +17,7 @@ in {
 
   inherit options;
 
-  config = lib.mkIf config.common.hercules.enable {
+  config = lib.mkIf false /* config.common.hercules.enable */ {
     age.secrets.hercules-token = {
       file = ../../../secrets/hercules-token.age;
       owner = herculesUser;
