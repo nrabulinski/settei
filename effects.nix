@@ -2,8 +2,33 @@
   config,
   lib,
   withSystem,
+  self,
   ...
-}: {
+}: let
+  collectFlakeOutputs = {
+    config,
+    pkgs,
+  }: let
+    inherit (pkgs) lib;
+    collectDrvs = prefix: attrs: let
+      drvs = lib.pipe attrs [
+        (lib.filterAttrs (_: lib.isDerivation))
+        (lib.mapAttrsToList (name: drv: {
+          name = lib.concatStringsSep "." (prefix ++ [name]);
+          inherit drv;
+        }))
+      ];
+      recursed = lib.pipe attrs [
+        (lib.filterAttrs (_: val:
+            (!lib.isDerivation val) && (lib.isAttrs val) && (val.recurseForDerivations or true)))
+        (lib.mapAttrsToList (name: collectDrvs (prefix ++ [name])))
+      ];
+    in
+      drvs ++ (lib.flatten recursed);
+    rootOutputs = builtins.removeAttrs config.onPush.default.outputs ["effects"];
+  in
+    collectDrvs [] rootOutputs;
+in {
   defaultEffectSystem = "aarch64-linux";
 
   hercules-ci = {
@@ -21,23 +46,10 @@
           hci-effects,
           ...
         }: let
-          collectDrvs = prefix: attrs: let
-            drvs = lib.pipe attrs [
-              (lib.filterAttrs (_: lib.isDerivation))
-              (lib.mapAttrsToList (name: drv: {
-                name = "${prefix}.${name}";
-                inherit drv;
-              }))
-            ];
-            recursed = lib.pipe attrs [
-              (lib.filterAttrs (_: val:
-                  (!lib.isDerivation val) && (lib.isAttrs val) && (val.recurseForDerivations or true)))
-              (lib.mapAttrsToList (name: collectDrvs "${prefix}.${name}"))
-            ];
-          in
-            drvs ++ (lib.flatten recursed);
-          rootOutputs = builtins.removeAttrs herculesCI.config.onPush.default.outputs ["effects"];
-          collected = collectDrvs "outputs" rootOutputs;
+          collected = collectFlakeOutputs {
+            inherit (herculesCI) config;
+            inherit pkgs;
+          };
           cachixCommands =
             lib.concatMapStringsSep
             "\n"
@@ -60,5 +72,29 @@
           }));
       };
     };
+  };
+
+  perSystem = {
+    pkgs,
+    lib,
+    ...
+  }: rec {
+    legacyPackages.outputsList = let
+      config = self.herculesCI {
+        primaryRepo = {};
+        herculesCI = {};
+      };
+    in
+      collectFlakeOutputs {inherit config pkgs;};
+
+    legacyPackages.github-matrix = let
+      systems = lib.groupBy ({drv, ...}: drv.system) legacyPackages.outputsList;
+    in
+      lib.concatMapStringsSep "\n" ({
+        name,
+        value,
+      }: ''
+        ${name}=${builtins.toJSON (map (d: d.name) value)}
+      '') (lib.attrsToList systems);
   };
 }
