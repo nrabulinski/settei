@@ -28,6 +28,7 @@
         devShells.default = pkgs.mkShellNoCC {
           packages = [
             inputs'.agenix.packages.agenix
+            inputs'.attic.packages.attic
             # TODO: Contribute darwin support to nh
             pkgs.nh
           ];
@@ -125,17 +126,17 @@
       "https://hyprland.cachix.org"
       "https://cache.garnix.io"
       "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
       "https://hercules-ci.cachix.org"
       "https://nrabulinski.cachix.org"
+      "https://cache.nrab.lol/public"
     ];
     extra-trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
       "nrabulinski.cachix.org-1:Q5FD7+1c68uH74CQK66UWNzxhanZW8xcg1LFXxGK8ic="
+      "public:wIIyvCTlsk39uwKlBFOuVY+BXrPY3lUNAEpDN4H+O0Q="
     ];
   };
 }
