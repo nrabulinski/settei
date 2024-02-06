@@ -30,8 +30,9 @@
     };
   };
 
-  security.acme.certs."valut.rabulinski.com" = {
+  security.acme.certs."vault.rabulinski.com" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.age.secrets.vault-cert-env.path;
+    webroot = null;
   };
 }
