@@ -57,7 +57,7 @@
     enable = true;
     excludePackages = [pkgs.xterm];
     videoDrivers = ["nvidia"];
-    layout = "pl";
+    xkb.layout = "pl";
     displayManager.startx.enable = true;
     config = lib.mkForce ''
       Section "OutputClass"
