@@ -13,6 +13,7 @@ jobs:
 
   matrix:
     runs-on: ubuntu-latest
+    needs: [check]
     outputs:
       aarch64-darwin: ${{ steps.generate_matrix.outputs.aarch64-darwin }}
       aarch64-linux: ${{ steps.generate_matrix.outputs.aarch64-linux }}
@@ -80,3 +81,12 @@ jobs:
         run: |
           nix run .#attic -- login nrab-attic 'https://cache.nrab.lol/' ${{ secrets.ATTIC_TOKEN }}
           nix run .#attic -- push nrab-attic:public result
+
+  all-built:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [build-x86_64-linux, build-aarch64-darwin, build-aarch64-linux]
+    steps:
+    - uses: re-actors/alls-green@release/v1
+      with:
+        jobs: ${{ toJSON(needs) }}
