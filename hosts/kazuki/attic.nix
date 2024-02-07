@@ -21,7 +21,7 @@ in {
       listen = "[::]:${toString atticPort}";
       storage = {
         type = "local";
-        path = "/storage-box/attic";
+        path = "/storage-box";
       };
       compression.type = "zstd";
       chunking = {
@@ -37,12 +37,15 @@ in {
 
   users = {
     users.atticd = {
+      uid = 990;
       isSystemUser = true;
       group = "atticd";
       home = "/var/lib/atticd";
       createHome = true;
     };
-    groups.atticd = {};
+    groups.atticd = {
+      gid = 988;
+    };
   };
 
   systemd.services.atticd = {
