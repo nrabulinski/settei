@@ -17,6 +17,9 @@
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
     virtualHosts."vault.rabulinski.com" = {
       forceSSL = true;
       enableACME = true;

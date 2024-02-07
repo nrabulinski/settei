@@ -64,6 +64,9 @@ in {
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
     virtualHosts."cache.nrab.lol" = {
       forceSSL = true;
       enableACME = true;
