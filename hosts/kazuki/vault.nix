@@ -22,6 +22,7 @@
       enableACME = true;
       locations."/" = {
         proxyPass = "http://vaultwarden";
+        proxyWebsockets = true;
       };
     };
 
