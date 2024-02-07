@@ -61,14 +61,15 @@ in {
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
-    virtualHosts = {
-      "cache.nrab.lol" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://attic";
-        };
+    virtualHosts."cache.nrab.lol" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://attic";
       };
+      extraConfig = ''
+        client_max_body_size 8G;
+      '';
     };
 
     upstreams."attic".servers = {
