@@ -37,3 +37,7 @@ jobs:
       - uses: ./.github/actions/install-nix
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
+      - name: Push output
+        run: |
+          nix run .#attic -- login nrab-attic 'https://cache.nrab.lol/' ${{ secrets.ATTIC_TOKEN }}
+          nix run .#attic -- push nrab-attic:public result
