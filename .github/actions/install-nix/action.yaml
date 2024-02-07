@@ -1,4 +1,7 @@
 name: "Nix setup"
+inputs:
+  extra-conf:
+    required: false
 runs:
   using: "composite"
   steps:
@@ -6,6 +9,7 @@ runs:
       with:
         # Needs to be kept in sync with flake.nix
         extra-conf: |
+          fallback = true
           allow-import-from-derivation = false
           extra-substituters = https://hyprland.cachix.org
           extra-substituters = https://cache.garnix.io
@@ -19,4 +23,5 @@ runs:
           extra-trusted-public-keys = hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0=
           extra-trusted-public-keys = nrabulinski.cachix.org-1:Q5FD7+1c68uH74CQK66UWNzxhanZW8xcg1LFXxGK8ic=
           extra-trusted-public-keys = public:wIIyvCTlsk39uwKlBFOuVY+BXrPY3lUNAEpDN4H+O0Q=
+          ${{ inputs.extra-conf }}
     - uses: DeterminateSystems/magic-nix-cache-action@main
