@@ -42,6 +42,8 @@
             git-commit-last
           ];
         };
+        # Re-export it for convenience and for caching
+        packages.attic = inputs'.attic.packages.attic;
 
         formatter = pkgs.alejandra;
       };
