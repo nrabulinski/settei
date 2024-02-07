@@ -41,3 +41,21 @@ jobs:
         run: |
           nix run .#attic -- login nrab-attic 'https://cache.nrab.lol/' ${{ secrets.ATTIC_TOKEN }}
           nix run .#attic -- push nrab-attic:public result
+
+  build-aarch64-darwin:
+    runs-on: macos-14
+    needs: [matrix]
+    if: ${{ needs.matrix.outputs.aarch64-darwin != '[]' && needs.matrix.outputs.aarch64-darwin != '' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        output: ${{ fromJson(needs.matrix.outputs.aarch64-darwin )}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/install-nix
+      - name: Build output
+        run: nix build .#${{ matrix.output }} -L
+      - name: Push output
+        run: |
+          nix run .#attic -- login nrab-attic 'https://cache.nrab.lol/' ${{ secrets.ATTIC_TOKEN }}
+          nix run .#attic -- push nrab-attic:public result
