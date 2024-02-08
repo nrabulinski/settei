@@ -10,16 +10,16 @@
         inherit inputs;
       };
     };
-    wrapped = inputs.wrapper-manager.lib {
+    wrapped = inputs.wrapper-manager-hm-compat.lib {
       inherit pkgs;
       modules = [
-        inputs.wrapper-manager-hm-compat.wrapperManagerModules.homeManagerCompat
         argsModule
         # ./starship
         ./helix
         # TODO: Enable again
         # ./rash
         ./fish
+        ./wezterm
       ];
     };
     all-packages = wrapped.config.build.packages;
