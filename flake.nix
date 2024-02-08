@@ -85,6 +85,7 @@
       url = "github:nrabulinski/wrapper-manager-hm-compat";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+      inputs.wrapper-manager.follows = "wrapper-manager";
     };
     racket = {
       url = "github:nrabulinski/racket.nix";
