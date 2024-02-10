@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  inputs',
   ...
 }: {
   _file = ./default.nix;
@@ -13,6 +14,7 @@
 
   config = lib.mkIf config.common.desktop.enable {
     home.packages = with pkgs; [
+      inputs'.settei.packages.wezterm
       nerdfonts
       fontconfig
     ];
@@ -27,19 +29,12 @@
         lib.mkIf pkgs.stdenv.isDarwin firefox-pkgs.firefox-bin;
     };
 
-    programs.alacritty = {
+    programs.qutebrowser = {
       enable = true;
-      settings = {
-        cursor.style.shape = "Beam";
-        window = {
-          option_as_alt = lib.mkIf pkgs.stdenv.isDarwin "Both";
-          decorations =
-            if pkgs.stdenv.isDarwin
-            then "Buttonless"
-            else "None";
-        };
-        font.normal.family = "Iosevka Nerd Font";
-      };
+      package =
+        if pkgs.stdenv.isDarwin
+        then inputs'.niko-nur.packages.qutebrowser-bin
+        else pkgs.qutebrowser;
     };
 
     programs.zellij = {
