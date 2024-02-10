@@ -62,7 +62,7 @@ jobs:
           nix run .#attic -- push nrab-attic:public result
 
   build-aarch64-linux:
-    runs-on: ubuntu-latest
+    runs-on: [Linux, ARM64, nix]
     needs: [matrix]
     if: ${{ needs.matrix.outputs.aarch64-linux != '[]' && needs.matrix.outputs.aarch64-linux != '' }}
     strategy:
@@ -71,10 +71,6 @@ jobs:
         output: ${{ fromJson(needs.matrix.outputs.aarch64-linux )}}
     steps:
       - uses: actions/checkout@v3
-      - uses: docker/setup-qemu-action@v3
-      - uses: ./.github/actions/install-nix
-        with:
-          extra-conf: extra-platforms = aarch64-linux
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
