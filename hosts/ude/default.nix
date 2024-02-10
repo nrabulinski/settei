@@ -8,7 +8,6 @@
     imports = [
       "${modulesPath}/profiles/qemu-guest.nix"
       ./disks.nix
-      ./github-runner.nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
@@ -21,6 +20,10 @@
 
     common.hercules.enable = true;
     services.hercules-ci-agent.settings.concurrentTasks = 6;
+    common.github-runner = {
+      enable = true;
+      runners.settei.url = "https://github.com/nrabulinski/settei";
+    };
 
     services.nginx = {
       enable = true;
