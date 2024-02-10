@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  inputs',
-  ...
-}: {
+{lib, ...}: {
   services.skhd = {
     enable = true;
     skhdConfig = let
@@ -13,8 +8,8 @@
         (i: let num = toString (i + 1); in "cmd - ${num} : yabai -m space --focus ${num}")
         spaceCount;
     in ''
-      cmd - return : ${pkgs.alacritty}/Applications/Alacritty.app/Contents/MacOS/alacritty
-      cmd + shift - return : ${inputs'.niko-nur.packages.qutebrowser-bin}/Applications/qutebrowser.app/Contents/MacOS/qutebrowser
+      cmd - return : wezterm
+      cmd + shift - return : qutebrowser
 
       cmd - h : yabai -m window --focus west
       cmd - j : yabai -m window --focus south
