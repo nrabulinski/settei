@@ -5,22 +5,20 @@ on:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: [nix]
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/install-nix
+      - uses: actions/checkout@v4
       - run: nix flake check
 
   matrix:
-    runs-on: ubuntu-latest
+    runs-on: [nix]
     needs: [check]
     outputs:
       aarch64-darwin: ${{ steps.generate_matrix.outputs.aarch64-darwin }}
       aarch64-linux: ${{ steps.generate_matrix.outputs.aarch64-linux }}
       x86_64-linux: ${{ steps.generate_matrix.outputs.x86_64-linux }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/install-nix
+      - uses: actions/checkout@v4
       - id: generate_matrix
         run: |
           nix eval --raw .#github-matrix >> $GITHUB_OUTPUT
@@ -34,7 +32,7 @@ jobs:
       matrix:
         output: ${{ fromJson(needs.matrix.outputs.x86_64-linux )}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-nix
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
@@ -52,7 +50,7 @@ jobs:
       matrix:
         output: ${{ fromJson(needs.matrix.outputs.aarch64-darwin )}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/install-nix
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
@@ -70,7 +68,7 @@ jobs:
       matrix:
         output: ${{ fromJson(needs.matrix.outputs.aarch64-linux )}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
