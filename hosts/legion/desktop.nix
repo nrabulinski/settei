@@ -10,12 +10,13 @@
   nixpkgs.config.allowUnfree = true;
 
   settei.user.config = {
-    home.packages = with pkgs; [alacritty brightnessctl dmenu];
+    common.desktop.enable = true;
+    home.packages = with pkgs; [brightnessctl dmenu];
 
     xsession.windowManager.i3 = {
       enable = true;
       config = {
-        terminal = "alacritty";
+        terminal = "wezterm";
         modifier = "Mod4";
       };
     };
