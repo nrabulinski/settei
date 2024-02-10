@@ -22,7 +22,10 @@
     services.hercules-ci-agent.settings.concurrentTasks = 6;
     common.github-runner = {
       enable = true;
-      runners.settei.url = "https://github.com/nrabulinski/settei";
+      runners.settei = {
+        url = "https://github.com/nrabulinski/settei";
+        instances = 6;
+      };
     };
 
     services.nginx = {

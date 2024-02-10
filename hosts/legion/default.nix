@@ -38,5 +38,12 @@
     users.users.${username}.hashedPasswordFile = config.age.secrets.niko-pass.path;
 
     common.hercules.enable = true;
+    common.github-runner = {
+      enable = true;
+      runners.settei = {
+        url = "https://github.com/nrabulinski/settei";
+        instances = 4;
+      };
+    };
   };
 }

@@ -14,5 +14,9 @@
     environment.systemPackages = with pkgs; [teams];
 
     common.hercules.enable = true;
+    common.github-runner = {
+      enable = true;
+      runners.settei.url = "https://github.com/nrabulinski/settei";
+    };
   };
 }

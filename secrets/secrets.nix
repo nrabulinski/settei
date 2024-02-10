@@ -57,6 +57,7 @@ in {
   ];
   "github-token.age".publicKeys = [
     keys.system.ude
+    keys.system.kazuki
     keys.other.bootstrap
   ];
 }
