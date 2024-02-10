@@ -8,6 +8,7 @@
     imports = [
       "${modulesPath}/profiles/qemu-guest.nix"
       ./disks.nix
+      ./github-runner.nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
