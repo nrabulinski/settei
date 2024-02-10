@@ -23,12 +23,12 @@ in {
         type = "local";
         path = "/storage-box";
       };
-      compression.type = "zstd";
+      compression.type = "none";
       chunking = {
-        nar-size-threshold = 64 * 1024;
-        min-size = 16 * 1024;
-        avg-size = 64 * 1024;
-        max-size = 256 * 1024;
+        nar-size-threshold = 0;
+        min-size = 0;
+        avg-size = 0;
+        max-size = 0;
       };
       api-endpoint = "https://cache.nrab.lol/";
       allowed-hosts = ["cache.nrab.lol"];
@@ -75,12 +75,21 @@ in {
       };
       extraConfig = ''
         client_max_body_size 8G;
+        proxy_cache nixstore;
+        proxy_cache_use_stale error timeout http_500 http_502;
+        proxy_cache_lock on;
+        proxy_cache_key $request_uri;
+        proxy_cache_valid 200 24h;
       '';
     };
 
     upstreams."attic".servers = {
       "localhost:${toString atticPort}" = {};
     };
+
+    appendHttpConfig = ''
+      proxy_cache_path /var/cache/nginx/nixstore levels=1:2 keys_zone=nixstore:10m max_size=10g inactive=24h use_temp_path=off;
+    '';
   };
 
   security.acme.certs."cache.nrab.lol" = {

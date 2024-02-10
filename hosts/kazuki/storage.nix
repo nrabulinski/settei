@@ -19,6 +19,7 @@
       "uid=${toString config.users.users.atticd.uid}"
       "gid=${toString config.users.groups.atticd.gid}"
       "credentials=${config.age.secrets.storage-box-creds.path}"
+      "cache=none"
     ];
   };
 
