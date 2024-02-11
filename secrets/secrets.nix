@@ -60,4 +60,8 @@ in {
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "storage-box-webdav.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }

@@ -1,29 +1,22 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  age.secrets = {
-    storage-box-creds.file = ../../secrets/storage-box-creds.age;
+{config, ...}: {
+  age.secrets.storage-box-webdav = {
+    file = ../../secrets/storage-box-webdav.age;
   };
 
-  environment.systemPackages = with pkgs; [cifs-utils];
+  services.davfs2.enable = true;
+  environment.etc."davfs2/secrets".source = config.age.secrets.storage-box-webdav.path;
+
   fileSystems."/storage-box" = {
-    fsType = "cifs";
-    device = "//u389358.your-storagebox.de/backup";
+    fsType = "davfs";
+    device = "https://u389358.your-storagebox.de";
     options = [
-      "iocharset=utf8"
       "x-systemd.automount"
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
+      "noauto"
       "uid=${toString config.users.users.atticd.uid}"
       "gid=${toString config.users.groups.atticd.gid}"
-      "credentials=${config.age.secrets.storage-box-creds.path}"
-      "cache=none"
+      "rw"
     ];
   };
-
-  networking.firewall.extraCommands = ''
-    iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns
-  '';
 }
