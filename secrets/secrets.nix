@@ -58,6 +58,8 @@ in {
   "github-token.age".publicKeys = [
     keys.system.ude
     keys.system.kazuki
+    keys.system.legion
+    keys.system.kogata
     keys.other.bootstrap
   ];
   "storage-box-webdav.age".publicKeys = [
