@@ -24,7 +24,7 @@ jobs:
           nix eval --raw .#github-matrix >> $GITHUB_OUTPUT
 
   build-x86_64-linux:
-    runs-on: ubuntu-latest
+    runs-on: [Linux, X64, nix]
     needs: [matrix]
     if: ${{ needs.matrix.outputs.x86_64-linux != '[]' && needs.matrix.outputs.x86_64-linux != '' }}
     strategy:
@@ -33,7 +33,6 @@ jobs:
         output: ${{ fromJson(needs.matrix.outputs.x86_64-linux )}}
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/install-nix
       - name: Build output
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
