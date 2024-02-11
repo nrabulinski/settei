@@ -16,12 +16,12 @@ runs:
           extra-substituters = https://nix-community.cachix.org
           extra-substituters = https://hercules-ci.cachix.org
           extra-substituters = https://nrabulinski.cachix.org
-          extra-substituters = https://cache.nrab.lol/public
+          extra-substituters = https://cache.nrab.lol
           extra-trusted-public-keys = hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=
           extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
           extra-trusted-public-keys = nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
           extra-trusted-public-keys = hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0=
           extra-trusted-public-keys = nrabulinski.cachix.org-1:Q5FD7+1c68uH74CQK66UWNzxhanZW8xcg1LFXxGK8ic=
-          extra-trusted-public-keys = public:wIIyvCTlsk39uwKlBFOuVY+BXrPY3lUNAEpDN4H+O0Q=
+          extra-trusted-public-keys = cache.nrab.lol-1:wIIyvCTlsk39uwKlBFOuVY+BXrPY3lUNAEpDN4H+O0Q=
           ${{ inputs.extra-conf }}
     - uses: DeterminateSystems/magic-nix-cache-action@main
