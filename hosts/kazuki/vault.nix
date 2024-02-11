@@ -23,6 +23,7 @@
     virtualHosts."vault.rabulinski.com" = {
       forceSSL = true;
       enableACME = true;
+      acmeRoot = null;
       locations."/" = {
         proxyPass = "http://vaultwarden";
         proxyWebsockets = true;
@@ -37,6 +38,5 @@
   security.acme.certs."vault.rabulinski.com" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.age.secrets.vault-cert-env.path;
-    webroot = null;
   };
 }
