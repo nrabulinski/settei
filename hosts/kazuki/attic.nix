@@ -69,6 +69,7 @@ in {
     virtualHosts."attic.nrab.lol" = {
       forceSSL = true;
       enableACME = true;
+      acmeRoot = null;
       locations."/" = {
         proxyPass = "http://attic";
       };
@@ -104,7 +105,6 @@ in {
   security.acme.certs."attic.nrab.lol" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.age.secrets.nrab-lol-cf.path;
-    webroot = null;
   };
 
   security.acme.certs."cache.nrab.lol" = {
