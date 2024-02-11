@@ -30,8 +30,7 @@ in {
         avg-size = 0;
         max-size = 0;
       };
-      api-endpoint = "https://cache.nrab.lol/";
-      allowed-hosts = ["cache.nrab.lol"];
+      api-endpoint = "https://attic.nrab.lol/";
     };
   };
 
@@ -67,7 +66,7 @@ in {
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
-    virtualHosts."cache.nrab.lol" = {
+    virtualHosts."attic.nrab.lol" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {
@@ -75,6 +74,16 @@ in {
       };
       extraConfig = ''
         client_max_body_size 8G;
+      '';
+    };
+    virtualHosts."cache.nrab.lol" = {
+      forceSSL = true;
+      enableACME = true;
+      acmeRoot = null;
+      locations."/" = {
+        proxyPass = "http://attic/public$request_uri";
+      };
+      extraConfig = ''
         proxy_cache nixstore;
         proxy_cache_use_stale error timeout http_500 http_502;
         proxy_cache_lock on;
@@ -92,9 +101,14 @@ in {
     '';
   };
 
-  security.acme.certs."cache.nrab.lol" = {
+  security.acme.certs."attic.nrab.lol" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.age.secrets.nrab-lol-cf.path;
     webroot = null;
+  };
+
+  security.acme.certs."cache.nrab.lol" = {
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.nrab-lol-cf.path;
   };
 }
