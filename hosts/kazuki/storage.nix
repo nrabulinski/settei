@@ -3,7 +3,14 @@
     file = ../../secrets/storage-box-webdav.age;
   };
 
-  services.davfs2.enable = true;
+  services.davfs2 = {
+    enable = true;
+    extraConfig = ''
+      cache_size 50000
+      minimize_mem 1
+      use_locks 0
+    '';
+  };
   environment.etc."davfs2/secrets".source = config.age.secrets.storage-box-webdav.path;
 
   fileSystems."/storage-box" = {
