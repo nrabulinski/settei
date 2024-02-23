@@ -37,6 +37,15 @@ in {
     extraConfig = {
       gpg.format = "ssh";
       push.followTags = true;
+      diff.algorithm = "histogram";
+      diff.submodule = "log";
+      status.submoduleSummary = true;
+      help.autocorrect = "prompt";
+      merge.conflictstyle = "zdiff3";
+      branch.sort = "-committerdate";
+      tag.sort = "taggerdate";
+      log.date = "iso";
+      rebase.missingCommitsCheck = "error";
     };
   };
 
