@@ -67,4 +67,9 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "ntfy-niko-pass.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
+  "ntfy-alert-pass.age".publicKeys = (builtins.attrValues keys.system) ++ [ keys.other.bootstrap ];
 }
