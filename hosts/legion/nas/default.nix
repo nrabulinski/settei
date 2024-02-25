@@ -3,19 +3,21 @@
   lib,
   username,
   ...
-}: {
-  imports = [
-    ./media.nix
+}:
+{
+  imports = [ ./media.nix ];
+
+  boot.supportedFilesystems = [
+    "ext4"
+    "zfs"
   ];
 
-  boot.supportedFilesystems = ["ext4" "zfs"];
-
-  boot.zfs.extraPools = ["yottapool"];
+  boot.zfs.extraPools = [ "yottapool" ];
   services.zfs = {
     autoScrub.enable = true;
     zed.settings = {
       ZED_DEBUG_LOG = "/tmp/zed.debug.log";
-      ZED_EMAIL_ADDR = [username];
+      ZED_EMAIL_ADDR = [ username ];
       ZED_EMAIL_PROG = lib.getExe pkgs.msmtp;
       ZED_EMAIL_OPTS = "@ADDRESS@";
 
@@ -38,8 +40,8 @@
       options = "bind,nofail";
       what = "/media/data";
       where = "/export/yotta-data";
-      requires = ["zfs-mount.service"];
-      wantedBy = ["multi-user.target"];
+      requires = [ "zfs-mount.service" ];
+      wantedBy = [ "multi-user.target" ];
     }
   ];
 

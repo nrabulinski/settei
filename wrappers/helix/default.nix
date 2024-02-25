@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.helix = {
     enable = true;
     settings = {
@@ -25,8 +26,8 @@
         {
           name = "koka";
           scope = "scope.koka";
-          file-types = ["kk"];
-          roots = [];
+          file-types = [ "kk" ];
+          roots = [ ];
           indent = {
             tab-width = 4;
             unit = "    ";
@@ -43,5 +44,5 @@
     };
   };
 
-  wrappers.helix.pathAdd = [pkgs.nil];
+  wrappers.helix.pathAdd = [ pkgs.nil ];
 }

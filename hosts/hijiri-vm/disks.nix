@@ -1,6 +1,8 @@
-args: let
+args:
+let
   bootDevice = args.bootDevice or "/dev/vda";
-in {
+in
+{
   disko.devices.disk.bootDisk = {
     type = "disk";
     device = bootDevice;
@@ -26,19 +28,24 @@ in {
           end = "100%";
           content = {
             type = "btrfs";
-            extraArgs = ["-f"];
-            subvolumes = let
-              mountOptions = ["compress=zstd" "noatime"];
-            in {
-              "/root" = {
-                inherit mountOptions;
-                mountpoint = "/";
+            extraArgs = [ "-f" ];
+            subvolumes =
+              let
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              in
+              {
+                "/root" = {
+                  inherit mountOptions;
+                  mountpoint = "/";
+                };
+                "/nix" = {
+                  inherit mountOptions;
+                  mountpoint = "/nix";
+                };
               };
-              "/nix" = {
-                inherit mountOptions;
-                mountpoint = "/nix";
-              };
-            };
           };
         }
       ];

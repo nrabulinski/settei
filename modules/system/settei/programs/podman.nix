@@ -1,11 +1,13 @@
-{isLinux}: {
+{ isLinux }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   sharedConfig = {
-    environment.systemPackages = [pkgs.podman-compose];
+    environment.systemPackages = [ pkgs.podman-compose ];
   };
 
   linuxConfig = lib.optionalAttrs isLinux {
@@ -16,16 +18,15 @@
     };
   };
 
-  darwinConfig = lib.optionalAttrs (!isLinux) {
-    environment.systemPackages = [pkgs.podman];
-  };
+  darwinConfig = lib.optionalAttrs (!isLinux) { environment.systemPackages = [ pkgs.podman ]; };
 
   finalConfig = lib.mkMerge [
     sharedConfig
     linuxConfig
     darwinConfig
   ];
-in {
+in
+{
   _file = ./podman.nix;
 
   options.settei.programs.podman.enable = lib.mkEnableOption "Podman";

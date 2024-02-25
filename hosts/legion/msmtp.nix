@@ -4,13 +4,15 @@
   config,
   username,
   ...
-}: let
+}:
+let
   mail = "alert@nrab.lol";
   aliases = pkgs.writeText "mail-aliases" ''
     ${username}: nikodem@rabulinski.com
     root: ${mail}
   '';
-in {
+in
+{
   age.secrets.alert-plaintext.file = ../../secrets/alert-plain-pass.age;
 
   programs.msmtp = {

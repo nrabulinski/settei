@@ -1,8 +1,5 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
   services.yabai = {
     enable = true;
     enableScriptingAddition = true;

@@ -8,27 +8,29 @@
   rocksdb,
   darwin,
   rustPlatform,
-}: let
-  rust = with fenix;
+}:
+let
+  rust =
+    with fenix;
     combine [
       stable.cargo
       stable.rustc
     ];
   crane' = crane.overrideToolchain rust;
 in
-  crane'.buildPackage {
-    inherit src;
-    strictDeps = true;
+crane'.buildPackage {
+  inherit src;
+  strictDeps = true;
 
-    nativeBuildInputs = [rustPlatform.bindgenHook];
+  nativeBuildInputs = [ rustPlatform.bindgenHook ];
 
-    buildInputs = lib.optionals stdenv.isDarwin [
-      libiconv
-      darwin.apple_sdk.frameworks.Security
-      darwin.apple_sdk.frameworks.SystemConfiguration
-    ];
+  buildInputs = lib.optionals stdenv.isDarwin [
+    libiconv
+    darwin.apple_sdk.frameworks.Security
+    darwin.apple_sdk.frameworks.SystemConfiguration
+  ];
 
-    # Use system RocksDB
-    ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
-    ROCKSDB_LIB_DIR = "${rocksdb}/lib";
-  }
+  # Use system RocksDB
+  ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
+  ROCKSDB_LIB_DIR = "${rocksdb}/lib";
+}

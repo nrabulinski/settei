@@ -5,7 +5,8 @@
   inputs,
   inputs',
   ...
-}: {
+}:
+{
   _file = ./default.nix;
 
   options.common.desktop = {
@@ -23,18 +24,17 @@
 
     programs.firefox = {
       enable = true;
-      package = let
-        firefox-pkgs = pkgs.extend inputs.firefox-darwin.overlay;
-      in
+      package =
+        let
+          firefox-pkgs = pkgs.extend inputs.firefox-darwin.overlay;
+        in
         lib.mkIf pkgs.stdenv.isDarwin firefox-pkgs.firefox-bin;
     };
 
     programs.qutebrowser = {
       enable = true;
       package =
-        if pkgs.stdenv.isDarwin
-        then inputs'.niko-nur.packages.qutebrowser-bin
-        else pkgs.qutebrowser;
+        if pkgs.stdenv.isDarwin then inputs'.niko-nur.packages.qutebrowser-bin else pkgs.qutebrowser;
     };
 
     programs.zellij = {
@@ -42,7 +42,7 @@
       settings = {
         keybinds = {
           shared_except = {
-            _args = ["locked"];
+            _args = [ "locked" ];
             unbind = "Ctrl q";
           };
         };

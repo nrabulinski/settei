@@ -5,13 +5,17 @@
   lib,
   username,
   ...
-}: {
+}:
+{
   # Needed for nvidia and steam
   nixpkgs.config.allowUnfree = true;
 
   settei.user.config = {
     common.desktop.enable = true;
-    home.packages = with pkgs; [brightnessctl dmenu];
+    home.packages = with pkgs; [
+      brightnessctl
+      dmenu
+    ];
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -32,15 +36,19 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
-    gamescopeSession = {};
+    gamescopeSession = { };
   };
 
   hardware.steam-hardware.enable = true;
 
   services.logind =
     lib.genAttrs
-    ["lidSwitch" "lidSwitchDocked" "lidSwitchExternalPower"]
-    (_: "ignore");
+      [
+        "lidSwitch"
+        "lidSwitchDocked"
+        "lidSwitchExternalPower"
+      ]
+      (_: "ignore");
 
   services.pipewire = {
     enable = true;
@@ -51,13 +59,16 @@
   programs.dconf.enable = true;
   services.dbus.enable = true;
 
-  users.users.${username}.extraGroups = ["video" "input"];
+  users.users.${username}.extraGroups = [
+    "video"
+    "input"
+  ];
 
   # NVIDIA stuff
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
-    videoDrivers = ["nvidia"];
+    excludePackages = [ pkgs.xterm ];
+    videoDrivers = [ "nvidia" ];
     xkb.layout = "pl";
     displayManager.startx.enable = true;
     config = lib.mkForce ''
