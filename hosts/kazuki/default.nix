@@ -14,6 +14,7 @@
       ./vault.nix
       ./storage.nix
       ./attic.nix
+      ./ntfy.nix
     ];
 
     nixpkgs.hostPlatform = "aarch64-linux";
