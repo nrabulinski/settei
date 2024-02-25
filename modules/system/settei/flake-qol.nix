@@ -1,11 +1,14 @@
-{perInput}: {
+{ perInput }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.settei.flake-qol;
-in {
+in
+{
   _file = ./flake-qol.nix;
 
   options.settei.flake-qol = with lib; {
@@ -14,9 +17,7 @@ in {
       type = types.bool;
       default = true;
     };
-    inputs = mkOption {
-      type = types.unspecified;
-    };
+    inputs = mkOption { type = types.unspecified; };
     inputs-flakes = mkOption {
       type = types.attrs;
       readOnly = true;
@@ -27,11 +28,10 @@ in {
     };
   };
 
-  config = let
-    reexportedArgs = lib.mkIf cfg.reexportAsArgs {
-      inherit (cfg) inputs inputs-flakes inputs';
-    };
-  in
+  config =
+    let
+      reexportedArgs = lib.mkIf cfg.reexportAsArgs { inherit (cfg) inputs inputs-flakes inputs'; };
+    in
     lib.mkIf cfg.enable {
       settei.flake-qol = {
         inputs-flakes = lib.filterAttrs (_: input: input ? flake -> input.flake) cfg.inputs;
@@ -42,7 +42,7 @@ in {
       settei.user.extraArgs = reexportedArgs;
 
       nix = {
-        registry = lib.mapAttrs (_: flake: {inherit flake;}) cfg.inputs-flakes;
+        registry = lib.mapAttrs (_: flake: { inherit flake; }) cfg.inputs-flakes;
         nixPath = lib.mapAttrsToList (name: _: "${name}=flake:${name}") cfg.inputs-flakes;
       };
     };

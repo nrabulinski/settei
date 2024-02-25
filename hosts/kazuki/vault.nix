@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   age.secrets.vault-cert-env = {
     file = ../../secrets/vault-cert-env.age;
     owner = config.services.nginx.user;
@@ -11,8 +12,13 @@
     };
   };
 
-  users.users.nginx.extraGroups = ["acme"];
-  networking.firewall.allowedTCPPorts = [80 443 8448 2222];
+  users.users.nginx.extraGroups = [ "acme" ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    8448
+    2222
+  ];
 
   services.nginx = {
     enable = true;
@@ -31,7 +37,7 @@
     };
 
     upstreams.vaultwarden.servers = {
-      "localhost:${toString config.services.vaultwarden.config.ROCKET_PORT}" = {};
+      "localhost:${toString config.services.vaultwarden.config.ROCKET_PORT}" = { };
     };
   };
 

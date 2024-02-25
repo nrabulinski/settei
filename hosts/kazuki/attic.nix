@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   atticPort = 9476;
-in {
+in
+{
   age.secrets.attic-creds = {
     file = ../../secrets/attic-creds.age;
     owner = config.services.atticd.user;
@@ -48,7 +46,7 @@ in {
   };
 
   systemd.services.atticd = {
-    after = ["storage\\x2dbox.mount"];
+    after = [ "storage\\x2dbox.mount" ];
     serviceConfig.DynamicUser = lib.mkForce false;
   };
 
@@ -57,8 +55,11 @@ in {
     defaults.email = "nikodem@rabulinski.com";
   };
 
-  users.users.nginx.extraGroups = ["acme"];
-  networking.firewall.allowedTCPPorts = [80 443];
+  users.users.nginx.extraGroups = [ "acme" ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.nginx = {
     enable = true;
@@ -94,7 +95,7 @@ in {
     };
 
     upstreams."attic".servers = {
-      "localhost:${toString atticPort}" = {};
+      "localhost:${toString atticPort}" = { };
     };
 
     appendHttpConfig = ''

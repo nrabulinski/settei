@@ -1,4 +1,5 @@
-{isLinux}: {
+{ isLinux }:
+{
   config,
   configurationName,
   lib,
@@ -7,7 +8,8 @@
   inputs',
   username,
   ...
-}: let
+}:
+let
   sharedConfig = {
     settei = {
       username = lib.mkDefault "niko";
@@ -20,7 +22,7 @@
         enable = lib.mkDefault true;
         # TODO: Move to settei or leave here?
         extraArgs.machineName = configurationName;
-        config.imports = [inputs.settei.homeModules.common];
+        config.imports = [ inputs.settei.homeModules.common ];
       };
     };
 
@@ -31,7 +33,7 @@
 
     # NixOS' fish module doesn't allow setting what package to use for fish,
     # so I need to override the fish package.
-    nixpkgs.overlays = [(_: _: {inherit (inputs'.settei.packages) fish;})];
+    nixpkgs.overlays = [ (_: _: { inherit (inputs'.settei.packages) fish; }) ];
 
     nix.settings.allow-import-from-derivation = false;
   };
@@ -53,15 +55,16 @@
     system.stateVersion = 4;
 
     # Every macOS ARM machine can emulate x86.
-    nix.settings.extra-platforms = lib.mkIf pkgs.stdenv.isAarch64 ["x86_64-darwin"];
+    nix.settings.extra-platforms = lib.mkIf pkgs.stdenv.isAarch64 [ "x86_64-darwin" ];
   };
-in {
+in
+{
   _file = ./default.nix;
 
   imports = [
-    (import ./hercules.nix {inherit isLinux;})
-    (import ./user.nix {inherit isLinux;})
-    (import ./github-runner.nix {inherit isLinux;})
+    (import ./hercules.nix { inherit isLinux; })
+    (import ./user.nix { inherit isLinux; })
+    (import ./github-runner.nix { inherit isLinux; })
   ];
 
   config = lib.mkMerge [

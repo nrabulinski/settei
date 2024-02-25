@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   age.secrets.nrab-lol-cf = {
     file = ../../secrets/nrab-lol-cf.age;
     owner = config.services.nginx.user;
@@ -15,8 +16,11 @@
     };
   };
 
-  users.users.nginx.extraGroups = ["acme"];
-  networking.firewall.allowedTCPPorts = [80 443];
+  users.users.nginx.extraGroups = [ "acme" ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.nginx = {
     enable = true;
@@ -35,7 +39,7 @@
     };
 
     upstreams.ntfy.servers = {
-      "localhost:9800" = {};
+      "localhost:9800" = { };
     };
   };
 

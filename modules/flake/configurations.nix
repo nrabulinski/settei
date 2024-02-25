@@ -2,13 +2,15 @@
   nixpkgs,
   darwin,
   home-manager,
-}: {
+}:
+{
   config,
   lib,
   flake-parts-lib,
   ...
 }:
-with lib; {
+with lib;
+{
   _file = ./configurations.nix;
 
   options = {
@@ -32,31 +34,22 @@ with lib; {
     configurations = {
       nixos = mkOption {
         type = types.lazyAttrsOf types.deferredModule;
-        default = {};
+        default = { };
       };
       darwin = mkOption {
         type = types.lazyAttrsOf types.deferredModule;
-        default = {};
+        default = { };
       };
       home = mkOption {
         type = types.lazyAttrsOf types.deferredModule;
-        default = {};
+        default = { };
       };
     };
   };
 
   config.flake = {
-    nixosConfigurations =
-      mapAttrs
-      config.builders.nixos
-      config.configurations.nixos;
-    darwinConfigurations =
-      mapAttrs
-      config.builders.darwin
-      config.configurations.darwin;
-    homeConfigurations =
-      mapAttrs
-      config.builders.home
-      config.configurations.home;
+    nixosConfigurations = mapAttrs config.builders.nixos config.configurations.nixos;
+    darwinConfigurations = mapAttrs config.builders.darwin config.configurations.darwin;
+    homeConfigurations = mapAttrs config.builders.home config.configurations.home;
   };
 }

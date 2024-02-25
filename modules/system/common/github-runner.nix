@@ -1,9 +1,11 @@
-{isLinux}: {
+{ isLinux }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
   github-runner-user = "github-runner";
 
@@ -20,10 +22,10 @@
     services.github-runners = lib.pipe cfg.runners [
       (lib.mapAttrsToList (
         name: cfg:
-          lib.genList (i:
-            lib.nameValuePair
-            "${name}-${toString i}"
-            {
+        lib.genList
+          (
+            i:
+            lib.nameValuePair "${name}-${toString i}" {
               enable = true;
               tokenFile = config.age.secrets.github-token.path;
               inherit (cfg) url;
@@ -32,8 +34,9 @@
               serviceOverrides = {
                 DynamicUser = false;
               };
-              extraLabels = ["nix"];
-            })
+              extraLabels = [ "nix" ];
+            }
+          )
           cfg.instances
       ))
       lib.flatten
@@ -45,41 +48,48 @@
         isSystemUser = true;
         group = github-runner-user;
       };
-      groups.${github-runner-user} = {};
+      groups.${github-runner-user} = { };
     };
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
     warnings = lib.singleton "common.github-runner doesn't do anything on darwin yet";
   };
-in {
+in
+{
   _file = ./github-runner.nix;
 
   options.common.github-runner = {
     enable = lib.mkEnableOption "using this machine as a self-hosted github runner";
     runners = mkOption {
-      type = with types;
-        attrsOf (submodule ({name, ...}: {
-          options = {
-            name = mkOption {
-              type = types.str;
-              default = "${name}-${config.networking.hostName}";
-            };
-            url = mkOption {
-              type = types.str;
-            };
-            instances = mkOption {
-              type = types.int;
-              default = 1;
-            };
-          };
-        }));
+      type =
+        with types;
+        attrsOf (
+          submodule (
+            { name, ... }:
+            {
+              options = {
+                name = mkOption {
+                  type = types.str;
+                  default = "${name}-${config.networking.hostName}";
+                };
+                url = mkOption { type = types.str; };
+                instances = mkOption {
+                  type = types.int;
+                  default = 1;
+                };
+              };
+            }
+          )
+        );
     };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    sharedConfig
-    linuxConfig
-    darwinConfig
-  ]);
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      sharedConfig
+      linuxConfig
+      darwinConfig
+    ]
+  );
 }

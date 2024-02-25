@@ -1,6 +1,7 @@
 let
   keys = import ../assets/ssh.nix;
-in {
+in
+{
   "leet-nrab-lol-pass.age".publicKeys = [
     keys.system.kazuki
     keys.other.bootstrap

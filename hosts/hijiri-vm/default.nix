@@ -1,24 +1,26 @@
 {
-  configurations.nixos.hijiri-vm = {
-    modulesPath,
-    lib,
-    username,
-    ...
-  }: {
-    imports = [
-      "${modulesPath}/profiles/qemu-guest.nix"
-      ./disks.nix
-    ];
+  configurations.nixos.hijiri-vm =
+    {
+      modulesPath,
+      lib,
+      username,
+      ...
+    }:
+    {
+      imports = [
+        "${modulesPath}/profiles/qemu-guest.nix"
+        ./disks.nix
+      ];
 
-    nixpkgs.hostPlatform = "aarch64-linux";
+      nixpkgs.hostPlatform = "aarch64-linux";
 
-    boot = {
-      loader.systemd-boot.enable = true;
-      loader.systemd-boot.configurationLimit = 1;
-      loader.efi.canTouchEfiVariables = true;
+      boot = {
+        loader.systemd-boot.enable = true;
+        loader.systemd-boot.configurationLimit = 1;
+        loader.efi.canTouchEfiVariables = true;
+      };
+
+      networking.domain = "hijiri";
+      networking.hostName = "vm";
     };
-
-    networking.domain = "hijiri";
-    networking.hostName = "vm";
-  };
 }

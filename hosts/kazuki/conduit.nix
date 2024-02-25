@@ -3,10 +3,12 @@
   pkgs,
   inputs',
   ...
-}: let
-  formatJson = pkgs.formats.json {};
+}:
+let
+  formatJson = pkgs.formats.json { };
   serverDomain = "matrix.nrab.lol";
-in {
+in
+{
   services.matrix-conduit = {
     enable = true;
     package = inputs'.settei.packages.conduit-next;
@@ -23,8 +25,13 @@ in {
     defaults.email = "nikodem@rabulinski.com";
   };
 
-  users.users.nginx.extraGroups = ["acme"];
-  networking.firewall.allowedTCPPorts = [80 443 8448 2222];
+  users.users.nginx.extraGroups = [ "acme" ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    8448
+    2222
+  ];
 
   services.nginx = {
     enable = true;
@@ -35,9 +42,7 @@ in {
         enableACME = true;
 
         locations."=/.well-known/matrix/server" = {
-          alias = formatJson.generate "well-known-matrix-server" {
-            "m.server" = serverDomain;
-          };
+          alias = formatJson.generate "well-known-matrix-server" { "m.server" = serverDomain; };
           extraConfig = ''
             default_type application/json;
             add_header Access-Control-Allow-Origin "*";
@@ -95,7 +100,7 @@ in {
     };
 
     upstreams."backend_conduit".servers = {
-      "localhost:${toString config.services.matrix-conduit.settings.global.port}" = {};
+      "localhost:${toString config.services.matrix-conduit.settings.global.port}" = { };
     };
   };
 }

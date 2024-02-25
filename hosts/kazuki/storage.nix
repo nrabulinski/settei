@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   age.secrets.storage-box-webdav = {
     file = ../../secrets/storage-box-webdav.age;
   };
