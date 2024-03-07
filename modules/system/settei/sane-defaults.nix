@@ -43,8 +43,7 @@ let
         let
           configName' =
             args.configurationName
-              or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself"
-              );
+              or (throw "pass configurationName to module arguments or set users.users.${username}.openssh.authorizedKeys yourself");
           filteredKeys = lib.filterAttrs (name: _: name != configName') cfg.allSshKeys;
         in
         lib.mkDefault (lib.attrValues filteredKeys);

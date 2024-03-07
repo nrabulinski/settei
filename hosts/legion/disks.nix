@@ -1,7 +1,8 @@
 args:
-/* let
-     bootDevice = args.bootDevice or "/dev/nvme0n1";
-   in
+/*
+  let
+    bootDevice = args.bootDevice or "/dev/nvme0n1";
+  in
 */
 {
   assertions = [

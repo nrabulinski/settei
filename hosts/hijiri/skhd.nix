@@ -5,16 +5,13 @@
     skhdConfig =
       let
         spaceCount = 6;
-        spaceBindings =
-          lib.genList
-            (
-              i:
-              let
-                num = toString (i + 1);
-              in
-              "cmd - ${num} : yabai -m space --focus ${num}"
-            )
-            spaceCount;
+        spaceBindings = lib.genList (
+          i:
+          let
+            num = toString (i + 1);
+          in
+          "cmd - ${num} : yabai -m space --focus ${num}"
+        ) spaceCount;
       in
       ''
         cmd - return : wezterm
