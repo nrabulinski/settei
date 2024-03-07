@@ -41,14 +41,11 @@
 
   hardware.steam-hardware.enable = true;
 
-  services.logind =
-    lib.genAttrs
-      [
-        "lidSwitch"
-        "lidSwitchDocked"
-        "lidSwitchExternalPower"
-      ]
-      (_: "ignore");
+  services.logind = lib.genAttrs [
+    "lidSwitch"
+    "lidSwitchDocked"
+    "lidSwitchExternalPower"
+  ] (_: "ignore");
 
   services.pipewire = {
     enable = true;

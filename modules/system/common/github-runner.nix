@@ -22,22 +22,20 @@ let
     services.github-runners = lib.pipe cfg.runners [
       (lib.mapAttrsToList (
         name: cfg:
-        lib.genList
-          (
-            i:
-            lib.nameValuePair "${name}-${toString i}" {
-              enable = true;
-              tokenFile = config.age.secrets.github-token.path;
-              inherit (cfg) url;
-              name = "${cfg.name}-${toString i}";
-              user = github-runner-user;
-              serviceOverrides = {
-                DynamicUser = false;
-              };
-              extraLabels = [ "nix" ];
-            }
-          )
-          cfg.instances
+        lib.genList (
+          i:
+          lib.nameValuePair "${name}-${toString i}" {
+            enable = true;
+            tokenFile = config.age.secrets.github-token.path;
+            inherit (cfg) url;
+            name = "${cfg.name}-${toString i}";
+            user = github-runner-user;
+            serviceOverrides = {
+              DynamicUser = false;
+            };
+            extraLabels = [ "nix" ];
+          }
+        ) cfg.instances
       ))
       lib.flatten
       lib.listToAttrs

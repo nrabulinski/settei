@@ -54,10 +54,9 @@ in
               inherit (herculesCI) config;
               inherit pkgs;
             };
-            cachixCommands =
-              lib.concatMapStringsSep "\n"
-                ({ name, drv }: "cachix pin nrabulinski ${lib.escapeShellArg name} ${lib.escapeShellArg drv}")
-                collected;
+            cachixCommands = lib.concatMapStringsSep "\n" (
+              { name, drv }: "cachix pin nrabulinski ${lib.escapeShellArg name} ${lib.escapeShellArg drv}"
+            ) collected;
           in
           hci-effects.runIf (herculesCI.config.repo.branch == "main") (
             hci-effects.mkEffect {
@@ -93,13 +92,11 @@ in
         let
           systems = lib.groupBy ({ drv, ... }: drv.system) legacyPackages.outputsList;
         in
-        lib.concatMapStringsSep "\n"
-          (
-            { name, value }:
-            ''
-              ${name}=${builtins.toJSON (map (d: d.name) value)}
-            ''
-          )
-          (lib.attrsToList systems);
+        lib.concatMapStringsSep "\n" (
+          { name, value }:
+          ''
+            ${name}=${builtins.toJSON (map (d: d.name) value)}
+          ''
+        ) (lib.attrsToList systems);
     };
 }
