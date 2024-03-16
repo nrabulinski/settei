@@ -21,5 +21,8 @@
           git commit -eF "$GITDIR/COMMIT_EDITMSG"
         '';
       };
+
+      # Under legacyPackages so that hercules doesn't try to build it.
+      legacyPackages.binary-ninja = pkgs.callPackage ./binary-ninja { };
     };
 }
