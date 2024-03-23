@@ -19,6 +19,7 @@
     ./user.nix
     (import ./programs { inherit isLinux; })
     (import ./tailscale.nix { inherit isLinux; })
+    (import ./containers.nix { inherit isLinux; })
   ];
 
   options.settei = with lib; {
