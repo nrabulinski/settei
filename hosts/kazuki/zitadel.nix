@@ -4,10 +4,14 @@
     file = ../../secrets/rabulinski-com-cf.age;
     owner = config.services.nginx.user;
   };
+  age.secrets.zitadel-master = {
+    file = ../../secrets/zitadel-master.age;
+  };
 
   settei.containers.zitadel.config = {
     services.zitadel = {
       enable = true;
+      masterKeyFile = "/zitadel-master-key";
       settings = {
         Port = 80;
         Database.postgres = {
@@ -38,6 +42,9 @@
         }
       ];
     };
+  };
+  settei.containers.zitadel.bindMounts = {
+    "/zitadel-master-key".hostPath = config.age.secrets.zitadel-master.path;
   };
 
   users.users.nginx.extraGroups = [ "acme" ];

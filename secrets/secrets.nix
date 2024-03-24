@@ -72,4 +72,8 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "zitadel-master.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }
