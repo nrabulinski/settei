@@ -1,5 +1,10 @@
 { config, ... }:
 {
+  age.secrets.rabulinski-com-cf = {
+    file = ../../secrets/rabulinski-com-cf.age;
+    owner = config.services.nginx.user;
+  };
+
   settei.containers.zitadel.config = {
     services.zitadel = {
       enable = true;
@@ -58,5 +63,10 @@
         '';
       };
     };
+  };
+
+  security.acme.certs."zitadel.rabulinski.com" = {
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.rabulinski-com-cf.path;
   };
 }
