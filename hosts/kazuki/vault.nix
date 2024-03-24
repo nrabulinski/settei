@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
-  age.secrets.vault-cert-env = {
-    file = ../../secrets/vault-cert-env.age;
+  age.secrets.rabulinski-com-cf = {
+    file = ../../secrets/rabulinski-com-cf.age;
     owner = config.services.nginx.user;
   };
 
@@ -45,6 +45,6 @@
 
   security.acme.certs."vault.rabulinski.com" = {
     dnsProvider = "cloudflare";
-    credentialsFile = config.age.secrets.vault-cert-env.path;
+    credentialsFile = config.age.secrets.rabulinski-com-cf.path;
   };
 }

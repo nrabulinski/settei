@@ -10,10 +10,6 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
-  "vault-cert-env.age".publicKeys = [
-    keys.system.kazuki
-    keys.other.bootstrap
-  ];
   # "bitwarden-env-file.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   "hercules-token.age".publicKeys = [
     keys.system.kazuki
@@ -78,6 +74,10 @@ in
   ];
   "rab-lol-cf.age".publicKeys = [
     keys.system.legion
+    keys.other.bootstrap
+  ];
+  "rabulinski-com-cf.age".publicKeys = [
+    keys.system.kazuki
     keys.other.bootstrap
   ];
 }
