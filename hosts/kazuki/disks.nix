@@ -7,23 +7,23 @@ in
     type = "disk";
     device = bootDevice;
     content = {
-      type = "table";
-      format = "gpt";
-      partitions = [
-        {
-          name = "EFI";
+      type = "gpt";
+      partitions = {
+        esp = {
+          label = "EFI";
+          priority = 1;
           start = "1MiB";
           end = "128MiB";
-          fs-type = "fat32";
-          bootable = true;
+          type = "EF00";
           content = {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
           };
-        }
-        {
-          name = "LINUX";
+        };
+        linux = {
+          label = "LINUX";
+          priority = 2;
           start = "128MiB";
           end = "-4G";
           content = {
@@ -47,17 +47,16 @@ in
                 };
               };
           };
-        }
-        {
-          name = "SWAP";
-          start = "-4G";
-          end = "100%";
+        };
+        swap = {
+          label = "SWAP";
+          size = "100%";
           content = {
             type = "swap";
             randomEncryption = true;
           };
-        }
-      ];
+        };
+      };
     };
   };
 }
