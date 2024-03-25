@@ -31,7 +31,7 @@
           devShells.default = pkgs.mkShellNoCC {
             packages = [
               inputs'.agenix.packages.agenix
-              inputs'.attic.packages.attic
+              self'.packages.attic
               # TODO: Contribute darwin support to nh
               pkgs.nh
             ];
@@ -46,7 +46,9 @@
             ];
           };
           # Re-export it for convenience and for caching
-          packages.attic = inputs'.attic.packages.attic;
+          packages.attic = inputs'.attic.packages.attic.overrideAttrs (prev: {
+            env = builtins.removeAttrs prev.env or { } [ "NIX_LDFLAGS" ];
+          });
 
           formatter = pkgs.nixfmt-rfc-style;
         };

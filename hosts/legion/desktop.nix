@@ -99,7 +99,8 @@
   };
 
   hardware.nvidia = {
-    patch.enable = true;
+    # FIXME: broken
+    # patch.enable = true;
     modesetting.enable = true;
   };
 

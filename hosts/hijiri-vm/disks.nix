@@ -7,25 +7,23 @@ in
     type = "disk";
     device = bootDevice;
     content = {
-      type = "table";
-      format = "gpt";
-      partitions = [
-        {
-          name = "EFI";
+      type = "gpt";
+      partitions = {
+        esp = {
+          label = "EFI";
+          priority = 1;
           start = "1MiB";
           end = "128MiB";
-          fs-type = "fat32";
-          bootable = true;
+          type = "EF00";
           content = {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
           };
-        }
-        {
-          name = "LINUX";
-          start = "128MiB";
-          end = "100%";
+        };
+        linux = {
+          label = "LINUX";
+          size = "100%";
           content = {
             type = "btrfs";
             extraArgs = [ "-f" ];
@@ -47,8 +45,8 @@ in
                 };
               };
           };
-        }
-      ];
+        };
+      };
     };
   };
 }

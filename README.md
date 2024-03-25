@@ -44,5 +44,6 @@ to achieve this i still need to create a proper live iso with my config and my b
 Sorted rougly by priority
 
 - migrate the rest of my machines
-- private nix cache (unneeded with cachix?)
 - hercules-ci effects for deploying machines on update (if configuration is valid)
+- go back to hercules or just migrate off of gha in some way
+- fix disko
