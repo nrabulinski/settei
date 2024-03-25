@@ -1,6 +1,11 @@
 {
   configurations.darwin.hijiri =
-    { pkgs, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     {
       imports = [
         ./skhd.nix
@@ -52,5 +57,11 @@
           }
         ];
       };
+
+      system.activationScripts.keyboard.text = lib.mkForce ''
+        # Configuring keyboard, but only the builtin one
+        echo "configuring apple keyboard..." >&2
+        hidutil property --matching '{"ProductID":0x0342}' --set '{"UserKeyMapping":${builtins.toJSON config.system.keyboard.userKeyMapping}}' > /dev/null
+      '';
     };
 }
