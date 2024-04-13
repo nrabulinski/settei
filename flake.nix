@@ -133,6 +133,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
     };
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+    };
   };
 
   /*
