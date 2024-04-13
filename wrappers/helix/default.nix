@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs', ... }:
 {
   programs.helix = {
     enable = true;
+    package = inputs'.helix.packages.default;
     settings = {
       theme = "base16_default_dark";
       editor = {
