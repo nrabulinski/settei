@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs',
   ...
@@ -13,9 +14,13 @@ in
     enable = true;
     package = inputs'.settei.packages.conduit-next;
     settings.global = {
+      address = "127.0.0.1";
       server_name = "nrab.lol";
       database_backend = "rocksdb";
       allow_registration = false;
+      allow_check_for_updates = false;
+      max_request_size = 100 * 1024 * 1024;
+      conduit_cache_capacity_modifier = 4.0;
     };
   };
   systemd.services.conduit.serviceConfig.LimitNOFILE = 8192;
@@ -68,22 +73,26 @@ in
       "matrix.nrab.lol" = {
         forceSSL = true;
         enableACME = true;
-        listen = [
-          {
-            addr = "0.0.0.0";
-            port = 80;
-          }
-          {
-            addr = "0.0.0.0";
-            port = 443;
-            ssl = true;
-          }
-          {
-            addr = "0.0.0.0";
-            port = 8448;
-            ssl = true;
-          }
-        ];
+        listen =
+          let
+            ports = [
+              { port = 80; }
+              {
+                port = 443;
+                ssl = true;
+              }
+              {
+                port = 8448;
+                ssl = true;
+              }
+            ];
+          in
+          lib.flatten (
+            map (port: [
+              (port // { addr = "0.0.0.0"; })
+              (port // { addr = "[::0]"; })
+            ]) ports
+          );
         extraConfig = ''
           merge_slashes off;
         '';
