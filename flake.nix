@@ -138,6 +138,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
     };
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+    };
   };
 
   /*
