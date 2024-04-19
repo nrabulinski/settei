@@ -6,11 +6,11 @@
 
   services.davfs2 = {
     enable = true;
-    extraConfig = ''
-      cache_size 50000
-      minimize_mem 1
-      use_locks 0
-    '';
+    settings.globalSection = {
+      cache_size = 50000;
+      minimize_mem = true;
+      use_locks = false;
+    };
   };
   environment.etc."davfs2/secrets".source = config.age.secrets.storage-box-webdav.path;
 
