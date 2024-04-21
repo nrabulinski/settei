@@ -31,6 +31,7 @@
         hostId = builtins.substring 0 8 (builtins.readFile ./machine-id);
         networkmanager.enable = true;
         firewall.trustedInterfaces = [ "tailscale0" ];
+        nftables.enable = true;
       };
       systemd.services.NetworkManager-wait-online.enable = false;
 
@@ -47,5 +48,6 @@
           instances = 4;
         };
       };
+      common.incus.enable = true;
     };
 }

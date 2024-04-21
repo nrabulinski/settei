@@ -19,6 +19,7 @@
         loader.systemd-boot.configurationLimit = 1;
         loader.efi.canTouchEfiVariables = true;
       };
+      networking.nftables.enable = true;
 
       common.hercules.enable = true;
       services.hercules-ci-agent.settings.concurrentTasks = 6;
@@ -29,6 +30,7 @@
           instances = 6;
         };
       };
+      common.incus.enable = true;
 
       services.nginx = {
         enable = true;
