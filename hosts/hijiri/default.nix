@@ -23,6 +23,7 @@
         ];
         programs.alacritty.settings.font.size = 14;
       };
+      common.incus.enable = true;
 
       system.defaults = {
         ".GlobalPreferences" = {

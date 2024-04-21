@@ -65,6 +65,7 @@ in
     (import ./hercules.nix { inherit isLinux; })
     (import ./user.nix { inherit isLinux; })
     (import ./github-runner.nix { inherit isLinux; })
+    (import ./incus.nix { inherit isLinux; })
   ];
 
   config = lib.mkMerge [
