@@ -99,7 +99,8 @@
   };
 
   hardware.nvidia = {
-    patch.enable = true;
+    # TODO: Reenable
+    # patch.enable = true;
     modesetting.enable = true;
   };
 
