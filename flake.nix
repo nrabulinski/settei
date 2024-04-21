@@ -114,11 +114,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     crane = {
-      # TODO: Move back once either is resolved
-      #       https://github.com/ipetkov/crane/pull/533
-      #       https://github.com/toml-rs/toml/issues/691
-      # url = "github:ipetkov/crane";
-      url = "github:nrabulinski/crane/no-toml-edit";
+      url = "github:ipetkov/crane";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-darwin = {
