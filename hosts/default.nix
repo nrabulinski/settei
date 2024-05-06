@@ -38,6 +38,7 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.nvidia-patch.nixosModules.nvidia-patch
             inputs.attic.nixosModules.atticd
+            inputs.lix-module.nixosModules.default
             self.nixosModules.settei
             self.nixosModules.common
             sharedOptions

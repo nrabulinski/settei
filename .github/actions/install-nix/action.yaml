@@ -7,6 +7,7 @@ runs:
   steps:
     - uses: DeterminateSystems/nix-installer-action@main
       with:
+        # source-url: https://install.lix.systems/lix
         # Needs to be kept in sync with flake.nix
         extra-conf: |
           fallback = true
