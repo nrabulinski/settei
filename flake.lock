@@ -328,7 +328,25 @@
     },
     "flake-utils_3": {
       "inputs": {
-        "systems": "systems_4"
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_4": {
+      "inputs": {
+        "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1710146030,
@@ -360,6 +378,21 @@
       "original": {
         "owner": "flakelib",
         "repo": "fl",
+        "type": "github"
+      }
+    },
+    "flakey-profile": {
+      "locked": {
+        "lastModified": 1712898590,
+        "narHash": "sha256-FhGIEU93VHAChKEXx905TSiPZKga69bWl1VB37FK//I=",
+        "owner": "lf-",
+        "repo": "flakey-profile",
+        "rev": "243c903fd8eadc0f63d205665a92d4df91d42d9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lf-",
+        "repo": "flakey-profile",
         "type": "github"
       }
     },
@@ -425,6 +458,47 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "lix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714353561,
+        "narHash": "sha256-1OKjSB5kPw0Tnm/h4j1IZe6TfdX04QNbm1kn0q58Rls=",
+        "ref": "refs/heads/main",
+        "rev": "e2ab89a74b1d6044cea91e91f5c3d5fce203c2e8",
+        "revCount": 15448,
+        "type": "git",
+        "url": "https://git.lix.systems/nrabulinski/lix.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lix.systems/nrabulinski/lix.git"
+      }
+    },
+    "lix-module": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "flakey-profile": "flakey-profile",
+        "lix": [
+          "lix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1714868057,
+        "narHash": "sha256-Q9vGkxmuarySjPKO6yixjZ0tkaVIQS2wU9FpCpDA7+I=",
+        "ref": "refs/heads/main",
+        "rev": "e31baf57680bab449ab5b40179cc4a08a99f5314",
+        "revCount": 62,
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/nixos-module.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/nixos-module.git"
       }
     },
     "mailserver": {
@@ -638,6 +712,8 @@
         "helix": "helix",
         "hercules-ci-effects": "hercules-ci-effects",
         "home-manager": "home-manager",
+        "lix": "lix",
+        "lix-module": "lix-module",
         "mailserver": "mailserver",
         "niko-nur": "niko-nur",
         "nixpkgs": "nixpkgs_3",
@@ -793,9 +869,24 @@
         "type": "github"
       }
     },
+    "systems_5": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "utils": {
       "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1709126324,
@@ -863,7 +954,7 @@
         "crane": [
           "crane"
         ],
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
