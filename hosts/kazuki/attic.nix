@@ -75,7 +75,7 @@ in
         proxyPass = "http://attic";
       };
       extraConfig = ''
-        client_max_body_size 8G;
+        client_max_body_size 24G;
       '';
     };
     virtualHosts."cache.nrab.lol" = {
