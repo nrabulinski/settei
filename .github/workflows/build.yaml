@@ -37,8 +37,8 @@ jobs:
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
         run: |
-          nix run .#attic -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
-          nix run .#attic -- push nrab-attic:public result
+          nix run .#attic.client -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
+          nix run .#attic.client -- push nrab-attic:public result
 
   build-aarch64-darwin:
     runs-on: macos-14
@@ -55,8 +55,8 @@ jobs:
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
         run: |
-          nix run .#attic -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
-          nix run .#attic -- push nrab-attic:public result
+          nix run .#attic.client -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
+          nix run .#attic.client -- push nrab-attic:public result
 
   build-aarch64-linux:
     runs-on: [Linux, ARM64, nix]
@@ -72,8 +72,8 @@ jobs:
         run: nix build .#${{ matrix.output }} -L
       - name: Push output
         run: |
-          nix run .#attic -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
-          nix run .#attic -- push nrab-attic:public result
+          nix run .#attic.client -- login nrab-attic 'https://attic.nrab.lol' ${{ secrets.ATTIC_TOKEN }}
+          nix run .#attic.client -- push nrab-attic:public result
 
   all-built:
     runs-on: ubuntu-latest
