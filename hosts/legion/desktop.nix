@@ -95,8 +95,8 @@
       EndSection
     '';
     exportConfiguration = true;
-    libinput.enable = true;
   };
+  services.libinput.enable = true;
 
   hardware.nvidia = {
     # TODO: Reenable
