@@ -47,7 +47,7 @@
           };
           # Re-export it for convenience and for caching
           packages.attic = inputs'.attic.packages.attic.overrideAttrs (prev: {
-            passthru = prev.passthru or {} // {
+            passthru = prev.passthru or { } // {
               client = inputs'.attic.packages.attic-client;
               server = inputs'.attic.packages.attic-server;
             };
