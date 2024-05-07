@@ -19,10 +19,10 @@ let
   crane' = crane.overrideToolchain rust;
   rocksdb' = rocksdb.overrideAttrs (
     final: prev: {
-      version = "8.11.3";
+      version = "9.1.1";
       src = prev.src.override {
         rev = "v${final.version}";
-        hash = "sha256-OpEiMwGxZuxb9o3RQuSrwZMQGLhe9xLT1aa3HpI4KPs=";
+        hash = "sha256-/Xf0bzNJPclH9IP80QNaABfhj4IAR5LycYET18VFCXc=";
       };
     }
   );
@@ -42,4 +42,6 @@ crane'.buildPackage {
   # Use system RocksDB
   ROCKSDB_INCLUDE_DIR = "${rocksdb'}/include";
   ROCKSDB_LIB_DIR = "${rocksdb'}/lib";
+  NIX_OUTPATH_USED_AS_RANDOM_SEED = "randomseed";
+  CONDUIT_VERSION_EXTRA = src.shortRev;
 }
