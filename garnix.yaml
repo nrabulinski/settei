@@ -1,0 +1,8 @@
+builds:
+  include:
+    - 'devShells.*.*'
+    - 'packages.*.*'
+    - 'formatter.*'
+    - 'nixosConfigurations.*'
+    - 'darwinConfigurations.*'
+    - 'homeConfigurations.*'
