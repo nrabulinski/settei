@@ -57,6 +57,7 @@ let
             "auto-allocate-uids"
           ];
           trusted-users = lib.optionals (!adminNeedsPassword) [ username ];
+          use-xdg-base-directories = true;
           auto-allocate-uids = true;
           extra-substituters = [
             "https://hyprland.cachix.org"
