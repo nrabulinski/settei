@@ -20,6 +20,7 @@ in
   imports = [
     ./desktop
     fishOverlayModule
+    ./xdg.nix
   ];
 
   programs.fish.enable = true;
