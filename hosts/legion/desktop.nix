@@ -99,8 +99,7 @@
   services.libinput.enable = true;
 
   hardware.nvidia = {
-    # TODO: Reenable
-    # patch.enable = true;
+    patch.enable = true;
     modesetting.enable = true;
   };
 
