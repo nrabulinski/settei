@@ -463,17 +463,17 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1714353561,
-        "narHash": "sha256-1OKjSB5kPw0Tnm/h4j1IZe6TfdX04QNbm1kn0q58Rls=",
+        "lastModified": 1716017186,
+        "narHash": "sha256-6YVtLy+1o36SYgWv0CmoMuxfS+i2SJrpcsoSnsVK5ck=",
         "ref": "refs/heads/main",
-        "rev": "e2ab89a74b1d6044cea91e91f5c3d5fce203c2e8",
-        "revCount": 15448,
+        "rev": "d1c8fd3b0981a53f122dc4b9e5cda705de3c1ac2",
+        "revCount": 15590,
         "type": "git",
-        "url": "https://git.lix.systems/nrabulinski/lix.git"
+        "url": "https://git.lix.systems/lix-project/lix.git"
       },
       "original": {
         "type": "git",
-        "url": "https://git.lix.systems/nrabulinski/lix.git"
+        "url": "https://git.lix.systems/lix-project/lix.git"
       }
     },
     "lix-module": {
@@ -488,11 +488,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714868057,
-        "narHash": "sha256-Q9vGkxmuarySjPKO6yixjZ0tkaVIQS2wU9FpCpDA7+I=",
+        "lastModified": 1715885250,
+        "narHash": "sha256-IUFYAl3158Ig5vySnRBHoPReb2/S97bjodCo6FhzJv4=",
         "ref": "refs/heads/main",
-        "rev": "e31baf57680bab449ab5b40179cc4a08a99f5314",
-        "revCount": 62,
+        "rev": "53d713eb486f21d653af3ef3528e9a19ecfc45e5",
+        "revCount": 81,
         "type": "git",
         "url": "https://git.lix.systems/lix-project/nixos-module.git"
       },
