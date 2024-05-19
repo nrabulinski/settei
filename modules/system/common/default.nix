@@ -36,8 +36,6 @@ let
     nixpkgs.overlays = [ (_: _: { inherit (inputs'.settei.packages) fish; }) ];
 
     nix.settings.allow-import-from-derivation = false;
-    # TODO: Remove once config checking works with lix
-    nix.checkConfig = false;
   };
 
   linuxConfig = lib.optionalAttrs isLinux {

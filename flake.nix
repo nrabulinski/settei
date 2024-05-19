@@ -143,9 +143,7 @@
       inputs.crane.follows = "crane";
     };
     lix = {
-      # TODO: Go back once building on darwin is fixed
-      # url = "git+https://git.lix.systems/lix-project/lix.git";
-      url = "git+https://git.lix.systems/nrabulinski/lix.git";
+      url = "git+https://git.lix.systems/lix-project/lix.git";
       flake = false;
     };
     lix-module = {

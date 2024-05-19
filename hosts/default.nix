@@ -53,6 +53,7 @@
           modules = [
             inputs.agenix.darwinModules.age
             inputs.home-manager.darwinModules.home-manager
+            inputs.lix-module.nixosModules.default
             self.darwinModules.settei
             self.darwinModules.common
             sharedOptions
