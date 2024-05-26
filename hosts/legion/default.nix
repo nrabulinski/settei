@@ -30,7 +30,6 @@
         hostName = "legion";
         hostId = builtins.substring 0 8 (builtins.readFile ./machine-id);
         networkmanager.enable = true;
-        nftables.enable = true;
       };
       systemd.services.NetworkManager-wait-online.enable = false;
 
