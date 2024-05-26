@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  username,
   ...
 }:
 let
@@ -14,33 +15,41 @@ let
     environment.systemPackages = [ cfg.clientPackage ];
   };
 
-  linuxConfig = lib.optionalAttrs isLinux {
-    virtualisation.incus = lib.mkIf (!cfg.clientOnly) {
-      enable = true;
-      inherit (cfg) package clientPackage;
-      preseed = {
-        networks = [
-          {
-            name = "incusbr0";
-            type = "bridge";
-            config = {
-              "ipv4.address" = "10.0.100.1/24";
-              "ipv4.nat" = "true";
-            };
-          }
-        ];
-        storage_pools = [
-          {
-            name = "default";
-            driver = "dir";
-            config = {
-              source = "/var/lib/incus/storage-pools/default";
-            };
-          }
-        ];
+  linuxConfig = lib.optionalAttrs isLinux (
+    lib.mkIf (!cfg.clientOnly) {
+      virtualisation.incus = {
+        enable = true;
+        inherit (cfg) package clientPackage;
+        preseed = {
+          # TODO: Default profile with storage pool
+          networks = [
+            {
+              name = "incusbr0";
+              type = "bridge";
+              config = {
+                "ipv4.address" = "10.0.100.1/24";
+                "ipv4.nat" = "true";
+              };
+            }
+          ];
+          storage_pools = [
+            {
+              name = "default";
+              driver = "dir";
+              config = {
+                source = "/var/lib/incus/storage-pools/default";
+              };
+            }
+          ];
+        };
       };
-    };
-  };
+      networking = {
+        nftables.enable = true;
+        firewall.trustedInterfaces = [ "incusbr0" ];
+      };
+      users.users.${username}.extraGroups = [ "incus-admin" ];
+    }
+  );
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
     assertions = [
