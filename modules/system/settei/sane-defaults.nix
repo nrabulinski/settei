@@ -29,6 +29,7 @@ let
 
       # FIXME: Move to common
       services.tailscale.enable = true;
+      networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
       networking.hostName = lib.mkDefault (
         args.configurationName
