@@ -20,6 +20,7 @@
 
               source ${./prompt.fish}
               source ${./config.fish}
+              source ${./greeting.fish}
             '';
           in
           [
@@ -34,6 +35,8 @@
           ripgrep
           zoxide
           direnv
+          fd
+          file
         ];
       };
   };
