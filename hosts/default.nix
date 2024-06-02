@@ -16,8 +16,7 @@
     ./kogata
   ];
 
-  builders =
-    let
+  builders = let
       sharedOptions = {
         _file = ./default.nix;
 
@@ -26,11 +25,8 @@
           settei = self;
         };
       };
-    in
-    {
-      nixos =
-        name: module:
-        inputs.nixpkgs.lib.nixosSystem {
+
+      baseNixos = inputs.nixpkgs.lib.nixosSystem {
           modules = [
             inputs.agenix.nixosModules.age
             inputs.disko.nixosModules.disko
@@ -42,14 +38,11 @@
             self.nixosModules.settei
             self.nixosModules.common
             sharedOptions
-            module
           ];
-          specialArgs.configurationName = name;
+          specialArgs.configurationName = "base";
         };
 
-      darwin =
-        name: module:
-        inputs.darwin.lib.darwinSystem {
+      baseDarwin = inputs.darwin.lib.darwinSystem {
           modules = [
             inputs.agenix.darwinModules.age
             inputs.home-manager.darwinModules.home-manager
@@ -57,8 +50,23 @@
             self.darwinModules.settei
             self.darwinModules.common
             sharedOptions
+          ];
+          specialArgs.configurationName = "base";
+        };
+    in {
+      nixos =
+        name: module:
+        baseNixos.extendModules {
+          modules = [
             module
           ];
+          specialArgs.configurationName = name;
+        };
+
+      darwin =
+        name: module:
+        baseDarwin.extendModules {
+          modules = [module];
           specialArgs.configurationName = name;
         };
     };
