@@ -29,7 +29,6 @@ let
 
       # FIXME: Move to common
       services.tailscale.enable = true;
-      networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
       networking.hostName = lib.mkDefault (
         args.configurationName
@@ -83,43 +82,50 @@ let
   linuxConfig = lib.optionalAttrs isLinux (
     let
       nmEnabled = config.networking.networkmanager.enable;
+      tlEnabled = config.services.tailscale.enable;
     in
-    {
-      hardware.enableRedistributableFirmware = true;
+    lib.mkMerge [
+      {
+        hardware.enableRedistributableFirmware = true;
 
-      services.openssh.enable = true;
-      programs.mosh.enable = lib.mkDefault true;
-      programs.git.enable = lib.mkDefault true;
+        # FIXME: Move to common
+        networking.firewall.trustedInterfaces = lib.mkIf tlEnabled [ "tailscale0" ];
 
-      users = {
-        mutableUsers = false;
-        users.${username} = {
-          isNormalUser = true;
-          home = "/home/${username}";
-          group = username;
-          extraGroups = [ "wheel" ];
+        services.openssh.enable = true;
+        programs.mosh.enable = lib.mkDefault true;
+        programs.git.enable = lib.mkDefault true;
+
+        users = {
+          mutableUsers = false;
+          users.${username} = {
+            isNormalUser = true;
+            home = "/home/${username}";
+            group = username;
+            extraGroups = [ "wheel" ];
+          };
+          groups.${username} = { };
         };
-        groups.${username} = { };
-      };
 
-      # TODO: Actually this should be extraRules which makes wheel users without any password set
-      #       be able to use sudo with no password
-      security.sudo.wheelNeedsPassword = false;
+        # TODO: Actually this should be extraRules which makes wheel users without any password set
+        #       be able to use sudo with no password
+        security.sudo.wheelNeedsPassword = false;
+      }
+      {
+        # When NetworkManager isn't in use, add tailscale DNS address manually
+        # FIXME: Move to common
+        networking = lib.mkIf (!nmEnabled && tlEnabled && cfg.tailnet != null) {
+          nameservers = [
+            "100.100.100.100"
+            "1.1.1.1"
+            "1.0.0.1"
+          ];
+          search = [ cfg.tailnet ];
+        };
 
-      # When NetworkManager isn't in use, add tailscale DNS address manually
-      # FIXME: Move to common
-      networking = lib.mkIf (!nmEnabled && config.services.tailscale.enable && cfg.tailnet != null) {
-        nameservers = [
-          "100.100.100.100"
-          "1.1.1.1"
-          "1.0.0.1"
-        ];
-        search = [ cfg.tailnet ];
-      };
-
-      # NetworkManager probably means desktop system so we don't want to slow down boot times
-      systemd.services = lib.mkIf nmEnabled { NetworkManager-wait-online.enable = false; };
-    }
+        # NetworkManager probably means desktop system so we don't want to slow down boot times
+        systemd.services = lib.mkIf nmEnabled { NetworkManager-wait-online.enable = false; };
+      }
+    ]
   );
 
   darwinConfig = lib.optionalAttrs (!isLinux) {

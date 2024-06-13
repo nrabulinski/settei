@@ -16,7 +16,8 @@
     ./kogata
   ];
 
-  builders = let
+  builders =
+    let
       sharedOptions = {
         _file = ./default.nix;
 
@@ -27,47 +28,51 @@
       };
 
       baseNixos = inputs.nixpkgs.lib.nixosSystem {
-          modules = [
-            inputs.agenix.nixosModules.age
-            inputs.disko.nixosModules.disko
-            inputs.mailserver.nixosModules.default
-            inputs.home-manager.nixosModules.home-manager
-            inputs.nvidia-patch.nixosModules.nvidia-patch
-            inputs.attic.nixosModules.atticd
-            inputs.lix-module.nixosModules.default
-            self.nixosModules.settei
-            self.nixosModules.common
-            sharedOptions
-          ];
-          specialArgs.configurationName = "base";
-        };
+        modules = [
+          inputs.agenix.nixosModules.age
+          inputs.disko.nixosModules.disko
+          inputs.mailserver.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          inputs.nvidia-patch.nixosModules.nvidia-patch
+          inputs.attic.nixosModules.atticd
+          inputs.lix-module.nixosModules.default
+          self.nixosModules.settei
+          self.nixosModules.common
+          sharedOptions
+        ];
+        specialArgs.configurationName = "base";
+      };
 
       baseDarwin = inputs.darwin.lib.darwinSystem {
-          modules = [
-            inputs.agenix.darwinModules.age
-            inputs.home-manager.darwinModules.home-manager
-            inputs.lix-module.nixosModules.default
-            self.darwinModules.settei
-            self.darwinModules.common
-            sharedOptions
-          ];
-          specialArgs.configurationName = "base";
-        };
-    in {
+        modules = [
+          inputs.agenix.darwinModules.age
+          inputs.home-manager.darwinModules.home-manager
+          inputs.lix-module.nixosModules.default
+          self.darwinModules.settei
+          self.darwinModules.common
+          sharedOptions
+        ];
+        specialArgs.configurationName = "base";
+      };
+    in
+    {
       nixos =
         name: module:
         baseNixos.extendModules {
-          modules = [
-            module
-          ];
+          modules = [ module ];
           specialArgs.configurationName = name;
         };
 
       darwin =
         name: module:
-        baseDarwin.extendModules {
-          modules = [module];
-          specialArgs.configurationName = name;
+        let
+          eval = baseDarwin._module.args.extendModules {
+            modules = [ module ];
+            specialArgs.configurationName = name;
+          };
+        in
+        {
+          system = eval.config.system.build.toplevel;
         };
     };
 }
