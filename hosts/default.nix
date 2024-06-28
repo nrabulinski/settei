@@ -14,6 +14,7 @@
     # ./installer
     ./ude
     ./kogata
+    ./miyagi
   ];
 
   builders =

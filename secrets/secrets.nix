@@ -72,4 +72,8 @@ in
     keys.other.bootstrap
   ];
   "ntfy-alert-pass.age".publicKeys = (builtins.attrValues keys.system) ++ [ keys.other.bootstrap ];
+  "miyagi-niko-pass.age".publicKeys = [
+    keys.system.miyagi
+    keys.other.bootstrap
+  ];
 }
