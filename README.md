@@ -9,9 +9,9 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 - hosts - per-machine configurations
   - kazuki - my linux arm server
   - legion - my linux x86 server
-  - hijiri - my macbook[^1]
+  - hijiri - my macbook
   - hijiri-vm - linux vm running on my macbook
-  - miyagi - my work machine[^1]
+  - miyagi - my work machine
   - ude - another linux arm server
   - kogata - my m1 mac mini doubling as a server
 - modules - options which in principle should be reusable by others
@@ -23,8 +23,6 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 - wrappers - nix packages wrapped with my configs (see: [wrapper-manager](https://github.com/viperML/wrapper-manager))
 - assets - miscellaneous values reused throughout my config
 - effects.nix - hercules-ci configuration
-
-[^1]: Machine not migrated yet or in the process of migrating. See: https://nest.pijul.com/nrabulinski/nix-config
 
 ## Code guidelines
 
@@ -43,7 +41,7 @@ to achieve this i still need to create a proper live iso with my config and my b
 ## TODOs
 Sorted rougly by priority
 
-- migrate the rest of my machines
+- bring back ci
 - hercules-ci effects for deploying machines on update (if configuration is valid)
-- go back to hercules or just migrate off of gha in some way
 - fix disko
+- themeing solution
