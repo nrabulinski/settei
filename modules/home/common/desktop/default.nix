@@ -9,6 +9,8 @@
 {
   _file = ./default.nix;
 
+  imports = [ ./zellij.nix ];
+
   options.common.desktop = {
     enable = lib.mkEnableOption "Common configuration for desktop machines";
   };
@@ -67,51 +69,5 @@
         };
       };
     };
-
-    programs.zellij = {
-      enable = true;
-      settings = {
-        keybinds = {
-          shared_except = {
-            _args = [ "locked" ];
-            unbind = "Ctrl q";
-          };
-        };
-      };
-    };
-
-    xdg.configFile."zellij/layouts/compacter.kdl".text = ''
-      layout {
-        pane split_direction="vertical" {
-          pane
-        }
-
-        pane size=1 borderless=true {
-          plugin location="file:${inputs'.zjstatus.packages.default}/bin/zjstatus.wasm" {
-            hide_frame_for_single_pane "true"
-
-            format_left  "{mode}#[fg=fg,bg=bg,bold] {session}#[bg=bg] {tabs}"
-            format_right "#[fg=#424554,bg=bg]::{datetime}"
-            format_space "#[bg=bg]"
-
-            mode_normal          "#[bg=green] "
-            mode_locked          "#[bg=magenta] "
-            mode_tab             "#[bg=blue] "
-            mode_tmux            "#[bg=red] "
-            mode_default_to_mode "tmux"
-
-            tab_normal               "#[fg=#6C7086,bg=bg] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-            tab_active               "#[fg=#9399B2,bg=bg,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-            tab_fullscreen_indicator "□ "
-            tab_sync_indicator       "  "
-            tab_floating_indicator   "󰉈 "
-
-            datetime          "#[fg=#9399B2,bg=bg] {format} "
-            datetime_format   "%A, %d %b %Y %H:%M"
-            datetime_timezone "Europe/Warsaw"
-          }
-        }
-      }
-    '';
   };
 }
