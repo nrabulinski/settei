@@ -1,11 +1,7 @@
 { inputs, ... }:
 {
   perSystem =
-    {
-      pkgs,
-      inputs',
-      ...
-    }:
+    { pkgs, inputs', ... }:
     {
       packages.conduit-next = pkgs.callPackage ./conduit {
         src = inputs.conduit-src;

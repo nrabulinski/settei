@@ -46,7 +46,9 @@
             ];
           };
           # Re-export it for convenience and for caching
-          packages = { inherit (inputs'.attic.packages) attic-client attic-server; };
+          packages = {
+            inherit (inputs'.attic.packages) attic-client attic-server;
+          };
 
           formatter = pkgs.nixfmt-rfc-style;
         };
