@@ -31,7 +31,7 @@
           devShells.default = pkgs.mkShellNoCC {
             packages = [
               inputs'.agenix.packages.agenix
-              self'.packages.attic.client
+              self'.packages.attic-client
               # TODO: Contribute darwin support to nh
               pkgs.nh
             ];
@@ -46,12 +46,7 @@
             ];
           };
           # Re-export it for convenience and for caching
-          packages.attic = inputs'.attic.packages.attic.overrideAttrs (prev: {
-            passthru = prev.passthru or { } // {
-              client = inputs'.attic.packages.attic-client;
-              server = inputs'.attic.packages.attic-server;
-            };
-          });
+          packages = { inherit (inputs'.attic.packages) attic-client attic-server; };
 
           formatter = pkgs.nixfmt-rfc-style;
         };
