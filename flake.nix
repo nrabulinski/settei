@@ -128,9 +128,11 @@
       url = "github:nrabulinski/nur-packages";
     };
     attic = {
-      url = "github:zhaofengli/attic";
+      url = "git+https://git.lix.systems/nrabulinski/attic.git";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
+      inputs.lix.follows = "lix";
+      inputs.lix-module.follows = "lix-module";
     };
     helix = {
       url = "github:helix-editor/helix";

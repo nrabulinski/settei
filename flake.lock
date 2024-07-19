@@ -34,23 +34,28 @@
         ],
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
+        "lix": [
+          "lix"
+        ],
+        "lix-module": [
+          "lix-module"
+        ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "nixpkgs-stable": "nixpkgs-stable"
+        ]
       },
       "locked": {
-        "lastModified": 1720542474,
-        "narHash": "sha256-aKjJ/4l2I9+wNGTaOGRsuS3M1+IoTibqgEMPDikXm04=",
-        "owner": "zhaofengli",
-        "repo": "attic",
-        "rev": "6139576a3ce6bb992e0f6c3022528ec233e45f00",
-        "type": "github"
+        "lastModified": 1721416846,
+        "narHash": "sha256-dY7YoNln1wUBM83SRPYoAIzndSnp+YaqE5GdR+wr+wg=",
+        "ref": "refs/heads/main",
+        "rev": "f2cfa79c615f3fbec09b67550329ca9840a65f4b",
+        "revCount": 223,
+        "type": "git",
+        "url": "https://git.lix.systems/nrabulinski/attic.git"
       },
       "original": {
-        "owner": "zhaofengli",
-        "repo": "attic",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.lix.systems/nrabulinski/attic.git"
       }
     },
     "blobs": {
@@ -603,22 +608,6 @@
         "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-stable": {
-      "locked": {
-        "lastModified": 1711460390,
-        "narHash": "sha256-akSgjDZL6pVHEfSE6sz1DNSXuYX6hq+P/1Z5IoYWs7E=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "44733514b72e732bd49f5511bd0203dea9b9a434",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-23.11",
         "repo": "nixpkgs",
         "type": "github"
       }
