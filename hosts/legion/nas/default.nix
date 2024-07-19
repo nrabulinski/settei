@@ -37,11 +37,14 @@
   systemd.mounts = [
     {
       type = "none";
-      options = "bind,nofail";
+      options = "bind";
       what = "/media/data";
       where = "/export/yotta-data";
       requires = [ "zfs-mount.service" ];
+      after = [ "zfs-mount.service" ];
       wantedBy = [ "multi-user.target" ];
+      before = ["nfs-server.service"];
+      requiredBy = ["nfs-server.service"];
     }
   ];
 
