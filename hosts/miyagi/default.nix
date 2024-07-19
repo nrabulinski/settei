@@ -40,6 +40,10 @@
         ];
       };
 
+      settei.tailscale = {
+        ipv4 = "100.103.204.32";
+        ipv6 = "fd7a:115c:a1e0:ab12:4843:cd96:6267:cc20";
+      };
       settei.user.config = {
         common.desktop.enable = true;
         home.packages = [ pkgs.slack ];

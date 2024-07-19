@@ -18,6 +18,7 @@
     (import ./flake-qol.nix { inherit perInput; })
     ./user.nix
     (import ./programs { inherit isLinux; })
+    (import ./tailscale.nix { inherit isLinux; })
   ];
 
   options.settei = with lib; {

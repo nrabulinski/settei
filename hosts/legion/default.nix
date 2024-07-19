@@ -26,6 +26,11 @@
         loader.efi.canTouchEfiVariables = true;
       };
 
+      settei.tailscale = {
+        ipv4 = "100.84.112.35";
+        ipv6 = "fd7a:115c:a1e0:ab12:4843:cd96:6254:7023";
+      };
+
       networking = {
         hostName = "legion";
         hostId = builtins.substring 0 8 (builtins.readFile ./machine-id);
