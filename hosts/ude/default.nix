@@ -20,6 +20,11 @@
         loader.efi.canTouchEfiVariables = true;
       };
 
+      settei.tailscale = {
+        ipv4 = "100.118.42.139";
+        ipv6 = "fd7a:115c:a1e0:ab12:4843:cd96:6276:2a8b";
+      };
+
       common.hercules.enable = true;
       services.hercules-ci-agent.settings.concurrentTasks = 6;
       common.github-runner = {

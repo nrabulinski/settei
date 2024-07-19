@@ -11,10 +11,6 @@ let
         type = types.attrsOf types.singleLineStr;
         default = { };
       };
-      tailnet = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-      };
     };
   };
 
@@ -26,9 +22,6 @@ let
       _module.args = {
         username = lib.mkDefault username;
       };
-
-      # FIXME: Move to common
-      services.tailscale.enable = true;
 
       networking.hostName = lib.mkDefault (
         args.configurationName
@@ -79,54 +72,28 @@ let
       };
     };
 
-  linuxConfig = lib.optionalAttrs isLinux (
-    let
-      nmEnabled = config.networking.networkmanager.enable;
-      tlEnabled = config.services.tailscale.enable;
-    in
-    lib.mkMerge [
-      {
-        hardware.enableRedistributableFirmware = true;
+  linuxConfig = lib.optionalAttrs isLinux {
+    hardware.enableRedistributableFirmware = true;
 
-        # FIXME: Move to common
-        networking.firewall.trustedInterfaces = lib.mkIf tlEnabled [ "tailscale0" ];
+    services.openssh.enable = true;
+    programs.mosh.enable = lib.mkDefault true;
+    programs.git.enable = lib.mkDefault true;
 
-        services.openssh.enable = true;
-        programs.mosh.enable = lib.mkDefault true;
-        programs.git.enable = lib.mkDefault true;
+    users = {
+      mutableUsers = false;
+      users.${username} = {
+        isNormalUser = true;
+        home = "/home/${username}";
+        group = username;
+        extraGroups = [ "wheel" ];
+      };
+      groups.${username} = { };
+    };
 
-        users = {
-          mutableUsers = false;
-          users.${username} = {
-            isNormalUser = true;
-            home = "/home/${username}";
-            group = username;
-            extraGroups = [ "wheel" ];
-          };
-          groups.${username} = { };
-        };
-
-        # TODO: Actually this should be extraRules which makes wheel users without any password set
-        #       be able to use sudo with no password
-        security.sudo.wheelNeedsPassword = false;
-      }
-      {
-        # When NetworkManager isn't in use, add tailscale DNS address manually
-        # FIXME: Move to common
-        networking = lib.mkIf (!nmEnabled && tlEnabled && cfg.tailnet != null) {
-          nameservers = [
-            "100.100.100.100"
-            "1.1.1.1"
-            "1.0.0.1"
-          ];
-          search = [ cfg.tailnet ];
-        };
-
-        # NetworkManager probably means desktop system so we don't want to slow down boot times
-        systemd.services = lib.mkIf nmEnabled { NetworkManager-wait-online.enable = false; };
-      }
-    ]
-  );
+    # TODO: Actually this should be extraRules which makes wheel users without any password set
+    #       be able to use sudo with no password
+    security.sudo.wheelNeedsPassword = false;
+  };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
     services.nix-daemon.enable = true;

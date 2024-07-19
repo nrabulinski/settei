@@ -15,9 +15,12 @@ let
       username = lib.mkDefault "niko";
       sane-defaults = {
         enable = lib.mkDefault true;
-        tailnet = "discus-macaroni.ts.net";
       };
       flake-qol.enable = true;
+      tailscale = {
+        enable = true;
+        tailnet = "discus-macaroni.ts.net";
+      };
       user = {
         enable = lib.mkDefault true;
         # TODO: Move to settei or leave here?

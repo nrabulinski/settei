@@ -23,6 +23,11 @@
       # Not intended for interactive use
       settei.user.enable = false;
 
+      settei.tailscale = {
+        ipv4 = "100.88.21.71";
+        ipv6 = "fd7a:115c:a1e0:ab12:4843:cd96:6258:1547";
+      };
+
       boot = {
         loader.systemd-boot.enable = true;
         loader.systemd-boot.configurationLimit = 1;
