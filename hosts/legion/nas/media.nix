@@ -1,5 +1,15 @@
-{ username, lib, ... }:
 {
+  config,
+  username,
+  lib,
+  ...
+}:
+{
+  age.secrets.rab-lol-cf = {
+    file = ../../../secrets/rab-lol-cf.age;
+    owner = config.services.nginx.user;
+  };
+
   services.jellyfin.enable = true;
   services.radarr.enable = true;
   services.sonarr.enable = true;
@@ -39,4 +49,60 @@
         requires = [ "zfs-mount.service" ];
         after = [ "zfs-mount.service" ];
       });
+
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    virtualHosts =
+      let
+        services = [
+          "jellyfin"
+          "deluge"
+          "prowlarr"
+          "sonarr"
+          "radarr"
+        ];
+        mkService = name: {
+          forceSSL = true;
+          useACMEHost = "_wildcard.legion.rab.lol";
+          listen = lib.flatten (
+            map
+              (port: [
+                (port // { addr = config.settei.tailscale.ipv4; })
+                (port // { addr = "[${config.settei.tailscale.ipv6}]"; })
+              ])
+              [
+                { port = 80; }
+                {
+                  port = 443;
+                  ssl = true;
+                }
+              ]
+          );
+
+          locations."/".proxyPass = "http://${name}";
+        };
+        services' = map (service: {
+          name = "${service}.legion.rab.lol";
+          value = mkService service;
+        }) services;
+      in
+      lib.listToAttrs services';
+    upstreams = {
+      jellyfin.servers."localhost:8096" = { };
+      deluge.servers."localhost:8112" = { };
+      prowlarr.servers."localhost:9696" = { };
+      radarr.servers."localhost:7878" = { };
+      sonarr.servers."localhost:8989" = { };
+    };
+  };
+
+  users.users.nginx.extraGroups = [ "acme" ];
+  security.acme.acceptTerms = true;
+  security.acme.certs."_wildcard.legion.rab.lol" = {
+    domain = "*.legion.rab.lol";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.rab-lol-cf.path;
+    email = "nikodem@rabulinski.com";
+  };
 }

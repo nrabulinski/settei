@@ -76,4 +76,8 @@ in
     keys.system.miyagi
     keys.other.bootstrap
   ];
+  "rab-lol-cf.age".publicKeys = [
+    keys.system.legion
+    keys.other.bootstrap
+  ];
 }
