@@ -43,8 +43,8 @@
       requires = [ "zfs-mount.service" ];
       after = [ "zfs-mount.service" ];
       wantedBy = [ "multi-user.target" ];
-      before = ["nfs-server.service"];
-      requiredBy = ["nfs-server.service"];
+      before = [ "nfs-server.service" ];
+      requiredBy = [ "nfs-server.service" ];
     }
   ];
 
