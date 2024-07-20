@@ -8,9 +8,7 @@
   services.vaultwarden = {
     enable = true;
     # TODO: Remove with next version bump
-    webVaultPackage = pkgs.vaultwarden.webvault.override {
-      python3 = pkgs.python311;
-    };
+    webVaultPackage = pkgs.vaultwarden.webvault.override { python3 = pkgs.python311; };
     config = {
       ROCKET_PORT = 60001;
     };
