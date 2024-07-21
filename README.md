@@ -41,7 +41,8 @@ to achieve this i still need to create a proper live iso with my config and my b
 ## TODOs
 Sorted rougly by priority
 
-- bring back ci
+- bring back ci (sorta done)
 - hercules-ci effects for deploying machines on update (if configuration is valid)
 - fix disko
+- make the configuration truly declarative (to a reasonable degree)
 - themeing solution
