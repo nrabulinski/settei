@@ -74,6 +74,7 @@ in
   ];
   "rab-lol-cf.age".publicKeys = [
     keys.system.legion
+    keys.system.kazuki
     keys.other.bootstrap
   ];
   "rabulinski-com-cf.age".publicKeys = [
