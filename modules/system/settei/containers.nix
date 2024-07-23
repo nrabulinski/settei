@@ -98,7 +98,9 @@ let
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
-    warnings = lib.optional options.settei.containers.isDefined "settei.containers doesn't do anything on darwin yet";
+    warnings = lib.optional (
+      config.settei.containers != { }
+    ) "settei.containers doesn't do anything on darwin yet";
   };
 in
 {

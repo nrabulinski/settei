@@ -74,6 +74,7 @@
         in
         {
           system = eval.config.system.build.toplevel;
+          inherit eval;
         };
     };
 }
