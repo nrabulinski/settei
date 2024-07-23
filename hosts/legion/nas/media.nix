@@ -24,6 +24,7 @@
   services.restic.server = {
     enable = true;
     dataDir = "/media/restic";
+    extraFlags = [ "--no-auth" ];
   };
 
   users.users = {
