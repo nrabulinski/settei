@@ -69,7 +69,7 @@ in
       type = types.bool;
       default = !isLinux;
     };
-    package = lib.mkPackageOption pkgs "incus" { };
+    package = lib.mkPackageOption pkgs "incus-lts" { };
     clientPackage = lib.mkOption {
       type = types.package;
       default = cfg.package.client;
