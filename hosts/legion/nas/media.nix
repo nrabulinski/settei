@@ -37,8 +37,8 @@
     ${username}.extraGroups = [ "deluge" ];
   };
 
-  systemd.services =
-    lib.genAttrs
+  systemd.services = lib.mkMerge [
+    (lib.genAttrs
       [
         "jellyfin"
         "radarr"
@@ -50,7 +50,19 @@
       (_: {
         requires = [ "zfs-mount.service" ];
         after = [ "zfs-mount.service" ];
-      });
+      })
+    )
+    {
+      jellyseerr.requires = [
+        "jellyfin.service"
+        "radarr.service"
+        "sonarr.service"
+      ];
+
+      radarr.requires = [ "deluged.service" ];
+      sonarr.requires = [ "deluged.service" ];
+    }
+  ];
 
   services.nginx = {
     enable = true;
