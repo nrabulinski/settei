@@ -14,6 +14,7 @@
   services.radarr.enable = true;
   services.sonarr.enable = true;
   services.prowlarr.enable = true;
+  services.jellyseerr.enable = true;
   services.deluge = {
     enable = true;
     web.enable = true;
@@ -57,6 +58,7 @@
       let
         services = [
           "jellyfin"
+          "jellyseerr"
           "deluge"
           "prowlarr"
           "sonarr"
@@ -90,6 +92,7 @@
       lib.listToAttrs services';
     upstreams = {
       jellyfin.servers."localhost:8096" = { };
+      jellyseerr.servers."localhost:5055" = { };
       deluge.servers."localhost:8112" = { };
       prowlarr.servers."localhost:9696" = { };
       radarr.servers."localhost:7878" = { };
