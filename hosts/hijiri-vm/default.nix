@@ -22,5 +22,7 @@
 
       networking.domain = "hijiri";
       networking.hostName = "vm";
+
+      services.prometheus.exporters.node.enable = lib.mkForce false;
     };
 }

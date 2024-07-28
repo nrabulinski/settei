@@ -19,6 +19,7 @@
         ./ntfy.nix
         ./zitadel.nix
         ./forgejo.nix
+        ./prometheus.nix
       ];
 
       nixpkgs.hostPlatform = "aarch64-linux";
