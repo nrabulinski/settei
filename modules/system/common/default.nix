@@ -52,6 +52,11 @@ let
     settei.user.config = {
       services.ssh-agent.enable = true;
     };
+
+    services.prometheus.exporters.node = {
+      enable = true;
+      enabledCollectors = [ "systemd" ];
+    };
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
