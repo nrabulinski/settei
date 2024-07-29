@@ -19,15 +19,29 @@
           _: nixos: (nodeExporter nixos).enable
         ) inputs.settei.nixosConfigurations;
       in
-      lib.mapAttrsToList (name: nixos: {
-        job_name = "${name}-node";
-        static_configs = [ { targets = [ "${name}:${toString (nodeExporter nixos).port}" ]; } ];
-      }) configurations;
+      lib.mapAttrsToList (
+        name: nixos:
+        let
+          target = "${name}:${toString (nodeExporter nixos).port}";
+        in
+        {
+          job_name = "${name}-node";
+          static_configs = [
+            {
+              targets = [ target ];
+              labels.${name} = target;
+            }
+          ];
+        }
+      ) configurations;
   };
 
   services.grafana = {
     enable = true;
-    settings.server.http_port = 3030;
+    settings.server = {
+      http_port = 3030;
+      root_url = "https://monitor.rab.lol";
+    };
   };
 
   services.nginx = {
