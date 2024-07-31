@@ -17,6 +17,9 @@ let
 
   linuxConfig = lib.optionalAttrs isLinux (
     lib.mkIf (!cfg.clientOnly) {
+      # TODO: Remove after update
+      systemd.services.incus.serviceConfig.Environment = lib.strings.toJSON "INCUS_OVMF_PATH=${config.systemd.services.incus.environment.INCUS_EDK2_PATH}";
+
       virtualisation.incus = {
         enable = true;
         inherit (cfg) package clientPackage;
