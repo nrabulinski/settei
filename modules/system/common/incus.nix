@@ -4,6 +4,7 @@
   config,
   pkgs,
   username,
+  inputs',
   ...
 }:
 let
@@ -12,7 +13,15 @@ let
   cfg = config.common.incus;
 
   sharedConfig = {
-    environment.systemPackages = [ cfg.clientPackage ];
+    environment.systemPackages = [
+      (cfg.clientPackage.overrideAttrs (prev: {
+        postInstall = ''
+          export HOME="$(mktemp -d)"
+          mkdir -p "$HOME/.config/incus"
+          ${prev.postInstall or ""}
+        '';
+      }))
+    ];
   };
 
   linuxConfig = lib.optionalAttrs isLinux (
@@ -72,7 +81,7 @@ in
       type = types.bool;
       default = !isLinux;
     };
-    package = lib.mkPackageOption pkgs "incus-lts" { };
+    package = lib.mkPackageOption pkgs "incus" { };
     clientPackage = lib.mkOption {
       type = types.package;
       default = cfg.package.client;
