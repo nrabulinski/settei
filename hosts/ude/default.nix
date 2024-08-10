@@ -44,5 +44,24 @@
         '';
       };
       networking.firewall.allowedTCPPorts = [ 80 ];
+
+      age.secrets.deluge-auth = {
+        file = ../../secrets/ude-deluge.age;
+        owner = config.services.deluge.user;
+      };
+      services.deluge = {
+        enable = true;
+        web.enable = true;
+        declarative = true;
+        openFirewall = true;
+        authFile = config.age.secrets.deluge-auth.path;
+        config = {
+          download_location = "${config.services.deluge.dataDir}/torrents/";
+          allow_remote = true;
+          daemon_port = 58846;
+          listen_ports = lib.genList (off: 6881 + off) 10;
+          random_port = false;
+        };
+      };
     };
 }

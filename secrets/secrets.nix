@@ -85,4 +85,8 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "ude-deluge.age".publicKeys = [
+    keys.system.ude
+    keys.other.bootstrap
+  ];
 }
