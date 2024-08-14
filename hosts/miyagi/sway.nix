@@ -72,6 +72,7 @@
         {
           enable = true;
           package = null;
+          config.workspaceAutoBackAndForth = true;
           config.terminal = "wezterm";
           config.modifier = "Mod4";
           config.fonts.names = [ "Iosevka Nerd Font" ];
