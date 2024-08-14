@@ -38,30 +38,18 @@
             ];
           };
 
-          packages =
-            let
-              darwinConfigs = lib.filterAttrs (
-                _: config: config.eval.config.nixpkgs.system == system
-              ) inputs.self.darwinConfigurations;
-              # Force garnix to build the config
-              darwinConfigs' = lib.mapAttrs' (name: config: {
-                name = "__darwinConfigurations_${name}";
-                value = config.system;
-              }) darwinConfigs;
-            in
-            {
-              # Re-export it for convenience and for caching
-              inherit (inputs'.attic.packages) attic-client attic-server;
-              base-packages = pkgs.symlinkJoin {
-                name = "settei-base";
-                paths = with self'.packages; [
-                  helix
-                  fish
-                  git-commit-last
-                ];
-              };
-            }
-            // darwinConfigs';
+          packages = {
+            # Re-export it for convenience and for caching
+            inherit (inputs'.attic.packages) attic-client attic-server;
+            base-packages = pkgs.symlinkJoin {
+              name = "settei-base";
+              paths = with self'.packages; [
+                helix
+                fish
+                git-commit-last
+              ];
+            };
+          };
 
           formatter = pkgs.nixfmt-rfc-style;
         };
