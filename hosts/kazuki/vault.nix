@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   age.secrets.rabulinski-com-cf = {
     file = ../../secrets/rabulinski-com-cf.age;
@@ -7,8 +7,6 @@
 
   services.vaultwarden = {
     enable = true;
-    # TODO: Remove with next version bump
-    webVaultPackage = pkgs.vaultwarden.webvault.override { python3 = pkgs.python311; };
     config = {
       ROCKET_PORT = 60001;
     };
