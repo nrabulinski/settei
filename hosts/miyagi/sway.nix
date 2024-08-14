@@ -7,10 +7,17 @@
 {
   services.greetd = {
     enable = true;
-    settings.default_session = {
-      command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${lib.getExe config.programs.sway.package}";
-      user = "niko";
-    };
+    settings.default_session =
+      let
+        swayWrapper = pkgs.writeShellScript "sway-wrapper" ''
+          export XCURSOR_THEME=volantes_cursors
+          exec ${lib.getExe config.programs.sway.package}
+        '';
+      in
+      {
+        command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${swayWrapper}";
+        user = "niko";
+      };
   };
 
   programs.sway = {
@@ -25,6 +32,11 @@
   settei.user.config =
     { config, ... }:
     {
+      home.pointerCursor = {
+        name = "volantes_cursors";
+        package = pkgs.volantes-cursors;
+      };
+
       home.packages = with pkgs; [
         (writeShellApplication {
           name = "lock";
@@ -122,6 +134,15 @@
             {
               workspace = "2";
               output = "DP-1";
+            }
+          ];
+          config.seat."*" = {
+            xcursor_theme = "volantes_cursors 24";
+          };
+          config.startup = [
+            {
+              command = "${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface cursor-theme 'volantes_cursors'";
+              always = true;
             }
           ];
         };
