@@ -22,6 +22,11 @@
           anki-bin
         ];
         programs.alacritty.settings.font.size = 14;
+
+        services.syncthing = {
+          enable = true;
+        };
+        # TODO: Declarative syncthing config
       };
       common.incus.enable = true;
 
