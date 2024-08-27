@@ -100,6 +100,8 @@
 
   hardware.nvidia = {
     patch.enable = true;
+    patch.nvidiaPackage = config.boot.kernelPackages.nvidia_x11_production;
+    open = false;
     modesetting.enable = true;
   };
 
