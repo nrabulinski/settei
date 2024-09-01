@@ -52,8 +52,8 @@
     enable = true;
     hostName = "100.84.112.35";
     exports = ''
-      /export            *(insecure,rw,crossmnt,fsid=0)
-      /export/yotta-data *(insecure,rw,nohide)
+      /export            *(insecure,rw,crossmnt,fsid=0,async,no_subtree_check)
+      /export/yotta-data *(insecure,rw,nohide,async,no_subtree_check)
     '';
   };
 }
