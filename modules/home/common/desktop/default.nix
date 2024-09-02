@@ -48,7 +48,7 @@
         };
 
         fonts = {
-          default_family = "Iosevka";
+          default_family = "IosevkaTerm Nerd Font";
           default_size = "13px";
         };
 
