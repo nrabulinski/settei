@@ -13,6 +13,8 @@ local cfg = {
 if string.find(wezterm.target_triple, "darwin") then
   cfg.font_size = 14.0
   cfg.window_decorations = 'RESIZE'
+else
+  cfg.front_end = "WebGpu"
 end
 
 return cfg
