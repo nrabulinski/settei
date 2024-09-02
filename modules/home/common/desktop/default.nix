@@ -18,7 +18,12 @@
   config = lib.mkIf config.common.desktop.enable {
     home.packages = with pkgs; [
       inputs'.settei.packages.wezterm
-      nerdfonts
+      (inputs'.nixpkgs.legacyPackages.nerdfonts.override {
+        fonts = [
+          "Iosevka"
+          "IosevkaTerm"
+        ];
+      })
       fontconfig
     ];
 
