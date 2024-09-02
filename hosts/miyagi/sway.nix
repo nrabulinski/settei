@@ -75,7 +75,7 @@
           config.workspaceAutoBackAndForth = true;
           config.terminal = "wezterm";
           config.modifier = "Mod4";
-          config.fonts.names = [ "Iosevka Nerd Font" ];
+          config.fonts.names = [ "IosevkaTerm Nerd Font" ];
           config.keybindings = lib.mkOptionDefault {
             "${mod}+b" = "exec rofi-rbw --selector rofi";
             "${mod}+d" = "exec rofi -show drun";
