@@ -37,6 +37,7 @@
           direnv
           fd
           file
+          yazi
         ];
       };
   };
