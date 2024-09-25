@@ -35,6 +35,7 @@
         };
       };
       common.incus.enable = true;
+      virtualisation.podman.enable = true;
 
       services.nginx = {
         enable = true;

@@ -29,6 +29,7 @@
         # TODO: Declarative syncthing config
       };
       common.incus.enable = true;
+      # TODO: Setup podman remote
 
       system.defaults = {
         ".GlobalPreferences" = {
