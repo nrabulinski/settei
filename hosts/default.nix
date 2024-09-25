@@ -66,9 +66,15 @@
 
       darwin =
         name: module:
-        baseDarwin._module.args.extendModules {
-          modules = [ module ];
-          specialArgs.configurationName = name;
+        let
+          eval = baseDarwin._module.args.extendModules {
+            modules = [ module ];
+            specialArgs.configurationName = name;
+          };
+        in
+        eval
+        // {
+          system = eval.config.system.build.toplevel;
         };
     };
 }
