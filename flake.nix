@@ -116,7 +116,6 @@
     };
     crane = {
       url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
