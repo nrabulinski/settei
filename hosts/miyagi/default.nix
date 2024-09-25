@@ -67,6 +67,7 @@
         };
       };
       common.incus.enable = true;
+      virtualisation.podman.enable = true;
 
       services.udisks2.enable = true;
       services.printing = {
