@@ -8,13 +8,12 @@ local cfg = {
   font_size = 10.5,
   native_macos_fullscreen_mode = true,
   hide_mouse_cursor_when_typing = false,
+  front_end = "WebGpu",
 }
 
 if string.find(wezterm.target_triple, "darwin") then
   cfg.font_size = 14.0
   cfg.window_decorations = 'RESIZE'
-else
-  cfg.front_end = "WebGpu"
 end
 
 return cfg
