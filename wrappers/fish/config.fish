@@ -12,10 +12,16 @@ and begin
     abbr --add --global -- gp 'git pull'
     abbr --add --global -- gps 'git push'
     abbr --add --global -- gc 'git commit'
+    abbr --add --global -- gca 'git commit --amend --no-edit'
     abbr --add --global -- gch 'git checkout'
+    abbr --add --global -- gss 'git switch'
     abbr --add --global -- ga 'git add'
     abbr --add --global -- gr 'git rebase'
+    abbr --add --global -- gri 'git rebase -i --autosquash'
+    abbr --add --global -- grc 'git rebase --continue'
+    abbr --add --global -- gra 'git rebase --abort'
     abbr --add --global -- gd 'git diff'
+    abbr --add --global -- gdd 'git diff --cached'
     abbr --add --global -- gl 'git log'
 
     # Aliases
@@ -25,7 +31,7 @@ and begin
     # Integrations
     zoxide init fish | source
     direnv hook fish | source
-    function y
+    function y --wraps yazi
         set tmp (mktemp -t "yazi-cwd.XXXXXX")
         yazi $argv --cwd-file="$tmp"
         if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
