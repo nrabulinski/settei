@@ -62,7 +62,7 @@
         # Maybe use some other input method?
         (rofi-rbw.override { waylandSupport = true; })
         rbw
-        pinentry.curses
+        pinentry-rofi
       ];
 
       wayland.windowManager.sway =
