@@ -23,6 +23,7 @@ and begin
     abbr --add --global -- gd 'git diff'
     abbr --add --global -- gdd 'git diff --cached'
     abbr --add --global -- gl 'git log'
+    abbr --add --global -- gf 'git fixup' # See pkgs/default.nix
 
     # Aliases
     alias cat bat
