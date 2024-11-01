@@ -21,7 +21,6 @@
       };
 
       boot = {
-        kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
         loader.systemd-boot.enable = true;
         loader.efi.canTouchEfiVariables = true;
       };
