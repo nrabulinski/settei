@@ -40,6 +40,11 @@
           self.nixosModules.settei
           self.nixosModules.common
           sharedOptions
+          {
+            disabledModules = [
+              "services/networking/atticd.nix"
+            ];
+          }
         ];
         specialArgs.configurationName = "base";
       };
