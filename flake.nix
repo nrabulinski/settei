@@ -47,6 +47,7 @@
                 helix
                 fish
                 git-commit-last
+                git-fixup
               ];
             };
           };

@@ -9,6 +9,10 @@ local cfg = {
   native_macos_fullscreen_mode = true,
   hide_mouse_cursor_when_typing = false,
   front_end = "WebGpu",
+  keys = {
+    { key = "Enter", mods = "CTRL",  action = wezterm.action { SendString = "\x1b[13;5u" } },
+    { key = "Enter", mods = "SHIFT", action = wezterm.action { SendString = "\x1b[13;2u" } },
+  },
 }
 
 if string.find(wezterm.target_triple, "darwin") then
