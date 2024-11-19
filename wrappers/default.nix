@@ -6,7 +6,7 @@
       wrapped = inputs.wrapper-manager-hm-compat.lib {
         inherit pkgs;
         modules = [
-          # ./starship
+          ./starship
           ./helix
           # TODO: Enable again
           # ./rash
