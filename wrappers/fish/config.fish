@@ -30,6 +30,7 @@ and begin
     alias l 'eza -lah --group-directories-first --icons'
 
     # Integrations
+    starship init fish | source
     zoxide init fish | source
     direnv hook fish | source
     function y --wraps yazi

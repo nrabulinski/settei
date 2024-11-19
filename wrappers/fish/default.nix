@@ -1,4 +1,12 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  setteiStarship = config.wrappers.starship.wrapped;
+in
 {
   wrappers.fish = {
     basePackage = pkgs.fish;
@@ -18,7 +26,6 @@
             config-fish = pkgs.writeText "config.fish" ''
               ${path-add-lines}
 
-              source ${./prompt.fish}
               source ${./config.fish}
               source ${./greeting.fish}
             '';
@@ -38,6 +45,7 @@
           fd
           file
           yazi
+          setteiStarship
         ];
       };
   };
