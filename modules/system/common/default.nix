@@ -37,6 +37,8 @@ let
     # NixOS' fish module doesn't allow setting what package to use for fish,
     # so I need to override the fish package.
     nixpkgs.overlays = [ (_: _: { inherit (inputs'.settei.packages) fish; }) ];
+    # TODO: Move to home/common/desktop
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "signal-desktop" ];
 
     nix.settings.allow-import-from-derivation = false;
   };

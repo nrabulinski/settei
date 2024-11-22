@@ -25,6 +25,7 @@
         ];
       })
       fontconfig
+      signal-desktop
     ];
 
     fonts.fontconfig.enable = true;
