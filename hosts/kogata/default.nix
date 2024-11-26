@@ -6,8 +6,7 @@
 
       settei.user.config.common.desktop.enable = true;
 
-      # TODO: Make it a settei module so it's easy to concatenate which pkgs are allowed
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "teams" ];
+      settei.unfree.allowedPackages = [ "teams" ];
       environment.systemPackages = with pkgs; [ teams ];
 
       settei.tailscale = {
