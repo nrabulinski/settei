@@ -25,7 +25,10 @@ in
 
   programs.fish.enable = true;
   programs.nix-index.enable = true;
-  programs.ssh.enable = true;
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
   programs.git = {
     enable = true;
     difftastic.enable = true;
