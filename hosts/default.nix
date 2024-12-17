@@ -14,6 +14,7 @@
     # ./installer
     ./ude
     ./kogata
+    ./youko
   ];
 
   builders =
