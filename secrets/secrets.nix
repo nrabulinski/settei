@@ -89,4 +89,8 @@ in
     keys.system.ude
     keys.other.bootstrap
   ];
+  "youko-niko-pass.age".publicKeys = [
+    keys.system.youko
+    keys.other.bootstrap
+  ];
 }

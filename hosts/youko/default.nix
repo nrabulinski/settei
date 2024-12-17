@@ -1,26 +1,22 @@
 {
-  configurations.nixos.youko = {
-    imports = [
-      ./disks.nix
-      ./hardware.nix
-    ];
+  configurations.nixos.youko =
+    { config, username, ... }:
+    {
+      imports = [
+        ./disks.nix
+        ./hardware.nix
+      ];
 
-    nixpkgs.hostPlatform = "x86_64-linux";
+      nixpkgs.hostPlatform = "x86_64-linux";
 
-    boot = {
-      loader.systemd-boot.enable = true;
-      loader.efi.canTouchEfiVariables = true;
-    };
-
-    networking.networkmanager.enable = true;
-
-    settei.user.config =
-      { lib, ... }:
-      {
-        programs.git.signing = lib.mkForce {
-          key = null;
-          signByDefault = false;
-        };
+      boot = {
+        loader.systemd-boot.enable = true;
+        loader.efi.canTouchEfiVariables = true;
       };
-  };
+
+      networking.networkmanager.enable = true;
+
+      age.secrets.niko-pass.file = ../../secrets/youko-niko-pass.age;
+      users.users.${username}.hashedPasswordFile = config.age.secrets.niko-pass.path;
+    };
 }
