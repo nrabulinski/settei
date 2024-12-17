@@ -15,6 +15,7 @@
     ./ude
     ./kogata
     ./miyagi
+    ./youko
   ];
 
   builders =
