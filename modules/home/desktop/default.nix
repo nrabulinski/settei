@@ -11,11 +11,11 @@
 
   imports = [ ./zellij.nix ];
 
-  options.common.desktop = {
+  options.settei.desktop = {
     enable = lib.mkEnableOption "Common configuration for desktop machines";
   };
 
-  config = lib.mkIf config.common.desktop.enable {
+  config = lib.mkIf config.settei.desktop.enable {
     home.packages = with pkgs; [
       inputs'.settei.packages.wezterm
       nerd-fonts.iosevka

@@ -15,7 +15,7 @@
       nixpkgs.system = "aarch64-darwin";
 
       settei.user.config = {
-        common.desktop.enable = true;
+        settei.desktop.enable = true;
         home.packages = with pkgs; [
           utm
           qemu
@@ -28,7 +28,7 @@
         };
         # TODO: Declarative syncthing config
       };
-      common.incus.enable = true;
+      settei.incus.enable = true;
       # TODO: Setup podman remote
 
       system.defaults = {

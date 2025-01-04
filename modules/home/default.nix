@@ -10,7 +10,7 @@
 let
   # TODO: Conditionally define based on whether we're in a system configuration or not
   fishOverlayModule = lib.mkIf (!args ? osConfig) {
-    # See modules/system/common/default.nix for reasoning.
+    # See modules/system/settei/default.nix for reasoning.
     nixpkgs.overlays = [ (_: _: { inherit (inputs'.settei.packages) fish; }) ];
   };
 in

@@ -9,7 +9,7 @@
 let
   inherit (lib) mkOption types;
 
-  cfg = config.common.incus;
+  cfg = config.settei.incus;
 
   sharedConfig = {
     environment.systemPackages = [
@@ -71,7 +71,7 @@ in
 {
   _file = ./incus.nix;
 
-  options.common.incus = {
+  options.settei.incus = {
     enable = lib.mkEnableOption "incus, the VM and container manager";
     clientOnly = mkOption {
       type = types.bool;
@@ -81,7 +81,7 @@ in
     clientPackage = lib.mkOption {
       type = types.package;
       default = cfg.package.client;
-      defaultText = lib.literalExpression "config.common.incus.package.client";
+      defaultText = lib.literalExpression "config.settei.incus.package.client";
       description = "The incus client package to use. This package is added to PATH.";
     };
   };

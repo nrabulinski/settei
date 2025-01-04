@@ -4,7 +4,7 @@
     {
       nixpkgs.system = "aarch64-darwin";
 
-      settei.user.config.common.desktop.enable = true;
+      settei.user.config.settei.desktop.enable = true;
 
       settei.unfree.allowedPackages = [ "teams" ];
       environment.systemPackages = with pkgs; [

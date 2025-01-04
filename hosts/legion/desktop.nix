@@ -11,7 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   settei.user.config = {
-    common.desktop.enable = true;
+    settei.desktop.enable = true;
     home.packages = with pkgs; [
       brightnessctl
       dmenu
