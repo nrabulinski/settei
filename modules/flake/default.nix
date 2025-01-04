@@ -8,5 +8,6 @@
 
   imports = [
     (import ./configurations.nix { inherit nixpkgs darwin home-manager; })
+    ./services.nix
   ];
 }

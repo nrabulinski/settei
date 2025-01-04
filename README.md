@@ -24,6 +24,7 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - system - my opinionated nixos/nix-darwin modules
   - home - my opinionated home-manager modules
   - flake - flake-parts modules
+- services - configs for services I self-host
 - secrets - agenix secrets
 - wrappers - nix packages wrapped with my configs (see: [wrapper-manager](https://github.com/viperML/wrapper-manager))
 - assets - miscellaneous values reused throughout my config

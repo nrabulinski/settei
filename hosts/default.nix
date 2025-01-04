@@ -62,7 +62,10 @@
       nixos =
         name: module:
         baseNixos.extendModules {
-          modules = [ module ];
+          modules = [
+            module
+            config.__extraHostConfigs.${name} or { }
+          ];
           specialArgs.configurationName = name;
         };
 
@@ -70,7 +73,10 @@
         name: module:
         let
           eval = baseDarwin._module.args.extendModules {
-            modules = [ module ];
+            modules = [
+              module
+              config.__extraHostConfigs.${name} or { }
+            ];
             specialArgs.configurationName = name;
           };
         in
