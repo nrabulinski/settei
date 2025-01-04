@@ -2,6 +2,8 @@
   config,
   options,
   lib,
+  inputs,
+  configurationName,
   ...
 }@args:
 let
@@ -13,7 +15,9 @@ in
   _file = ./user.nix;
 
   options.settei.user = with lib; {
-    enable = mkEnableOption "User-specific configuration";
+    enable = mkEnableOption "User-specific configuration" // {
+      default = true;
+    };
     config = mkOption {
       type = types.deferredModule;
       default = { };
@@ -31,12 +35,16 @@ in
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {
           inherit (args) inputs inputs';
+          machineName = configurationName;
         } // cfg.extraArgs;
 
         home-manager.users.${username} = {
           _file = ./user.nix;
 
-          imports = [ cfg.config ];
+          imports = [
+            inputs.settei.homeModules.settei
+            cfg.config
+          ];
 
           home = {
             inherit username;
@@ -45,6 +53,7 @@ in
           };
 
           programs.home-manager.enable = true;
+          services.ssh-agent.enable = true;
         };
       };
     in

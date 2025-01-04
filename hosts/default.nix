@@ -37,7 +37,6 @@
           inputs.attic.nixosModules.atticd
           inputs.lix-module.nixosModules.default
           self.nixosModules.settei
-          self.nixosModules.common
           sharedOptions
           {
             disabledModules = [
@@ -54,7 +53,6 @@
           inputs.home-manager.darwinModules.home-manager
           inputs.lix-module.nixosModules.default
           self.darwinModules.settei
-          self.darwinModules.common
           sharedOptions
         ];
         specialArgs.configurationName = "base";

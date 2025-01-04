@@ -1,12 +1,19 @@
 { isLinux }:
-{ config, lib, ... }@args:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}@args:
 let
   cfg = config.settei.sane-defaults;
   inherit (config.settei) username;
 
   options = {
     settei.sane-defaults = with lib; {
-      enable = mkEnableOption "Personal sane defaults (but they should make sense for anyone)";
+      enable = mkEnableOption "Personal sane defaults (but they should make sense for anyone)" // {
+        default = true;
+      };
       allSshKeys = mkOption {
         type = types.attrsOf types.singleLineStr;
         default = { };
@@ -52,13 +59,14 @@ let
           trusted-users = lib.optionals (!adminNeedsPassword) [ username ];
           use-xdg-base-directories = true;
           auto-allocate-uids = true;
+          allow-import-from-derivation = false;
           extra-substituters = [
-            "https://hyprland.cachix.org"
+            "https://cache.nrab.lol"
             "https://cache.garnix.io"
             "https://nix-community.cachix.org"
+            "https://hyprland.cachix.org"
             "https://hercules-ci.cachix.org"
             "https://nrabulinski.cachix.org"
-            "https://cache.nrab.lol"
           ];
           extra-trusted-public-keys = [
             "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
@@ -93,14 +101,25 @@ let
     # TODO: Actually this should be extraRules which makes wheel users without any password set
     #       be able to use sudo with no password
     security.sudo.wheelNeedsPassword = false;
+
+    system.stateVersion = "22.05";
+
+    # https://github.com/NixOS/nixpkgs/issues/254807
+    boot.swraid.enable = false;
+
+    i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+    boot.kernel.sysctl."kernel.yama.ptrace_scope" = 0;
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
+    system.stateVersion = 4;
     services.nix-daemon.enable = true;
 
     security.pam.enableSudoTouchIdAuth = true;
 
     users.users.${username}.home = "/Users/${username}";
+    # Every macOS ARM machine can emulate x86.
+    nix.settings.extra-platforms = lib.mkIf pkgs.stdenv.isAarch64 [ "x86_64-darwin" ];
   };
 in
 {

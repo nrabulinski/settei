@@ -12,7 +12,9 @@ in
   _file = ./flake-qol.nix;
 
   options.settei.flake-qol = with lib; {
-    enable = mkEnableOption "QoL defaults when using flakes";
+    enable = mkEnableOption "QoL defaults when using flakes" // {
+      default = true;
+    };
     reexportAsArgs = mkOption {
       type = types.bool;
       default = true;

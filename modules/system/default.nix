@@ -16,7 +16,6 @@
             inherit (config) perInput;
             inherit isLinux;
           };
-          common = import ./common { inherit isLinux; };
         }
       );
 }
