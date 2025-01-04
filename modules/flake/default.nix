@@ -1,19 +1,12 @@
 {
-  flake-parts-lib,
-  lib,
-  inputs,
-  ...
+  nixpkgs,
+  darwin,
+  home-manager,
 }:
-let
-  inherit (flake-parts-lib) importApply;
-  flakeModules = {
-    configurations = importApply ./configurations.nix { inherit (inputs) nixpkgs darwin home-manager; };
-  };
-in
 {
-  imports = lib.attrValues flakeModules;
+  _file = ./default.nix;
 
-  flake = {
-    inherit flakeModules;
-  };
+  imports = [
+    (import ./configurations.nix { inherit nixpkgs darwin home-manager; })
+  ];
 }
