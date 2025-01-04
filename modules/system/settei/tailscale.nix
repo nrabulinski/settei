@@ -11,8 +11,13 @@ let
   cfg = config.settei.tailscale;
 
   options.settei.tailscale = {
-    enable = mkEnableOption "Tailscale configuration";
-    tailnet = mkOption { type = types.str; };
+    enable = mkEnableOption "Tailscale configuration" // {
+      default = true;
+    };
+    tailnet = mkOption {
+      type = types.str;
+      default = "discus-macaroni.ts.net";
+    };
     ipv4 = mkOption { type = types.str; };
     ipv6 = mkOption { type = types.str; };
   };
