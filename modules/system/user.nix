@@ -51,9 +51,6 @@ in
             homeDirectory = config.users.users.${username}.home;
             stateVersion = "22.05";
           };
-
-          programs.home-manager.enable = true;
-          services.ssh-agent.enable = true;
         };
       };
     in

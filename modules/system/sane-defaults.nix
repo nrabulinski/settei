@@ -108,6 +108,8 @@ let
 
     i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
     boot.kernel.sysctl."kernel.yama.ptrace_scope" = 0;
+
+    settei.user.config.services.ssh-agent.enable = true;
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
