@@ -42,14 +42,5 @@
         routes = [ { Gateway = "fe80::1"; } ];
       };
       networking.useNetworkd = true;
-
-      common.hercules.enable = true;
-      common.github-runner = {
-        enable = true;
-        runners.settei = {
-          url = "https://github.com/nrabulinski/settei";
-          instances = 2;
-        };
-      };
     };
 }
