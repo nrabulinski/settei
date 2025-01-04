@@ -1,5 +1,5 @@
 {
   flake.homeModules = {
-    common = ./common;
+    settei = ./settei;
   };
 }
