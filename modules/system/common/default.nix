@@ -25,7 +25,7 @@ let
         enable = lib.mkDefault true;
         # TODO: Move to settei or leave here?
         extraArgs.machineName = configurationName;
-        config.imports = [ inputs.settei.homeModules.common ];
+        config.imports = [ inputs.settei.homeModules.settei ];
       };
     };
 
