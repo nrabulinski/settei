@@ -16,6 +16,7 @@
         ./modules
         ./wrappers
         ./pkgs
+        ./services
       ];
 
       perSystem =
