@@ -2,6 +2,10 @@
   imports = [
     ./system
     ./flake
-    ./home
   ];
+
+  flake.homeModules = rec {
+    settei = ./home;
+    default = settei;
+  };
 }
