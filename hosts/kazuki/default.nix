@@ -13,7 +13,6 @@
         ./mail.nix
         ./vault.nix
         ./storage.nix
-        ./attic.nix
         ./ntfy.nix
         ./zitadel.nix
         ./forgejo.nix
