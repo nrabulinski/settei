@@ -41,7 +41,7 @@
       age.secrets.niko-pass.file = ../../secrets/legion-niko-pass.age;
       users.users.${username}.hashedPasswordFile = config.age.secrets.niko-pass.path;
 
-      common.incus.enable = true;
+      settei.incus.enable = true;
       virtualisation.podman.enable = true;
     };
 }

@@ -25,7 +25,7 @@
         ipv6 = "fd7a:115c:a1e0:ab12:4843:cd96:6276:2a8b";
       };
 
-      common.incus.enable = true;
+      settei.incus.enable = true;
       virtualisation.podman.enable = true;
 
       services.nginx = {

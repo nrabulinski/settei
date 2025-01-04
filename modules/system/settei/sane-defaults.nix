@@ -38,7 +38,6 @@ let
       # Flakes are unusable without git present so pull it into the environment by default
       settei.user.config.programs.git.enable = lib.mkDefault true;
 
-      # FIXME: Move to common
       users.users.${username}.openssh.authorizedKeys.keys =
         let
           configName' =

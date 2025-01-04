@@ -6,7 +6,7 @@
 }:
 let
   options = {
-    common.hercules.enable = lib.mkEnableOption "Enables hercules-ci-agent with my configuration";
+    settei.hercules.enable = lib.mkEnableOption "Enables hercules-ci-agent with my configuration";
   };
 
   herculesUser =
@@ -20,7 +20,7 @@ in
 
   inherit options;
 
-  config = lib.mkIf config.common.hercules.enable {
+  config = lib.mkIf config.settei.hercules.enable {
     age.secrets.hercules-token = {
       file = ../../../secrets/hercules-token.age;
       owner = herculesUser;

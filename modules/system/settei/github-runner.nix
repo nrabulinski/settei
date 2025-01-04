@@ -8,7 +8,7 @@ let
   inherit (lib) mkOption types;
   github-runner-user = "github-runner";
 
-  cfg = config.common.github-runner;
+  cfg = config.settei.github-runner;
 
   sharedConfig = {
     age.secrets.github-token = {
@@ -50,13 +50,13 @@ let
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
-    warnings = lib.singleton "common.github-runner doesn't do anything on darwin yet";
+    warnings = lib.singleton "settei.github-runner doesn't do anything on darwin yet";
   };
 in
 {
   _file = ./github-runner.nix;
 
-  options.common.github-runner = {
+  options.settei.github-runner = {
     enable = lib.mkEnableOption "using this machine as a self-hosted github runner";
     runners = mkOption {
       type =
