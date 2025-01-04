@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   ...
 }:
@@ -7,7 +8,6 @@ let
 in
 {
   imports = [
-    ./system
     flakeModule
   ];
 
@@ -18,6 +18,22 @@ in
 
   flake.flakeModules = rec {
     settei = flakeModule;
+    default = settei;
+  };
+
+  flake.nixosModules = rec {
+    settei = import ./system {
+      inherit (config) perInput;
+      isLinux = true;
+    };
+    default = settei;
+  };
+
+  flake.darwinModules = rec {
+    settei = import ./system {
+      inherit (config) perInput;
+      isLinux = false;
+    };
     default = settei;
   };
 }
