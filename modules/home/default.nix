@@ -21,6 +21,7 @@ in
     ./desktop
     fishOverlayModule
     ./xdg.nix
+    ./unfree.nix
   ];
 
   programs.home-manager.enable = true;
