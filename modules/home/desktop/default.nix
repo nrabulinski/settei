@@ -23,6 +23,7 @@
       fontconfig
       signal-desktop
     ];
+    settei.unfree.allowedPackages = [ "signal-desktop" ];
 
     fonts.fontconfig.enable = true;
 
