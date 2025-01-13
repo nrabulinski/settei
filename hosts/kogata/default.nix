@@ -7,7 +7,7 @@
       settei.user.config.common.desktop.enable = true;
 
       settei.unfree.allowedPackages = [ "teams" ];
-      environment.systemPackages = with pkgs; [ teams ];
+      environment.systemPackages = with pkgs; [ (teams.overrideAttrs { sourceRoot = "Microsoft Teams.app";}) ];
 
       settei.tailscale = {
         ipv4 = "100.102.13.61";

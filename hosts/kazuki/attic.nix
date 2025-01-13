@@ -14,7 +14,7 @@ in
 
   services.atticd = {
     enable = true;
-    credentialsFile = config.age.secrets.attic-creds.path;
+    environmentFile = config.age.secrets.attic-creds.path;
     settings = {
       listen = "[::]:${toString atticPort}";
       storage = {

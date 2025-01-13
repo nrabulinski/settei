@@ -18,12 +18,8 @@
   config = lib.mkIf config.common.desktop.enable {
     home.packages = with pkgs; [
       inputs'.settei.packages.wezterm
-      (inputs'.nixpkgs.legacyPackages.nerdfonts.override {
-        fonts = [
-          "Iosevka"
-          "IosevkaTerm"
-        ];
-      })
+      nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
       fontconfig
       signal-desktop
     ];
