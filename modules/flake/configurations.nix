@@ -6,7 +6,6 @@
 {
   config,
   lib,
-  flake-parts-lib,
   ...
 }:
 with lib;

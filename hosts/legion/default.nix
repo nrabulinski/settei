@@ -2,7 +2,6 @@
   configurations.nixos.legion =
     {
       config,
-      lib,
       username,
       ...
     }:

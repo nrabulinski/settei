@@ -1,9 +1,7 @@
 {
   configurations.nixos.kazuki =
     {
-      config,
       modulesPath,
-      lib,
       ...
     }:
     {

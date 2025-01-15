@@ -1,7 +1,6 @@
 { isLinux }:
 {
   config,
-  pkgs,
   lib,
   ...
 }:
