@@ -23,8 +23,6 @@
           inputs',
           self',
           pkgs,
-          lib,
-          system,
           ...
         }:
         {
@@ -51,7 +49,12 @@
             };
           };
 
-          formatter = pkgs.nixfmt-rfc-style;
+          treefmt = {
+            programs.deadnix.enable = true;
+            programs.nixfmt.enable = true;
+            programs.statix.enable = true;
+            programs.fish_indent.enable = true;
+          };
         };
     };
 
