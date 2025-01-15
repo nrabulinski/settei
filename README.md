@@ -11,7 +11,6 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - legion - my linux x86 server
   - hijiri - my macbook
   - hijiri-vm - linux vm running on my macbook
-  - miyagi - my work machine
   - ude - another linux arm server
   - kogata - my m1 mac mini doubling as a server
 - modules - options which in principle should be reusable by others
