@@ -9,13 +9,12 @@
       ];
 
       imports = [
-        inputs.hercules-ci-effects.flakeModule
+        inputs.treefmt.flakeModule
 
         ./assets
         ./hosts
         ./modules
         ./wrappers
-        ./effects.nix
         ./pkgs
       ];
 
@@ -100,9 +99,6 @@
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hercules-ci-effects = {
-      url = "github:hercules-ci/hercules-ci-effects";
-    };
     conduit-src = {
       url = "gitlab:famedly/conduit?ref=next";
       flake = false;
@@ -150,6 +146,10 @@
       url = "git+https://git.lix.systems/lix-project/nixos-module.git";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.lix.follows = "lix";
+    };
+    treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
