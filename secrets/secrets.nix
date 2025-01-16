@@ -33,9 +33,8 @@ in
     keys.other.bootstrap
   ];
   "alert-plain-pass.age".publicKeys = [
-    keys.system.legion
     keys.other.bootstrap
-  ];
+  ] ++ builtins.attrValues keys.system;
   "legion-niko-pass.age".publicKeys = [
     keys.system.legion
     keys.other.bootstrap
