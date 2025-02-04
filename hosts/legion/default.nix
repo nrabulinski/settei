@@ -31,7 +31,7 @@
 
       networking = {
         hostName = "legion";
-        hostId = builtins.substring 0 8 (builtins.readFile ./machine-id);
+        hostId = builtins.substring 0 8 "524209a432724c7abaf04398cdd6eecd";
         networkmanager.enable = true;
       };
       systemd.services.NetworkManager-wait-online.enable = false;
