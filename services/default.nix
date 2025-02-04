@@ -4,5 +4,6 @@
     ./forgejo-runner.nix
     ./forgejo.nix
     ./paperless.nix
+    ./kanidm.nix
   ];
 }

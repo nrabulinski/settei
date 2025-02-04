@@ -93,4 +93,12 @@ in
     keys.system.youko
     keys.other.bootstrap
   ];
+  "kanidm-admin-pass.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
+  "kanidm-idm-admin-pass.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }
