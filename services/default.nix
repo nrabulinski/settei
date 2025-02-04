@@ -5,5 +5,6 @@
     ./forgejo.nix
     ./paperless.nix
     ./ddns.nix
+    ./kanidm.nix
   ];
 }
