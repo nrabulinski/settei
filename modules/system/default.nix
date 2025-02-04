@@ -5,10 +5,8 @@
 }:
 {
   config,
-  configurationName,
   lib,
   pkgs,
-  inputs,
   inputs',
   username,
   ...
