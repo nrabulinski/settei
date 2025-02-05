@@ -15,7 +15,6 @@
         ./storage.nix
         ./ntfy.nix
         ./zitadel.nix
-        ./forgejo.nix
         ./prometheus.nix
       ];
 
