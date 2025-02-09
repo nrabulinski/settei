@@ -92,7 +92,10 @@ let
         isNormalUser = true;
         home = "/home/${username}";
         group = username;
-        extraGroups = [ "wheel" ];
+        extraGroups = lib.mkMerge [
+          [ "wheel" ]
+          (lib.mkIf config.networking.networkmanager.enable [ "networkmanager" ])
+        ];
       };
       groups.${username} = { };
     };
