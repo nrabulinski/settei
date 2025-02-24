@@ -49,6 +49,23 @@ let
               };
             }
           ];
+          profiles = [
+            {
+              devices = {
+                eth0 = {
+                  name = "eth0";
+                  network = "incusbr0";
+                  type = "nic";
+                };
+                root = {
+                  path = "/";
+                  pool = "default";
+                  type = "disk";
+                };
+              };
+              name = "default";
+            }
+          ];
         };
       };
       networking = {
