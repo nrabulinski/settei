@@ -29,30 +29,15 @@
 
       baseNixos = inputs.nixpkgs.lib.nixosSystem {
         modules = [
-          inputs.agenix.nixosModules.age
-          inputs.disko.nixosModules.disko
-          inputs.mailserver.nixosModules.default
-          inputs.home-manager.nixosModules.home-manager
-          inputs.nvidia-patch.nixosModules.nvidia-patch
-          inputs.attic.nixosModules.atticd
-          inputs.lix-module.nixosModules.default
-          self.nixosModules.settei
+          self.nixosModules.combined
           sharedOptions
-          {
-            disabledModules = [
-              "services/networking/atticd.nix"
-            ];
-          }
         ];
         specialArgs.configurationName = "base";
       };
 
       baseDarwin = inputs.darwin.lib.darwinSystem {
         modules = [
-          inputs.agenix.darwinModules.age
-          inputs.home-manager.darwinModules.home-manager
-          inputs.lix-module.nixosModules.default
-          self.darwinModules.settei
+          self.darwinModules.combined
           sharedOptions
         ];
         specialArgs.configurationName = "base";

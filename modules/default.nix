@@ -26,7 +26,24 @@ in
       inherit (config) perInput;
       isLinux = true;
     };
-    default = settei;
+    combined = {
+      imports = [
+        settei
+        inputs.agenix.nixosModules.age
+        inputs.disko.nixosModules.disko
+        inputs.mailserver.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
+        inputs.nvidia-patch.nixosModules.nvidia-patch
+        inputs.attic.nixosModules.atticd
+        inputs.lix-module.nixosModules.default
+        {
+          disabledModules = [
+            "services/networking/atticd.nix"
+          ];
+        }
+      ];
+    };
+    default = combined;
   };
 
   flake.darwinModules = rec {
@@ -34,6 +51,14 @@ in
       inherit (config) perInput;
       isLinux = false;
     };
-    default = settei;
+    combined = {
+      imports = [
+        settei
+        inputs.agenix.darwinModules.age
+        inputs.home-manager.darwinModules.home-manager
+        inputs.lix-module.nixosModules.default
+      ];
+    };
+    default = combined;
   };
 }
