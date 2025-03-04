@@ -85,6 +85,12 @@ let
 
           services.openssh.hostKeys = [ ];
           system.stateVersion = lib.mkDefault config.system.stateVersion;
+
+          networking.useHostResolvConf = false;
+          networking.nameservers = [
+            "1.1.1.1"
+            "1.0.0.1"
+          ];
         };
 
         bindMounts = {
@@ -95,6 +101,11 @@ let
         privateNetwork = lib.mkForce true;
       }
     ) config.settei.containers;
+
+    networking.nat = lib.mkIf (config.settei.containers != { }) {
+      enable = true;
+      internalInterfaces = [ "ve-+" ];
+    };
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
