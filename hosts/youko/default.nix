@@ -1,6 +1,11 @@
 {
   configurations.nixos.youko =
-    { config, username, ... }:
+    {
+      config,
+      lib,
+      username,
+      ...
+    }:
     {
       imports = [
         ./disks.nix
@@ -30,6 +35,13 @@
       settei.incus.enable = true;
       virtualisation.podman.enable = true;
       hardware.keyboard.qmk.enable = true;
+
+      settei.unfree.allowedPackages = [ "vmware-workstation" ];
+      virtualisation.vmware.host.enable = true;
+      environment.etc."vmware/config" = lib.mkForce {
+        source = "${config.virtualisation.vmware.host.package}/etc/vmware/config";
+        text = null;
+      };
 
       networking.hostId = "b49ee8de";
     };
