@@ -5,7 +5,12 @@
       "youko"
     ];
     config =
-      { config, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         age.secrets.forgejo-runner-token.file = ../secrets/forgejo-token.age;
 
@@ -19,6 +24,9 @@
             settings = {
               container.network = "bridge";
             };
+            hostPackages = lib.mkOptionDefault [
+              pkgs.nix
+            ];
             labels = [
               "ubuntu-latest:docker://node:16-bullseye"
               "ubuntu-22.04:docker://node:16-bullseye"
