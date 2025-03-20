@@ -1,5 +1,5 @@
 # Copy of modules/system/unfree.nix
-{ config, lib, ... }:
+args@{ config, lib, ... }:
 {
   _file = ./unfree.nix;
 
@@ -11,7 +11,7 @@
       };
   };
 
-  config = {
+  config = lib.mkIf (!args ? osConfig) {
     nixpkgs.config.allowUnfreePredicate = lib.mkForce (
       pkg: builtins.elem (lib.getName pkg) config.settei.unfree.allowedPackages
     );

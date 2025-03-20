@@ -52,7 +52,6 @@ let
           experimental-features = [
             "nix-command"
             "flakes"
-            "repl-flake"
             "auto-allocate-uids"
           ];
           trusted-users = lib.optionals (!adminNeedsPassword) [ username ];
@@ -117,9 +116,8 @@ let
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
     system.stateVersion = 4;
-    services.nix-daemon.enable = true;
 
-    security.pam.enableSudoTouchIdAuth = true;
+    security.pam.services.sudo_local.touchIdAuth = true;
 
     users.users.${username}.home = "/Users/${username}";
     # Every macOS ARM machine can emulate x86.

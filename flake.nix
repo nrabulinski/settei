@@ -86,7 +86,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
-      url = "github:lnl7/nix-darwin";
+      # TODO: Move back once https://github.com/LnL7/nix-darwin/issues/1392 is resolved
+      # url = "github:lnl7/nix-darwin";
+      url = "github:lnl7/nix-darwin?ref=refs/pull/1335/merge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
@@ -147,7 +149,6 @@
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
     };
     zjstatus = {
       url = "github:dj95/zjstatus";
