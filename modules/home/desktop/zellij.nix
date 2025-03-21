@@ -3,7 +3,12 @@
   # TODO: Move zellij to a wrapper
   programs.zellij = {
     enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = false;
     settings = {
+      default_layout = "compacter";
+      show_startup_tips = false;
       keybinds = {
         shared_except = {
           _args = [ "locked" ];
