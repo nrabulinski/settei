@@ -37,6 +37,19 @@
           };
         };
 
+        systemd.tmpfiles.rules =
+          let
+            cfg = config.services.forgejo;
+            imgDir = pkgs.runCommand "forgejo-img-dir" { } ''
+              cp -R ${../assets/forgejo} "$out"
+            '';
+          in
+          [
+            "d '${cfg.customDir}/public' 0750 ${cfg.user} ${cfg.group} - -"
+            "d '${cfg.customDir}/public/assets' 0750 ${cfg.user} ${cfg.group} - -"
+            "L+ '${cfg.customDir}/public/assets/img' - - - - ${imgDir}"
+          ];
+
         services.nginx = {
           enable = true;
           recommendedProxySettings = true;

@@ -65,6 +65,10 @@
               # racket
               "*.rkt"
               "**/rashrc"
+
+              # custom assets
+              "*.png"
+              "*.svg"
             ];
             settings.on-unmatched = "fatal";
           };
