@@ -18,6 +18,9 @@
               DOMAIN = "git.rab.lol";
               ROOT_URL = "https://git.rab.lol/";
             };
+            security = {
+              DISABLE_GIT_HOOKS = false;
+            };
             oauth2_client = {
               REGISTER_EMAIL_CONFIRM = false;
               ENABLE_AUTO_REGISTRATION = true;
