@@ -3,7 +3,7 @@
     host = "kazuki";
     ports = [ 3000 ];
     config =
-      { config, ... }:
+      { config, pkgs, ... }:
       {
         age.secrets.rab-lol-cf = {
           file = ../secrets/rab-lol-cf.age;
@@ -12,6 +12,7 @@
 
         services.forgejo = {
           enable = true;
+          package = pkgs.forgejo;
           settings = {
             server = {
               DOMAIN = "git.rab.lol";
