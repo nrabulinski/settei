@@ -47,10 +47,10 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1742674578,
-        "narHash": "sha256-WnbRUpnUtd0UadC/zrwQjCWi2P0f/pBLv0HSknZ+0t8=",
+        "lastModified": 1742679462,
+        "narHash": "sha256-L9q9KDqiJEREM/GRnSo4vB9VCvclmdRT9vXuFwBmb9Y=",
         "ref": "refs/heads/main",
-        "rev": "faf973d3829e1b9b9e76ca2d0a09389c0c8233cb",
+        "rev": "087bfe9234f8dc682dbf1d8f96c0b712f587c466",
         "revCount": 368,
         "type": "git",
         "url": "https://git.lix.systems/nrabulinski/attic.git"
