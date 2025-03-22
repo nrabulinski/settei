@@ -17,7 +17,6 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 
 - hosts - per-machine configurations
   - kazuki - my linux arm server
-  - legion - my linux x86 server
   - hijiri - my macbook
   - hijiri-vm - linux vm running on my macbook
   - ude - another linux arm server

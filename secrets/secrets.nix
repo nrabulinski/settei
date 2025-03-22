@@ -13,21 +13,18 @@ in
   # "bitwarden-env-file.age".publicKeys = [keys.system.kazuki keys.other.bootstrap];
   "hercules-token.age".publicKeys = [
     keys.system.kazuki
-    keys.system.legion
     keys.system.ude
     keys.system.kogata
     keys.other.bootstrap
   ];
   "hercules-cache.age".publicKeys = [
     keys.system.kazuki
-    keys.system.legion
     keys.system.ude
     keys.system.kogata
     keys.other.bootstrap
   ];
   "hercules-secrets.age".publicKeys = [
     keys.system.kazuki
-    keys.system.legion
     keys.system.ude
     keys.system.kogata
     keys.other.bootstrap
@@ -35,10 +32,6 @@ in
   "alert-plain-pass.age".publicKeys = [
     keys.other.bootstrap
   ] ++ builtins.attrValues keys.system;
-  "legion-niko-pass.age".publicKeys = [
-    keys.system.legion
-    keys.other.bootstrap
-  ];
   "storage-box-creds.age".publicKeys = [
     keys.system.kazuki
     keys.other.bootstrap
@@ -54,7 +47,6 @@ in
   "github-token.age".publicKeys = [
     keys.system.ude
     keys.system.kazuki
-    keys.system.legion
     keys.system.kogata
     keys.other.bootstrap
   ];
@@ -72,7 +64,6 @@ in
     keys.other.bootstrap
   ];
   "rab-lol-cf.age".publicKeys = [
-    keys.system.legion
     keys.system.kazuki
     keys.other.bootstrap
   ];

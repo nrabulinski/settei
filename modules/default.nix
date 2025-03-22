@@ -33,7 +33,6 @@ in
         inputs.disko.nixosModules.disko
         inputs.mailserver.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
-        inputs.nvidia-patch.nixosModules.nvidia-patch
         inputs.attic.nixosModules.atticd
         inputs.lix-module.nixosModules.default
         {

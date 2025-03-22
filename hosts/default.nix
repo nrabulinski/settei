@@ -9,7 +9,6 @@
     ./kazuki
     ./hijiri-vm
     ./hijiri
-    ./legion
     # TODO: Custom installer ISO
     # ./installer
     ./ude

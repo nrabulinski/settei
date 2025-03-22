@@ -190,22 +190,6 @@
         "type": "github"
       }
     },
-    "fl-config": {
-      "locked": {
-        "lastModified": 1653159448,
-        "narHash": "sha256-PvB9ha0r4w6p412MBPP71kS/ZTBnOjxL0brlmyucPBA=",
-        "owner": "flakelib",
-        "repo": "fl",
-        "rev": "fcefb9738d5995308a24cda018a083ccb6b0f460",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flakelib",
-        "ref": "config",
-        "repo": "fl",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -348,25 +332,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flakelib": {
-      "inputs": {
-        "fl-config": "fl-config",
-        "std": "std"
-      },
-      "locked": {
-        "lastModified": 1701802971,
-        "narHash": "sha256-Zo5fJpXbe+xXOTiDT4JG2rExobMJTmFZ72+3XTMMHrQ=",
-        "owner": "flakelib",
-        "repo": "fl",
-        "rev": "b71a91517f6b16aa5faefe8ec491d9f3062d7a20",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flakelib",
-        "repo": "fl",
         "type": "github"
       }
     },
@@ -531,21 +496,6 @@
         "type": "github"
       }
     },
-    "nix-std": {
-      "locked": {
-        "lastModified": 1701658249,
-        "narHash": "sha256-KIt1TUuBvldhaVRta010MI5FeQlB8WadjqljybjesN0=",
-        "owner": "chessai",
-        "repo": "nix-std",
-        "rev": "715db541ffff4194620e48d210b76f73a74b5b5d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chessai",
-        "repo": "nix-std",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1723603349,
@@ -621,44 +571,6 @@
         "type": "github"
       }
     },
-    "nvidia-patch": {
-      "inputs": {
-        "flakelib": "flakelib",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nvidia-patch-src": "nvidia-patch-src"
-      },
-      "locked": {
-        "lastModified": 1742460640,
-        "narHash": "sha256-Qks0TRMOiuVKjcSPkg251Q2/wdU5ooMt4b2f2numPzg=",
-        "owner": "arcnmx",
-        "repo": "nvidia-patch.nix",
-        "rev": "c85990250376300fe11413e22458911f408f64d0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "arcnmx",
-        "repo": "nvidia-patch.nix",
-        "type": "github"
-      }
-    },
-    "nvidia-patch-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1742384429,
-        "narHash": "sha256-5O0TXVrLsFrULXli2vB2iJ7TECUckMHKvJZYmdkcnGE=",
-        "owner": "keylase",
-        "repo": "nvidia-patch",
-        "rev": "07080317245ac30c38001d2149810b2dee3cce1f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "keylase",
-        "repo": "nvidia-patch",
-        "type": "github"
-      }
-    },
     "racket": {
       "inputs": {
         "nixpkgs": [
@@ -697,7 +609,6 @@
         "mailserver": "mailserver",
         "niko-nur": "niko-nur",
         "nixpkgs": "nixpkgs_2",
-        "nvidia-patch": "nvidia-patch",
         "racket": "racket",
         "treefmt": "treefmt",
         "wrapper-manager": "wrapper-manager",
@@ -761,24 +672,6 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "std": {
-      "inputs": {
-        "nix-std": "nix-std"
-      },
-      "locked": {
-        "lastModified": 1701802337,
-        "narHash": "sha256-JCVCyjDZ6LA0xyVoDZzRXjy0OgWOZo3OpeZEVm/U97w=",
-        "owner": "flakelib",
-        "repo": "std",
-        "rev": "443d1c8246b3d96a4822b02af907ca0d833e8b63",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flakelib",
-        "repo": "std",
         "type": "github"
       }
     },
