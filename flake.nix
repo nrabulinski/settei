@@ -20,10 +20,10 @@
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       inherit systems;
-      imports = [
-        ./modules
-      ];
 
+      flake.nixosModules = nilla.nixosModules;
+      flake.darwinModules = nilla.darwinModules;
+      flake.homeModules = nilla.homeModules;
       flake.nixosConfigurations = nilla.nixosConfigurations;
       flake.darwinConfigurations = nilla.darwinConfigurations;
       flake.homeConfigurations = nilla.homeConfigurations;
