@@ -1,17 +1,21 @@
 {
   config,
-  inputs,
-  ...
 }:
+let
+  inputs = builtins.mapAttrs (_: input: input.result) config.inputs;
+  perInput = system: flake: {
+    packages = flake.packages.${system};
+  };
+in
 {
-  flake.homeModules = rec {
+  config.homeModules = rec {
     settei = ./home;
     default = settei;
   };
 
-  flake.nixosModules = rec {
+  config.nixosModules = rec {
     settei = import ./system {
-      inherit (config) perInput;
+      inherit perInput;
       isLinux = true;
     };
     combined = {
@@ -33,9 +37,9 @@
     default = combined;
   };
 
-  flake.darwinModules = rec {
+  config.darwinModules = rec {
     settei = import ./system {
-      inherit (config) perInput;
+      inherit perInput;
       isLinux = false;
     };
     combined = {

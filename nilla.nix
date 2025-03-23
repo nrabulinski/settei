@@ -11,6 +11,7 @@
       ./hosts
       ./assets
       ./services
+      ./modules
     ];
 
     config.inputs = builtins.mapAttrs (_: src: {
