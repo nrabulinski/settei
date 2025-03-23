@@ -29,8 +29,6 @@
       ];
 
       imports = [
-        inputs.treefmt.flakeModule
-
         ./assets
         ./hosts
         ./modules
@@ -39,31 +37,7 @@
 
       flake.devShells = transpose (builtins.mapAttrs (_: shell: shell.result) nilla.shells);
       flake.packages = transpose (builtins.mapAttrs (_: pkg: pkg.result) nilla.packages);
-
-      perSystem = {
-        treefmt = {
-          programs.deadnix.enable = true;
-          programs.nixfmt.enable = true;
-          programs.statix.enable = true;
-          programs.fish_indent.enable = true;
-          programs.deno.enable = true;
-          programs.stylua.enable = true;
-          programs.shfmt.enable = true;
-          settings.global.excludes = [
-            # agenix
-            "*.age"
-
-            # racket
-            "*.rkt"
-            "**/rashrc"
-
-            # custom assets
-            "*.png"
-            "*.svg"
-          ];
-          settings.on-unmatched = "fatal";
-        };
-      };
+      flake.formatter = nilla.packages.formatter.result;
     };
 
   inputs = {

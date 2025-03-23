@@ -61,6 +61,16 @@
             ];
           }
         );
+        formatter = {
+          inherit systems;
+          builder = "custom-load";
+          package =
+            { system }:
+            let
+              eval = inputs.treefmt.lib.evalModule inputs.nixpkgs.legacyPackages.${system} ./treefmt.nix;
+            in
+            eval.config.build.wrapper;
+        };
       };
 
     config.shells.default = {
