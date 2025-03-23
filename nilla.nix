@@ -4,7 +4,10 @@
 (import inputs.nilla).create (
   { config, lib }:
   {
-    includes = [ ./modules/nilla ];
+    includes = [
+      ./modules/nilla
+      ./pkgs
+    ];
 
     config.inputs = builtins.mapAttrs (_: src: {
       inherit src;
@@ -32,8 +35,10 @@
             builder = "custom-load";
             package = { system }: inputs.${input}.packages.${system}.${output};
           };
+        getPkgs = system: builtins.mapAttrs (_: pkg: pkg.result.${system}) config.packages;
       in
       {
+        # Re-export for convenience and for caching
         attic-client = mkPackageFlakeOutput {
           input = "attic";
           output = "attic-client";
@@ -44,10 +49,16 @@
         };
         agenix = mkPackageFlakeOutput { input = "agenix"; };
         base-packages = mkPackage (
-          { symlinkJoin }:
+          { symlinkJoin, system }:
           symlinkJoin {
             name = "settei-base";
-            paths = [ ];
+            paths = with (getPkgs system); [
+              # TODO: wrappers
+              # helix
+              # fish
+              git-commit-last
+              git-fixup
+            ];
           }
         );
       };
@@ -62,13 +73,13 @@
       shell =
         {
           mkShellNoCC,
+          system,
           nh,
-          self',
         }:
         mkShellNoCC {
           packages = [
-            self'.agenix
-            self'.attic-client
+            config.packages.agenix.result.${system}
+            config.packages.attic-client.result.${system}
             nh
           ];
         };
