@@ -1,11 +1,11 @@
 {
   config,
-  self,
-  inputs,
-  ...
 }:
+let
+  inputs = builtins.mapAttrs (_: input: input.result) config.inputs;
+in
 {
-  imports = [
+  includes = [
     ./kazuki
     ./hijiri-vm
     ./hijiri
@@ -16,20 +16,20 @@
     ./youko
   ];
 
-  builders =
+  config.configBuilders =
     let
       sharedOptions = {
         _file = ./default.nix;
 
         settei.sane-defaults.allSshKeys = config.assets.sshKeys.user;
         settei.flake-qol.inputs = inputs // {
-          settei = self;
+          settei = inputs.self;
         };
       };
 
       baseNixos = inputs.nixpkgs.lib.nixosSystem {
         modules = [
-          self.nixosModules.combined
+          inputs.self.nixosModules.combined
           sharedOptions
         ];
         specialArgs.configurationName = "base";
@@ -37,7 +37,7 @@
 
       baseDarwin = inputs.darwin.lib.darwinSystem {
         modules = [
-          self.darwinModules.combined
+          inputs.self.darwinModules.combined
           sharedOptions
         ];
         specialArgs.configurationName = "base";
@@ -49,7 +49,7 @@
         baseNixos.extendModules {
           modules = [
             module
-            config.__extraHostConfigs.${name} or { }
+            config.extraHostConfigs.${name} or { }
           ];
           specialArgs.configurationName = name;
         };
@@ -60,7 +60,7 @@
           eval = baseDarwin._module.args.extendModules {
             modules = [
               module
-              config.__extraHostConfigs.${name} or { }
+              config.extraHostConfigs.${name} or { }
             ];
             specialArgs.configurationName = name;
           };

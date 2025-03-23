@@ -1,5 +1,5 @@
 {
-  configurations.nixos.kazuki =
+  config.configurations.nixos.kazuki =
     {
       modulesPath,
       ...
