@@ -34,7 +34,6 @@
         ./assets
         ./hosts
         ./modules
-        ./wrappers
         ./services
       ];
 
