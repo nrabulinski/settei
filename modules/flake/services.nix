@@ -21,11 +21,11 @@ let
           type = with lib.types; listOf str;
           default = [ config.host ];
         };
-        config = lib.mkOption {
+        module = lib.mkOption {
           type = lib.types.deferredModule;
           default = { };
         };
-        hostConfig = lib.mkOption {
+        hostModule = lib.mkOption {
           type = with lib.types; attrsOf deferredModule;
           default = { };
         };
@@ -36,8 +36,8 @@ let
     cfg:
     lib.genAttrs cfg.hosts (host: {
       imports = [
-        cfg.config
-        (cfg.hostConfig.${host} or { })
+        cfg.module
+        (cfg.hostModule.${host} or { })
       ];
     });
 
