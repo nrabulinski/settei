@@ -14,14 +14,14 @@ let
     {
       options = {
         host = lib.options.create {
-          type = lib.types.str;
+          type = lib.types.string;
         };
         ports = lib.options.create {
           type = lib.types.list.of lib.types.port;
           default.value = [ ];
         };
         hosts = lib.options.create {
-          type = lib.types.list.of lib.types.str;
+          type = lib.types.list.of lib.types.string;
           default.value = [ config.host ];
         };
         module = lib.options.create {

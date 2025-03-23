@@ -1,5 +1,5 @@
 {
-  configurations.nixos.hijiri-vm =
+  config.configurations.nixos.hijiri-vm =
     {
       modulesPath,
       lib,

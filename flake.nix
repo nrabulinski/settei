@@ -21,12 +21,12 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       inherit systems;
       imports = [
-        ./assets
-        ./hosts
         ./modules
-        ./services
       ];
 
+      flake.nixosConfigurations = nilla.nixosConfigurations;
+      flake.darwinConfigurations = nilla.darwinConfigurations;
+      flake.homeConfigurations = nilla.homeConfigurations;
       flake.devShells = transpose nilla.shells;
       flake.packages = transpose nilla.packages;
       flake.formatter = nilla.packages.formatter.result;

@@ -8,9 +8,9 @@
       ./modules/nilla
       ./pkgs
       ./wrappers
-
-      ./services/attic.nix
-      ./services/forgejo-runner.nix
+      ./hosts
+      ./assets
+      ./services
     ];
 
     config.inputs = builtins.mapAttrs (_: src: {

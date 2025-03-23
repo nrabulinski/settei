@@ -1,5 +1,5 @@
 {
-  configurations.nixos.legion =
+  config.configurations.nixos.legion =
     {
       config,
       username,
