@@ -1,8 +1,8 @@
 {
-  services.forgejo = {
+  config.services.forgejo = {
     host = "kazuki";
     ports = [ 3000 ];
-    config =
+    module =
       { config, pkgs, ... }:
       {
         age.secrets.rab-lol-cf = {

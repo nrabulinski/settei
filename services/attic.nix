@@ -1,12 +1,12 @@
 {
-  services.attic =
+  config.services.attic =
     let
       atticPort = 9476;
     in
     {
       host = "kazuki";
       ports = [ atticPort ];
-      config =
+      module =
         { config, ... }:
         {
           age.secrets.attic-creds = {
