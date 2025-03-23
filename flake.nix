@@ -168,6 +168,14 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    __flake-compat = {
+      url = "git+https://git.lix.systems/lix-project/flake-compat.git";
+      flake = false;
+    };
+    nilla = {
+      url = "github:nilla-nix/nilla";
+      flake = false;
+    };
   };
 
   /*
