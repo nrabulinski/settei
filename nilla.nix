@@ -7,6 +7,7 @@
     includes = [
       ./modules/nilla
       ./pkgs
+      ./wrappers
     ];
 
     config.inputs = builtins.mapAttrs (_: src: {
@@ -53,9 +54,8 @@
           symlinkJoin {
             name = "settei-base";
             paths = with (getPkgs system); [
-              # TODO: wrappers
-              # helix
-              # fish
+              helix
+              fish
               git-commit-last
               git-fixup
             ];
