@@ -3,31 +3,23 @@
     inputs@{ flake-parts, ... }:
     let
       nilla = import ./nilla.nix { inherit inputs; };
-      transpose =
-        attrs:
-        let
-          inherit (inputs.nixpkgs) lib;
-          # maps an attrset of systems to packages to list of [ {name; system; value;} ]
-          pkgToListAll =
-            name: pkg:
-            map (system: {
-              inherit name system;
-              value = pkg.${system};
-            }) (builtins.attrNames pkg);
-          pkgsToListAll = pkgs: map (name: pkgToListAll name pkgs.${name}) (builtins.attrNames pkgs);
-          # list of all packages in format [ {name; system; value;} ]
-          allPkgs = lib.flatten (pkgsToListAll attrs);
-          systems = builtins.groupBy (pkg: pkg.system) allPkgs;
-        in
-        builtins.mapAttrs (_: pkgs: lib.listToAttrs pkgs) systems;
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
-
+      # NOTE: Assumes every package is available for every system.
+      #       For now let's say this is always the case.
+      transpose =
+        attrs:
+        let
+          inherit (inputs.nixpkgs) lib;
+          mappedForSystem = system: builtins.mapAttrs (_: pkg: pkg.result.${system}) attrs;
+        in
+        lib.genAttrs systems mappedForSystem;
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      inherit systems;
       imports = [
         ./assets
         ./hosts
@@ -35,8 +27,8 @@
         ./services
       ];
 
-      flake.devShells = transpose (builtins.mapAttrs (_: shell: shell.result) nilla.shells);
-      flake.packages = transpose (builtins.mapAttrs (_: pkg: pkg.result) nilla.packages);
+      flake.devShells = transpose nilla.shells;
+      flake.packages = transpose nilla.packages;
       flake.formatter = nilla.packages.formatter.result;
     };
 
