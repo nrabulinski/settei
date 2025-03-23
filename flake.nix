@@ -1,6 +1,6 @@
 {
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs:
     let
       nilla = import ./nilla.nix { inherit inputs; };
       systems = [
@@ -18,26 +18,20 @@
         in
         lib.genAttrs systems mappedForSystem;
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      inherit systems;
-
-      flake.nixosModules = nilla.nixosModules;
-      flake.darwinModules = nilla.darwinModules;
-      flake.homeModules = nilla.homeModules;
-      flake.nixosConfigurations = nilla.nixosConfigurations;
-      flake.darwinConfigurations = nilla.darwinConfigurations;
-      flake.homeConfigurations = nilla.homeConfigurations;
-      flake.devShells = transpose nilla.shells;
-      flake.packages = transpose nilla.packages;
-      flake.formatter = nilla.packages.formatter.result;
+    {
+      inherit (nilla) nixosModules;
+      inherit (nilla) darwinModules;
+      inherit (nilla) homeModules;
+      inherit (nilla) nixosConfigurations;
+      inherit (nilla) darwinConfigurations;
+      inherit (nilla) homeConfigurations;
+      devShells = transpose nilla.shells;
+      packages = transpose nilla.packages;
+      formatter = nilla.packages.formatter.result;
     };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
