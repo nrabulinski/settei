@@ -55,13 +55,23 @@
             name = "settei-base";
             paths = with (getPkgs system); [
               # TODO: wrappers
-              # helix
-              # fish
+              helix
+              fish
               git-commit-last
               git-fixup
             ];
           }
         );
+        formatter = {
+          inherit systems;
+          builder = "custom-load";
+          package =
+            { system }:
+            let
+              eval = inputs.treefmt.lib.evalModule inputs.nixpkgs.legacyPackages.${system} ./treefmt.nix;
+            in
+            eval.config.build.wrapper;
+        };
       };
 
     config.shells.default = {
