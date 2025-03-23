@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "__flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742412704,
+        "narHash": "sha256-mhazLo8DuZ3c6r5I7hDxxag8ftAM4W0aUjFjQuw8q5c=",
+        "ref": "refs/heads/main",
+        "rev": "f7a7752f237bbc59b868058f70cffd3e436b49b7",
+        "revCount": 69,
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/flake-compat.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lix.systems/lix-project/flake-compat.git"
+      }
+    },
     "agenix": {
       "inputs": {
         "darwin": [
@@ -475,6 +491,22 @@
         "type": "github"
       }
     },
+    "nilla": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742722370,
+        "narHash": "sha256-MqdseA78bo2M3zfb0mjcBPYU2Qn9CF/KH5LZivWRtB0=",
+        "owner": "nilla-nix",
+        "repo": "nilla",
+        "rev": "b30b5a225843ab649a9b140eb3cbbcc8030a7eaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nilla-nix",
+        "repo": "nilla",
+        "type": "github"
+      }
+    },
     "nix-github-actions": {
       "inputs": {
         "nixpkgs": [
@@ -593,6 +625,7 @@
     },
     "root": {
       "inputs": {
+        "__flake-compat": "__flake-compat",
         "agenix": "agenix",
         "attic": "attic",
         "conduit-src": "conduit-src",
@@ -608,6 +641,7 @@
         "lix-module": "lix-module",
         "mailserver": "mailserver",
         "niko-nur": "niko-nur",
+        "nilla": "nilla",
         "nixpkgs": "nixpkgs_2",
         "racket": "racket",
         "treefmt": "treefmt",
