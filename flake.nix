@@ -1,6 +1,9 @@
 {
   outputs =
     inputs@{ flake-parts, ... }:
+    let
+      nilla = import ./nilla.nix { inherit inputs; };
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -24,17 +27,11 @@
           inputs',
           self',
           pkgs,
+          system,
           ...
         }:
         {
-          devShells.default = pkgs.mkShellNoCC {
-            packages = [
-              inputs'.agenix.packages.agenix
-              self'.packages.attic-client
-              # TODO: Contribute darwin support to nh
-              pkgs.nh
-            ];
-          };
+          devShells = builtins.mapAttrs (_: shell: shell.result.${system}) nilla.shells;
 
           packages = {
             # Re-export it for convenience and for caching
