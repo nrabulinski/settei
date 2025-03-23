@@ -30,7 +30,7 @@ in
 
       baseNixos = inputs.nixpkgs.lib.nixosSystem {
         modules = [
-          inputs.self.nixosModules.combined
+          config.nixosModules.combined
           sharedOptions
         ];
         specialArgs.configurationName = "base";
@@ -38,7 +38,7 @@ in
 
       baseDarwin = inputs.darwin.lib.darwinSystem {
         modules = [
-          inputs.self.darwinModules.combined
+          config.darwinModules.combined
           sharedOptions
         ];
         specialArgs.configurationName = "base";
