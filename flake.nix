@@ -3,6 +3,23 @@
     inputs@{ flake-parts, ... }:
     let
       nilla = import ./nilla.nix { inherit inputs; };
+      transpose =
+        attrs:
+        let
+          inherit (inputs.nixpkgs) lib;
+          # maps an attrset of systems to packages to list of [ {name; system; value;} ]
+          pkgToListAll =
+            name: pkg:
+            map (system: {
+              inherit name system;
+              value = pkg.${system};
+            }) (builtins.attrNames pkg);
+          pkgsToListAll = pkgs: map (name: pkgToListAll name pkgs.${name}) (builtins.attrNames pkgs);
+          # list of all packages in format [ {name; system; value;} ]
+          allPkgs = lib.flatten (pkgsToListAll attrs);
+          systems = builtins.groupBy (pkg: pkg.system) allPkgs;
+        in
+        builtins.mapAttrs (_: pkgs: lib.listToAttrs pkgs) systems;
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
@@ -22,17 +39,16 @@
         ./services
       ];
 
+      flake.devShells = transpose (builtins.mapAttrs (_: shell: shell.result) nilla.shells);
+
       perSystem =
         {
           inputs',
           self',
           pkgs,
-          system,
           ...
         }:
         {
-          devShells = builtins.mapAttrs (_: shell: shell.result.${system}) nilla.shells;
-
           packages = {
             # Re-export it for convenience and for caching
             inherit (inputs'.attic.packages) attic-client attic-server;
