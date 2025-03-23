@@ -1,3 +1,6 @@
 {
-  includes = [ ./builders ];
+  includes = [
+    ./builders
+    ./services.nix
+  ];
 }
