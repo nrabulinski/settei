@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  configurations.nixos =
+  config.configurations.nixos =
     let
       mkInstaller =
         system:

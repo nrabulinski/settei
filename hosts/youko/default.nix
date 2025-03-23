@@ -1,5 +1,5 @@
 {
-  configurations.nixos.youko =
+  config.configurations.nixos.youko =
     {
       config,
       lib,

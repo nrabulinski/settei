@@ -1,8 +1,8 @@
-{ lib, ... }:
+{ lib }:
 {
-  options.assets = lib.mkOption {
-    type = lib.types.unspecified;
-    readOnly = true;
+  options.assets = lib.options.create {
+    type = lib.types.raw;
+    writable = false;
   };
 
   config.assets = {

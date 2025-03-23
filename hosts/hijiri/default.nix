@@ -1,5 +1,5 @@
 {
-  configurations.darwin.hijiri =
+  config.configurations.darwin.hijiri =
     {
       config,
       pkgs,
