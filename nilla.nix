@@ -4,42 +4,12 @@
 (import inputs.nilla).create (
   { config, lib }:
   {
+    includes = [ ./modules/nilla ];
+
     config.inputs = builtins.mapAttrs (_: src: {
       inherit src;
       loader = "raw";
     }) inputs;
-
-    config.builders.nixpkgs-flake = {
-      settings.type = lib.types.submodule {
-        options.args = lib.options.create {
-          type = lib.types.any;
-          default.value = { };
-        };
-      };
-      settings.default = { };
-      build =
-        pkg:
-        lib.attrs.generate pkg.systems (
-          system:
-          inputs.nixpkgs.legacyPackages.${system}.callPackage pkg.package (
-            {
-              self' = builtins.mapAttrs (_: pkg: pkg.result.${system}) config.packages;
-            }
-            // pkg.settings.args
-          )
-        );
-    };
-
-    config.builders.custom-load = {
-      settings.type = lib.types.submodule {
-        options.args = lib.options.create {
-          type = lib.types.null;
-          default.value = null;
-        };
-      };
-      settings.default = { };
-      build = pkg: lib.attrs.generate pkg.systems (system: pkg.package { inherit system; });
-    };
 
     config.packages =
       let
