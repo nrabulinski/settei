@@ -1,10 +1,10 @@
 {
-  services.forgejo-runner = {
+  config.services.forgejo-runner = {
     hosts = [
       "ude"
       "youko"
     ];
-    config =
+    module =
       {
         config,
         lib,
