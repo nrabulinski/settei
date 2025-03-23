@@ -35,53 +35,32 @@
         ./hosts
         ./modules
         ./wrappers
-        ./pkgs
         ./services
       ];
 
       flake.devShells = transpose (builtins.mapAttrs (_: shell: shell.result) nilla.shells);
+      flake.packages = transpose (builtins.mapAttrs (_: pkg: pkg.result) nilla.packages);
 
-      perSystem =
-        {
-          inputs',
-          self',
-          pkgs,
-          ...
-        }:
-        {
-          packages = {
-            # Re-export it for convenience and for caching
-            inherit (inputs'.attic.packages) attic-client attic-server;
-            base-packages = pkgs.symlinkJoin {
-              name = "settei-base";
-              paths = with self'.packages; [
-                helix
-                fish
-                git-commit-last
-                git-fixup
-              ];
-            };
-          };
+      perSystem = {
+        treefmt = {
+          programs.deadnix.enable = true;
+          programs.nixfmt.enable = true;
+          programs.statix.enable = true;
+          programs.fish_indent.enable = true;
+          programs.deno.enable = true;
+          programs.stylua.enable = true;
+          programs.shfmt.enable = true;
+          settings.global.excludes = [
+            # agenix
+            "*.age"
 
-          treefmt = {
-            programs.deadnix.enable = true;
-            programs.nixfmt.enable = true;
-            programs.statix.enable = true;
-            programs.fish_indent.enable = true;
-            programs.deno.enable = true;
-            programs.stylua.enable = true;
-            programs.shfmt.enable = true;
-            settings.global.excludes = [
-              # agenix
-              "*.age"
-
-              # racket
-              "*.rkt"
-              "**/rashrc"
-            ];
-            settings.on-unmatched = "fatal";
-          };
+            # racket
+            "*.rkt"
+            "**/rashrc"
+          ];
+          settings.on-unmatched = "fatal";
         };
+      };
     };
 
   inputs = {

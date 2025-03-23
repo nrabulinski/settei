@@ -15,12 +15,7 @@
       pkg:
       lib.attrs.generate pkg.systems (
         system:
-        config.inputs.nixpkgs.result.legacyPackages.${system}.callPackage pkg.package (
-          {
-            self' = builtins.mapAttrs (_: pkg: pkg.result.${system}) config.packages;
-          }
-          // pkg.settings.args
-        )
+        config.inputs.nixpkgs.result.legacyPackages.${system}.callPackage pkg.package pkg.settings.args
       );
   };
 }

@@ -1,6 +1,8 @@
 {
   lib,
   stdenv,
+  pkgs,
+  system,
   fenix,
   crane,
   src,
@@ -11,12 +13,12 @@
 }:
 let
   rust =
-    with fenix;
+    with fenix.${system};
     combine [
       stable.cargo
       stable.rustc
     ];
-  crane' = crane.overrideToolchain rust;
+  crane' = (crane pkgs).overrideToolchain rust;
   rocksdb' = rocksdb.overrideAttrs (
     final: prev: {
       version = "9.1.1";
