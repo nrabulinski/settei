@@ -1,3 +1,4 @@
+{ config }:
 let
   systems = [
     "x86_64-linux"
@@ -10,7 +11,6 @@ let
   };
 
 in
-{ config }:
 {
   config.packages.conduit-next = {
     inherit systems builder;

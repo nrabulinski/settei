@@ -7,6 +7,7 @@
     includes = [
       ./modules/nilla
       ./pkgs
+      ./wrappers
     ];
 
     config.inputs = builtins.mapAttrs (_: src: {
