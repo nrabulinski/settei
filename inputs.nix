@@ -6,6 +6,11 @@ let
     url = "${url}/archive/${rev}.tar.gz";
     sha256 = narHash;
   };
-  flake = import flake-compat { src = ./.; };
+  flake = import flake-compat {
+    src = ./.;
+    copySourceTreeToStore = false;
+    useBuiltinsFetchTree = true;
+  };
 in
-flake.inputs
+# Workaround for https://github.com/nilla-nix/nilla/issues/14
+builtins.mapAttrs (_: input: input // { type = "derivation"; }) flake.inputs
