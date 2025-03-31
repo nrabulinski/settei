@@ -26,28 +26,14 @@ in
           settei = inputs.self;
         };
       };
-
-      baseNixos = inputs.nixpkgs.lib.nixosSystem {
-        modules = [
-          config.nixosModules.combined
-          sharedOptions
-        ];
-        specialArgs.configurationName = "base";
-      };
-
-      baseDarwin = inputs.darwin.lib.darwinSystem {
-        modules = [
-          config.darwinModules.combined
-          sharedOptions
-        ];
-        specialArgs.configurationName = "base";
-      };
     in
     {
       nixos =
         name: module:
-        baseNixos.extendModules {
+        inputs.nixpkgs.lib.nixosSystem {
           modules = [
+            config.nixosModules.combined
+            sharedOptions
             module
             config.extraHostConfigs.${name} or { }
           ];
@@ -56,18 +42,14 @@ in
 
       darwin =
         name: module:
-        let
-          eval = baseDarwin._module.args.extendModules {
-            modules = [
-              module
-              config.extraHostConfigs.${name} or { }
-            ];
-            specialArgs.configurationName = name;
-          };
-        in
-        eval
-        // {
-          system = eval.config.system.build.toplevel;
+        inputs.darwin.lib.darwinSystem {
+          modules = [
+            config.darwinModules.combined
+            sharedOptions
+            module
+            config.extraHostConfigs.${name} or { }
+          ];
+          specialArgs.configurationName = name;
         };
     };
 }
