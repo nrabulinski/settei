@@ -2,7 +2,7 @@
   includes = [
     ./builders
     ./services.nix
-    ./configurations.nix
+    ./systems.nix
     ./modules.nix
     ./flake.nix
   ];

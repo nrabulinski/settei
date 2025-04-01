@@ -1,5 +1,5 @@
 {
-  config.configurations.darwin.hijiri =
+  config.systems.darwin.hijiri.module =
     {
       config,
       pkgs,

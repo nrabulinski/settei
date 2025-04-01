@@ -1,5 +1,5 @@
 {
-  config.configurations.nixos.youko =
+  config.systems.nixos.youko.module =
     {
       config,
       lib,
