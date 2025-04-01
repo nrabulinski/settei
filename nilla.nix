@@ -75,6 +75,43 @@
             in
             eval.config.build.wrapper;
         };
+        __allPackages =
+          let
+            all-packages = builtins.attrValues (
+              builtins.removeAttrs config.packages [
+                "ci-check"
+                "__allPackages"
+              ]
+            );
+            all-packages' = lib.lists.flatten (map (pkg: builtins.attrValues pkg.result) all-packages);
+
+            nixos-systems = builtins.attrValues config.systems.nixos;
+            nixos-systems' = map (system: system.result.config.system.build.toplevel) nixos-systems;
+
+            darwin-systems = builtins.attrValues config.systems.darwin;
+            darwin-systems' = map (system: system.result.config.system.build.toplevel) darwin-systems;
+
+            all-drvs = all-packages' ++ nixos-systems' ++ darwin-systems';
+            all-drvs' = lib.strings.concatMapSep "\n" builtins.unsafeDiscardStringContext all-drvs;
+          in
+          mkPackage (
+            { runCommand }:
+            runCommand "eval-check" {
+              allDerivations = all-drvs';
+              passAsFile = [ "allDerivations" ];
+            } "touch $out"
+          );
+        ci-check = mkPackage (
+          {
+            writeShellScript,
+            lib,
+            system,
+          }:
+          writeShellScript "ci-check" ''
+            nix-instantiate --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath
+            "${lib.getExe config.packages.formatter.result.${system}}" --ci
+          ''
+        );
       };
 
     config.shells.default = {

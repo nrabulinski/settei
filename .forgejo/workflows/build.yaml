@@ -8,4 +8,5 @@ jobs:
     runs-on: native
     steps:
       - uses: actions/checkout@v4
-      - run: nix flake check --all-systems
+      - run: nix-build -A ci.check
+      - run: ./result
