@@ -18,10 +18,11 @@ in
       nixosModules
       darwinModules
       homeModules
-      nixosConfigurations
-      darwinConfigurations
-      homeConfigurations
       ;
+
+    nixosConfigurations = builtins.mapAttrs (_: system: system.result) config.systems.nixos;
+    darwinConfigurations = builtins.mapAttrs (_: system: system.result) config.systems.darwin;
+    homeConfigurations = builtins.mapAttrs (_: system: system.result) config.systems.home;
 
     devShells = transpose config.shells;
     packages = transpose config.packages;

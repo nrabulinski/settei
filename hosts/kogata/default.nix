@@ -1,5 +1,5 @@
 {
-  config.configurations.darwin.kogata =
+  config.systems.darwin.kogata.module =
     { pkgs, ... }:
     {
       nixpkgs.system = "aarch64-darwin";

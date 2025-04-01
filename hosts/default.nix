@@ -16,7 +16,7 @@ in
     ./youko
   ];
 
-  config.configBuilders =
+  config.systems.builders =
     let
       sharedOptions = {
         _file = ./default.nix;

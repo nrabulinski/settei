@@ -1,5 +1,5 @@
 {
-  config.configurations.nixos.ude =
+  config.systems.nixos.ude.module =
     {
       config,
       modulesPath,
