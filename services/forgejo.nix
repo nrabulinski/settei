@@ -32,6 +32,9 @@
               ALLOW_ONLY_INTERNAL_REGISTRATION = false;
               ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
             };
+            session = {
+              SESSION_LIFE_TIME = 86400 * 30;
+            };
             federation.ENABLED = true;
           };
           repositoryRoot = "/storage-box/forgejo/repos";
