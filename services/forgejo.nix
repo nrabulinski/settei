@@ -37,10 +37,10 @@
             };
             federation.ENABLED = true;
           };
-          repositoryRoot = "/storage-box/forgejo/repos";
+          repositoryRoot = "/forgejo/repos";
           lfs = {
             enable = true;
-            contentDir = "/storage-box/forgejo/lfs";
+            contentDir = "/forgejo/lfs";
           };
         };
 
@@ -83,6 +83,15 @@
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.rab-lol-cf.path;
           email = "nikodem@rabulinski.com";
+        };
+
+        fileSystems."/forgejo" = {
+          device = "/dev/disk/by-label/forgejo";
+          fsType = "btrfs";
+          options = [
+            "compress=zstd"
+            "noatime"
+          ];
         };
       };
   };
