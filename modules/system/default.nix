@@ -25,6 +25,7 @@
     (import ./github-runner.nix { inherit isLinux; })
     (import ./incus.nix { inherit isLinux; })
     (import ./monitoring.nix { inherit isLinux; })
+    (import ./builder.nix { inherit isLinux; })
   ];
 
   options.settei = with lib; {

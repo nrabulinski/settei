@@ -1,3 +1,17 @@
+{ config, lib, ... }:
+let
+  builderUsers = lib.fp.pipe [
+    (lib.attrs.filter (
+      name: _:
+      !builtins.elem name [
+        "youko"
+        "kazuki"
+        "ude"
+      ]
+    ))
+    builtins.attrValues
+  ] config.assets.sshKeys.system;
+in
 {
   config.systems.nixos.youko.module =
     {
@@ -29,6 +43,11 @@
 
       settei.user.config = {
         settei.desktop.enable = true;
+      };
+
+      settei.remote-builder = {
+        enable = true;
+        sshKeys = builderUsers;
       };
 
       services.udisks2.enable = true;
