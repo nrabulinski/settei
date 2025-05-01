@@ -60,6 +60,10 @@
       inputs.lix.follows = "lix";
       inputs.lix-module.follows = "lix-module";
     };
+    crane = {
+      url = "github:ipetkov/crane";
+      flake = false;
+    };
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";

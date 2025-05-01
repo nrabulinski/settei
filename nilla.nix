@@ -47,15 +47,6 @@
         getPkgs = system: builtins.mapAttrs (_: pkg: pkg.result.${system}) config.packages;
       in
       {
-        # Re-export for convenience and for caching
-        attic-client = mkPackageFlakeOutput {
-          input = "attic";
-          output = "attic-client";
-        };
-        attic-server = mkPackageFlakeOutput {
-          input = "attic";
-          output = "attic-server";
-        };
         agenix = mkPackageFlakeOutput { input = "agenix"; };
         base-packages = mkPackage (
           { symlinkJoin, system }:

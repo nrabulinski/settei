@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   inputs,
 }:
 let
@@ -12,6 +13,14 @@ let
   mkPackage = package: {
     inherit systems package builder;
   };
+  atticPkgs = lib.attrs.generate systems (
+    system:
+    let
+      pkgs = inputs.nixpkgs.legacyPackages.${system}.extend inputs.lix-module.overlays.default;
+      craneLib = import inputs.crane { inherit pkgs; };
+    in
+    pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
+  );
 in
 {
   config.packages.conduit-next = {
@@ -49,4 +58,15 @@ in
       '';
     }
   );
+
+  config.packages.attic-client = {
+    inherit systems;
+    builder = "custom-load";
+    package = { system }: atticPkgs.${system}.attic-client;
+  };
+  config.packages.attic-server = {
+    inherit systems;
+    builder = "custom-load";
+    package = { system }: atticPkgs.${system}.attic-server;
+  };
 }
