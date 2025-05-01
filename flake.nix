@@ -56,9 +56,7 @@
     };
     attic = {
       url = "git+https://git.lix.systems/nrabulinski/attic.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.lix.follows = "lix";
-      inputs.lix-module.follows = "lix-module";
+      flake = false;
     };
     crane = {
       url = "github:ipetkov/crane";
@@ -71,7 +69,6 @@
     zjstatus = {
       url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "attic/crane";
     };
     lix = {
       url = "git+https://git.lix.systems/lix-project/lix.git";

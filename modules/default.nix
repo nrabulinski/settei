@@ -25,11 +25,18 @@ in
         inputs.disko.nixosModules.disko
         inputs.mailserver.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
-        inputs.attic.nixosModules.atticd
+        "${inputs.attic}/nixos/atticd.nix"
         inputs.lix-module.nixosModules.default
         {
           disabledModules = [
             "services/networking/atticd.nix"
+          ];
+          services.atticd.useFlakeCompatOverlay = false;
+          nixpkgs.overlays = [
+            (final: _: {
+              attic-client = config.packages.attic-client.result.${final.system};
+              attic-server = config.packages.attic-server.result.${final.system};
+            })
           ];
         }
       ];
