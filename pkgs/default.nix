@@ -69,4 +69,10 @@ in
     builder = "custom-load";
     package = { system }: atticPkgs.${system}.attic-server;
   };
+
+  config.packages.nh = {
+    inherit systems builder;
+    package = import "${inputs.nh}/package.nix";
+    settings.args.rev = inputs.nh.shortRev;
+  };
 }

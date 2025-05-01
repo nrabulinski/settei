@@ -57,6 +57,7 @@
               fish
               git-commit-last
               git-fixup
+              nh
             ];
           }
         );
@@ -126,7 +127,7 @@
           packages = [
             config.packages.agenix.result.${system}
             config.packages.attic-client.result.${system}
-            nh
+            config.packages.nh.result.${system}
           ];
         };
     };

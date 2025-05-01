@@ -1,7 +1,6 @@
 # TODO: Make this module not rely on OS config being present
 {
   osConfig,
-  pkgs,
   lib,
   inputs',
   machineName,
@@ -59,7 +58,6 @@ in
 
   home.packages = [
     inputs'.settei.packages.base-packages
-    pkgs.nh
   ];
 
   home.sessionVariables.EDITOR = "hx";

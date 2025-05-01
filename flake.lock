@@ -393,6 +393,22 @@
         "type": "gitlab"
       }
     },
+    "nh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746032033,
+        "narHash": "sha256-BCD0tfDNlQHFM75THRtXM3GegMg/KbREsYllg7Az9ao=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "894bb7ebf3adb58f76d1f7d9f6b33f58758d40f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "niko-nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -522,6 +538,7 @@
         "lix": "lix",
         "lix-module": "lix-module",
         "mailserver": "mailserver",
+        "nh": "nh",
         "niko-nur": "niko-nur",
         "nilla": "nilla",
         "nixpkgs": "nixpkgs_2",

@@ -91,5 +91,9 @@
       url = "github:nilla-nix/nilla";
       flake = false;
     };
+    nh = {
+      url = "github:nix-community/nh";
+      flake = false;
+    };
   };
 }
