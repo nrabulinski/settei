@@ -1,4 +1,8 @@
-{ lib, config }:
+{
+  lib,
+  config,
+  inputs,
+}:
 let
   systems = [
     "x86_64-linux"
@@ -7,8 +11,8 @@ let
   ];
   wrappedPerSystem = lib.attrs.generate systems (
     system:
-    config.inputs.wrapper-manager-hm-compat.result.lib {
-      pkgs = config.inputs.nixpkgs.result.legacyPackages.${system};
+    inputs.wrapper-manager-hm-compat.lib {
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
         ./starship
         ./helix
@@ -17,7 +21,7 @@ let
         ./fish
         ./wezterm
       ];
-      specialArgs.inputs = builtins.mapAttrs (_: input: input.result) config.inputs;
+      specialArgs = { inherit inputs; };
     }
   );
   wrappedPerSystem' = builtins.mapAttrs (_: wrapped: wrapped.config.build.packages) wrappedPerSystem;

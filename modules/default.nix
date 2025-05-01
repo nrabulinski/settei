@@ -1,8 +1,8 @@
 {
   config,
+  inputs,
 }:
 let
-  inputs = builtins.mapAttrs (_: input: input.result) config.inputs;
   perInput = system: flake: {
     packages = flake.packages.${system};
   };

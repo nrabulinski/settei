@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
 }:
 {
   config.builders.nixpkgs-flake = {
@@ -14,8 +15,7 @@
     build =
       pkg:
       lib.attrs.generate pkg.systems (
-        system:
-        config.inputs.nixpkgs.result.legacyPackages.${system}.callPackage pkg.package pkg.settings.args
+        system: inputs.nixpkgs.legacyPackages.${system}.callPackage pkg.package pkg.settings.args
       );
   };
 }

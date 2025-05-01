@@ -1,4 +1,7 @@
-{ config }:
+{
+  config,
+  inputs,
+}:
 let
   systems = [
     "x86_64-linux"
@@ -9,14 +12,13 @@ let
   mkPackage = package: {
     inherit systems package builder;
   };
-
 in
 {
   config.packages.conduit-next = {
     inherit systems builder;
     package = import ./conduit;
     settings.args = {
-      src = config.inputs.conduit-src.result;
+      src = inputs.conduit-src;
     };
   };
 

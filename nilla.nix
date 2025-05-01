@@ -18,6 +18,10 @@
       inherit src;
       loader = "raw";
     }) inputs;
+    # Add inputs argument so modules can conveniently use it
+    config.__module__.args.dynamic.inputs = builtins.mapAttrs (
+      _name: input: input.result
+    ) config.inputs;
 
     config.packages =
       let

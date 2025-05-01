@@ -1,9 +1,7 @@
 {
   config,
+  inputs,
 }:
-let
-  inputs = builtins.mapAttrs (_: input: input.result) config.inputs;
-in
 {
   includes = [
     ./kazuki
