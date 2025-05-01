@@ -45,9 +45,7 @@
     },
     "attic": {
       "inputs": {
-        "crane": [
-          "crane"
-        ],
+        "crane": "crane",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "lix": [
@@ -111,11 +109,11 @@
     },
     "crane": {
       "locked": {
-        "lastModified": 1742394900,
-        "narHash": "sha256-vVOAp9ahvnU+fQoKd4SEXB2JG2wbENkpqcwlkIXgUC0=",
+        "lastModified": 1745454774,
+        "narHash": "sha256-oLvmxOnsEKGtwczxp/CwhrfmQUG2ym24OMWowcoRhH8=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "70947c1908108c0c551ddfd73d4f750ff2ea67cd",
+        "rev": "efd36682371678e2b6da3f108fdb5c613b3ec598",
         "type": "github"
       },
       "original": {
@@ -162,27 +160,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "disko",
-        "type": "github"
-      }
-    },
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1742452566,
-        "narHash": "sha256-sVuLDQ2UIWfXUBbctzrZrXM2X05YjX08K7XHMztt36E=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "7d9ba794daf5e8cc7ee728859bc688d8e26d5f06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
         "type": "github"
       }
     },
@@ -609,10 +586,8 @@
         "agenix": "agenix",
         "attic": "attic",
         "conduit-src": "conduit-src",
-        "crane": "crane",
         "darwin": "darwin",
         "disko": "disko",
-        "fenix": "fenix",
         "firefox-darwin": "firefox-darwin",
         "helix": "helix",
         "home-manager": "home-manager",
@@ -627,23 +602,6 @@
         "wrapper-manager": "wrapper-manager",
         "wrapper-manager-hm-compat": "wrapper-manager-hm-compat",
         "zjstatus": "zjstatus"
-      }
-    },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1742296961,
-        "narHash": "sha256-gCpvEQOrugHWLimD1wTFOJHagnSEP6VYBDspq96Idu0=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "15d87419f1a123d8f888d608129c3ce3ff8f13d4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
       }
     },
     "rust-overlay": {
@@ -818,6 +776,7 @@
     "zjstatus": {
       "inputs": {
         "crane": [
+          "attic",
           "crane"
         ],
         "flake-utils": "flake-utils_3",

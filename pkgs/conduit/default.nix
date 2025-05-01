@@ -1,10 +1,6 @@
 {
   lib,
   stdenv,
-  pkgs,
-  system,
-  fenix,
-  crane,
   src,
   libiconv,
   rocksdb,
@@ -12,26 +8,17 @@
   rustPlatform,
 }:
 let
-  rust =
-    with fenix.${system};
-    combine [
-      stable.cargo
-      stable.rustc
-    ];
-  crane' = (crane pkgs).overrideToolchain rust;
-  rocksdb' = rocksdb.overrideAttrs (
-    final: prev: {
-      version = "9.1.1";
-      src = prev.src.override {
-        rev = "v${final.version}";
-        hash = "sha256-/Xf0bzNJPclH9IP80QNaABfhj4IAR5LycYET18VFCXc=";
-      };
-    }
-  );
+  manifest = (builtins.fromTOML (builtins.readFile "${src}/Cargo.toml")).package;
 in
-crane'.buildPackage {
+rustPlatform.buildRustPackage {
+  pname = manifest.name;
+  inherit (manifest) version;
+
   inherit src;
   strictDeps = true;
+
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-wESDxtKRMm/jyCr4kc20UuHGcE2s+OCMjfL+l1XihnA=";
 
   nativeBuildInputs = [ rustPlatform.bindgenHook ];
 
@@ -42,8 +29,8 @@ crane'.buildPackage {
   ];
 
   # Use system RocksDB
-  ROCKSDB_INCLUDE_DIR = "${rocksdb'}/include";
-  ROCKSDB_LIB_DIR = "${rocksdb'}/lib";
+  ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
+  ROCKSDB_LIB_DIR = "${rocksdb}/lib";
   NIX_OUTPATH_USED_AS_RANDOM_SEED = "randomseed";
   CONDUIT_VERSION_EXTRA = src.shortRev;
 }

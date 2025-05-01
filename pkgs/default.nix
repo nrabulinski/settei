@@ -17,8 +17,6 @@ in
     package = import ./conduit;
     settings.args = {
       src = config.inputs.conduit-src.result;
-      crane = config.inputs.crane.result.mkLib;
-      fenix = config.inputs.fenix.result.packages;
     };
   };
 

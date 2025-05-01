@@ -47,13 +47,6 @@
       url = "gitlab:famedly/conduit?ref=next";
       flake = false;
     };
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    crane = {
-      url = "github:ipetkov/crane";
-    };
     firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +57,6 @@
     attic = {
       url = "git+https://git.lix.systems/nrabulinski/attic.git";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
       inputs.lix.follows = "lix";
       inputs.lix-module.follows = "lix-module";
     };
@@ -75,7 +67,7 @@
     zjstatus = {
       url = "github:dj95/zjstatus";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
+      inputs.crane.follows = "attic/crane";
     };
     lix = {
       url = "git+https://git.lix.systems/lix-project/lix.git";
