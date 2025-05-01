@@ -47,10 +47,6 @@
       url = "gitlab:famedly/conduit?ref=next";
       flake = false;
     };
-    firefox-darwin = {
-      url = "github:bandithedoge/nixpkgs-firefox-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     niko-nur = {
       url = "github:nrabulinski/nur-packages";
     };

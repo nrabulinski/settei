@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   inputs',
   ...
 }:
@@ -29,11 +28,7 @@
 
     programs.firefox = {
       enable = true;
-      package =
-        let
-          firefox-pkgs = pkgs.extend inputs.firefox-darwin.overlay;
-        in
-        lib.mkIf pkgs.stdenv.isDarwin firefox-pkgs.firefox-bin;
+      package = lib.mkIf pkgs.stdenv.isDarwin pkgs.firefox-unwrapped;
     };
 
     programs.qutebrowser = {
