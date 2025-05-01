@@ -7,6 +7,18 @@
 }:
 let
   cfg = config.settei.flake-qol;
+
+  nixpkgsInputToFlakeRef =
+    input:
+    if input._type or "" == "flake" then
+      {
+        type = "github";
+        owner = "NixOS";
+        repo = "nixpkgs";
+        inherit (input) lastModified narHash rev;
+      }
+    else
+      input;
 in
 {
   _file = ./flake-qol.nix;
@@ -20,6 +32,12 @@ in
       default = true;
     };
     inputs = mkOption { type = types.unspecified; };
+    nixpkgsRef = mkOption {
+      type = types.unspecified;
+      default = cfg.inputs.nixpkgs;
+      apply =
+        ref: if builtins.isString ref then builtins.parseFlakeRef ref else nixpkgsInputToFlakeRef ref;
+    };
     inputs-flakes = mkOption {
       type = types.attrs;
       readOnly = true;
@@ -44,8 +62,8 @@ in
       settei.user.extraArgs = reexportedArgs;
 
       nix = {
-        registry = lib.mapAttrs (_: flake: { inherit flake; }) cfg.inputs-flakes;
-        nixPath = lib.mapAttrsToList (name: _: "${name}=flake:${name}") cfg.inputs-flakes;
+        registry.nixpkgs.to = cfg.nixpkgsRef;
+        nixPath = [ "nixpkgs=flake:nixpkgs" ];
       };
     };
 }
