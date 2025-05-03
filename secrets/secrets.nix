@@ -65,6 +65,7 @@ in
   ];
   "rab-lol-cf.age".publicKeys = [
     keys.system.kazuki
+    keys.system.youko
     keys.other.bootstrap
   ];
   "rabulinski-com-cf.age".publicKeys = [
@@ -86,6 +87,10 @@ in
   "forgejo-token.age".publicKeys = [
     keys.system.youko
     keys.system.ude
+    keys.other.bootstrap
+  ];
+  "paperless-pass.age".publicKeys = [
+    keys.system.youko
     keys.other.bootstrap
   ];
 }
