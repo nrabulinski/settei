@@ -4,7 +4,7 @@
     enable = true;
     skhdConfig =
       let
-        spaceCount = 6;
+        spaceCount = 9;
         spaceBindings = lib.genList (
           i:
           let
