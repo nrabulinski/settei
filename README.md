@@ -3,7 +3,7 @@
   雪定<rp>(</rp><rt>せってい</rt><rp>)</rp>
 </ruby>
 </h1>
-Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, home-manager, and flake-parts modules.
+Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, home-manager, and nilla modules.
 
 > [!CAUTION]
 > I tried to make the modules in this repository useful to others without having
@@ -25,13 +25,12 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
 - modules - options which in principle should be reusable by others
   - system - my opinionated nixos/nix-darwin modules
   - home - my opinionated home-manager modules
-  - flake - flake-parts modules
+  - nilla - nilla modules
 - services - configs for services I self-host
 - secrets - agenix secrets
 - wrappers - nix packages wrapped with my configs (see:
   [wrapper-manager](https://github.com/viperML/wrapper-manager))
 - assets - miscellaneous values reused throughout my config
-- effects.nix - hercules-ci configuration
 
 ## Code guidelines
 
@@ -55,9 +54,8 @@ clean, maintainable, and reusable.
 
 Sorted rougly by priority
 
+- get rid of flakes completely
 - bring back ci (sorta done)
-- hercules-ci effects for deploying machines on update (if configuration is
-  valid)
-- fix disko
+- automatic deploys (either push or pull, to be decided)
 - make the configuration truly declarative (to a reasonable degree)
 - themeing solution

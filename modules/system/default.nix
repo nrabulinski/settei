@@ -22,7 +22,6 @@
     (import ./tailscale.nix { inherit isLinux; })
     (import ./containers.nix { inherit isLinux; })
     ./unfree.nix
-    (import ./hercules.nix { inherit isLinux; })
     (import ./github-runner.nix { inherit isLinux; })
     (import ./incus.nix { inherit isLinux; })
     (import ./monitoring.nix { inherit isLinux; })
