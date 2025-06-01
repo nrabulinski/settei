@@ -20,16 +20,13 @@
       nerd-fonts.iosevka
       nerd-fonts.iosevka-term
       fontconfig
-      signal-desktop
+      signal-desktop-bin
     ];
-    settei.unfree.allowedPackages = [ "signal-desktop" ];
+    settei.unfree.allowedPackages = [ "signal-desktop-bin" ];
 
     fonts.fontconfig.enable = true;
 
-    programs.firefox = {
-      enable = true;
-      package = lib.mkIf pkgs.stdenv.isDarwin pkgs.firefox-unwrapped;
-    };
+    programs.firefox.enable = true;
 
     programs.qutebrowser = {
       enable = true;

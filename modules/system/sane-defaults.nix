@@ -112,6 +112,8 @@ let
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
     system.stateVersion = 4;
+    # FIXME: Remove
+    system.primaryUser = username;
 
     security.pam.services.sudo_local.touchIdAuth = true;
 
