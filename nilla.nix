@@ -88,7 +88,7 @@
             darwin-systems' = map (system: system.result.config.system.build.toplevel) darwin-systems;
 
             all-drvs = all-packages' ++ nixos-systems' ++ darwin-systems';
-            all-drvs' = lib.strings.concatMapSep "\n" builtins.unsafeDiscardStringContext all-drvs;
+            all-drvs' = builtins.concatStringsSep "\n" all-drvs;
           in
           mkPackage (
             { runCommand }:
@@ -104,7 +104,7 @@
             system,
           }:
           writeShellScript "ci-check" ''
-            nix-instantiate --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath
+            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath
             "${lib.getExe config.packages.formatter.result.${system}}" --ci
           ''
         );
@@ -128,6 +128,7 @@
             config.packages.agenix.result.${system}
             config.packages.attic-client.result.${system}
             config.packages.nh.result.${system}
+            config.packages.formatter.result.${system}
           ];
         };
     };
