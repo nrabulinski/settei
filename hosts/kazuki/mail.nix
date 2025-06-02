@@ -37,6 +37,8 @@
     };
 
     certificateScheme = "acme-nginx";
+
+    stateVersion = 2;
   };
 
   # TODO: Remove once SNM gets their shit together

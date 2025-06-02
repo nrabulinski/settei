@@ -13,7 +13,8 @@ rustPlatform.buildRustPackage {
   inherit src;
   strictDeps = true;
 
-  cargoLock.lockFile = "${src}/Cargo.lock";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-gNcpB2LMZU18RIxVu+mJfa4+lB5rNIRcZ2DJPvZCdQo=";
 
   nativeBuildInputs = [ rustPlatform.bindgenHook ];
 
