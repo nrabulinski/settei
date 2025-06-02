@@ -47,9 +47,6 @@
       url = "gitlab:famedly/conduit?ref=next";
       flake = false;
     };
-    niko-nur = {
-      url = "github:nrabulinski/nur-packages";
-    };
     attic = {
       url = "git+https://git.lix.systems/nrabulinski/attic.git";
       flake = false;
