@@ -1,6 +1,11 @@
-{ pkgs, ... }:
 {
-  programs.qutebrowser = {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  programs.qutebrowser = lib.mkIf config.settei.desktop.enable {
     # TODO: Enable again
     enable = pkgs.stdenv.isLinux;
     searchEngines = {
