@@ -108,6 +108,15 @@ let
     boot.kernel.sysctl."kernel.yama.ptrace_scope" = 0;
 
     settei.user.config.services.ssh-agent.enable = true;
+
+    nix.settings = {
+      experimental-features = [ "cgroups" ];
+      use-cgroups = true;
+    };
+    systemd.services.nix-daemon.serviceConfig = {
+      Delegate = "yes";
+      DelegateSubgroup = "supervisor";
+    };
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {
