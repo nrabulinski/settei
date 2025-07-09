@@ -10,7 +10,6 @@ in
 {
   wrappers.fish = {
     basePackage = pkgs.fish;
-    wrapByDefault = false;
 
     programs.fish =
       { config, ... }:

@@ -595,38 +595,23 @@
       }
     },
     "wrapper-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+      "flake": false,
       "locked": {
-        "lastModified": 1707514093,
-        "narHash": "sha256-vrESSBhoRgEnAglfr30Vd1lzuS4pX/xLjoSj78oQKOc=",
-        "owner": "nrabulinski",
+        "lastModified": 1751998186,
+        "narHash": "sha256-np2RxS8tRz/jGfUSYKxzg7cCi4dS8PL8gutLZfPMbIY=",
+        "owner": "viperML",
         "repo": "wrapper-manager",
-        "rev": "01b80d8ea37839a7614177d59f06eb88fbe30fd2",
+        "rev": "8ad2484b485acad0632cb0af15b5eb704e3c1d0a",
         "type": "github"
       },
       "original": {
-        "owner": "nrabulinski",
-        "ref": "wrap-certain-programs",
+        "owner": "viperML",
         "repo": "wrapper-manager",
         "type": "github"
       }
     },
     "wrapper-manager-hm-compat": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "wrapper-manager": [
-          "wrapper-manager"
-        ]
-      },
+      "flake": false,
       "locked": {
         "lastModified": 1752097311,
         "narHash": "sha256-54VWi/AwHkzsjStfJqLQu/BlP4HfMNBm9AHBKTIkqDY=",

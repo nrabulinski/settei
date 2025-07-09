@@ -28,16 +28,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wrapper-manager = {
-      # TODO: Move back once https://github.com/viperML/wrapper-manager/issues/14 is resolved
-      # url = "github:viperML/wrapper-manager";
-      url = "github:nrabulinski/wrapper-manager?ref=wrap-certain-programs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:viperML/wrapper-manager";
+      flake = false;
     };
     wrapper-manager-hm-compat = {
       url = "github:nrabulinski/wrapper-manager-hm-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-      inputs.wrapper-manager.follows = "wrapper-manager";
+      flake = false;
     };
     racket = {
       url = "github:nrabulinski/racket.nix";

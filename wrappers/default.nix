@@ -9,9 +9,13 @@ let
     "aarch64-linux"
     "aarch64-darwin"
   ];
+  wrapper-manager = import inputs.wrapper-manager-hm-compat {
+    wrapper-manager = (import inputs.wrapper-manager).lib;
+    inherit (inputs) home-manager;
+  };
   wrappedPerSystem = lib.attrs.generate systems (
     system:
-    inputs.wrapper-manager-hm-compat.lib {
+    wrapper-manager {
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
         ./starship
