@@ -9,4 +9,5 @@ in
     nixos = builtins.mapAttrs (_: system: system.result) nilla.systems.nixos;
     darwin = builtins.mapAttrs (_: system: system.result) nilla.systems.darwin;
   };
+  pkgs = builtins.mapAttrs (_: pkg: pkg.result.${builtins.currentSystem}) nilla.packages;
 }
