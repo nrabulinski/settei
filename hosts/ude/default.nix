@@ -10,6 +10,7 @@
       imports = [
         "${modulesPath}/profiles/qemu-guest.nix"
         ./disks.nix
+        ./impure.nix
       ];
 
       nixpkgs.hostPlatform = "aarch64-linux";
@@ -27,14 +28,6 @@
 
       settei.incus.enable = true;
       virtualisation.podman.enable = true;
-
-      services.nginx = {
-        enable = true;
-        appendHttpConfig = ''
-          include /impure/nginx/*.conf;
-        '';
-      };
-      networking.firewall.allowedTCPPorts = [ 80 ];
 
       age.secrets.deluge-auth = {
         file = ../../secrets/ude-deluge.age;
