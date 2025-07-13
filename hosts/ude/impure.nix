@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   services.nginx = {
     enable = true;
@@ -6,4 +7,14 @@
     '';
   };
   networking.firewall.allowedTCPPorts = [ 80 ];
+
+  users.users.impure-deploys = {
+    isSystemUser = true;
+    createHome = true;
+    home = "/var/lib/impure";
+    group = "impure-deploys";
+    linger = true;
+    shell = pkgs.bash;
+  };
+  users.groups.impure-deploys = { };
 }

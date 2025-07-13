@@ -1,3 +1,7 @@
+{ config }:
+let
+  inherit (config.assets.sshKeys.other) ude-impure-deploy;
+in
 {
   config.systems.nixos.ude.module =
     {
@@ -28,6 +32,8 @@
 
       settei.incus.enable = true;
       virtualisation.podman.enable = true;
+
+      users.users.impure-deploys.openssh.authorizedKeys.keys = [ ude-impure-deploy ];
 
       age.secrets.deluge-auth = {
         file = ../../secrets/ude-deluge.age;
