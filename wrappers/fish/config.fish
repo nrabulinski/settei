@@ -24,6 +24,7 @@ and begin
     abbr --add -- gdd 'git diff --cached'
     abbr --add -- gl 'git log'
     abbr --add -- gf 'git fixup' # See pkgs/default.nix
+    abbr --add --set-cursor -- gpss 'git push origin% "@:refs/for/main/$(git rev-parse --abbrev-ref @)" -o force-push=true'
 
     # Aliases
     alias cat bat
