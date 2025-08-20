@@ -6,6 +6,17 @@ let
   perInput = system: flake: {
     packages = flake.packages.${system};
   };
+  # Tests on macOS with auto-allocate-uids are currently broken.
+  # Revert once fixes are found and merged.
+  no-lix-install-checks = {
+    nixpkgs.overlays = [
+      (_final: prev: {
+        lix = prev.lix.overrideAttrs {
+          doInstallCheck = false;
+        };
+      })
+    ];
+  };
 in
 {
   config.homeModules = rec {
@@ -27,6 +38,7 @@ in
         inputs.home-manager.nixosModules.home-manager
         "${inputs.attic}/nixos/atticd.nix"
         inputs.lix-module.nixosModules.default
+        no-lix-install-checks
         {
           disabledModules = [
             "services/networking/atticd.nix"
@@ -55,6 +67,7 @@ in
         inputs.agenix.darwinModules.age
         inputs.home-manager.darwinModules.home-manager
         inputs.lix-module.nixosModules.default
+        no-lix-install-checks
       ];
     };
     default = combined;

@@ -28,7 +28,7 @@ in
   programs.nix-index.enable = true;
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    matchBlocks."*".addKeysToAgent = "yes";
     enableDefaultConfig = false;
   };
   programs.git = {

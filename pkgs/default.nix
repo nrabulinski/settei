@@ -15,7 +15,19 @@ let
   atticPkgs = lib.attrs.generate systems (
     system:
     let
-      pkgs = inputs.nixpkgs.legacyPackages.${system}.extend inputs.lix-module.overlays.default;
+      # See: modules/default.nix for explanation.
+      lix-overlay =
+        final: prev:
+        let
+          lix-pkgs = inputs.lix-module.overlays.default final prev;
+        in
+        lix-pkgs
+        // {
+          lix = lix-pkgs.lix.overrideAttrs {
+            doInstallCheck = false;
+          };
+        };
+      pkgs = inputs.nixpkgs.legacyPackages.${system}.extend lix-overlay;
       craneLib = import inputs.crane { inherit pkgs; };
     in
     pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }

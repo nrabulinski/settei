@@ -13,7 +13,6 @@ rustPlatform.buildRustPackage {
   inherit src;
   strictDeps = true;
 
-  useFetchCargoVendor = true;
   cargoHash = "sha256-+0xx8h1W6TwXoaWKPXtOxt0dfGd/078/LPnb6yfI7Lg=";
 
   nativeBuildInputs = [ rustPlatform.bindgenHook ];

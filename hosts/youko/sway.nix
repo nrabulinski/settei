@@ -7,7 +7,6 @@
 {
   services.greetd = {
     enable = true;
-    vt = 2;
     settings.default_session =
       let
         swayWrapper = pkgs.writeShellScript "sway-wrapper" ''
@@ -16,7 +15,7 @@
         '';
       in
       {
-        command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${swayWrapper}";
+        command = "${lib.getExe pkgs.tuigreet} --time --cmd ${swayWrapper}";
         user = "niko";
       };
   };
@@ -129,9 +128,6 @@
             }
           ];
         };
-      programs.rofi = {
-        enable = true;
-        package = pkgs.rofi-wayland;
-      };
+      programs.rofi.enable = true;
     };
 }
