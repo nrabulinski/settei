@@ -121,7 +121,6 @@
         {
           mkShellNoCC,
           system,
-          nh,
         }:
         mkShellNoCC {
           packages = [

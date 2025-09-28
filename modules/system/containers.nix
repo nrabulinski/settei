@@ -1,7 +1,6 @@
 { isLinux }:
 {
   config,
-  options,
   lib,
   ...
 }:
@@ -96,7 +95,8 @@ let
         bindMounts = {
           # Pass in host's system key to allow decrypting secrets inside containers
           "/etc/ssh/ssh_host_ed25519_key" = { };
-        } // container.bindMounts;
+        }
+        // container.bindMounts;
 
         privateNetwork = lib.mkForce true;
       }

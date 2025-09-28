@@ -31,7 +31,8 @@ in
   ];
   "alert-plain-pass.age".publicKeys = [
     keys.other.bootstrap
-  ] ++ builtins.attrValues keys.system;
+  ]
+  ++ builtins.attrValues keys.system;
   "storage-box-creds.age".publicKeys = [
     keys.system.kazuki
     keys.other.bootstrap

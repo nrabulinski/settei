@@ -36,7 +36,8 @@ in
         home-manager.extraSpecialArgs = {
           inherit (args) inputs inputs';
           machineName = configurationName;
-        } // cfg.extraArgs;
+        }
+        // cfg.extraArgs;
 
         home-manager.users.${username} = {
           _file = ./user.nix;

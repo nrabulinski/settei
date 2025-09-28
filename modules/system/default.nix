@@ -4,7 +4,6 @@
   isLinux,
 }:
 {
-  config,
   lib,
   pkgs,
   inputs',
