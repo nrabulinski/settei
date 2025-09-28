@@ -22,4 +22,5 @@
 
   services.smartd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+  powerManagement.powertop.enable = true;
 }
