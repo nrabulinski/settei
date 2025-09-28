@@ -18,7 +18,6 @@
     (import ./sane-defaults.nix { inherit isLinux; })
     (import ./flake-qol.nix { inherit perInput; })
     ./user.nix
-    (import ./programs { inherit isLinux; })
     (import ./tailscale.nix { inherit isLinux; })
     (import ./containers.nix { inherit isLinux; })
     ./unfree.nix
