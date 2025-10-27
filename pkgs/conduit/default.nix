@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage {
   inherit src;
   strictDeps = true;
 
-  cargoHash = "sha256-+0xx8h1W6TwXoaWKPXtOxt0dfGd/078/LPnb6yfI7Lg=";
+  cargoHash = "sha256-kWurvPo1hjDAFIpfHHOw78ngAVgArW2iYKCB6VscDqw=";
 
   nativeBuildInputs = [ rustPlatform.bindgenHook ];
 

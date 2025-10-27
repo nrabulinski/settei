@@ -77,6 +77,7 @@
               builtins.removeAttrs config.packages [
                 "ci-check"
                 "__allPackages"
+                "ci-build"
               ]
             );
             all-packages' = lib.lists.flatten (map (pkg: builtins.attrValues pkg.result) all-packages);
@@ -107,6 +108,41 @@
             nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath
             "${lib.getExe config.packages.formatter.result.${system}}" --ci
           ''
+        );
+        ci-build = mkPackage (
+          { stdenv, runCommand }:
+          let
+            all-packages = builtins.attrValues (
+              builtins.removeAttrs config.packages [
+                "ci-check"
+                "__allPackages"
+                "ci-build"
+                # TODO: Build for all systems
+                # This is fine because it will be built as part of the system config,
+                # but for some reason it doesn't build on x86_64-linux
+                "conduit-next"
+              ]
+            );
+            all-packages' = map (pkg: pkg.result.${stdenv.system}) all-packages;
+
+            systems = builtins.attrValues (
+              if stdenv.isLinux then config.systems.nixos else config.systems.darwin
+            );
+            systems' = builtins.filter (
+              system: system.result.config.nixpkgs.hostPlatform == stdenv.system
+            ) systems;
+            systems'' = map (system: system.result.config.system.build.toplevel) systems';
+
+            all-drvs = all-packages' ++ systems'';
+          in
+          runCommand "ci-build"
+            {
+              allDerivations = all-drvs;
+              passAsFile = [ "allDerivations" ];
+            }
+            ''
+              cp "$allDerivationsPath" "$out"
+            ''
         );
       };
 

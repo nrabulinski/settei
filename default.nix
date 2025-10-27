@@ -4,6 +4,7 @@ let
 in
 {
   ci.check = getPackage "ci-check";
+  ci.build = getPackage "ci-build";
   formatter = getPackage "formatter";
   systems = {
     nixos = builtins.mapAttrs (_: system: system.result) nilla.systems.nixos;

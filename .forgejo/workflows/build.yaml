@@ -11,3 +11,15 @@ jobs:
       - uses: actions/checkout@v4
       - run: nix-build -A ci.check
       - run: ./result
+
+  build:
+    strategy:
+      matrix:
+        host: [x86_64-linux, aarch64-linux]
+    needs: check
+    runs-on:
+      - native
+      - native-${{ matrix.host }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: nix-build -A ci.build
