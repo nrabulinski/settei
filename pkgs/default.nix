@@ -86,4 +86,6 @@ in
     package = import "${inputs.nh}/package.nix";
     settings.args.rev = inputs.nh.shortRev;
   };
+
+  config.packages.ddns = mkPackage (import ./ddns/package.nix);
 }

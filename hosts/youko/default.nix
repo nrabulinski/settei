@@ -62,6 +62,10 @@ in
         text = null;
       };
 
+      age.secrets.ddns-secret.file = ../../secrets/ddns-secret.age;
+      settei.ddns.enable = true;
+      settei.ddns.secret = config.age.secrets.ddns-secret.path;
+
       networking.hostId = "b49ee8de";
     };
 }

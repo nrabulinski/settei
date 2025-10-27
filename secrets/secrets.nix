@@ -94,4 +94,9 @@ in
     keys.system.youko
     keys.other.bootstrap
   ];
+  "ddns-secret.age".publicKeys = [
+    keys.system.kazuki
+    keys.system.youko
+    keys.other.bootstrap
+  ];
 }

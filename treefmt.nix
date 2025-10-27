@@ -7,6 +7,8 @@
   programs.deno.enable = true;
   programs.stylua.enable = true;
   programs.shfmt.enable = true;
+  programs.taplo.enable = true;
+  programs.rustfmt.enable = true;
   settings.global.excludes = [
     # agenix
     "*.age"
@@ -18,6 +20,8 @@
     # custom assets
     "*.png"
     "*.svg"
+
+    "**/.gitignore"
   ];
   settings.on-unmatched = "fatal";
 }

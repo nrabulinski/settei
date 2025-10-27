@@ -24,6 +24,7 @@
     (import ./incus.nix { inherit isLinux; })
     (import ./monitoring.nix { inherit isLinux; })
     (import ./builder.nix { inherit isLinux; })
+    (import ./ddns.nix { inherit isLinux; })
   ];
 
   options.settei = with lib; {

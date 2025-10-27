@@ -121,6 +121,11 @@
         {
           mkShellNoCC,
           system,
+          rustc,
+          cargo,
+          rustfmt,
+          clippy,
+          rust-analyzer,
         }:
         mkShellNoCC {
           packages = [
@@ -128,6 +133,12 @@
             config.packages.attic-client.result.${system}
             config.packages.nh.result.${system}
             config.packages.formatter.result.${system}
+
+            rustc
+            cargo
+            rustfmt
+            clippy
+            rust-analyzer
           ];
         };
     };
