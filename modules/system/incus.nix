@@ -29,7 +29,6 @@ let
         enable = true;
         inherit (cfg) package clientPackage;
         preseed = {
-          # TODO: Default profile with storage pool
           networks = [
             {
               name = "incusbr0";

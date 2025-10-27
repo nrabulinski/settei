@@ -31,18 +31,21 @@ in
     matchBlocks."*".addKeysToAgent = "yes";
     enableDefaultConfig = false;
   };
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+  };
   programs.git = {
     enable = true;
-    difftastic.enable = true;
     lfs.enable = true;
-    userName = "Nikodem Rabuliński";
-    userEmail = lib.mkDefault "nikodem@rabulinski.com";
     # TODO: settei options for home-manager module
     signing = {
       key = osConfig.settei.sane-defaults.allSshKeys.${machineName};
       signByDefault = true;
     };
-    extraConfig = {
+    settings = {
+      user.name = "Nikodem Rabuliński";
+      user.email = lib.mkDefault "nikodem@rabulinski.com";
       gpg.format = "ssh";
       push.followTags = true;
       diff.algorithm = "histogram";

@@ -40,7 +40,4 @@
 
     stateVersion = 3;
   };
-
-  # TODO: Remove once SNM gets their shit together
-  services.dovecot2.sieve.extensions = [ "fileinto" ];
 }
