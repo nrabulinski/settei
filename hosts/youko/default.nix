@@ -18,6 +18,7 @@ in
       config,
       lib,
       username,
+      pkgs,
       ...
     }:
     {
@@ -55,7 +56,18 @@ in
       virtualisation.podman.enable = true;
       hardware.keyboard.qmk.enable = true;
 
-      settei.unfree.allowedPackages = [ "vmware-workstation" ];
+      services.unifi = {
+        enable = true;
+        unifiPackage = pkgs.unifi;
+        mongodbPackage = pkgs.mongodb-7_0;
+        openFirewall = true;
+      };
+
+      settei.unfree.allowedPackages = [
+        "unifi-controller"
+        "mongodb"
+        "vmware-workstation"
+      ];
       virtualisation.vmware.host.enable = true;
       environment.etc."vmware/config" = lib.mkForce {
         source = "${config.virtualisation.vmware.host.package}/etc/vmware/config";
