@@ -155,7 +155,7 @@
       builder = "nixpkgs-flake";
       shell =
         {
-          mkShellNoCC,
+          mkShell,
           system,
           rustc,
           cargo,
@@ -163,7 +163,7 @@
           clippy,
           rust-analyzer,
         }:
-        mkShellNoCC {
+        mkShell {
           packages = [
             config.packages.agenix.result.${system}
             config.packages.attic-client.result.${system}

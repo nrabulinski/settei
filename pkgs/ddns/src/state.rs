@@ -1,4 +1,4 @@
-use std::{collections::HashMap, net::IpAddr, sync::Arc};
+use std::{borrow::Cow, collections::HashMap, net::IpAddr, sync::Arc};
 
 use color_eyre::Result;
 use subtle::ConstantTimeEq;
@@ -9,12 +9,36 @@ use crate::cf::{
     overwrite_record_for_domain,
 };
 
+#[derive(Hash, PartialEq, Eq)]
+struct EntryKey<'a> {
+    domain: Cow<'a, str>,
+    rec_type: &'static str,
+}
+
+impl EntryKey<'static> {
+    fn owned(domain: &str, rec_type: &'static str) -> Self {
+        EntryKey {
+            domain: domain.to_string().into(),
+            rec_type,
+        }
+    }
+}
+
+impl<'a> EntryKey<'a> {
+    fn borrow(domain: &'a str, rec_type: &'static str) -> Self {
+        EntryKey {
+            domain: domain.into(),
+            rec_type,
+        }
+    }
+}
+
 struct StateInner {
     secret: Vec<u8>,
     cf_key: String,
     domain: String,
     zone_id: OnceCell<String>,
-    dns_entry_cache: RwLock<HashMap<String, String>>,
+    dns_entry_cache: RwLock<HashMap<EntryKey<'static>, String>>,
 }
 
 #[derive(Clone)]
@@ -54,7 +78,13 @@ impl Ddns {
         };
         let content = addr.to_string();
         let zone = self.get_zone_id().await?;
-        if let Some(record) = self.0.dns_entry_cache.read().await.get(domain) {
+        if let Some(record) = self
+            .0
+            .dns_entry_cache
+            .read()
+            .await
+            .get(&EntryKey::borrow(domain, rec_type))
+        {
             overwrite_record_for_domain(self.cf_key(), zone, record, domain, rec_type, &content)
                 .await?;
         } else {
@@ -78,7 +108,7 @@ impl Ddns {
                 .dns_entry_cache
                 .write()
                 .await
-                .insert(domain.to_string(), record);
+                .insert(EntryKey::owned(domain, rec_type), record);
         }
         Ok(())
     }
