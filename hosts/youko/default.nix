@@ -74,6 +74,11 @@ in
         text = null;
       };
 
+      settei.tailscale = {
+        ipv4 = "100.114.160.30";
+        ipv6 = "fd7a:115c:a1e0::8e01:a01e";
+      };
+
       age.secrets.ddns-secret.file = ../../secrets/ddns-secret.age;
       settei.ddns.enable = true;
       settei.ddns.secret = config.age.secrets.ddns-secret.path;
