@@ -1,7 +1,7 @@
 on:
   push:
     branches: [main]
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
 
 jobs:
@@ -23,3 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: nix-build -A ci.build
+      - name: Push to cache
+        run: |
+          nix-build -o attic-result -A pkgs.attic-client
+          export PATH="$(readlink -f attic-result/bin):$PATH"
+          attic login rab-attic 'https://attic.rab.lol' '${{ secrets.ATTIC_TOKEN }}'
+          attic push rab-attic:public result

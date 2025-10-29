@@ -12,25 +12,27 @@ let
   mkPackage = package: {
     inherit systems package builder;
   };
-  atticPkgs = lib.attrs.generate systems (
-    system:
-    let
-      # See: modules/default.nix for explanation.
-      lix-overlay =
-        final: prev:
-        let
-          lix-pkgs = inputs.lix-module.overlays.default final prev;
-        in
-        lix-pkgs
-        // {
-          lix = lix-pkgs.lix.overrideAttrs {
-            doInstallCheck = false;
-          };
-        };
-      pkgs = inputs.nixpkgs.legacyPackages.${system}.extend lix-overlay;
-      craneLib = import inputs.crane { inherit pkgs; };
-    in
-    pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
+  # There are problems with my patched attic... investigate
+  atticPkgs = lib.attrs.generate systems (system: {
+    inherit (inputs.nixpkgs.legacyPackages.${system}) attic-client attic-server;
+  }
+  # let
+  #   # See: modules/default.nix for explanation.
+  #   lix-overlay =
+  #     final: prev:
+  #     let
+  #       lix-pkgs = inputs.lix-module.overlays.default final prev;
+  #     in
+  #     lix-pkgs
+  #     // {
+  #       lix = lix-pkgs.lix.overrideAttrs {
+  #         doInstallCheck = false;
+  #       };
+  #     };
+  #   pkgs = inputs.nixpkgs.legacyPackages.${system}.extend lix-overlay;
+  #   craneLib = import inputs.crane { inherit pkgs; };
+  # in
+  # pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
   );
 in
 {
