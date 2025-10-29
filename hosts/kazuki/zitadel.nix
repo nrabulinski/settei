@@ -81,22 +81,16 @@
     443
   ];
 
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedTlsSettings = true;
-    virtualHosts."zi.rabulinski.com" = {
-      forceSSL = true;
-      enableACME = true;
-      acmeRoot = null;
-      locations."/" = {
-        extraConfig = ''
-          grpc_pass grpc://${config.settei.containers.zitadel.localAddress}:8080;
-          grpc_set_header Host $host:$server_port;
-        '';
-      };
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."zi.rabulinski.com" = {
+    forceSSL = true;
+    enableACME = true;
+    acmeRoot = null;
+    locations."/" = {
+      extraConfig = ''
+        grpc_pass grpc://${config.settei.containers.zitadel.localAddress}:8080;
+        grpc_set_header Host $host:$server_port;
+      '';
     };
   };
 

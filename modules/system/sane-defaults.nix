@@ -117,6 +117,14 @@ let
       Delegate = "yes";
       DelegateSubgroup = "supervisor";
     };
+
+    # No good reason to not have those enabled
+    services.nginx = {
+      recommendedProxySettings = lib.mkDefault true;
+      recommendedGzipSettings = lib.mkDefault true;
+      recommendedOptimisation = lib.mkDefault true;
+      recommendedTlsSettings = lib.mkDefault true;
+    };
   };
 
   darwinConfig = lib.optionalAttrs (!isLinux) {

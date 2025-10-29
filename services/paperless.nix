@@ -33,21 +33,15 @@
           };
         };
 
-        services.nginx = {
-          enable = true;
-          recommendedProxySettings = true;
-          recommendedGzipSettings = true;
-          recommendedOptimisation = true;
-          recommendedTlsSettings = true;
-          virtualHosts."paper.rab.lol" = {
-            forceSSL = true;
-            enableACME = true;
-            acmeRoot = null;
-            locations."/".proxyPass = "http://localhost:28981";
-            extraConfig = ''
-              client_max_body_size 24G;
-            '';
-          };
+        services.nginx.enable = true;
+        services.nginx.virtualHosts."paper.rab.lol" = {
+          forceSSL = true;
+          enableACME = true;
+          acmeRoot = null;
+          locations."/".proxyPass = "http://localhost:28981";
+          extraConfig = ''
+            client_max_body_size 24G;
+          '';
         };
 
         security.acme.acceptTerms = true;

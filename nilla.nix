@@ -105,7 +105,7 @@
             system,
           }:
           writeShellScript "ci-check" ''
-            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath
+            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath "$@"
             "${lib.getExe config.packages.formatter.result.${system}}" --ci
           ''
         );

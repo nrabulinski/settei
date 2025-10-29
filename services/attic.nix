@@ -68,10 +68,6 @@
 
           services.nginx = {
             enable = true;
-            recommendedProxySettings = true;
-            recommendedGzipSettings = true;
-            recommendedOptimisation = true;
-            recommendedTlsSettings = true;
             virtualHosts."attic.nrab.lol" = {
               forceSSL = true;
               enableACME = true;

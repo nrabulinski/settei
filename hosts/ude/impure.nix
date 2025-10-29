@@ -2,6 +2,10 @@
 {
   services.nginx = {
     enable = true;
+    recommendedProxySettings = false;
+    recommendedGzipSettings = false;
+    recommendedOptimisation = false;
+    recommendedTlsSettings = false;
     appendHttpConfig = ''
       include /impure/nginx/*.conf;
     '';

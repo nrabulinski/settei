@@ -57,23 +57,17 @@
             "L+ '${cfg.customDir}/public/assets/img' - - - - ${imgDir}"
           ];
 
-        services.nginx = {
-          enable = true;
-          recommendedProxySettings = true;
-          recommendedGzipSettings = true;
-          recommendedOptimisation = true;
-          recommendedTlsSettings = true;
-          virtualHosts."git.rab.lol" = {
-            forceSSL = true;
-            enableACME = true;
-            acmeRoot = null;
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:3000";
-              extraConfig = ''
-                proxy_set_header Connection $http_connection;
-                proxy_set_header Upgrade $http_upgrade;
-              '';
-            };
+        services.nginx.enable = true;
+        services.nginx.virtualHosts."git.rab.lol" = {
+          forceSSL = true;
+          enableACME = true;
+          acmeRoot = null;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:3000";
+            extraConfig = ''
+              proxy_set_header Connection $http_connection;
+              proxy_set_header Upgrade $http_upgrade;
+            '';
           };
         };
 

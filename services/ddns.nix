@@ -32,18 +32,12 @@
           serviceConfig.Restart = "on-failure";
         };
 
-        services.nginx = {
-          enable = true;
-          recommendedProxySettings = true;
-          recommendedGzipSettings = true;
-          recommendedOptimisation = true;
-          recommendedTlsSettings = true;
-          virtualHosts."ddns.rab.lol" = {
-            forceSSL = true;
-            enableACME = true;
-            acmeRoot = null;
-            locations."/".proxyPass = "http://127.0.0.1:50002";
-          };
+        services.nginx.enable = true;
+        services.nginx.virtualHosts."ddns.rab.lol" = {
+          forceSSL = true;
+          enableACME = true;
+          acmeRoot = null;
+          locations."/".proxyPass = "http://127.0.0.1:50002";
         };
 
         security.acme.acceptTerms = true;

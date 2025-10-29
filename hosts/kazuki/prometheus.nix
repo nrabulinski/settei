@@ -44,30 +44,24 @@
     };
   };
 
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedTlsSettings = true;
-    virtualHosts."monitor.rab.lol" = {
-      forceSSL = true;
-      enableACME = true;
-      acmeRoot = null;
-      locations."/" = {
-        proxyPass = "http://grafana";
-        proxyWebsockets = true;
-      };
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."monitor.rab.lol" = {
+    forceSSL = true;
+    enableACME = true;
+    acmeRoot = null;
+    locations."/" = {
+      proxyPass = "http://grafana";
+      proxyWebsockets = true;
     };
-
-    upstreams.grafana.servers =
-      let
-        inherit (config.services.grafana.settings.server) http_addr http_port;
-      in
-      {
-        "${http_addr}:${toString http_port}" = { };
-      };
   };
+
+  services.nginx.upstreams.grafana.servers =
+    let
+      inherit (config.services.grafana.settings.server) http_addr http_port;
+    in
+    {
+      "${http_addr}:${toString http_port}" = { };
+    };
 
   security.acme.certs."monitor.rab.lol" = {
     dnsProvider = "cloudflare";

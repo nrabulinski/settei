@@ -56,25 +56,19 @@
     443
   ];
 
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedTlsSettings = true;
-    virtualHosts."ntfy.nrab.lol" = {
-      forceSSL = true;
-      enableACME = true;
-      acmeRoot = null;
-      locations."/" = {
-        proxyPass = "http://ntfy";
-        proxyWebsockets = true;
-      };
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."ntfy.nrab.lol" = {
+    forceSSL = true;
+    enableACME = true;
+    acmeRoot = null;
+    locations."/" = {
+      proxyPass = "http://ntfy";
+      proxyWebsockets = true;
     };
+  };
 
-    upstreams.ntfy.servers = {
-      "localhost:9800" = { };
-    };
+  services.nginx.upstreams.ntfy.servers = {
+    "localhost:9800" = { };
   };
 
   security.acme.certs."ntfy.nrab.lol" = {
