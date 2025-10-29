@@ -43,6 +43,7 @@ in
   ];
   "attic-creds.age".publicKeys = [
     keys.system.kazuki
+    keys.system.youko
     keys.other.bootstrap
   ];
   "github-token.age".publicKeys = [
