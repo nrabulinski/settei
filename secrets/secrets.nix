@@ -33,16 +33,11 @@ in
     keys.other.bootstrap
   ]
   ++ builtins.attrValues keys.system;
-  "storage-box-creds.age".publicKeys = [
-    keys.system.kazuki
-    keys.other.bootstrap
-  ];
   "nrab-lol-cf.age".publicKeys = [
     keys.system.kazuki
     keys.other.bootstrap
   ];
   "attic-creds.age".publicKeys = [
-    keys.system.kazuki
     keys.system.youko
     keys.other.bootstrap
   ];
@@ -50,10 +45,6 @@ in
     keys.system.ude
     keys.system.kazuki
     keys.system.kogata
-    keys.other.bootstrap
-  ];
-  "storage-box-webdav.age".publicKeys = [
-    keys.system.kazuki
     keys.other.bootstrap
   ];
   "ntfy-niko-pass.age".publicKeys = [
