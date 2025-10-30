@@ -57,21 +57,47 @@
           ];
 
           services.nginx.enable = true;
+          services.nginx.upstreams.attic.servers."localhost:${toString atticPort}" = { };
           services.nginx.virtualHosts."attic.rab.lol" = {
             forceSSL = true;
             enableACME = true;
             acmeRoot = null;
             locations."/" = {
-              proxyPass = "http://localhost:${toString atticPort}";
+              proxyPass = "http://attic";
             };
             extraConfig = ''
               client_max_body_size 24G;
             '';
           };
+          services.nginx.virtualHosts."cache.rab.lol" = {
+            forceSSL = true;
+            enableACME = true;
+            acmeRoot = null;
+            locations."/" = {
+              proxyPass = "http://attic/public$request_uri";
+            };
+            extraConfig = ''
+              proxy_cache nixstore;
+              proxy_cache_use_stale error timeout http_500 http_502;
+              proxy_cache_lock on;
+              proxy_cache_key $request_uri;
+              proxy_cache_valid 200 2d;
+            '';
+          };
+          services.nginx.proxyCachePath.nixstore = {
+            enable = true;
+            keysZoneName = "nixstore";
+            inactive = "2d";
+          };
 
           users.users.nginx.extraGroups = [ "acme" ];
           security.acme.acceptTerms = true;
           security.acme.certs."attic.rab.lol" = {
+            email = "nikodem@rabulinski.com";
+            dnsProvider = "cloudflare";
+            credentialsFile = config.age.secrets.rab-lol-cf.path;
+          };
+          security.acme.certs."cache.rab.lol" = {
             email = "nikodem@rabulinski.com";
             dnsProvider = "cloudflare";
             credentialsFile = config.age.secrets.rab-lol-cf.path;

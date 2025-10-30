@@ -59,16 +59,14 @@ let
           auto-allocate-uids = true;
           allow-import-from-derivation = false;
           extra-substituters = [
-            "https://cache.nrab.lol"
+            "https://cache.rab.lol"
             "https://cache.garnix.io"
             "https://nix-community.cachix.org"
-            "https://nrabulinski.cachix.org"
           ];
           extra-trusted-public-keys = [
             "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "nrabulinski.cachix.org-1:Q5FD7+1c68uH74CQK66UWNzxhanZW8xcg1LFXxGK8ic="
-            "cache.nrab.lol-1:CJl1TouOyuJ1Xh4tZSXLwm3Upt06HzUNZmeyuEB9EZg="
+            "cache.rab.lol-1:/b0gE755WZeAHXxdtehRWroV4Vu6KOjjuoRLV24Sh4A="
           ];
         };
       };
