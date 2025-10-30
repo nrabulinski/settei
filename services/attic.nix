@@ -1,10 +1,10 @@
 {
-  config.services.attic =
+  config.services.attic-youko =
     let
-      atticPort = 9476;
+      atticPort = 9478;
     in
     {
-      host = "kazuki";
+      host = "youko";
       ports = [ atticPort ];
       module =
         { config, ... }:
@@ -13,8 +13,8 @@
             file = ../secrets/attic-creds.age;
             owner = config.services.atticd.user;
           };
-          age.secrets.nrab-lol-cf = {
-            file = ../secrets/nrab-lol-cf.age;
+          age.secrets.rab-lol-cf = {
+            file = ../secrets/rab-lol-cf.age;
             owner = config.services.nginx.user;
           };
 
@@ -25,16 +25,16 @@
               listen = "[::]:${toString atticPort}";
               storage = {
                 type = "local";
-                path = "/storage-box";
+                path = "/media/attic";
               };
               compression.type = "none";
               chunking = {
-                nar-size-threshold = 0;
-                min-size = 0;
-                avg-size = 0;
-                max-size = 0;
+                nar-size-threshold = 64 * 1024;
+                min-size = 16 * 1024;
+                avg-size = 64 * 1024;
+                max-size = 256 * 1024;
               };
-              api-endpoint = "https://attic.nrab.lol/";
+              api-endpoint = "https://attic.rab.lol/";
             };
           };
 
@@ -51,67 +51,56 @@
             };
           };
 
-          systemd.services.atticd = {
-            after = [ "storage\\x2dbox.mount" ];
-          };
-
-          security.acme = {
-            acceptTerms = true;
-            defaults.email = "nikodem@rabulinski.com";
-          };
-
-          users.users.nginx.extraGroups = [ "acme" ];
           networking.firewall.allowedTCPPorts = [
             80
             443
           ];
 
-          services.nginx = {
-            enable = true;
-            virtualHosts."attic.nrab.lol" = {
-              forceSSL = true;
-              enableACME = true;
-              acmeRoot = null;
-              locations."/" = {
-                proxyPass = "http://attic";
-              };
-              extraConfig = ''
-                client_max_body_size 24G;
-              '';
+          services.nginx.enable = true;
+          services.nginx.upstreams.attic.servers."localhost:${toString atticPort}" = { };
+          services.nginx.virtualHosts."attic.rab.lol" = {
+            forceSSL = true;
+            enableACME = true;
+            acmeRoot = null;
+            locations."/" = {
+              proxyPass = "http://attic";
             };
-            virtualHosts."cache.nrab.lol" = {
-              forceSSL = true;
-              enableACME = true;
-              acmeRoot = null;
-              locations."/" = {
-                proxyPass = "http://attic/public$request_uri";
-              };
-              extraConfig = ''
-                proxy_cache nixstore;
-                proxy_cache_use_stale error timeout http_500 http_502;
-                proxy_cache_lock on;
-                proxy_cache_key $request_uri;
-                proxy_cache_valid 200 24h;
-              '';
-            };
-
-            upstreams."attic".servers = {
-              "localhost:${toString atticPort}" = { };
-            };
-
-            appendHttpConfig = ''
-              proxy_cache_path /var/cache/nginx/nixstore levels=1:2 keys_zone=nixstore:10m max_size=10g inactive=24h use_temp_path=off;
+            extraConfig = ''
+              client_max_body_size 24G;
             '';
           };
-
-          security.acme.certs."attic.nrab.lol" = {
-            dnsProvider = "cloudflare";
-            credentialsFile = config.age.secrets.nrab-lol-cf.path;
+          services.nginx.virtualHosts."cache.rab.lol" = {
+            forceSSL = true;
+            enableACME = true;
+            acmeRoot = null;
+            locations."/" = {
+              proxyPass = "http://attic/public$request_uri";
+            };
+            extraConfig = ''
+              proxy_cache nixstore;
+              proxy_cache_use_stale error timeout http_500 http_502;
+              proxy_cache_lock on;
+              proxy_cache_key $request_uri;
+              proxy_cache_valid 200 2d;
+            '';
+          };
+          services.nginx.proxyCachePath.nixstore = {
+            enable = true;
+            keysZoneName = "nixstore";
+            inactive = "2d";
           };
 
-          security.acme.certs."cache.nrab.lol" = {
+          users.users.nginx.extraGroups = [ "acme" ];
+          security.acme.acceptTerms = true;
+          security.acme.certs."attic.rab.lol" = {
+            email = "nikodem@rabulinski.com";
             dnsProvider = "cloudflare";
-            credentialsFile = config.age.secrets.nrab-lol-cf.path;
+            credentialsFile = config.age.secrets.rab-lol-cf.path;
+          };
+          security.acme.certs."cache.rab.lol" = {
+            email = "nikodem@rabulinski.com";
+            dnsProvider = "cloudflare";
+            credentialsFile = config.age.secrets.rab-lol-cf.path;
           };
         };
     };
