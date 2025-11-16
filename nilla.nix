@@ -105,6 +105,7 @@
             system,
           }:
           writeShellScript "ci-check" ''
+            set -euxo pipefail
             nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath "$@"
             "${lib.getExe config.packages.formatter.result.${system}}" --ci
           ''
@@ -129,7 +130,7 @@
               if stdenv.isLinux then config.systems.nixos else config.systems.darwin
             );
             systems' = builtins.filter (
-              system: system.result.config.nixpkgs.hostPlatform == stdenv.system
+              system: system.result.config.nixpkgs.hostPlatform.system == stdenv.system
             ) systems;
             systems'' = map (system: system.result.config.system.build.toplevel) systems';
 
