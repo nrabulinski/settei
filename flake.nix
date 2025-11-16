@@ -84,5 +84,9 @@
       url = "github:nix-community/nh";
       flake = false;
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      flake = false;
+    };
   };
 }

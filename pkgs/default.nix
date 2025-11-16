@@ -89,5 +89,14 @@ in
     settings.args.rev = inputs.nh.shortRev;
   };
 
+  config.packages.zjstatus = {
+    inherit systems builder;
+    package = import ./zjstatus;
+    settings.args = {
+      src = inputs.zjstatus;
+      inherit (inputs) rust-overlay;
+    };
+  };
+
   config.packages.ddns = mkPackage (import ./ddns/package.nix);
 }

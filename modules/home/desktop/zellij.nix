@@ -23,7 +23,7 @@
       default_tab_template {
         children
         pane size=1 borderless=true {
-          plugin location="file:${inputs'.zjstatus.packages.default}/bin/zjstatus.wasm" {
+          plugin location="file:${inputs'.settei.packages.zjstatus}/zjstatus.wasm" {
             hide_frame_for_single_pane "false"
 
             format_left  "{mode}#[fg=fg,bg=bg,bold] {session}#[bg=bg] {tabs}"
