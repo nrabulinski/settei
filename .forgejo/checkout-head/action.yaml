@@ -1,0 +1,14 @@
+# Reusable action to always check out at latest head,
+# even if the event trigger is pull_request_target
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      if: forgejo.event_name == 'push'
+      uses: actions/checkout@v5
+    - name: Checkout
+      if: forgejo.event_name == 'pull_request_target'
+      uses: actions/checkout@v5
+      with:
+        ref: ${{ forgejo.event.pull_request.head.sha }}

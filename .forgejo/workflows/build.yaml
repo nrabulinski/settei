@@ -8,7 +8,7 @@ jobs:
   check:
     runs-on: native
     steps:
-      - uses: actions/checkout@v4
+      - uses: ./.forgejo/checkout-head
       - run: nix-build -A ci.check
       - run: ./result
 
@@ -21,7 +21,7 @@ jobs:
       - native
       - native-${{ matrix.host }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: ./.forgejo/checkout-head
       - run: nix-build -A ci.build
       - name: Push to cache
         run: |
