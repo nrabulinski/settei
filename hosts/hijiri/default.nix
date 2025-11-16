@@ -12,7 +12,7 @@
         ./yabai.nix
       ];
 
-      nixpkgs.system = "aarch64-darwin";
+      nixpkgs.hostPlatform = "aarch64-darwin";
 
       settei.user.config = {
         settei.desktop.enable = true;

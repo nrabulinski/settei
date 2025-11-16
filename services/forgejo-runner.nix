@@ -33,7 +33,7 @@
               "ubuntu-20.04:docker://node:16-bullseye"
               "ubuntu-18.04:docker://node:16-buster"
               "native:host"
-              "native-${pkgs.system}:host"
+              "native-${pkgs.stdenv.hostPlatform.system}:host"
             ];
           };
         };

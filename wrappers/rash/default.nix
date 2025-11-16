@@ -13,7 +13,7 @@
         rev = "8eb52c163d6ea7c3cec2cc6b1011ce00738942e1";
         hash = "sha256-1yU0ZUBQqYEn85j4T2pLs02MTyJnO5BbYALIa88iomY=";
       };
-      racket-with-libs = inputs.racket.packages.${pkgs.system}.racket.newLayer {
+      racket-with-libs = inputs.racket.packages.${pkgs.stdenv.hostPlatform.system}.racket.newLayer {
         withRacketPackages =
           ps: with ps; [
             readline-gpl

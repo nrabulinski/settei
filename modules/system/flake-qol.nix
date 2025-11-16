@@ -55,7 +55,7 @@ in
     lib.mkIf cfg.enable {
       settei.flake-qol = {
         inputs-flakes = lib.filterAttrs (_: input: input ? flake -> input.flake) cfg.inputs;
-        inputs' = lib.mapAttrs (_: perInput pkgs.stdenv.system) cfg.inputs-flakes;
+        inputs' = lib.mapAttrs (_: perInput pkgs.stdenv.hostPlatform.system) cfg.inputs-flakes;
       };
 
       _module.args = reexportedArgs;

@@ -49,10 +49,10 @@
       {
         agenix = mkPackageFlakeOutput { input = "agenix"; };
         base-packages = mkPackage (
-          { symlinkJoin, system }:
+          { symlinkJoin, stdenv }:
           symlinkJoin {
             name = "settei-base";
-            paths = with (getPkgs system); [
+            paths = with (getPkgs stdenv.hostPlatform.system); [
               helix
               fish
               git-commit-last
@@ -102,12 +102,12 @@
           {
             writeShellScript,
             lib,
-            system,
+            stdenv,
           }:
           writeShellScript "ci-check" ''
             set -euxo pipefail
-            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${system}.outPath "$@"
-            "${lib.getExe config.packages.formatter.result.${system}}" --ci
+            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${stdenv.hostPlatform.system}.outPath "$@"
+            "${lib.getExe config.packages.formatter.result.${stdenv.hostPlatform.system}}" --ci
           ''
         );
         ci-build = mkPackage (
@@ -124,13 +124,13 @@
                 "conduit-next"
               ]
             );
-            all-packages' = map (pkg: pkg.result.${stdenv.system}) all-packages;
+            all-packages' = map (pkg: pkg.result.${stdenv.hostPlatform.system}) all-packages;
 
             systems = builtins.attrValues (
               if stdenv.isLinux then config.systems.nixos else config.systems.darwin
             );
             systems' = builtins.filter (
-              system: system.result.config.nixpkgs.hostPlatform.system == stdenv.system
+              system: system.result.config.nixpkgs.hostPlatform.system == stdenv.hostPlatform.system
             ) systems;
             systems'' = map (system: system.result.config.system.build.toplevel) systems';
 
@@ -157,13 +157,16 @@
       shell =
         {
           mkShell,
-          system,
+          stdenv,
           rustc,
           cargo,
           rustfmt,
           clippy,
           rust-analyzer,
         }:
+        let
+          inherit (stdenv.hostPlatform) system;
+        in
         mkShell {
           packages = [
             config.packages.agenix.result.${system}
