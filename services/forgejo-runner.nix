@@ -15,7 +15,7 @@
         age.secrets.forgejo-runner-token.file = ../secrets/forgejo-token.age;
 
         services.gitea-actions-runner = {
-          package = pkgs.forgejo-actions-runner;
+          package = pkgs.forgejo-runner;
           instances.default = {
             enable = true;
             name = config.networking.hostName;
