@@ -30,6 +30,7 @@
               optimize = 1;
               pdfa_image_compression = "lossless";
             };
+            PAPERLESS_URL = "https://paper.rab.lol";
           };
         };
 
