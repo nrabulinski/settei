@@ -53,7 +53,7 @@
     };
     helix = {
       url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
     zjstatus = {
       url = "github:dj95/zjstatus";

@@ -2,7 +2,7 @@
 {
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.system}.default;
+    package = pkgs.callPackage inputs.helix { gitRev = inputs.helix.rev; };
     settings = {
       theme = "base16_default_dark";
       editor = {
