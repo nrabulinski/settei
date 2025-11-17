@@ -8,15 +8,17 @@ let
   };
   # Tests on macOS with auto-allocate-uids are currently broken.
   # Revert once fixes are found and merged.
-  no-lix-install-checks = {
-    nixpkgs.overlays = [
-      (_final: prev: {
-        lix = prev.lix.overrideAttrs {
-          doInstallCheck = false;
-        };
-      })
-    ];
-  };
+  no-lix-install-checks =
+    { lib, ... }:
+    {
+      nixpkgs.overlays = lib.mkAfter [
+        (_final: prev: {
+          lix = prev.lix.overrideAttrs {
+            doInstallCheck = false;
+          };
+        })
+      ];
+    };
 in
 {
   config.homeModules = rec {
