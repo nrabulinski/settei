@@ -2,9 +2,15 @@
   username,
   lib,
   pkgs,
+  config,
   ...
 }:
 {
+  age.secrets.cross-seed-config = {
+    file = ../../secrets/cross-seed-config.age;
+    owner = config.services.cross-seed.user;
+  };
+
   boot = {
     supportedFilesystems = [ "zfs" ];
     zfs.extraPools = [ "yottapool" ];
@@ -101,6 +107,20 @@
     enable = true;
     web.enable = true;
     config.download_location = "/media/deluge";
+  };
+  services.cross-seed = {
+    enable = true;
+    user = "deluge";
+    group = "deluge";
+    settingsFile = config.age.secrets.cross-seed-config.path;
+    settings = {
+      linkDirs = [ "/media/cross-seed-links" ];
+      delay = 60 * 5;
+      matchMode = "partial";
+      skipRecheck = true;
+      maxDataDepth = 2;
+      action = "inject";
+    };
   };
 
   users = {

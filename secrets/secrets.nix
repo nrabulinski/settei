@@ -91,4 +91,8 @@ in
     keys.system.youko
     keys.other.bootstrap
   ];
+  "cross-seed-config.age".publicKeys = [
+    keys.system.youko
+    keys.other.bootstrap
+  ];
 }
