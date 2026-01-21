@@ -18,6 +18,7 @@
     extraConfig = ''
       yabai -m rule --add app="^Alacritty$" border=on
       yabai -m rule --add app="^System Settings$" manage=off
+      yabai -m rule --add app="^SlackowWall$" manage=off
 
       yabai -m signal --add event=window_created action='yabai -m query --windows --window $YABAI_WINDOW_ID \
         | ${lib.getExe pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" \
