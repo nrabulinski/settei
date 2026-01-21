@@ -67,11 +67,7 @@
           package =
             { system }:
             let
-              # TODO: Revert after fish is fixed
-              eval = inputs.treefmt.lib.evalModule inputs.nixpkgs.legacyPackages.${system} {
-                imports = [ ./treefmt.nix ];
-                programs.fish_indent.package = config.packages.fish.result.${system};
-              };
+              eval = inputs.treefmt.lib.evalModule inputs.nixpkgs.legacyPackages.${system} ./treefmt.nix;
             in
             eval.config.build.wrapper;
         };

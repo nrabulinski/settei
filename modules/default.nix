@@ -15,6 +15,8 @@ let
         (_final: prev: {
           lix = prev.lix.overrideAttrs {
             doInstallCheck = false;
+            # TODO: Those shouldn't be affected...
+            doCheck = false;
           };
         })
       ];
@@ -68,7 +70,7 @@ in
         settei
         inputs.agenix.darwinModules.age
         inputs.home-manager.darwinModules.home-manager
-        inputs.lix-module.nixosModules.default
+        inputs.lix-module.darwinModules.default
         no-lix-install-checks
       ];
     };

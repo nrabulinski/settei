@@ -6,15 +6,10 @@
 }:
 let
   setteiStarship = config.wrappers.starship.wrapped;
-  fishNoTests = pkgs.fish.overrideAttrs {
-    # TODO: Reenable tests after darwin failures are fixed
-    doCheck = false;
-    doInstallCheck = false;
-  };
 in
 {
   wrappers.fish = {
-    basePackage = fishNoTests;
+    basePackage = pkgs.fish;
 
     programs.fish =
       { config, ... }:
@@ -45,7 +40,7 @@ in
           fzf
           ripgrep
           zoxide
-          (direnv.override { fish = fishNoTests; })
+          direnv
           fd
           file
           yazi
