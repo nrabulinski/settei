@@ -88,7 +88,10 @@
             darwin-systems = builtins.attrValues config.systems.darwin;
             darwin-systems' = map (system: system.result.config.system.build.toplevel) darwin-systems;
 
-            all-drvs = all-packages' ++ nixos-systems' ++ darwin-systems';
+            shells = builtins.attrValues config.shells;
+            shells' = lib.lists.flatten (map (pkg: builtins.attrValues pkg.result) shells);
+
+            all-drvs = all-packages' ++ nixos-systems' ++ darwin-systems' ++ shells';
             all-drvs' = builtins.concatStringsSep "\n" all-drvs;
           in
           mkPackage (
@@ -130,7 +133,10 @@
             ) systems;
             systems'' = map (system: system.result.config.system.build.toplevel) systems';
 
-            all-drvs = all-packages' ++ systems'';
+            shells = builtins.attrValues config.shells;
+            shells' = map (pkg: pkg.result.${stdenv.hostPlatform.system}) shells;
+
+            all-drvs = all-packages' ++ systems'' ++ shells';
           in
           runCommand "ci-build"
             {
