@@ -1,14 +1,18 @@
 {
+  config,
   username,
   lib,
   pkgs,
-  config,
   ...
 }:
 {
   age.secrets.cross-seed-config = {
     file = ../../secrets/cross-seed-config.age;
     owner = config.services.cross-seed.user;
+  };
+  age.secrets.rab-lol-cf = {
+    file = ../../secrets/rab-lol-cf.age;
+    owner = config.services.nginx.user;
   };
 
   boot = {
@@ -95,6 +99,7 @@
     };
   };
 
+  # TODO: Declaratively configure services
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -133,5 +138,26 @@
       sonarr.extraGroups = [ "deluge" ];
       ${username}.extraGroups = [ "deluge" ];
     };
+  };
+
+  services.nginx.virtualHosts."flix.rab.lol" = {
+    forceSSL = true;
+    useACMEHost = "_wildcard.rab.lol";
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+      proxyWebsockets = true;
+    };
+  };
+  services.nginx.virtualHosts."seerr.rab.lol" = {
+    forceSSL = true;
+    useACMEHost = "_wildcard.rab.lol";
+    locations."/".proxyPass = "http://localhost:5055";
+  };
+
+  security.acme.certs."_wildcard.rab.lol" = {
+    domain = "*.rab.lol";
+    email = "nikodem@rabulinski.com";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.rab-lol-cf.path;
   };
 }
