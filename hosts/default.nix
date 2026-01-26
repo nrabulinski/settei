@@ -36,6 +36,7 @@
             config.extraHostConfigs.${name} or { }
           ];
           specialArgs.configurationName = name;
+          specialArgs.isLinux = true;
         };
 
       darwin =
@@ -48,6 +49,7 @@
             config.extraHostConfigs.${name} or { }
           ];
           specialArgs.configurationName = name;
+          specialArgs.isLinux = false;
         };
     };
 }

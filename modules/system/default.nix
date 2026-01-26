@@ -25,6 +25,9 @@
     (import ./monitoring.nix { inherit isLinux; })
     (import ./builder.nix { inherit isLinux; })
     (import ./ddns.nix { inherit isLinux; })
+  ]
+  ++ lib.optionals (!isLinux) [
+    ./gitea-actions-runner.nix
   ];
 
   options.settei = with lib; {

@@ -80,6 +80,7 @@ in
   "forgejo-token.age".publicKeys = [
     keys.system.youko
     keys.system.ude
+    keys.system.kogata
     keys.other.bootstrap
   ];
   "paperless-pass.age".publicKeys = [
