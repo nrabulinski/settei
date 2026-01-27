@@ -16,7 +16,7 @@ jobs:
   build:
     strategy:
       matrix:
-        host: [x86_64-linux, aarch64-linux]
+        host: [x86_64-linux, aarch64-linux, aarch64-darwin]
     needs: check
     runs-on:
       - native
