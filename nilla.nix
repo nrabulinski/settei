@@ -163,6 +163,7 @@
           rustfmt,
           clippy,
           rust-analyzer,
+          kanidm_1_8,
         }:
         let
           inherit (stdenv.hostPlatform) system;
@@ -174,12 +175,15 @@
             config.packages.nh.result.${system}
             config.packages.formatter.result.${system}
 
+            kanidm_1_8
+
             rustc
             cargo
             rustfmt
             clippy
             rust-analyzer
           ];
+          KANIDM_URL = "https://auth.rab.lol";
         };
     };
   }
