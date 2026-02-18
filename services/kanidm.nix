@@ -31,9 +31,9 @@
           };
 
           services.kanidm = {
-            enableServer = true;
+            server.enable = true;
             package = pkgs.kanidmWithSecretProvisioning_1_8;
-            serverSettings = {
+            server.settings = {
               bindaddress = "127.0.0.1:${toString port}";
               inherit domain;
               origin = "https://${domain}";

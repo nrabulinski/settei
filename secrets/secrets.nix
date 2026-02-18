@@ -104,4 +104,8 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "grafana-secret.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }

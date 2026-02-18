@@ -1,5 +1,4 @@
 {
-  lib,
   inputs,
 }:
 let
@@ -13,10 +12,7 @@ let
     inherit systems package builder;
   };
   # There are problems with my patched attic... investigate
-  atticPkgs = lib.attrs.generate systems (system: {
-    inherit (inputs.nixpkgs.legacyPackages.${system}) attic-client attic-server;
-  }
-  # let
+  # atticPkgs = lib.attrs.generate systems (system: let
   #   # See: modules/default.nix for explanation.
   #   lix-overlay =
   #     final: prev:
@@ -31,9 +27,9 @@ let
   #     };
   #   pkgs = inputs.nixpkgs.legacyPackages.${system}.extend lix-overlay;
   #   craneLib = import inputs.crane { inherit pkgs; };
-  # in
-  # pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
-  );
+  #   in
+  #   pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
+  # );
 in
 {
   config.packages.conduit-next = {
@@ -72,16 +68,17 @@ in
     }
   );
 
-  config.packages.attic-client = {
-    inherit systems;
-    builder = "custom-load";
-    package = { system }: atticPkgs.${system}.attic-client;
-  };
-  config.packages.attic-server = {
-    inherit systems;
-    builder = "custom-load";
-    package = { system }: atticPkgs.${system}.attic-server;
-  };
+  config.packages.attic-client = mkPackage ({ attic-client }: attic-client);
+  # config.packages.attic-client = {
+  #   inherit systems;
+  #   builder = "custom-load";
+  #   package = { system }: atticPkgs.${system}.attic-client;
+  # };
+  # config.packages.attic-server = {
+  #   inherit systems;
+  #   builder = "custom-load";
+  #   package = { system }: atticPkgs.${system}.attic-server;
+  # };
 
   config.packages.nh = {
     inherit systems builder;

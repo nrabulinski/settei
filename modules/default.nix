@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
 }:
 let
@@ -48,12 +47,13 @@ in
             "services/networking/atticd.nix"
           ];
           services.atticd.useFlakeCompatOverlay = false;
-          nixpkgs.overlays = [
-            (final: _: {
-              attic-client = config.packages.attic-client.result.${final.system};
-              attic-server = config.packages.attic-server.result.${final.system};
-            })
-          ];
+          # TODO: Switch back to patched attic
+          # nixpkgs.overlays = [
+          #   (final: _: {
+          #     attic-client = config.packages.attic-client.result.${final.system};
+          #     attic-server = config.packages.attic-server.result.${final.system};
+          #   })
+          # ];
         }
       ];
     };

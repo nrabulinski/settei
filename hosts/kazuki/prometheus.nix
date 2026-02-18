@@ -9,31 +9,35 @@
     file = ../../secrets/rab-lol-cf.age;
     owner = config.services.nginx.user;
   };
+  age.secrets.grafana-secret = {
+    file = ../../secrets/grafana-secret.age;
+    owner = "grafana";
+  };
 
   services.prometheus = {
     enable = true;
-    scrapeConfigs =
-      let
-        nodeExporter = nixos: nixos.config.services.prometheus.exporters.node;
-        configurations = lib.filterAttrs (
-          _: nixos: (nodeExporter nixos).enable
-        ) inputs.settei.nixosConfigurations;
-      in
-      lib.mapAttrsToList (
-        name: nixos:
-        let
-          target = "${name}:${toString (nodeExporter nixos).port}";
-        in
-        {
-          job_name = "${name}-node";
-          static_configs = [
+    scrapeConfigs = [
+      {
+        job_name = "exporter";
+        static_configs =
+          let
+            nodeExporter = nixos: nixos.config.services.prometheus.exporters.node;
+            configurations = lib.filterAttrs (
+              _: nixos: (nodeExporter nixos).enable
+            ) inputs.settei.nixosConfigurations;
+          in
+          lib.mapAttrsToList (
+            name: nixos:
+            let
+              target = "${name}:${toString (nodeExporter nixos).port}";
+            in
             {
               targets = [ target ];
               labels.${name} = target;
             }
-          ];
-        }
-      ) configurations;
+          ) configurations;
+      }
+    ];
   };
 
   services.grafana = {
@@ -41,6 +45,9 @@
     settings.server = {
       http_port = 3030;
       root_url = "https://monitor.rab.lol";
+    };
+    settings.security = {
+      secret_key = "$__file{${config.age.secrets.grafana-secret.path}}";
     };
   };
 
