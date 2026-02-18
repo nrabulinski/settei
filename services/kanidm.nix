@@ -43,6 +43,7 @@
             };
             provision = {
               enable = true;
+              autoRemove = false;
               idmAdminPasswordFile = config.age.secrets.kanidm-idm-admin-pass.path;
               adminPasswordFile = config.age.secrets.kanidm-admin-pass.path;
 
