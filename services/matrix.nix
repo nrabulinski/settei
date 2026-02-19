@@ -1,13 +1,35 @@
+let
+  # generate a list of numbers from start to end inclusive
+  range = start: end: builtins.genList (x: x + start) (end - start + 1);
+in
 {
   config.services.matrix = {
     host = "kazuki";
-    ports = [ 6168 ];
+    ports = [
+      # continuwuity
+      6168
+      # turn/stun
+      3478
+      5349
+      # livekit
+      7881
+    ]
+    # media relay
+    ++ (range 50201 65535)
+    # livekit
+    ++ (range 50100 50200);
     module =
       { config, lib, ... }:
       {
         age.secrets.rab-lol-cf = {
           file = ../secrets/rab-lol-cf.age;
           owner = config.services.nginx.user;
+        };
+        age.secrets.coturn-secret = {
+          file = ../secrets/coturn-secret.age;
+          owner = "turnserver";
+          group = "continuwuity";
+          mode = "440";
         };
 
         services.matrix-continuwuity = {
@@ -22,8 +44,48 @@
               client = "https://matrix.rab.lol";
               server = "matrix.rab.lol:443";
             };
+            turn_uris = [
+              "turn:turn.rab.lol?transport=udp"
+              "turn:turn.rab.lol?transport=tcp"
+              "turns:turn.rab.lol?transport=udp"
+              "turns:turn.rab.lol?transport=tcp"
+            ];
+            turn_secret_file = config.age.secrets.coturn-secret.path;
+            turn_ttl = 86400;
           };
         };
+
+        services.coturn = {
+          enable = true;
+          realm = "rab.lol";
+          use-auth-secret = true;
+          min-port = 50201;
+          max-port = 65535;
+          no-cli = true;
+          cert = "${config.security.acme.certs."turn.rab.lol".directory}/fullchain.pem";
+          pkey = "${config.security.acme.certs."turn.rab.lol".directory}/key.pem";
+          static-auth-secret-file = config.age.secrets.coturn-secret.path;
+        };
+
+        networking.firewall.allowedTCPPorts = [
+          80
+          443
+          8448
+          # turn/stun
+          3478
+          5349
+          # livekit
+          7881
+        ];
+        networking.firewall.allowedUDPPorts = [
+          # turn/stun
+          3478
+          5349
+        ]
+        # media relay
+        ++ (range 50201 65535)
+        # livekit
+        ++ (range 50100 50200);
 
         services.nginx.enable = true;
         services.nginx.virtualHosts."rab.lol" = {
@@ -81,6 +143,12 @@
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.rab-lol-cf.path;
+        };
+        security.acme.certs."turn.rab.lol" = {
+          email = "nikodem@rabulinski.com";
+          dnsProvider = "cloudflare";
+          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          group = "turnserver";
         };
       };
   };

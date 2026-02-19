@@ -108,4 +108,8 @@ in
     keys.system.kazuki
     keys.other.bootstrap
   ];
+  "coturn-secret.age".publicKeys = [
+    keys.system.kazuki
+    keys.other.bootstrap
+  ];
 }
