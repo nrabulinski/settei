@@ -6,6 +6,6 @@
     ./paperless.nix
     ./ddns.nix
     ./kanidm.nix
-    ./matrix.nix
+    ./matrix
   ];
 }
