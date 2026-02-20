@@ -42,7 +42,19 @@
       client_max_body_size 1G;
     '';
   };
+  services.nginx.virtualHosts."livekit.rab.lol" = {
+    forceSSL = true;
+    enableACME = true;
+    acmeRoot = null;
+  };
+
   services.nginx.upstreams.continuwuity.servers = {
     "localhost:${toString config.services.matrix-continuwuity.settings.global.port}" = { };
+  };
+  services.nginx.upstreams.livekit.servers = {
+    "localhost:${toString config.services.livekit.settings.port}" = { };
+  };
+  services.nginx.upstreams.livekit-jwt.servers = {
+    "localhost:${toString config.services.lk-jwt-service.port}" = { };
   };
 }

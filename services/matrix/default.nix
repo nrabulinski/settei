@@ -12,7 +12,9 @@ in
       3478
       5349
       # livekit
+      7880
       7881
+      6169
     ]
     # media relay
     ++ (range 50201 65535)
@@ -36,6 +38,7 @@ in
           ./continuwuity.nix
           ./coturn.nix
           ./proxy.nix
+          ./livekit.nix
         ];
 
         networking.firewall.allowedTCPPorts = [
@@ -74,6 +77,11 @@ in
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.rab-lol-cf.path;
           group = "turnserver";
+        };
+        security.acme.certs."livekit.rab.lol" = {
+          email = "nikodem@rabulinski.com";
+          dnsProvider = "cloudflare";
+          credentialsFile = config.age.secrets.rab-lol-cf.path;
         };
       };
   };
