@@ -27,14 +27,10 @@
     ];
     settei.unfree.allowedPackages = [
       "signal-desktop-bin"
-      # TODO: Remove once hydra builds firefox for darwin
-      "firefox-bin"
-      "firefox-bin-unwrapped"
     ];
 
     fonts.fontconfig.enable = true;
 
     programs.firefox.enable = true;
-    programs.firefox.package = pkgs.firefox-bin;
   };
 }
