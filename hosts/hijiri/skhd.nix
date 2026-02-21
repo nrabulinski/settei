@@ -15,7 +15,7 @@
       in
       ''
         cmd - return : wezterm
-        cmd + shift - return : qutebrowser
+        cmd + shift - return : glide
 
         cmd - h : yabai -m window --focus west
         cmd - j : yabai -m window --focus south

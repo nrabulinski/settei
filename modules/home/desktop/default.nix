@@ -10,7 +10,6 @@
 
   imports = [
     ./zellij.nix
-    ./qutebrowser.nix
   ];
 
   options.settei.desktop = {
