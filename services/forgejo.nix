@@ -71,8 +71,6 @@
           };
         };
 
-        users.users.nginx.extraGroups = [ "acme" ];
-        security.acme.acceptTerms = true;
         security.acme.certs."git.rab.lol" = {
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.rab-lol-cf.path;

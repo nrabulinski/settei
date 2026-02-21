@@ -25,17 +25,10 @@ in
   };
   systemd.services.conduit.serviceConfig.LimitNOFILE = 8192;
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "nikodem@rabulinski.com";
-  };
-
-  users.users.nginx.extraGroups = [ "acme" ];
   networking.firewall.allowedTCPPorts = [
     80
     443
     8448
-    2222
   ];
 
   services.nginx = {

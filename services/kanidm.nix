@@ -84,7 +84,6 @@
             SupplementaryGroups = [ cert.group ];
           };
 
-          users.users.nginx.extraGroups = [ "acme" ];
           networking.firewall.allowedTCPPorts = [
             80
             443

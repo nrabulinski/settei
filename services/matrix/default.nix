@@ -61,7 +61,6 @@ in
         # livekit
         ++ (range 50100 50200);
 
-        security.acme.acceptTerms = true;
         security.acme.certs."rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";

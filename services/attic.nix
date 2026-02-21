@@ -90,8 +90,6 @@
             inactive = "2d";
           };
 
-          users.users.nginx.extraGroups = [ "acme" ];
-          security.acme.acceptTerms = true;
           security.acme.certs."attic.rab.lol" = {
             email = "nikodem@rabulinski.com";
             dnsProvider = "cloudflare";

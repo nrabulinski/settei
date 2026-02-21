@@ -12,14 +12,6 @@
     };
   };
 
-  users.users.nginx.extraGroups = [ "acme" ];
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-    8448
-    2222
-  ];
-
   services.nginx.enable = true;
   services.nginx.virtualHosts."vault.rabulinski.com" = {
     forceSSL = true;

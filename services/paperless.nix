@@ -45,7 +45,6 @@
           '';
         };
 
-        security.acme.acceptTerms = true;
         security.acme.certs."paper.rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";

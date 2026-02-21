@@ -79,19 +79,22 @@ let
     programs.mosh.enable = lib.mkDefault true;
     programs.git.enable = lib.mkDefault true;
 
-    users = {
-      mutableUsers = false;
-      users.${username} = {
-        isNormalUser = true;
-        home = "/home/${username}";
-        group = username;
-        extraGroups = lib.mkMerge [
-          [ "wheel" ]
-          (lib.mkIf config.networking.networkmanager.enable [ "networkmanager" ])
-        ];
-      };
-      groups.${username} = { };
-    };
+    users = lib.mkMerge [
+      {
+        mutableUsers = false;
+        users.${username} = {
+          isNormalUser = true;
+          home = "/home/${username}";
+          group = username;
+          extraGroups = lib.mkMerge [
+            [ "wheel" ]
+            (lib.mkIf config.networking.networkmanager.enable [ "networkmanager" ])
+          ];
+        };
+        groups.${username} = { };
+      }
+      (lib.mkIf config.services.nginx.enable { users.nginx.extraGroups = [ "acme" ]; })
+    ];
 
     # TODO: Actually this should be extraRules which makes wheel users without any password set
     #       be able to use sudo with no password
@@ -122,6 +125,10 @@ let
       recommendedGzipSettings = lib.mkDefault true;
       recommendedOptimisation = lib.mkDefault true;
       recommendedTlsSettings = lib.mkDefault true;
+    };
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = lib.mkDefault "nikodem@rabulinski.com";
     };
   };
 

@@ -11,13 +11,6 @@
     alert-nrab-lol.file = ../../secrets/alert-nrab-lol-pass.age;
   };
 
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-    8448
-    2222
-  ];
-
   mailserver = {
     enable = true;
     fqdn = "mail.nrab.lol";

@@ -40,7 +40,6 @@
           locations."/".proxyPass = "http://127.0.0.1:50002";
         };
 
-        security.acme.acceptTerms = true;
         security.acme.certs."ddns.rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
