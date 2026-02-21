@@ -34,13 +34,6 @@
             unit = "    ";
           };
         }
-        {
-          name = "racket";
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
-        }
       ];
     };
   };

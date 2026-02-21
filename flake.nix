@@ -35,10 +35,6 @@
       url = "github:nrabulinski/wrapper-manager-hm-compat";
       flake = false;
     };
-    racket = {
-      url = "github:nrabulinski/racket.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     attic = {
       url = "https://git.lix.systems/nrabulinski/attic/archive/main.tar.gz";
       flake = false;

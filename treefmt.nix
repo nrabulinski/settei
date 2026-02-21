@@ -13,10 +13,6 @@
     # agenix
     "*.age"
 
-    # racket
-    "*.rkt"
-    "**/rashrc"
-
     # custom assets
     "*.png"
     "*.svg"

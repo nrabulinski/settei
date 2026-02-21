@@ -19,8 +19,6 @@ let
       modules = [
         ./starship
         ./helix
-        # TODO: Enable again
-        # ./rash
         ./fish
         ./wezterm
       ];

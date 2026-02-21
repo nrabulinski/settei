@@ -404,26 +404,6 @@
         "type": "github"
       }
     },
-    "racket": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1717066047,
-        "narHash": "sha256-h57NMJ7BUawABJ8UYIciTdr8GWOUfMbdA+2DKGv7MaI=",
-        "owner": "nrabulinski",
-        "repo": "racket.nix",
-        "rev": "de58c827a94be12d2a2418c614d4cd7f69ae8769",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nrabulinski",
-        "repo": "racket.nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "__flake-compat": "__flake-compat",
@@ -440,7 +420,6 @@
         "nh": "nh",
         "nilla": "nilla",
         "nixpkgs": "nixpkgs",
-        "racket": "racket",
         "rust-overlay": "rust-overlay",
         "treefmt": "treefmt",
         "wrapper-manager": "wrapper-manager",
