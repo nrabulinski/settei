@@ -32,14 +32,6 @@ let
   # );
 in
 {
-  config.packages.conduit-next = {
-    inherit systems builder;
-    package = import ./conduit;
-    settings.args = {
-      src = inputs.conduit-src;
-    };
-  };
-
   config.packages.git-commit-last = mkPackage (
     { writeShellApplication }:
     writeShellApplication {

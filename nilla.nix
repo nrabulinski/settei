@@ -118,10 +118,6 @@
                 "ci-check"
                 "__allPackages"
                 "ci-build"
-                # TODO: Build for all systems
-                # This is fine because it will be built as part of the system config,
-                # but for some reason it doesn't build on x86_64-linux
-                "conduit-next"
               ]
             );
             all-packages' = map (pkg: pkg.result.${stdenv.hostPlatform.system}) all-packages;

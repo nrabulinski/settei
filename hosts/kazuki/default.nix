@@ -9,7 +9,6 @@
         "${modulesPath}/profiles/qemu-guest.nix"
         ./disks.nix
 
-        ./conduit.nix
         ./mail.nix
         ./ntfy.nix
         ./zitadel.nix

@@ -39,10 +39,6 @@
       url = "github:nrabulinski/racket.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    conduit-src = {
-      url = "gitlab:famedly/conduit?ref=next";
-      flake = false;
-    };
     attic = {
       url = "https://git.lix.systems/nrabulinski/attic/archive/main.tar.gz";
       flake = false;

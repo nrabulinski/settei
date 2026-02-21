@@ -73,23 +73,6 @@
         "type": "gitlab"
       }
     },
-    "conduit-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1770886893,
-        "narHash": "sha256-efepRsi7RtajoLfMMe8GPqY+zkCIyE0X5ir6mtJ2zjY=",
-        "owner": "famedly",
-        "repo": "conduit",
-        "rev": "d058dab7aa5e9e41ef7cbab14f6ef030486f3ca8",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "famedly",
-        "ref": "next",
-        "repo": "conduit",
-        "type": "gitlab"
-      }
-    },
     "crane": {
       "flake": false,
       "locked": {
@@ -446,7 +429,6 @@
         "__flake-compat": "__flake-compat",
         "agenix": "agenix",
         "attic": "attic",
-        "conduit-src": "conduit-src",
         "crane": "crane",
         "darwin": "darwin",
         "disko": "disko",
