@@ -11,7 +11,6 @@
 
         ./conduit.nix
         ./mail.nix
-        ./vault.nix
         ./ntfy.nix
         ./zitadel.nix
         ./prometheus.nix

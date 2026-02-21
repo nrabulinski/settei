@@ -7,5 +7,6 @@
     ./ddns.nix
     ./kanidm.nix
     ./matrix
+    ./vault.nix
   ];
 }
