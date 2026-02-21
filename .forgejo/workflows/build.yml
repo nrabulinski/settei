@@ -4,6 +4,10 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
+# Disable spinners etc
+env:
+  TERM: dumb
+
 jobs:
   check:
     runs-on: native
