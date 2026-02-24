@@ -47,8 +47,9 @@
               idmAdminPasswordFile = config.age.secrets.kanidm-idm-admin-pass.path;
               adminPasswordFile = config.age.secrets.kanidm-admin-pass.path;
 
-              groups."git.access" = { };
-              groups."git.admins" = { };
+              groups."git.access".overwriteMembers = false;
+              groups."git.admins".overwriteMembers = false;
+              groups."radius.access".overwriteMembers = false;
 
               systems.oauth2.forgejo = {
                 displayName = "Forgejo";
@@ -75,6 +76,7 @@
                 groups = [
                   "git.access"
                   "git.admins"
+                  "radius.access"
                 ];
               };
             };
