@@ -22,10 +22,7 @@
       nerd-fonts.iosevka
       nerd-fonts.iosevka-term
       fontconfig
-      signal-desktop-bin
-    ];
-    settei.unfree.allowedPackages = [
-      "signal-desktop-bin"
+      signal-desktop
     ];
 
     fonts.fontconfig.enable = true;
