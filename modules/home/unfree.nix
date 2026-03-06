@@ -8,6 +8,7 @@ args@{ config, lib, ... }:
       with lib;
       mkOption {
         type = types.listOf types.str;
+        default = [ ];
       };
   };
 
