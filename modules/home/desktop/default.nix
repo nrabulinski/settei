@@ -10,6 +10,7 @@
 
   imports = [
     ./zellij.nix
+    ./atuin.nix
   ];
 
   options.settei.desktop = {
