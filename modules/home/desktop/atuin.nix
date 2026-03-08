@@ -8,6 +8,11 @@
     ];
     settings = {
       keymap_mode = "vim-insert";
+      ui.columns = [
+        "duration"
+        "host"
+        "command"
+      ];
     };
   };
 
