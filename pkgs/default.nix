@@ -88,4 +88,6 @@ in
   };
 
   config.packages.ddns = mkPackage (import ./ddns/package.nix);
+
+  config.packages.jetkvm-atx = mkPackage (import ./jetkvm-atx/package.nix);
 }

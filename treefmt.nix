@@ -9,6 +9,7 @@
   programs.shfmt.enable = true;
   programs.taplo.enable = true;
   programs.rustfmt.enable = true;
+  programs.clang-format.enable = true;
   settings.global.excludes = [
     # agenix
     "*.age"
@@ -18,6 +19,9 @@
     "*.svg"
 
     "**/.gitignore"
+
+    "**/CMakeLists.txt"
+    "*.cmake"
   ];
   settings.on-unmatched = "fatal";
 }
