@@ -40,6 +40,7 @@ in
     lfs.enable = true;
     # TODO: settei options for home-manager module
     signing = {
+      format = "ssh";
       key = osConfig.settei.sane-defaults.allSshKeys.${machineName};
       signByDefault = true;
     };

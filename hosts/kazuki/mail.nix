@@ -21,7 +21,7 @@
     lmtpSaveToDetailMailbox = "no";
     recipientDelimiter = "+-";
 
-    loginAccounts = {
+    accounts = {
       "1337@nrab.lol" = {
         hashedPasswordFile = config.age.secrets.leet-nrab-lol.path;
         aliases = [ "n@rab.lol" ];
