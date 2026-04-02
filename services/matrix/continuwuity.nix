@@ -1,7 +1,13 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   services.matrix-continuwuity = {
     enable = true;
+    package = pkgs.matrix-continuwuity.override {
+      rustPlatform = pkgs.makeRustPlatform {
+        inherit (pkgs) rustc cargo;
+        stdenv = pkgs.stdenvAdapters.keepDebugInfo pkgs.stdenv;
+      };
+    };
     settings.global = {
       address = [ "127.0.0.1" ];
       port = [ 6168 ];
