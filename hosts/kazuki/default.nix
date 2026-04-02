@@ -25,6 +25,8 @@
       };
 
       boot = {
+        initrd.kernelModules = [ "virtio_gpu" ];
+        kernelParams = [ "console=tty" ];
         loader.systemd-boot.enable = true;
         loader.systemd-boot.configurationLimit = 1;
         loader.efi.canTouchEfiVariables = true;
