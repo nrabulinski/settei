@@ -55,11 +55,19 @@ in
           # turn/stun
           3478
           5349
-        ]
-        # media relay
-        ++ (range 50201 65535)
-        # livekit
-        ++ (range 50100 50200);
+        ];
+        networking.firewall.allowedUDPPortRanges = [
+          # media relay
+          {
+            from = 50201;
+            to = 65535;
+          }
+          # livekit
+          {
+            from = 50100;
+            to = 50200;
+          }
+        ];
 
         security.acme.certs."rab.lol" = {
           email = "nikodem@rabulinski.com";
