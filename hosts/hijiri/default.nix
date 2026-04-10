@@ -32,6 +32,7 @@
       # TODO: Setup podman remote
 
       system.defaults = {
+        NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
         ".GlobalPreferences" = {
           "com.apple.mouse.scaling" = -1.0;
         };
