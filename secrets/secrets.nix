@@ -81,6 +81,7 @@ in
     keys.system.youko
     keys.system.ude
     keys.system.kogata
+    keys.system.kanade
     keys.other.bootstrap
   ];
   "paperless-pass.age".publicKeys = [

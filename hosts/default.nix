@@ -12,6 +12,7 @@
     ./ude
     ./kogata
     ./youko
+    ./kanade
   ];
 
   config.systems.builders =

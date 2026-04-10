@@ -4,6 +4,7 @@
       "ude"
       "youko"
       "kogata"
+      "kanade"
     ];
     module =
       {
