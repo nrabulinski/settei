@@ -109,7 +109,7 @@
 
           security.acme.certs.${domain} = {
             dnsProvider = "cloudflare";
-            credentialsFile = config.age.secrets.rab-lol-cf.path;
+            credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
             reloadServices = [ "kanidm" ];
           };
         };

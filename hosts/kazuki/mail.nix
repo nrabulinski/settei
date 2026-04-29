@@ -18,7 +18,7 @@
       "nrab.lol"
       "rab.lol"
     ];
-    lmtpSaveToDetailMailbox = "no";
+    lmtpSaveToDetailMailbox = false;
     recipientDelimiter = "+-";
 
     accounts = {
@@ -40,6 +40,6 @@
 
   security.acme.certs.${config.mailserver.fqdn} = {
     dnsProvider = "cloudflare";
-    credentialsFile = config.age.secrets.nrab-lol-cf.path;
+    credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.nrab-lol-cf.path;
   };
 }

@@ -73,7 +73,7 @@
 
         security.acme.certs."git.rab.lol" = {
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
           email = "nikodem@rabulinski.com";
         };
 

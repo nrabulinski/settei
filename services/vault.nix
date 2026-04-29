@@ -39,7 +39,7 @@
 
         security.acme.certs."vault.rabulinski.com" = {
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rabulinski-com-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rabulinski-com-cf.path;
         };
       };
   };

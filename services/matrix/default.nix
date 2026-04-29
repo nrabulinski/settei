@@ -72,23 +72,23 @@ in
         security.acme.certs."rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
         };
         security.acme.certs."matrix.rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
         };
         security.acme.certs."turn.rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
           group = "turnserver";
         };
         security.acme.certs."livekit.rab.lol" = {
           email = "nikodem@rabulinski.com";
           dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.rab-lol-cf.path;
+          credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;
         };
       };
   };

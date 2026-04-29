@@ -72,6 +72,6 @@
 
   security.acme.certs."ntfy.nrab.lol" = {
     dnsProvider = "cloudflare";
-    credentialsFile = config.age.secrets.nrab-lol-cf.path;
+    credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.nrab-lol-cf.path;
   };
 }

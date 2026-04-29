@@ -21,6 +21,11 @@ let
         '';
       }))
     ];
+
+    # TODO: Remove once incus doesn't depend on minio
+    nixpkgs.config.permittedInsecurePackages = [
+      "minio-2025-10-15T17-29-55Z"
+    ];
   };
 
   linuxConfig = lib.optionalAttrs isLinux (
