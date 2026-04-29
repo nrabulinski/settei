@@ -36,6 +36,10 @@
               SESSION_LIFE_TIME = 86400 * 30;
             };
             federation.ENABLED = true;
+            "git.timeout" = {
+              MIGRATE = 6000;
+              MIRROR = 3000;
+            };
           };
           repositoryRoot = "/forgejo/repos";
           lfs = {
