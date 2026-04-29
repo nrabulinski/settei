@@ -20,8 +20,9 @@ Collection of my personal Nix configurations and opinionated NixOS, nix-darwin, 
   - hijiri - my macbook
   - hijiri-vm - linux vm running on my macbook
   - ude - another linux arm server
-  - kogata - my m1 mac mini doubling as a server
+  - kogata - my m1 mac mini
   - youko - my linux x86 server
+  - kanade - my m4 mac mini doubling as a server
 - modules - options which in principle should be reusable by others
   - system - my opinionated nixos/nix-darwin modules
   - home - my opinionated home-manager modules
