@@ -4,7 +4,7 @@
   programs.nixfmt.enable = true;
   programs.statix.enable = true;
   programs.fish_indent.enable = true;
-  programs.deno.enable = true;
+  # programs.deno.enable = true;
   programs.stylua.enable = true;
   programs.shfmt.enable = true;
   programs.taplo.enable = true;
@@ -22,6 +22,11 @@
 
     "**/CMakeLists.txt"
     "*.cmake"
+
+    # TODO: remove once deno is enabled again
+    "*.yml"
+    "*.yaml"
+    "*.md"
   ];
   settings.on-unmatched = "fatal";
 }
