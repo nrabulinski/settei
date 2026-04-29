@@ -1,6 +1,6 @@
 {
   includes = [
-    ./attic.nix
+    ./celler.nix
     ./forgejo-runner.nix
     ./forgejo.nix
     ./paperless.nix

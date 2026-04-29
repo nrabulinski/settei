@@ -11,25 +11,13 @@ let
   mkPackage = package: {
     inherit systems package builder;
   };
-  # There are problems with my patched attic... investigate
-  # atticPkgs = lib.attrs.generate systems (system: let
-  #   # See: modules/default.nix for explanation.
-  #   lix-overlay =
-  #     final: prev:
-  #     let
-  #       lix-pkgs = inputs.lix-module.overlays.default final prev;
-  #     in
-  #     lix-pkgs
-  #     // {
-  #       lix = lix-pkgs.lix.overrideAttrs {
-  #         doInstallCheck = false;
-  #       };
-  #     };
-  #   pkgs = inputs.nixpkgs.legacyPackages.${system}.extend lix-overlay;
-  #   craneLib = import inputs.crane { inherit pkgs; };
-  #   in
-  #   pkgs.callPackage "${inputs.attic}/crane.nix" { inherit craneLib; }
-  # );
+  cellerFn =
+    { pkgs, callPackage }:
+    let
+      craneLib = import inputs.crane { inherit pkgs; };
+      eval = callPackage "${inputs.celler}/crane.nix" { inherit craneLib; };
+    in
+    eval.celler;
 in
 {
   config.packages.git-commit-last = mkPackage (
@@ -60,17 +48,7 @@ in
     }
   );
 
-  config.packages.attic-client = mkPackage ({ attic-client }: attic-client);
-  # config.packages.attic-client = {
-  #   inherit systems;
-  #   builder = "custom-load";
-  #   package = { system }: atticPkgs.${system}.attic-client;
-  # };
-  # config.packages.attic-server = {
-  #   inherit systems;
-  #   builder = "custom-load";
-  #   package = { system }: atticPkgs.${system}.attic-server;
-  # };
+  config.packages.celler = mkPackage cellerFn;
 
   config.packages.nh = {
     inherit systems builder;

@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
 }:
 let
@@ -39,21 +40,21 @@ in
         inputs.disko.nixosModules.disko
         inputs.mailserver.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
-        "${inputs.attic}/nixos/atticd.nix"
+        "${inputs.celler}/nixos/cellerd.nix"
         inputs.lix-module.nixosModules.default
         no-lix-install-checks
         {
-          disabledModules = [
-            "services/networking/atticd.nix"
-          ];
-          services.atticd.useFlakeCompatOverlay = false;
-          # TODO: Switch back to patched attic
-          # nixpkgs.overlays = [
-          #   (final: _: {
-          #     attic-client = config.packages.attic-client.result.${final.system};
-          #     attic-server = config.packages.attic-server.result.${final.system};
-          #   })
+          # TODO: Will be necessary once cellerd module is contributed to nixpkgs
+          # disabledModules = [
+          #   "services/networking/cellerd.nix"
           # ];
+          services.cellerd.useFlakeCompatOverlay = false;
+
+          nixpkgs.overlays = [
+            (final: _: {
+              celler = config.packages.celler.result.${final.stdenv.hostPlatform.system};
+            })
+          ];
         }
       ];
     };

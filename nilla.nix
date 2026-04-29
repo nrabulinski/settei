@@ -173,7 +173,7 @@
         mkShell {
           packages = [
             config.packages.agenix.result.${system}
-            config.packages.attic-client.result.${system}
+            config.packages.celler.result.${system}
             config.packages.nh.result.${system}
             config.packages.formatter.result.${system}
 

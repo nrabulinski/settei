@@ -1,28 +1,29 @@
 {
-  config.services.attic-youko =
+  config.services.celler-youko =
     let
-      atticPort = 9478;
+      cellerPort = 9478;
     in
     {
       host = "youko";
-      ports = [ atticPort ];
+      ports = [ cellerPort ];
       module =
-        { config, ... }:
+        { config, lib, ... }:
         {
-          age.secrets.attic-creds = {
+          age.secrets.celler-creds = {
             file = ../secrets/attic-creds.age;
-            owner = config.services.atticd.user;
+            owner = config.services.cellerd.user;
           };
           age.secrets.rab-lol-cf = {
             file = ../secrets/rab-lol-cf.age;
             owner = config.services.nginx.user;
           };
 
-          services.atticd = {
+          services.cellerd = {
             enable = true;
-            environmentFile = config.age.secrets.attic-creds.path;
+            environmentFile = config.age.secrets.celler-creds.path;
             settings = {
-              listen = "[::]:${toString atticPort}";
+              listen = "[::]:${toString cellerPort}";
+              database.url = "sqlite:///var/lib/atticd/server.db?mode=rwc";
               storage = {
                 type = "local";
                 path = "/media/attic";
@@ -34,21 +35,20 @@
                 avg-size = 64 * 1024;
                 max-size = 256 * 1024;
               };
-              api-endpoint = "https://attic.rab.lol/";
+              api-endpoint = "https://celler.rab.lol/";
             };
           };
 
+          systemd.services.cellerd.serviceConfig.StateDirectory = lib.mkForce "atticd";
+
           users = {
-            users.atticd = {
-              uid = 990;
+            users.cellerd = {
               isSystemUser = true;
-              group = "atticd";
+              group = "cellerd";
               home = "/var/lib/atticd";
               createHome = true;
             };
-            groups.atticd = {
-              gid = 988;
-            };
+            groups.cellerd = { };
           };
 
           networking.firewall.allowedTCPPorts = [
@@ -57,13 +57,13 @@
           ];
 
           services.nginx.enable = true;
-          services.nginx.upstreams.attic.servers."localhost:${toString atticPort}" = { };
-          services.nginx.virtualHosts."attic.rab.lol" = {
+          services.nginx.upstreams.celler.servers."localhost:${toString cellerPort}" = { };
+          services.nginx.virtualHosts."celler.rab.lol" = {
             forceSSL = true;
             enableACME = true;
             acmeRoot = null;
             locations."/" = {
-              proxyPass = "http://attic";
+              proxyPass = "http://celler";
             };
             extraConfig = ''
               client_max_body_size 24G;
@@ -74,7 +74,7 @@
             enableACME = true;
             acmeRoot = null;
             locations."/" = {
-              proxyPass = "http://attic/public$request_uri";
+              proxyPass = "http://celler/public$request_uri";
             };
             extraConfig = ''
               proxy_cache nixstore;
@@ -90,7 +90,7 @@
             inactive = "2d";
           };
 
-          security.acme.certs."attic.rab.lol" = {
+          security.acme.certs."celler.rab.lol" = {
             email = "nikodem@rabulinski.com";
             dnsProvider = "cloudflare";
             credentialFiles.CF_DNS_API_TOKEN_FILE = config.age.secrets.rab-lol-cf.path;

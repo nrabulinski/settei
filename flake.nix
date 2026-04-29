@@ -35,8 +35,8 @@
       url = "github:nrabulinski/wrapper-manager-hm-compat";
       flake = false;
     };
-    attic = {
-      url = "https://git.lix.systems/nrabulinski/attic/archive/main.tar.gz";
+    celler = {
+      url = "github:blitz/celler";
       flake = false;
     };
     crane = {

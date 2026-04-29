@@ -43,20 +43,6 @@
         "type": "github"
       }
     },
-    "attic": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1755727257,
-        "narHash": "sha256-m+KijYp/VTnNa5dQhI6QUcGeE+6YUUIC7hCmt3G/hPE=",
-        "rev": "13d8d9e9e735c80e0b2c889dc7efb4ee5c286b67",
-        "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/nrabulinski/attic/archive/13d8d9e9e735c80e0b2c889dc7efb4ee5c286b67.tar.gz?rev=13d8d9e9e735c80e0b2c889dc7efb4ee5c286b67"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://git.lix.systems/nrabulinski/attic/archive/main.tar.gz"
-      }
-    },
     "blobs": {
       "flake": false,
       "locked": {
@@ -71,6 +57,22 @@
         "owner": "simple-nixos-mailserver",
         "repo": "blobs",
         "type": "gitlab"
+      }
+    },
+    "celler": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777283740,
+        "narHash": "sha256-7KO34L7SkVPgSUIoaqF3TdMZsjh75aa0yCMYPtKb5YE=",
+        "owner": "blitz",
+        "repo": "celler",
+        "rev": "c4509eb67057fe4fdc22dfc9b5431b9fe113f2be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "blitz",
+        "repo": "celler",
+        "type": "github"
       }
     },
     "crane": {
@@ -408,7 +410,7 @@
       "inputs": {
         "__flake-compat": "__flake-compat",
         "agenix": "agenix",
-        "attic": "attic",
+        "celler": "celler",
         "crane": "crane",
         "darwin": "darwin",
         "disko": "disko",

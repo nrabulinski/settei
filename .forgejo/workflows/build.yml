@@ -31,7 +31,7 @@ jobs:
       - name: Push to cache
         continue-on-error: true
         run: |
-          nix-build -o attic-result -A pkgs.attic-client
-          export PATH="$(readlink -f attic-result/bin):$PATH"
-          attic login rab-attic 'https://attic.rab.lol' '${{ secrets.ATTIC_TOKEN }}'
-          attic push rab-attic:public result
+          nix-build -o celler-result -A pkgs.celler-client
+          export PATH="$(readlink -f celler-result/bin):$PATH"
+          celler login rab-celler 'https://celler.rab.lol' '${{ secrets.ATTIC_TOKEN }}'
+          celler push rab-celler:public result
