@@ -51,6 +51,11 @@
             };
           };
 
+          systemd.services.gitea-runner-default = {
+            path = [ "/run/wrappers" ];
+            serviceConfig.ExecPaths = "/var/lib/gitea-runner";
+          };
+
           virtualisation.podman = {
             enable = true;
             defaultNetwork.settings.dns_enabled = true;
