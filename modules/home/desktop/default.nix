@@ -28,6 +28,13 @@
 
     fonts.fontconfig.enable = true;
 
-    programs.firefox.enable = true;
+    programs.firefox = {
+      enable = true;
+      configPath =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "Library/Application Support/Firefox"
+        else
+          "${config.xdg.configHome}/mozilla/firefox";
+    };
   };
 }
