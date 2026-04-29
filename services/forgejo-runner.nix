@@ -3,7 +3,6 @@
     hosts = [
       "ude"
       "youko"
-      "kogata"
       "kanade"
     ];
     module =
