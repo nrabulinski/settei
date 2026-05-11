@@ -70,14 +70,6 @@ async fn main() -> Result<()> {
     let domain = env::var("DOMAIN")?;
     let secret = env::var("SECRET_PATH")?.pipe(fs::read).await?;
     let cf_key = env::var("CF_KEY_PATH")?.pipe(fs::read_to_string).await?;
-    let cf_key = cf_key
-        .lines()
-        .find_map(|line| {
-            line.trim_start()
-                .strip_prefix("CF_DNS_API_TOKEN=")
-                .map(str::trim)
-        })
-        .expect("CF_KEY_PATH should include DNS API token line");
 
     let port = env::var("PORT")?.parse()?;
     let listener = TcpListener::bind(("127.0.0.1", port)).await?;
