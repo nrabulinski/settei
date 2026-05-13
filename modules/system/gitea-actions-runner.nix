@@ -205,7 +205,7 @@ in
               "/sbin"
             ];
             hostPath = lib.makeBinPath ([ pkgs.coreutils ] ++ instance.hostPackages);
-            path = "${systemPath}:${hostPath}";
+            path = "${hostPath}:${systemPath}";
             workDir = "/var/lib/gitea-runner/${name}";
           in
           # TODO: Sanitize name
