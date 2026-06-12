@@ -11,23 +11,6 @@ let
 
   cfg = config.settei.incus;
 
-  sharedConfig = {
-    environment.systemPackages = [
-      (cfg.clientPackage.overrideAttrs (prev: {
-        postInstall = ''
-          export HOME="$(mktemp -d)"
-          mkdir -p "$HOME/.config/incus"
-          ${prev.postInstall or ""}
-        '';
-      }))
-    ];
-
-    # TODO: Remove once incus doesn't depend on minio
-    nixpkgs.config.permittedInsecurePackages = [
-      "minio-2025-10-15T17-29-55Z"
-    ];
-  };
-
   linuxConfig = lib.optionalAttrs isLinux (
     lib.mkIf (!cfg.clientOnly) {
       virtualisation.incus = {
@@ -109,7 +92,6 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
-      sharedConfig
       linuxConfig
       darwinConfig
     ]

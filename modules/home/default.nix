@@ -28,7 +28,9 @@ in
   programs.nix-index.enable = true;
   programs.ssh = {
     enable = true;
-    matchBlocks."*".addKeysToAgent = "yes";
+    settings = {
+      "Host *".AddKeysToAgent = "yes";
+    };
     enableDefaultConfig = false;
   };
   programs.difftastic = {

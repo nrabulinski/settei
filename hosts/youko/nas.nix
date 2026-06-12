@@ -18,6 +18,7 @@
   boot = {
     supportedFilesystems = [ "zfs" ];
     zfs.extraPools = [ "yottapool" ];
+    zfs.forceImportRoot = false;
   };
 
   services.zfs = {
