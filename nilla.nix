@@ -12,6 +12,7 @@
       ./assets
       ./services
       ./modules
+      ./net
     ];
 
     config.inputs = builtins.mapAttrs (_: src: {

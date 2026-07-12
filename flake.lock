@@ -335,6 +335,20 @@
         "type": "gitlab"
       }
     },
+    "mikrotik": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783945352,
+        "narHash": "sha256-6RB6UkuDPWLqYo7DxBOPFZDC2DdhgukTfoZl6sdUuMs=",
+        "rev": "9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00",
+        "type": "tarball",
+        "url": "https://git.rab.lol/api/v1/repos/nrabulinski/mikrotik.nix/archive/9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00.tar.gz?rev=9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz"
+      }
+    },
     "nh": {
       "flake": false,
       "locked": {
@@ -396,6 +410,7 @@
         "lix": "lix",
         "lix-module": "lix-module",
         "mailserver": "mailserver",
+        "mikrotik": "mikrotik",
         "nh": "nh",
         "nilla": "nilla",
         "nixpkgs": "nixpkgs",

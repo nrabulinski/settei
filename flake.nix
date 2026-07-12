@@ -80,5 +80,9 @@
       url = "github:oxalica/rust-overlay";
       flake = false;
     };
+    mikrotik = {
+      url = "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz";
+      flake = false;
+    };
   };
 }
