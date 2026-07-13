@@ -13,7 +13,7 @@ let
   linuxConfig = lib.optionalAttrs isLinux {
     systemd.timers.settei-ddns-client = {
       wantedBy = [ "timers.target" ];
-      timerConfig.OnCalendar = "Mon..Sun *-*-* 2:00:00";
+      timerConfig.OnCalendar = "Mon..Sun *-*-* *:00:00";
       timerConfig.Unit = "settei-ddns-client.service";
     };
 
