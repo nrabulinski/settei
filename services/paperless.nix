@@ -3,7 +3,7 @@
     host = "youko";
     ports = [ 28981 ];
     module =
-      { config, ... }:
+      { config, pkgs, ... }:
       {
         age.secrets.rab-lol-cf = {
           file = ../secrets/rab-lol-cf.age;
@@ -14,25 +14,50 @@
           owner = config.services.paperless.user;
         };
 
-        services.paperless = {
-          enable = true;
-          dataDir = "/var/lib/paperless";
-          mediaDir = "/media/paperless/media";
-          consumptionDir = "/media/paperless/consume";
-          passwordFile = config.age.secrets.paperless-pass.path;
-          settings = {
-            PAPERLESS_CONSUMER_IGNORE_PATTERN = [
-              ".DS_STORE/*"
-              "desktop.ini"
-            ];
-            PAPERLESS_OCR_LANGUAGE = "pol+eng+jpn";
-            PAPERLESS_OCR_USER_ARGS = {
-              optimize = 1;
-              pdfa_image_compression = "lossless";
+        services.paperless =
+          let
+            # Hacky way to override paperless package,
+            # as the module always calls override on it.
+            package' = pkgs.paperless-ngx.override {
+              tesseract5 = pkgs.paperless-ngx.tesseract5.override {
+                enableLanguages = [
+                  "equ"
+                  "osd"
+                  "eng"
+                  "pol"
+                  "jpn"
+                ];
+              };
             };
-            PAPERLESS_URL = "https://paper.rab.lol";
+            package = package'.overridePythonAttrs (prev: {
+              disabledTests = prev.disabledTests or [ ] ++ [
+                "test_filters"
+              ];
+            });
+          in
+          {
+            enable = true;
+            package = {
+              type = "derivation";
+              override = _: package;
+            };
+            dataDir = "/var/lib/paperless";
+            mediaDir = "/media/paperless/media";
+            consumptionDir = "/media/paperless/consume";
+            passwordFile = config.age.secrets.paperless-pass.path;
+            settings = {
+              PAPERLESS_CONSUMER_IGNORE_PATTERN = [
+                ".DS_STORE/*"
+                "desktop.ini"
+              ];
+              PAPERLESS_OCR_LANGUAGE = "pol+eng+jpn";
+              PAPERLESS_OCR_USER_ARGS = {
+                optimize = 1;
+                pdfa_image_compression = "lossless";
+              };
+              PAPERLESS_URL = "https://paper.rab.lol";
+            };
           };
-        };
 
         services.nginx.enable = true;
         services.nginx.virtualHosts."paper.rab.lol" = {
