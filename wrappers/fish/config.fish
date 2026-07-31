@@ -30,7 +30,7 @@ and begin
 
     # Aliases
     alias cat bat
-    alias l 'eza -lah --group-directories-first --icons'
+    alias l 'eza -lah --group-directories-first --icons=always'
 
     # Integrations
     starship init fish | source
