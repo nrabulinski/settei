@@ -71,6 +71,12 @@ let
       }
     ];
   };
+
+  sharedConfig = {
+    environment.systemPackages = [
+      cfg.clientPackage
+    ];
+  };
 in
 {
   _file = ./incus.nix;
@@ -92,6 +98,7 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
+      sharedConfig
       linuxConfig
       darwinConfig
     ]
