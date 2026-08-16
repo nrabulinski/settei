@@ -110,7 +110,14 @@
           }:
           writeShellScript "ci-check" ''
             set -euxo pipefail
-            nix-instantiate --strict --eval -E 'import ./nilla.nix {}' -A packages.__allPackages.result.${stdenv.hostPlatform.system}.outPath "$@"
+            nix-instantiate \
+              --strict \
+              --eval \
+              --read-write-mode \
+              -E 'import ./nilla.nix {}' \
+              -A \
+              packages.__allPackages.result.${stdenv.hostPlatform.system}.outPath \
+              "$@"
             "${lib.getExe config.packages.formatter.result.${stdenv.hostPlatform.system}}" --ci
           ''
         );
