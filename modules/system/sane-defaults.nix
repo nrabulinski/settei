@@ -139,7 +139,7 @@ let
 
     users.users.${username}.home = "/Users/${username}";
     # Every macOS ARM machine can emulate x86.
-    nix.settings.extra-platforms = lib.mkIf pkgs.stdenv.isAarch64 [ "x86_64-darwin" ];
+    nix.settings.extra-platforms = lib.mkIf pkgs.stdenv.hostPlatform.isAarch64 [ "x86_64-darwin" ];
   };
 in
 {
