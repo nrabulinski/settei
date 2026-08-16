@@ -42,6 +42,7 @@ in
         inputs.home-manager.nixosModules.home-manager
         "${inputs.celler}/nixos/cellerd.nix"
         inputs.lix-module.nixosModules.default
+        "${inputs.ncro}/nix/module.nix"
         no-lix-install-checks
         {
           # TODO: Will be necessary once cellerd module is contributed to nixpkgs

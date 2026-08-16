@@ -349,6 +349,22 @@
         "url": "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz"
       }
     },
+    "ncro": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786701834,
+        "narHash": "sha256-Ixz0rc6rnDEgNG6Cw2LJRdKxGjMbdy9bC9ncjAU+SmA=",
+        "owner": "manic-systems",
+        "repo": "ncro",
+        "rev": "3cc83303cc859901eb4330e9c4319b61f6ba1ffc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "manic-systems",
+        "repo": "ncro",
+        "type": "github"
+      }
+    },
     "nh": {
       "flake": false,
       "locked": {
@@ -411,6 +427,7 @@
         "lix-module": "lix-module",
         "mailserver": "mailserver",
         "mikrotik": "mikrotik",
+        "ncro": "ncro",
         "nh": "nh",
         "nilla": "nilla",
         "nixpkgs": "nixpkgs",

@@ -84,5 +84,9 @@
       url = "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz";
       flake = false;
     };
+    ncro = {
+      url = "github:manic-systems/ncro";
+      flake = false;
+    };
   };
 }

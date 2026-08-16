@@ -58,14 +58,6 @@ let
           use-xdg-base-directories = true;
           auto-allocate-uids = true;
           allow-import-from-derivation = false;
-          extra-substituters = [
-            "https://cache.rab.lol"
-            "https://nix-community.cachix.org"
-          ];
-          extra-trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            "cache.rab.lol-1:/b0gE755WZeAHXxdtehRWroV4Vu6KOjjuoRLV24Sh4A="
-          ];
         };
       };
     };
