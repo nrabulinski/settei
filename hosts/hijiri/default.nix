@@ -22,11 +22,6 @@
           anki-bin
         ];
         programs.alacritty.settings.font.size = 14;
-
-        services.syncthing = {
-          enable = true;
-        };
-        # TODO: Declarative syncthing config
       };
       settei.incus.enable = true;
       # TODO: Setup podman remote
