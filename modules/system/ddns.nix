@@ -24,6 +24,7 @@ let
         DOMAIN = cfg.domain;
         DDNS_URL = cfg.server;
         SECRET_PATH = cfg.secret;
+        DDNS_MODE = cfg.mode;
       };
     };
   };
@@ -52,6 +53,14 @@ in
     };
     secret = mkOption {
       type = types.path;
+    };
+    mode = mkOption {
+      type = types.enum [
+        "both"
+        "ipv4_only"
+        "ipv6_only"
+      ];
+      default = "both";
     };
   };
 
