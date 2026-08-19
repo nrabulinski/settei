@@ -37,8 +37,6 @@ in
         loader.efi.canTouchEfiVariables = true;
       };
 
-      networking.networkmanager.enable = true;
-
       age.secrets.niko-pass.file = ../../secrets/youko-niko-pass.age;
       users.users.${username}.hashedPasswordFile = config.age.secrets.niko-pass.path;
 
@@ -79,9 +77,27 @@ in
         ipv6 = "fd7a:115c:a1e0::8e01:a01e";
       };
 
+      systemd.network.enable = true;
+      systemd.network.networks."10-wan" = {
+        matchConfig.Name = "enp11s0";
+        networkConfig = {
+          DHCP = true;
+          IPv6PrivacyExtensions = true;
+        };
+        addresses = [
+          {
+            Address = "2a01:113f:4012:6200::d00d/64";
+          }
+        ];
+      };
+      networking.useNetworkd = true;
+
       age.secrets.ddns-secret.file = ../../secrets/ddns-secret.age;
-      settei.ddns.enable = true;
-      settei.ddns.secret = config.age.secrets.ddns-secret.path;
+      settei.ddns = {
+        enable = true;
+        secret = config.age.secrets.ddns-secret.path;
+        mode = "ipv4_only";
+      };
 
       networking.hostId = "b49ee8de";
     };
