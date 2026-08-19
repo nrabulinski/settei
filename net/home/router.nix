@@ -225,15 +225,16 @@
       false;
   };
 
-  mikrotik."ip/service" = {
-    _managed = false;
-    telnet.disabled = true;
-    ftp.disabled = true;
-    www.address = "192.168.88.0/24";
-    api.disabled = true;
-    winbox.disabled = true;
-    api-ssl.disabled = true;
-  };
+  # TODO: Restore this
+  # mikrotik."ip/service" = {
+  #   _managed = false;
+  #   telnet.disabled = true;
+  #   ftp.disabled = true;
+  #   www.address = "192.168.88.0/24";
+  #   api.disabled = true;
+  #   winbox.disabled = true;
+  #   api-ssl.disabled = true;
+  # };
 
   mikrotik."ip/upnp".enabled = true;
   mikrotik."ip/upnp/interfaces" = {
