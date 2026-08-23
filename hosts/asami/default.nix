@@ -7,9 +7,16 @@
       ...
     }:
     {
+      imports = [
+        ./rift-module.nix
+        ./rift.nix
+      ];
+
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       ids.gids.nixbld = 350;
+
+      services.rift.enable = true;
 
       settei.user.config = {
         settei.desktop.enable = true;
