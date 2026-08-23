@@ -17,6 +17,7 @@
     tsukasa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPKXcihNVgsStMstnZYvh+Ai+JsydX3vu4O0yhlN+zw niko@tsukasa";
     youko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKAGBazVVFr1+beFxpC701IPz4JwdPIyFJybVVZ9kTkr niko@youko";
     kanade = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKthqxvpycjqVwcRpBOjt6AmZVYSidVw3yGrpefUFcJJ niko@kanade";
+    asami = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwlQq84INiiZtZ8GPmFeVG7zpW9cJ1JFGRXDna2QWhI niko@asami";
   };
 
   system = {
@@ -28,5 +29,6 @@
     tsukasa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDKy32XGCkB0KOUm4f0ybrutfAzR7+baifM2yv5KuYV7 root@tsukasa";
     youko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSbIjEo28aB2TACkvLY+VRKElZEdH9qFlTTfxCrblGZ root@youko";
     kanade = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoCZcfijapmKaq2dWg9+hwypWb7s2fo5mS51jDSlyO7";
+    asami = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0XN6o41FBpKUNE9k8CT2lfMwstshlsTVvLMyrSFySM";
   };
 }

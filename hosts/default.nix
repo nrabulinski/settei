@@ -13,6 +13,7 @@
     ./kogata
     ./youko
     ./kanade
+    ./asami
   ];
 
   config.systems.builders =
