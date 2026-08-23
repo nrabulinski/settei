@@ -20,6 +20,14 @@
       settei.incus.enable = true;
       # TODO: Setup podman remote
 
+      programs.mas = {
+        enable = true;
+        update = true;
+        packages = {
+          Bitwarden = 1352778147;
+        };
+      };
+
       system.defaults = {
         NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
         ".GlobalPreferences" = {
