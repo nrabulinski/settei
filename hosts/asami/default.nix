@@ -32,6 +32,7 @@
         update = true;
         packages = {
           Bitwarden = 1352778147;
+          Spark = 1176895641;
         };
       };
 
