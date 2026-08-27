@@ -88,5 +88,9 @@
       url = "github:manic-systems/ncro";
       flake = false;
     };
+    nas = {
+      url = "github:nix-community/nixos-apple-silicon";
+      flake = false;
+    };
   };
 }

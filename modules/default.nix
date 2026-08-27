@@ -43,6 +43,7 @@ in
         "${inputs.celler}/nixos/cellerd.nix"
         inputs.lix-module.nixosModules.default
         "${inputs.ncro}/nix/module.nix"
+        "${inputs.nas}/apple-silicon-support"
         no-lix-install-checks
         {
           # TODO: Will be necessary once cellerd module is contributed to nixpkgs
@@ -57,6 +58,10 @@ in
             })
           ];
         }
+        # TODO: Remove once n-a-s makes .enable default to false
+        ({ lib, ... }: {
+          hardware.asahi.enable = lib.mkDefault false;
+        })
       ];
     };
     default = combined;

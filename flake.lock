@@ -349,6 +349,22 @@
         "url": "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz"
       }
     },
+    "nas": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787749944,
+        "narHash": "sha256-kJx0zNcW00CSRWHm0w1dhHBF+bNP89eW8ekdfN6pwqs=",
+        "owner": "nix-community",
+        "repo": "nixos-apple-silicon",
+        "rev": "cae818c72b2138510334850a3ff435831703bd23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-apple-silicon",
+        "type": "github"
+      }
+    },
     "ncro": {
       "flake": false,
       "locked": {
@@ -427,6 +443,7 @@
         "lix-module": "lix-module",
         "mailserver": "mailserver",
         "mikrotik": "mikrotik",
+        "nas": "nas",
         "ncro": "ncro",
         "nh": "nh",
         "nilla": "nilla",
