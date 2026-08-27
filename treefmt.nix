@@ -27,6 +27,9 @@
     "*.yml"
     "*.yaml"
     "*.md"
+
+    # TODO: Remove once firmware is no longer in repo
+    "*.cpio"
   ];
   settings.on-unmatched = "fatal";
 }

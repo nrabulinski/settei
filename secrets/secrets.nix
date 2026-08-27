@@ -82,6 +82,7 @@ in
     keys.system.ude
     keys.system.kogata
     keys.system.kanade
+    keys.system.hijiri-linux
     keys.other.bootstrap
   ];
   "paperless-pass.age".publicKeys = [
@@ -111,6 +112,10 @@ in
   ];
   "coturn-secret.age".publicKeys = [
     keys.system.kazuki
+    keys.other.bootstrap
+  ];
+  "hijiri-niko-pass.age".publicKeys = [
+    keys.system.hijiri-linux
     keys.other.bootstrap
   ];
 }

@@ -7,6 +7,7 @@ let
         "youko"
         "kazuki"
         "ude"
+        "hijiri-linux"
       ]
     ))
     builtins.attrValues

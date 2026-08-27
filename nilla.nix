@@ -134,7 +134,7 @@
             all-packages' = map (pkg: pkg.result.${stdenv.hostPlatform.system}) all-packages;
 
             systems = builtins.attrValues (
-              if stdenv.isLinux then config.systems.nixos else config.systems.darwin
+              if stdenv.hostPlatform.isLinux then config.systems.nixos else config.systems.darwin
             );
             systems' = builtins.filter (
               system: system.result.config.nixpkgs.hostPlatform.system == stdenv.hostPlatform.system
