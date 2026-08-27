@@ -1,9 +1,9 @@
 {
   config.services.forgejo-runner = {
     hosts = [
-      "ude"
       "youko"
       "kanade"
+      "hijiri"
     ];
     module =
       {
