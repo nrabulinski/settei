@@ -5,7 +5,6 @@
 {
   includes = [
     ./kazuki
-    ./hijiri-vm
     ./hijiri
     # TODO: Custom installer ISO
     # ./installer
