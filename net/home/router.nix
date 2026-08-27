@@ -104,6 +104,16 @@
       mac-address = "EC:71:DB:3F:C8:8A";
       server = config.mikrotik."ip/dhcp-server".default._name;
     };
+    kanade = {
+      address = "192.168.88.30";
+      mac-address = "1C:F6:4C:4C:EB:5A";
+      server = config.mikrotik."ip/dhcp-server".default._name;
+    };
+    # hijiri = {
+    #   address = "192.168.88.40";
+    #   mac-address = "";
+    #   server = config.mikrotik."ip/dhcp-server".default._name;
+    # };
   };
 
   mikrotik."interface/vlan" = {
