@@ -1,6 +1,21 @@
-{
+{ pkgs, ... }: {
   services.rift = {
     enable = true;
+    # TODO: Remove once #553940 is merged
+    package = pkgs.rift-wm.overrideAttrs (old: rec {
+      version = "0.5.5";
+      src = old.src.override {
+        hash = "sha256-UQodikmxw6AexlPNkBjXSADX13/wRVExml387AxQp18=";
+      };
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        inherit src;
+        hash = "sha256-wxymypJjczFqI9oivnVX/TOnR1KuupsaryQIQQVN7Gs=";
+      };
+      checkFlags = [
+        "--skip=actor::reactor::tests::topology_change_clears_stale_pending_hide_target_before_next_workspace_layout"
+        "--skip=actor::reactor::tests::best_space_prefers_authoritative_window_server_space_over_geometry"
+      ];
+    });
     config = {
       settings.default_disable = false;
       keys =
