@@ -53,6 +53,8 @@
               groups."radius.access".overwriteMembers = false;
               groups."grafana.access".overwriteMembers = false;
               groups."grafana.admins".overwriteMembers = false;
+              groups."immich.access".overwriteMembers = false;
+              groups."immich.admins".overwriteMembers = false;
 
               systems.oauth2.forgejo = {
                 displayName = "Forgejo";
@@ -86,6 +88,26 @@
                 };
               };
 
+              systems.oauth2.immich = {
+                displayName = "Immich";
+                originUrl = [
+                  "app.immich:///oauth-callback"
+                  "https://gallery.rab.lol/auth/login"
+                  "https://gallery.rab.lol/user-settings"
+                ];
+                originLanding = "https://gallery.rab.lol/auth/login?autoLaunch=1";
+                scopeMaps."immich.access" = [
+                  "openid"
+                  "email"
+                  "profile"
+                ];
+                preferShortUsername = true;
+                claimMaps.groups = {
+                  joinType = "array";
+                  valuesByGroup."immich.admins" = [ "admin" ];
+                };
+              };
+
               persons.niko = {
                 displayName = "niko";
                 legalName = "Nikodem Rabuliński";
@@ -98,6 +120,8 @@
                   "radius.access"
                   "grafana.access"
                   "grafana.admins"
+                  "immich.access"
+                  "immich.admins"
                 ];
               };
             };

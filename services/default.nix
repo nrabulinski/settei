@@ -8,5 +8,6 @@
     ./kanidm.nix
     ./matrix
     ./vault.nix
+    ./immich.nix
   ];
 }
