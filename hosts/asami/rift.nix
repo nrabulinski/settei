@@ -68,8 +68,6 @@
           "${mod} + Shift + Minus" = "resize_window_shrink";
 
           "${mod} + Enter".exec = [ "/etc/profiles/per-user/niko/bin/wezterm" ];
-
-          "${mod} + Ctrl + Q" = "save_and_exit";
         };
     };
   };
