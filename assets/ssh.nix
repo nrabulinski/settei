@@ -18,6 +18,7 @@
     youko = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKAGBazVVFr1+beFxpC701IPz4JwdPIyFJybVVZ9kTkr niko@youko";
     kanade = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKthqxvpycjqVwcRpBOjt6AmZVYSidVw3yGrpefUFcJJ niko@kanade";
     asami = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwlQq84INiiZtZ8GPmFeVG7zpW9cJ1JFGRXDna2QWhI niko@asami";
+    hijiri-linux = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqy+Y5lUBwulTtiDzrQAOGgmPqOp/u1zKtuUq5U4bPt niko@hijiri";
   };
 
   system = {

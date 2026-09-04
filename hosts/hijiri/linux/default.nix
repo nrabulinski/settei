@@ -4,6 +4,7 @@
       modulesPath,
       username,
       config,
+      lib,
       ...
     }:
     {
@@ -31,6 +32,9 @@
 
       services.udisks2.enable = true;
       settei.incus.enable = true;
+
+      settei.user.config.programs.git.signing.key =
+        lib.mkForce config.settei.sane-defaults.allSshKeys.hijiri-linux;
 
       systemd.network.enable = true;
       systemd.network.networks."10-wan" = {
