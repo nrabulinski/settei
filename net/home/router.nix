@@ -89,6 +89,11 @@
       mac-address = "8C:30:66:60:71:EC";
       server = config.mikrotik."ip/dhcp-server".default._name;
     };
+    switch = {
+      address = "192.168.88.3";
+      mac-address = "74:F9:2C:26:F8:0C";
+      server = config.mikrotik."ip/dhcp-server".default._name;
+    };
     youko = {
       address = "192.168.88.10";
       mac-address = "74:56:3C:BF:44:72";
