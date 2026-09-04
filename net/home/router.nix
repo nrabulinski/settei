@@ -109,11 +109,11 @@
       mac-address = "1C:F6:4C:4C:EB:5A";
       server = config.mikrotik."ip/dhcp-server".default._name;
     };
-    # hijiri = {
-    #   address = "192.168.88.40";
-    #   mac-address = "";
-    #   server = config.mikrotik."ip/dhcp-server".default._name;
-    # };
+    hijiri = {
+      address = "192.168.88.40";
+      mac-address = "18:69:45:03:9C:01";
+      server = config.mikrotik."ip/dhcp-server".default._name;
+    };
   };
 
   mikrotik."interface/vlan" = {

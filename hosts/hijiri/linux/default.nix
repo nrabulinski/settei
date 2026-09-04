@@ -32,6 +32,21 @@
       services.udisks2.enable = true;
       settei.incus.enable = true;
 
+      systemd.network.enable = true;
+      systemd.network.networks."10-wan" = {
+        matchConfig.Name = "enu1";
+        networkConfig = {
+          DHCP = true;
+          IPv6PrivacyExtensions = true;
+        };
+        addresses = [
+          {
+            Address = "2a01:113f:4012:6200::d11d/64";
+          }
+        ];
+      };
+      networking.useNetworkd = true;
+
       # TODO: Persist blanking configuration
       services.logind.settings.Login = {
         HandleLidSwitch = "ignore";
