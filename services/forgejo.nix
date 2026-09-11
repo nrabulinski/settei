@@ -4,6 +4,12 @@
     ports = [ 3000 ];
     module =
       { config, pkgs, ... }:
+      let
+        cfg = config.services.forgejo;
+        imgDir = pkgs.runCommand "forgejo-img-dir" { } ''
+          cp -R ${../assets/forgejo} "$out"
+        '';
+      in
       {
         age.secrets.rab-lol-cf = {
           file = ../secrets/rab-lol-cf.age;
@@ -41,6 +47,7 @@
               MIRROR = 3000;
             };
             repo-archive.PATH = "/forgejo/archive";
+            "actions.artifacts".PATH = "/forgejo/artifacts";
           };
           repositoryRoot = "/forgejo/repos";
           lfs = {
@@ -49,21 +56,22 @@
           };
         };
 
-        systemd.tmpfiles.rules =
-          let
-            cfg = config.services.forgejo;
-            imgDir = pkgs.runCommand "forgejo-img-dir" { } ''
-              cp -R ${../assets/forgejo} "$out"
-            '';
-          in
-          [
-            "d '${cfg.customDir}/public' 0750 ${cfg.user} ${cfg.group} - -"
-            "d '${cfg.customDir}/public/assets' 0750 ${cfg.user} ${cfg.group} - -"
-            "L+ '${cfg.customDir}/public/assets/img' - - - - ${imgDir}"
+        systemd.services.forgejo.serviceConfig.ReadWritePaths = [
+          cfg.settings.repo-archive.PATH
+          cfg.settings."actions.artifacts".PATH
+        ];
 
-            "d '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
-            "z '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
-          ];
+        systemd.tmpfiles.rules = [
+          "d '${cfg.customDir}/public' 0750 ${cfg.user} ${cfg.group} - -"
+          "d '${cfg.customDir}/public/assets' 0750 ${cfg.user} ${cfg.group} - -"
+          "L+ '${cfg.customDir}/public/assets/img' - - - - ${imgDir}"
+
+          "d '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
+          "z '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
+
+          "d '${cfg.settings."actions.artifacts".PATH}' 0750 ${cfg.user} ${cfg.group} - -"
+          "z '${cfg.settings."actions.artifacts".PATH}' 0750 ${cfg.user} ${cfg.group} - -"
+        ];
 
         services.nginx.enable = true;
         services.nginx.virtualHosts."git.rab.lol" = {
