@@ -40,6 +40,7 @@
               MIGRATE = 6000;
               MIRROR = 3000;
             };
+            repo-archive.PATH = "/forgejo/archive";
           };
           repositoryRoot = "/forgejo/repos";
           lfs = {
@@ -59,6 +60,9 @@
             "d '${cfg.customDir}/public' 0750 ${cfg.user} ${cfg.group} - -"
             "d '${cfg.customDir}/public/assets' 0750 ${cfg.user} ${cfg.group} - -"
             "L+ '${cfg.customDir}/public/assets/img' - - - - ${imgDir}"
+
+            "d '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
+            "z '${cfg.settings.repo-archive.PATH}' 0750 ${cfg.user} ${cfg.group} - -"
           ];
 
         services.nginx.enable = true;
