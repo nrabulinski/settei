@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   services.rift = {
     enable = true;
     # TODO: Remove once #553940 is merged
@@ -22,9 +22,16 @@
         let
           mod = "Meta";
           comb = "${mod} + Shift";
+
+          mkWorkspaceConfig = num: {
+            "${mod} + ${toString (num + 1)}".switch_to_workspace = num;
+            "${comb} + ${toString (num + 1)}".move_window_to_workspace = num;
+          };
+          configs = builtins.genList mkWorkspaceConfig 9;
+          configs' = lib.mergeAttrsList configs;
         in
         {
-          "${mod} + Z" = "toggle_space_activated";
+          "${comb} + Z" = "toggle_space_activated";
 
           "${mod} + H".move_focus = "left";
           "${mod} + J".move_focus = "down";
@@ -35,16 +42,6 @@
           "${comb} + J".move_node = "down";
           "${comb} + K".move_node = "up";
           "${comb} + L".move_node = "right";
-
-          "${mod} + 1".switch_to_workspace = 0;
-          "${mod} + 2".switch_to_workspace = 1;
-          "${mod} + 3".switch_to_workspace = 2;
-          "${mod} + 4".switch_to_workspace = 3;
-
-          "${comb} + 1".move_window_to_workspace = 0;
-          "${comb} + 2".move_window_to_workspace = 1;
-          "${comb} + 3".move_window_to_workspace = 2;
-          "${comb} + 4".move_window_to_workspace = 3;
 
           "${mod} + Tab" = "switch_to_last_workspace";
 
@@ -68,7 +65,8 @@
           "${mod} + Shift + Minus" = "resize_window_shrink";
 
           "${mod} + Enter".exec = [ "/etc/profiles/per-user/niko/bin/wezterm" ];
-        };
+        }
+        // configs';
     };
   };
 }
