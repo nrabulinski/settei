@@ -1,19 +1,21 @@
 { config, ... }: {
-  mikrotik."ipv6/settings".accept-router-advertisements = true;
+  mikrotik."ipv6/settings" = {
+    _table = false;
+    accept-router-advertisements = true;
+  };
 
   mikrotik."interface/list" = {
-    _table = true;
     wan = { };
     lan = { };
   };
 
   mikrotik."ip/neighbor/discovery-settings" = {
+    _table = false;
     _after = [ "interface/list" ];
     discover-interface-list = config.mikrotik."interface/list".lan._name;
   };
 
   mikrotik."interface/bridge" = {
-    _table = true;
     bridge = { };
   };
 
@@ -52,12 +54,10 @@
   };
 
   mikrotik."ip/pool" = {
-    _table = true;
     default-dhcp.ranges = "192.168.88.100-192.168.88.254";
   };
 
   mikrotik."ip/dhcp-server" = {
-    _table = true;
     _after = [
       "ip/pool"
       "interface/bridge"
@@ -122,7 +122,6 @@
   };
 
   mikrotik."interface/vlan" = {
-    _table = true;
     wan-vlan = {
       interface = "ether2";
       vlan-id = 35;
@@ -133,7 +132,6 @@
   #       ppp profile needs pool -> pool needs pppoe interface -> interface needs profile -> ...
 
   mikrotik."ipv6/dhcp-server" = {
-    _table = true;
     _after = [
       "interface/bridge"
       "interface/pppoe-client"
@@ -142,10 +140,10 @@
       address-pool = "v6-dhcp-pool";
       interface = config.mikrotik."interface/bridge".bridge._name;
     };
+    pppoe-v6 = { };
   };
 
   mikrotik."ppp/profile" = {
-    _table = true;
     default-v6 = {
       change-tcp-mss = true;
       dhcpv6-pd-pool = "v6-dhcp-pool";
@@ -153,7 +151,6 @@
   };
 
   mikrotik."interface/pppoe-client" = {
-    _table = true;
     _after = [
       "interface/vlan"
       "ppp/profile"
@@ -214,7 +211,7 @@
       protocol = "tcp";
       dst-port = "80,443";
       in-interface = config.mikrotik."interface/pppoe-client".pppoe-v4._name;
-      to-address = "192.168.88.10";
+      to-addresses = "192.168.88.10";
     };
   };
   mikrotik."ipv6/firewall/filter" = {
@@ -229,6 +226,7 @@
   };
 
   mikrotik."ip/dns" = {
+    _table = false;
     allow-remote-requests = true;
     # Quad9 upstream
     servers = "9.9.9.10,149.112.112.10";
@@ -251,7 +249,10 @@
   #   api-ssl.disabled = true;
   # };
 
-  mikrotik."ip/upnp".enabled = true;
+  mikrotik."ip/upnp" = {
+    _table = false;
+    enabled = true;
+  };
   mikrotik."ip/upnp/interfaces" = {
     _prefix = "";
     _after = [
@@ -269,5 +270,12 @@
     };
   };
 
-  mikrotik."system/clock".time-zone-name = "Europe/Warsaw";
+  mikrotik."system/clock" = {
+    _table = false;
+    time-zone-name = "Europe/Warsaw";
+  };
+
+  meta.stateVersion = 2;
+  # TODO: Remove
+  meta.cleanup = false;
 }

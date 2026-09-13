@@ -338,11 +338,11 @@
     "mikrotik": {
       "flake": false,
       "locked": {
-        "lastModified": 1783945352,
-        "narHash": "sha256-6RB6UkuDPWLqYo7DxBOPFZDC2DdhgukTfoZl6sdUuMs=",
-        "rev": "9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00",
+        "lastModified": 1789340150,
+        "narHash": "sha256-Gwdy0gUizMVhx676OKyRwRq8+jYO7Dhl4iGlyuUEAoc=",
+        "rev": "eec32dbb321a15637d1857a184800c47b7f5e252",
         "type": "tarball",
-        "url": "https://git.rab.lol/api/v1/repos/nrabulinski/mikrotik.nix/archive/9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00.tar.gz?rev=9637755ac0e5ce76fe9edb7ef1cbbffcfbbd8c00"
+        "url": "https://git.rab.lol/api/v1/repos/nrabulinski/mikrotik.nix/archive/eec32dbb321a15637d1857a184800c47b7f5e252.tar.gz?rev=eec32dbb321a15637d1857a184800c47b7f5e252"
       },
       "original": {
         "type": "tarball",
