@@ -11,11 +11,11 @@
   };
   age.secrets.ntfy-niko-pass = {
     file = ../../secrets/ntfy-niko-pass.age;
-    owner = config.services.ntfy-sh.user;
+    owner = "ntfy-sh";
   };
   age.secrets.ntfy-alert-pass = {
     file = ../../secrets/ntfy-alert-pass.age;
-    owner = config.services.ntfy-sh.user;
+    owner = "ntfy-sh";
   };
 
   services.ntfy-sh = {

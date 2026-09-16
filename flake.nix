@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wrapper-manager = {
-      url = "github:viperML/wrapper-manager";
+      url = "https://codeberg.org/viperML/wrapper-manager/archive/master.tar.gz";
       flake = false;
     };
     wrapper-manager-hm-compat = {

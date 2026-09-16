@@ -1,6 +1,13 @@
-{ lib, ... }: {
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   services.ncro = {
     enable = true;
+    package = pkgs.callPackage "${inputs.ncro}/nix/package.nix" { };
     settings.server = {
       listen = ":6767";
     };
