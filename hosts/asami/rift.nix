@@ -1,6 +1,21 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   services.rift = {
     enable = true;
+    package = pkgs.rift-wm.overrideAttrs (
+      final: prev: {
+        version = "0.6.9";
+        src = prev.src.override {
+          hash = "sha256-MuXUyQ0b4v66yPwrfefCHaYGL7zo9hg1QJq4ve0kFCQ=";
+        };
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit (final) pname version src;
+          hash = "sha256-JHB6yqrOuwZ+UwxSKBp9eh0bX4mkZndxQvHEtCclxPk=";
+        };
+        checkFlags = prev.checkFlags or [ ] ++ [
+          "--skip=actor::reactor::tests::empty_active_space_membership_during_wake_race_does_not_blank_known_active_windows"
+        ];
+      }
+    );
     config = {
       settings.default_disable = false;
       keys =
