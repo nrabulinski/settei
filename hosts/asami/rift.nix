@@ -18,6 +18,10 @@
     );
     config = {
       settings.default_disable = false;
+      virtual_workspaces = {
+        enabled = true;
+        default_workspace_count = 9;
+      };
       keys =
         let
           mod = "Meta";
