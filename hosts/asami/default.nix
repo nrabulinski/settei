@@ -22,6 +22,7 @@
         settei.desktop.enable = true;
         home.packages = with pkgs; [
           anki-bin
+          utm
         ];
       };
       settei.incus.enable = true;
