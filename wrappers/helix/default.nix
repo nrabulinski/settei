@@ -2,7 +2,10 @@
 {
   programs.helix = {
     enable = true;
-    package = pkgs.callPackage inputs.helix { gitRev = inputs.helix.rev; };
+    package = pkgs.callPackage inputs.helix {
+      gitRev = inputs.helix.rev;
+      includeGrammarIf = grammar: grammar.name != "perl";
+    };
     settings = {
       theme = "base16_default_dark";
       editor = {

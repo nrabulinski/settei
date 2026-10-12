@@ -39,16 +39,31 @@
           {
             input,
             output ? input,
+            apply ? null,
           }:
           {
             inherit systems;
             builder = "custom-load";
-            package = { system }: inputs.${input}.packages.${system}.${output};
+            package =
+              { system }:
+              let
+                out = inputs.${input}.packages.${system}.${output};
+                out' = if apply != null then (apply out) else out;
+              in
+              out';
           };
         getPkgs = system: builtins.mapAttrs (_: pkg: pkg.result.${system}) config.packages;
       in
       {
-        agenix = mkPackageFlakeOutput { input = "agenix"; };
+        agenix = mkPackageFlakeOutput {
+          input = "agenix";
+          apply =
+            agenix:
+            agenix.overrideAttrs {
+              doCheck = false;
+              doInstallCheck = false;
+            };
+        };
         base-packages = mkPackage (
           { symlinkJoin, stdenv }:
           symlinkJoin {
