@@ -1,0 +1,20 @@
+diff --git a/src/service/migrations.rs b/src/service/migrations.rs
+index 894dd5aa3..863356634 100644
+--- a/src/service/migrations.rs
++++ b/src/service/migrations.rs
+@@ -925,10 +925,13 @@ async fn unembed_unsigned_info(
+ 				}
+ 			}
+ 			pdu.unsigned = Some(to_raw_value(&unsigned).expect("unsigned must be valid JSON"));
+-			let pdu_id = timeline
++			let Ok(pdu_id) = timeline
+ 				.get_pdu_id(pdu.event_id())
+ 				.await
+-				.expect("PDU must have an id");
++				.inspect_err(|e| conduwuit::error!(?e, "event is fucked: {}", pdu.event_id()))
++			else {
++				continue;
++			};
+ 			timeline
+ 				.replace_pdu(&pdu_id, &to_canonical_object(pdu).expect("PDU must be valid JSON"))
+ 				.await
