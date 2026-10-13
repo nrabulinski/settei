@@ -122,4 +122,8 @@ in
     keys.system.hijiri-linux
     keys.other.bootstrap
   ];
+  "celler-secret.age".publicKeys = [
+    keys.system.youko
+    keys.other.bootstrap
+  ];
 }

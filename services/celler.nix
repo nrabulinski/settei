@@ -9,8 +9,8 @@
       module =
         { config, lib, ... }:
         {
-          age.secrets.celler-creds = {
-            file = ../secrets/attic-creds.age;
+          age.secrets.celler-secret = {
+            file = ../secrets/celler-secret.age;
             owner = config.services.cellerd.user;
           };
           age.secrets.rab-lol-cf = {
@@ -20,7 +20,6 @@
 
           services.cellerd = {
             enable = true;
-            environmentFile = config.age.secrets.celler-creds.path;
             settings = {
               listen = "[::]:${toString cellerPort}";
               database.url = "sqlite:///var/lib/atticd/server.db?mode=rwc";
@@ -36,6 +35,7 @@
                 max-size = 256 * 1024;
               };
               api-endpoint = "https://celler.rab.lol/";
+              jwt.hs256-secret-key-file = config.age.secrets.celler-secret.path;
             };
           };
 
