@@ -104,10 +104,17 @@ let
       experimental-features = [ "cgroups" ];
       use-cgroups = true;
     };
-    systemd.services.nix-daemon.serviceConfig = {
-      Delegate = "yes";
-      DelegateSubgroup = "supervisor";
-    };
+    systemd.services = lib.mkMerge [
+      {
+        nix-daemon.serviceConfig = {
+          Delegate = "yes";
+          DelegateSubgroup = "supervisor";
+        };
+      }
+      (lib.mkIf config.services.nginx.enable {
+        nginx.serviceConfig.LimitNOFILE = 65536;
+      })
+    ];
 
     # No good reason to not have those enabled
     services.nginx = {
@@ -115,6 +122,9 @@ let
       recommendedGzipSettings = lib.mkDefault true;
       recommendedOptimisation = lib.mkDefault true;
       recommendedTlsSettings = lib.mkDefault true;
+      eventsConfig = ''
+        worker_connections 2000;
+      '';
     };
     security.acme = {
       acceptTerms = true;
