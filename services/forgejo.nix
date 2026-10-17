@@ -73,17 +73,16 @@
           "z '${cfg.settings."actions.artifacts".PATH}' 0750 ${cfg.user} ${cfg.group} - -"
         ];
 
-        services.nginx.enable = true;
-        services.nginx.virtualHosts."git.rab.lol" = {
-          forceSSL = true;
-          enableACME = true;
-          acmeRoot = null;
+        settei.iocaine.enable = true;
+        settei.iocaine.protectedHosts."git.rab.lol" = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:3000";
-            extraConfig = ''
-              proxy_set_header Connection $http_connection;
-              proxy_set_header Upgrade $http_upgrade;
-            '';
+            proxyWebsockets = true;
+          };
+          extraNginxConfig = {
+            forceSSL = true;
+            enableACME = true;
+            acmeRoot = null;
           };
         };
 

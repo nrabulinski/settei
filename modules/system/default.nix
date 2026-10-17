@@ -26,6 +26,7 @@
     (import ./builder.nix { inherit isLinux; })
     (import ./ddns.nix { inherit isLinux; })
     ./cache.nix
+    (import ./iocaine.nix { inherit isLinux; })
   ]
   ++ lib.optionals (!isLinux) [
     ./gitea-actions-runner.nix

@@ -90,5 +90,13 @@
       url = "github:nix-community/nixos-apple-silicon";
       flake = false;
     };
+    ai-robots-txt = {
+      url = "github:ai-robots-txt/ai.robots.txt";
+      flake = false;
+    };
+    geolite2-asn-mmdb = {
+      url = "github:P3TERX/GeoLite.mmdb?ref=download";
+      flake = false;
+    };
   };
 }

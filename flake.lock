@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "ai-robots-txt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792205794,
+        "narHash": "sha256-ZKYoXYkOf4qLwL8qSZx1HL/mEfBYTPU91hNWYkDzyu0=",
+        "owner": "ai-robots-txt",
+        "repo": "ai.robots.txt",
+        "rev": "da755f80525b7146e93ccdb4ffdd38ffd72b0685",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ai-robots-txt",
+        "repo": "ai.robots.txt",
+        "type": "github"
+      }
+    },
     "blobs": {
       "flake": false,
       "locked": {
@@ -204,6 +220,23 @@
       "original": {
         "owner": "lf-",
         "repo": "flakey-profile",
+        "type": "github"
+      }
+    },
+    "geolite2-asn-mmdb": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792128692,
+        "narHash": "sha256-joVLi1zftI2Dh9yAIE4G5iFofsemdoIMp6+FaiCjpGM=",
+        "owner": "P3TERX",
+        "repo": "GeoLite.mmdb",
+        "rev": "e6d66b6d6e3298823a3da2bf3001abb23d4ae821",
+        "type": "github"
+      },
+      "original": {
+        "owner": "P3TERX",
+        "ref": "download",
+        "repo": "GeoLite.mmdb",
         "type": "github"
       }
     },
@@ -426,10 +459,12 @@
       "inputs": {
         "__flake-compat": "__flake-compat",
         "agenix": "agenix",
+        "ai-robots-txt": "ai-robots-txt",
         "celler": "celler",
         "crane": "crane",
         "darwin": "darwin",
         "disko": "disko",
+        "geolite2-asn-mmdb": "geolite2-asn-mmdb",
         "helix": "helix",
         "home-manager": "home-manager",
         "lix": "lix",
