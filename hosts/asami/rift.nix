@@ -21,6 +21,7 @@
       virtual_workspaces = {
         enabled = true;
         default_workspace_count = 9;
+        workspace_auto_back_and_forth = true;
       };
       keys =
         let
