@@ -1,13 +1,24 @@
 {
   config.services.forgejo = {
     host = "kazuki";
-    ports = [ 3000 ];
+    ports = [
+      3000
+      3001
+    ];
     module =
-      { config, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       let
         cfg = config.services.forgejo;
         imgDir = pkgs.runCommand "forgejo-img-dir" { } ''
           cp -R ${../assets/forgejo} "$out"
+        '';
+        go-away-policy = pkgs.runCommand "go-away-policy" { } ''
+          cp -R "${pkgs.go-away.src}/examples" "$out"
         '';
       in
       {
@@ -73,16 +84,32 @@
           "z '${cfg.settings."actions.artifacts".PATH}' 0750 ${cfg.user} ${cfg.group} - -"
         ];
 
+        # TODO: Make this into a module?
+        systemd.services.go-away-forgejo = {
+          wantedBy = [ "multi-user.target" ];
+          script = ''
+            ${lib.getExe pkgs.go-away} \
+              --bind "127.0.0.1:3001" \
+              --backend "git.rab.lol=http://127.0.0.1:3000" \
+              --client-ip-header "X-Real-Ip" \
+              --challenge-template forgejo \
+              --policy "${go-away-policy}/forgejo.yml" \
+              --policy-snippets "${go-away-policy}/snippets/"
+          '';
+        };
+
         settei.iocaine.enable = true;
         settei.iocaine.protectedHosts."git.rab.lol" = {
           locations."/" = {
-            proxyPass = "http://127.0.0.1:3000";
+            proxyPass = "http://127.0.0.1:3001";
             proxyWebsockets = true;
           };
           extraNginxConfig = {
             forceSSL = true;
             enableACME = true;
             acmeRoot = null;
+            # TODO: Allow archives from mirrors again?
+            locations."~* ^/(?:api/v1/repos/)?mirrors/[^/]+/archive(?:/|$)".return = 403;
           };
         };
 
