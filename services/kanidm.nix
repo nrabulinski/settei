@@ -51,6 +51,8 @@
               groups."git.access".overwriteMembers = false;
               groups."git.admins".overwriteMembers = false;
               groups."radius.access".overwriteMembers = false;
+              groups."grafana.access".overwriteMembers = false;
+              groups."grafana.admins".overwriteMembers = false;
 
               systems.oauth2.forgejo = {
                 displayName = "Forgejo";
@@ -68,6 +70,22 @@
                 };
               };
 
+              systems.oauth2.grafana = {
+                displayName = "Grafana";
+                originUrl = "https://monitor.rab.lol/login/generic_oauth";
+                originLanding = "https://monitor.rab.lol/";
+                scopeMaps."grafana.access" = [
+                  "openid"
+                  "email"
+                  "profile"
+                ];
+                preferShortUsername = true;
+                claimMaps.groups = {
+                  joinType = "array";
+                  valuesByGroup."grafana.admins" = [ "admin" ];
+                };
+              };
+
               persons.niko = {
                 displayName = "niko";
                 legalName = "Nikodem Rabuliński";
@@ -78,6 +96,8 @@
                   "git.access"
                   "git.admins"
                   "radius.access"
+                  "grafana.access"
+                  "grafana.admins"
                 ];
               };
             };
