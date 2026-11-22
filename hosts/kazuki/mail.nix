@@ -1,3 +1,4 @@
+# TODO: DNSSEC resolver
 { config, ... }:
 {
   # nix shell nixpkgs#apacheHttpd -c htpasswd -nbB "" "super secret password" | cut -d: -f2

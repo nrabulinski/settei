@@ -17,7 +17,6 @@ in
   config.systems.nixos.youko.module =
     {
       config,
-      lib,
       username,
       pkgs,
       ...
@@ -65,13 +64,7 @@ in
       settei.unfree.allowedPackages = [
         "unifi-controller"
         "mongodb"
-        "vmware-workstation"
       ];
-      virtualisation.vmware.host.enable = true;
-      environment.etc."vmware/config" = lib.mkForce {
-        source = "${config.virtualisation.vmware.host.package}/etc/vmware/config";
-        text = null;
-      };
 
       settei.tailscale = {
         ipv4 = "100.114.160.30";

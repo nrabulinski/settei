@@ -33,7 +33,7 @@
           services.kanidm = {
             server.enable = true;
             # TODO: Revert to stock
-            package = pkgs.kanidm_1_11.withSecretProvisioning;
+            package = pkgs.kanidm_1_12.withSecretProvisioning;
             server.settings = {
               bindaddress = "127.0.0.1:${toString port}";
               inherit domain;

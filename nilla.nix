@@ -188,7 +188,7 @@
           rustfmt,
           clippy,
           rust-analyzer,
-          kanidm_1_11,
+          kanidm_1_12,
         }:
         let
           inherit (stdenv.hostPlatform) system;
@@ -200,7 +200,7 @@
             config.packages.nh.result.${system}
             config.packages.formatter.result.${system}
 
-            kanidm_1_11
+            kanidm_1_12
 
             rustc
             cargo

@@ -79,7 +79,7 @@
       flake = false;
     };
     mikrotik = {
-      url = "https://git.rab.lol/nrabulinski/mikrotik.nix/archive/main.tar.gz";
+      url = "git+https://git.rab.lol/nrabulinski/mikrotik.nix";
       flake = false;
     };
     ncro = {
