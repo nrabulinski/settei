@@ -27,7 +27,7 @@
       # TODO: Setup podman remote
 
       # This is only meant to be a linux runner
-      services.gitea-actions-runner.instances = lib.mkForce { };
+      services.forgejo-runner.instances = lib.mkForce { };
 
       system.defaults = {
         NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;

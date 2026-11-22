@@ -29,7 +29,7 @@
     (import ./iocaine.nix { inherit isLinux; })
   ]
   ++ lib.optionals (!isLinux) [
-    ./gitea-actions-runner.nix
+    ./forgejo-runner.nix
   ];
 
   options.settei = with lib; {

@@ -77,14 +77,6 @@ in
     keys.system.youko
     keys.other.bootstrap
   ];
-  "forgejo-token.age".publicKeys = [
-    keys.system.youko
-    keys.system.ude
-    keys.system.kogata
-    keys.system.kanade
-    keys.system.hijiri-linux
-    keys.other.bootstrap
-  ];
   "paperless-pass.age".publicKeys = [
     keys.system.youko
     keys.other.bootstrap
@@ -115,6 +107,18 @@ in
     keys.other.bootstrap
   ];
   "hijiri-niko-pass.age".publicKeys = [
+    keys.system.hijiri-linux
+    keys.other.bootstrap
+  ];
+  "forgejo-token-youko.age".publicKeys = [
+    keys.system.youko
+    keys.other.bootstrap
+  ];
+  "forgejo-token-kanade.age".publicKeys = [
+    keys.system.kanade
+    keys.other.bootstrap
+  ];
+  "forgejo-token-hijiri.age".publicKeys = [
     keys.system.hijiri-linux
     keys.other.bootstrap
   ];
