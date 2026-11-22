@@ -394,11 +394,11 @@
     "ncro": {
       "flake": false,
       "locked": {
-        "lastModified": 1791615473,
-        "narHash": "sha256-MYNywU2QeJ22mb3nd18TVrJQAPfDaI1ZGYj/QVh8mhw=",
+        "lastModified": 1795351307,
+        "narHash": "sha256-m93+qwpVxFF+EFQNv3b7bnInbY+B6qkHj+X3OmpJS0U=",
         "owner": "manic-systems",
         "repo": "ncro",
-        "rev": "f224e3e8852cebbe1f74a2d43537e5e5eece8368",
+        "rev": "b6d6396faa8de1cc0b84ba823a5ee2f369a0595a",
         "type": "github"
       },
       "original": {

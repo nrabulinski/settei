@@ -25,12 +25,11 @@
     (import ./monitoring.nix { inherit isLinux; })
     (import ./builder.nix { inherit isLinux; })
     (import ./ddns.nix { inherit isLinux; })
-    ./cache.nix
+    (import ./cache.nix { inherit isLinux; })
     (import ./iocaine.nix { inherit isLinux; })
   ]
   ++ lib.optionals (!isLinux) [
     ./gitea-actions-runner.nix
-    ./ncro.nix
   ];
 
   options.settei = with lib; {

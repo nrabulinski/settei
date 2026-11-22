@@ -78,6 +78,7 @@ in
         inputs.agenix.darwinModules.age
         inputs.home-manager.darwinModules.home-manager
         inputs.lix-module.darwinModules.default
+        "${inputs.ncro}/nix/darwin-module.nix"
         no-lix-install-checks
       ];
     };
