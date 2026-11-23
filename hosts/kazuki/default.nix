@@ -11,7 +11,6 @@
 
         ./mail.nix
         ./ntfy.nix
-        ./zitadel.nix
         ./prometheus.nix
       ];
 
