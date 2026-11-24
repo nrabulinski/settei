@@ -69,6 +69,12 @@ let
     programs.mosh.enable = lib.mkDefault true;
     programs.git.enable = lib.mkDefault true;
 
+    services.postgresql.package = pkgs.postgresql_18;
+    # TODO: Remove once vectorchord has been replaced
+    nixpkgs.config.problems.handlers = {
+      vectorchord.broken = "warn";
+    };
+
     users = lib.mkMerge [
       {
         mutableUsers = false;
